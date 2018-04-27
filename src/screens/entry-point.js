@@ -23,10 +23,6 @@ export class EntryPointScreen extends React.Component {
         // var userToken = await AsyncStorage.getItem('userToken');
         // userToken = 1;
 
-        // This will switch to the App screen or Auth screen and this loading
-        // screen will be unmounted and thrown away.
-        // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-
         setTimeout(() => {
             // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
             this.props.navigation.navigate('Auth');
