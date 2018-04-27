@@ -32,7 +32,7 @@ export class SignInScreen extends React.Component {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text h1>HACCP</Text>
-                <Text style={{ padding: 30, paddingLeft: 100, paddingRight: 100, textAlign: 'center' }}>
+                <Text style={{ padding: 30, paddingLeft: 100, paddingRight: 100 }}>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
                 </Text>
 
@@ -61,7 +61,7 @@ export class SignInScreen extends React.Component {
                     </Picker>
                 </View>
                 <Button title='CONNECTION' buttonStyle={styles.button} onPress={this.GetSelectedPickerItem} />
-                <Text onPress={() => { this.props.navigation.navigate('SignInAdmin'); }}> I AM AN ADMIN </Text>
+                <Text style={{textDecorationLine: 'underline'}} onPress={() => { this.props.navigation.navigate('SignInAdmin'); }}> I AM AN ADMIN </Text>
             </View >
         );
     }
@@ -70,9 +70,6 @@ export class SignInScreen extends React.Component {
 
 const styles = StyleSheet.create({
     dropdown: {
-        flex: 1,
-    },
-    button: {
         flex: 1,
     },
     dropdownView: {
