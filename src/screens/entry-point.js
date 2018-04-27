@@ -28,7 +28,6 @@ export class EntryPointScreen extends React.Component {
         }, 1000);
 
         // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-        // this.props.navigation.navigate('App');
     };
 
     render() {
