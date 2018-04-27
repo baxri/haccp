@@ -67,7 +67,6 @@ export class SignInScreen extends React.Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     dropdown: {
         flex: 1,
