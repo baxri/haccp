@@ -8,7 +8,6 @@ import {
     Text
 } from 'react-native';
 
-
 export class HelloAppScreen extends React.Component {
     constructor(props) {
         super(props);
