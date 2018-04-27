@@ -14,6 +14,7 @@ export class EntryPointScreen extends React.Component {
         super(props);
         this._bootstrapAsync();
     }
+    
     static navigationOptions = {
         title: 'EntryPoint',
     };
