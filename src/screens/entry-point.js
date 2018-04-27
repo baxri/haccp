@@ -18,7 +18,6 @@ export class EntryPointScreen extends React.Component {
         title: 'EntryPoint',
     };
 
-    // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = () => {
         // var userToken = await AsyncStorage.getItem('userToken');
         // userToken = 1;
