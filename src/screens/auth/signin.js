@@ -19,6 +19,8 @@ export class SignInScreen extends React.Component {
             department: '',
             user: '',
         };
+
+
     }
 
     static navigationOptions = {
@@ -31,11 +33,12 @@ export class SignInScreen extends React.Component {
     }
 
     render() {
+
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content >
-                    <View style={{ alignItems: 'center', marginBottom: 50 }}>
-                        <H1>Lorem Ipsum is simply dummy text</H1>
+                    <View style={{ padding: 30 }}>
+                        <H1>Lorem Ipsum is simply dummy Text </H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <View style={styles.dropdownView}>
@@ -66,10 +69,14 @@ export class SignInScreen extends React.Component {
                         </View>
                         <View style={{ alignItems: 'center' }}>
                             <Button primary style={styles.button} onPress={this.GetSelectedPickerItem}>
-                                <Text>CONNECTION</Text>
+                                <Text>SIGN IN</Text>
                             </Button>
-                            <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('SignInAdmin'); }}>
-                                <Text>I AM AN ADMIN</Text>
+                            <Button light style={styles.button} onPress={() => {
+                                this.props.navigation.navigate('SignInAdmin', {
+                                    func: () => { }
+                                });
+                            }}>
+                                <Text>SIGN IN AS ADMIN</Text>
                             </Button>
                         </View>
                     </View>

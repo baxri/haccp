@@ -4,7 +4,9 @@ import {
     AsyncStorage,
     StatusBar,
     StyleSheet,
-    View
+    ToastAndroid,
+    View,
+
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root } from 'native-base';
 
@@ -29,28 +31,30 @@ export class SetupAdminScreen extends React.Component {
 
     _setupAdmin = async () => {
 
-        let toastDuration = 2000;
-        let toastButton = "Okey";
         const password = this.state.password;
         const passwordConfirm = this.state.passwordConfirm;
 
-        if (password.length < 2) {
-            Toast.show({ text: "Password must be more than 2 symbols", buttonText: toastButton, duration: toastDuration })
-        }
-
-        if (password != passwordConfirm) {
-            Toast.show({ text: "Password dont mutches", buttonText: toastButton, duration: toastDuration })
-        }
-
         try {
+
+            if (password.length == 0) {
+                throw Error('Please enter password');
+            }
+
+            if (password != passwordConfirm) {
+                throw Error("Password dont mutches");
+            }
 
             //Save admin password
             await AsyncStorage.setItem('adminPasswordV1', password);
 
-            //Navigate to admin login page
-            this.props.navigation.navigate('SignInAdmin');
+            //Navigate to admin login page           
+            this.props.navigation.navigate('SignInAdmin', {
+                func: () => {
+                    ToastAndroid.show('Administrator Succssfully created', ToastAndroid.LONG);
+                }
+            });
         } catch (error) {
-            Toast.show({ text: error, buttonText: toastButton, duration: toastDuration })
+            ToastAndroid.show(error.message, ToastAndroid.LONG);
         }
     }
 
@@ -58,8 +62,8 @@ export class SetupAdminScreen extends React.Component {
         return (
             <Root>
                 <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                    <Content style={{ flex: 1 }}>
-                        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+                    <Content padder style={{ flex: 1 }}>
+                        <View style={{ padding: 30 }}>
                             <H1>Setup administrator password for login</H1>
                         </View>
                         <View style={{ alignItems: 'center', }}>

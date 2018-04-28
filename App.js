@@ -19,6 +19,7 @@ const AuthStack = StackNavigator(
   },
   {
     initialRouteName: 'SignIn',
+    headerMode: 'none',
   }
 );
 
@@ -28,6 +29,7 @@ const SetupAdminStack = StackNavigator(
   },
   {
     initialRouteName: 'SetupAdminScreen',
+    headerMode: 'none',
   }
 );
 

@@ -14,21 +14,25 @@ export class EntryPointScreen extends React.Component {
         super(props);
         this._bootstrapAsync();
     }
-    
+
     static navigationOptions = {
         title: 'EntryPoint',
     };
 
-    _bootstrapAsync = () => {
-        // var userToken = await AsyncStorage.getItem('userToken');
-        // userToken = 1;
+    _bootstrapAsync = async () => {
+
+        const userSession = await AsyncStorage.getItem('userSession');
+        const userSessionType = await AsyncStorage.getItem('userSessionType');
 
         setTimeout(() => {
-            // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-            this.props.navigation.navigate('Auth');
+            this.props.navigation.navigate((userSession ? 'App' : 'Auth'), {
+                func: () => {
+
+                }
+            });
         }, 1000);
 
-        // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+
     };
 
     render() {
