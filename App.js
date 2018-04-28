@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, DrawerNavigator, SwitchNavigator } from 'react-navigation';
+import { Root, Button, Icon } from 'native-base';
 
 import { EntryPointScreen } from './src/screens/entry-point';
 import { SignInScreen } from './src/screens/auth/signin';
@@ -10,7 +11,15 @@ import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 
 import { HelloAppScreen } from './src/screens/app/hello-app';
 
+import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
+import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
+
+
+import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
+
 console.disableYellowBox = true;
+
+
 
 const AuthStack = StackNavigator(
   {
@@ -39,22 +48,44 @@ const DrawerStackFront = DrawerNavigator({
 },
   {
     initialRouteName: 'HelloAppFront',
+
     // headerMode: 'none',
   });
 
+
+// =====================================================================
+const AdminHomeStack = StackNavigator(
+  {
+    AdminHomeIndex: AdminHomeIndexScreen,
+    AdminHomeDetails: AdminHomeDetailsScreen,
+  },
+  {
+    initialRouteName: 'AdminHomeIndex',
+  }
+);
+
+const AdminUsersStack = StackNavigator(
+  {
+    AdminUsersIndex: AdminUsersIndexScreen,
+  },
+  {
+    initialRouteName: 'AdminUsersIndex',
+  }
+);
 
 const DrawerStackAdmin = DrawerNavigator({
-  HelloAppAdmin: HelloAppScreen
+  AdminHome: AdminHomeStack,
+  AdminUsers: AdminUsersStack,
 },
   {
-    initialRouteName: 'HelloAppAdmin',
-    // headerMode: 'none',
+    initialRouteName: 'AdminHome',
   });
 
+// =====================================================================
 
 
 
-export default SwitchNavigator(
+const RootWrapper = SwitchNavigator(
   {
     EntryPoint: EntryPointScreen,
     StackFront: DrawerStackFront,
@@ -67,6 +98,11 @@ export default SwitchNavigator(
   }
 );
 
+
+export default () =>
+  <Root>
+    <RootWrapper />
+  </Root>;
 
 
 

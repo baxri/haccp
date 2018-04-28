@@ -60,7 +60,6 @@ export class SetupAdminScreen extends React.Component {
 
     render() {
         return (
-            <Root>
                 <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                     <Content padder style={{ flex: 1 }}>
                         <View style={{ padding: 30 }}>
@@ -91,7 +90,6 @@ export class SetupAdminScreen extends React.Component {
                         </View>
                     </Content >
                 </Container>
-            </Root>
         );
     }
 }

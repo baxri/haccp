@@ -35,7 +35,7 @@ export class EntryPointScreen extends React.Component {
             }
         }
 
-        //You can remove timeout it just to show loader with more duration :)
+        //You can remove timeout it just to show loader longer :)
         setTimeout(() => {
             this.props.navigation.navigate(stack, {
                 func: () => {

@@ -7,8 +7,20 @@ import {
     View,
     Text
 } from 'react-native';
+import { Menu } from '../../../components/menu';
+
 
 export class AdminUsersIndexScreen extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        const params = navigation.state.params || {};
+
+        return {
+            title: "User Managment",
+            headerRight: (<Menu navigation={navigation} />),
+        };
+    };
+
     constructor(props) {
         super(props);
 
@@ -33,9 +45,7 @@ export class AdminUsersIndexScreen extends React.Component {
     };
 
 
-    static navigationOptions = {
-        title: 'EntryPoint',
-    };
+
 
     render() {
 
@@ -47,7 +57,7 @@ export class AdminUsersIndexScreen extends React.Component {
 
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>ADMIN HOME INDEX SCREEN: {this.state.userSession}</Text>
+                <Text>ADMIN USERS INDEX SCREEN: {this.state.userSession}</Text>
                 <Text>Type: {this.state.userSessionType}</Text>
             </View>
         );

@@ -82,7 +82,6 @@ export class SignInAdminScreen extends React.Component {
         }
 
         return (
-            <Root>
                 <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                     <Content>
                         <View style={{ padding: 30 }}>
@@ -109,7 +108,6 @@ export class SignInAdminScreen extends React.Component {
                         </View>
                     </Content >
                 </Container>
-            </Root>
         );
     }
 }
