@@ -64,9 +64,9 @@ export class AdminHomeIndexScreen extends React.Component {
                 <Text>Type: {this.state.userSessionType}</Text>
 
 
-                <Button onPress={() => { this.props.navigation.navigate('AdminHomeDetails'); }}>
+                {/* <Button onPress={() => { this.props.navigation.navigate('AdminHomeDetails'); }}>
                     <Text>GO TO DETAILS</Text>
-                </Button>
+                </Button> */}
             </View>
         );
     }

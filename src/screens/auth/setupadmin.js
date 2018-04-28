@@ -8,7 +8,7 @@ import {
     View,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 
 export class SetupAdminScreen extends React.Component {
     constructor(props) {
@@ -45,7 +45,7 @@ export class SetupAdminScreen extends React.Component {
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV1', password);
+            await AsyncStorage.setItem('adminPasswordV2', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {
@@ -60,51 +60,64 @@ export class SetupAdminScreen extends React.Component {
 
     render() {
         return (
-                <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                    <Content padder style={{ flex: 1 }}>
-                        <View style={{ padding: 30 }}>
-                            <H1>Setup administrator password for login</H1>
-                        </View>
-                        <View style={{ alignItems: 'center', }}>
-                            <Form>
-                                <Item floatingLabel style={styles.input}>
-                                    <Label>Enter new password </Label>
-                                    <Input onChangeText={(value) => { this.setState({ password: value }) }} />
-                                </Item>
-                                <Item floatingLabel style={styles.input}>
-                                    <Label>Confirm password</Label>
-                                    <Input onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
-                                </Item>
-                                <View style={{ alignItems: 'center', marginBottom: 10 }}>
+            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
+                <Content padder style={{ flex: 1 }}>
+                    <View style={{ padding: 30 }}>
+                        <H1>Create New Administrator</H1>
+                    </View>
+                    <View style={{ alignItems: 'center', }}>
+                        <Form>
+                            <Item floatingLabel style={styles.input}>
+                                <Label>Enter new password </Label>
+                                <Input onChangeText={(value) => { this.setState({ password: value }) }} />
+                            </Item>
+                            <Item floatingLabel style={styles.input}>
+                                <Label>Confirm password</Label>
+                                <Input onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
+                            </Item>
+                            <View style={{ alignItems: 'center', marginBottom: 10 }}>
 
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Button primary style={styles.button} onPress={() => { this._setupAdmin() }}>
-                                        <Text>SETUP</Text>
-                                    </Button>
-                                    <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
-                                        <Text>I will setup later</Text>
-                                    </Button>
-                                </View>
-                            </Form>
-                        </View>
-                    </Content >
-                </Container>
+                            </View>
+                            <View style={{ alignItems: 'center' }}>
+                                <Button primary style={styles.button} onPress={() => { this._setupAdmin() }}>
+                                    <Left >
+                                        <Text style={{ color: 'white', }}>CREATE</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='bookmark' style={{ color: 'white', }} />
+                                    </Right>
+                                </Button>
+                                <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
+                                    <Left >
+                                        <Text>I WILL CREATE LATER</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='arrow-back' />
+                                    </Right>
+                                </Button>
+                            </View>
+                        </Form>
+                    </View>
+                </Content >
+            </Container>
         );
     }
 }
 
-
 const styles = StyleSheet.create({
     input: {
-        width: 300,
+        width: 400,
+        paddingBottom: 10,
     },
+
     button: {
-        width: 300,
+        width: 400,
+        height: 60,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 15,
         marginBottom: 40,
         marginLeft: 15,
+        padding: 20,
     },
 });

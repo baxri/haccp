@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 // import { Text } from 'react-native-elements';
-import { Container, Header, Content, Button, Text, Picker, H1 } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Icon, Left, Right } from 'native-base';
 
 export class SignInScreen extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ export class SignInScreen extends React.Component {
 
 
     GetSelectedPickerItem = () => {
-        Alert.alert(this.state.user);
+        Alert.alert('Not implemented yet try admin login');
     }
 
     render() {
@@ -37,8 +37,8 @@ export class SignInScreen extends React.Component {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content >
-                    <View style={{ padding: 30 }}>
-                        <H1>Lorem Ipsum is simply dummy Text </H1>
+                    <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
+                        <H1>HACCP User/Login</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <View style={styles.dropdownView}>
@@ -67,16 +67,27 @@ export class SignInScreen extends React.Component {
                                 <Picker.Item label="jkob.yeang@gmail.com" value="Jakob Yeang" />
                             </Picker>
                         </View>
-                        <View style={{ alignItems: 'center' }}>
+                        <View>
                             <Button primary style={styles.button} onPress={this.GetSelectedPickerItem}>
-                                <Text>SIGN IN</Text>
+                                <Left >
+                                    <Text style={{ color: 'white', }}>CONNECTION</Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='log-in' style={{ color: 'white', }} />
+                                </Right>
+
                             </Button>
                             <Button light style={styles.button} onPress={() => {
                                 this.props.navigation.navigate('SignInAdmin', {
                                     func: () => { }
                                 });
                             }}>
-                                <Text>SIGN IN AS ADMIN</Text>
+                                <Left >
+                                    <Text>SIGN IN AS ADMIN</Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='settings' />
+                                </Right>
                             </Button>
                         </View>
                     </View>
@@ -91,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     dropdownView: {
-        width: 300,
+        width: 400,
         height: 50,
         padding: 5,
         borderBottomWidth: 2,
@@ -101,10 +112,11 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: 300,
+        width: 400,
+        height: 60,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10,
+        padding: 20,
         marginBottom: 40,
     },
 });

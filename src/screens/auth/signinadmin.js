@@ -9,7 +9,8 @@ import {
 
 } from 'react-native';
 
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
+
 
 export class SignInAdminScreen extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV1');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV2');
 
         this.setState({
             loading: 0,
@@ -44,7 +45,7 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _loginAdmin = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV1');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV2');
 
         try {
 
@@ -80,8 +81,8 @@ export class SignInAdminScreen extends React.Component {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content>
-                    <View style={{ padding: 30 }}>
-                        <H1>Administrator manage users and departments</H1>
+                    <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
+                        <H1>Administrator Login</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
@@ -94,10 +95,20 @@ export class SignInAdminScreen extends React.Component {
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <Button primary style={styles.button} onPress={() => { this._loginAdmin() }}>
-                                    <Text>LOGIN</Text>
+                                    <Left >
+                                        <Text style={{ color: 'white', }}>CONNECTION</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='log-in' style={{ color: 'white', }} />
+                                    </Right>
                                 </Button>
                                 <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
-                                    <Text>SIGN IN AS USER</Text>
+                                    <Left >
+                                        <Text>BACK (SIGN IN)</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='arrow-back' />
+                                    </Right>
                                 </Button>
                             </View>
                         </Form>
@@ -110,14 +121,17 @@ export class SignInAdminScreen extends React.Component {
 
 const styles = StyleSheet.create({
     input: {
-        width: 300,
+        width: 400,
+        paddingBottom: 10,
     },
     button: {
-        width: 300,
+        width: 400,
+        height: 60,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 15,
         marginBottom: 40,
         marginLeft: 15,
+        padding: 20,
     },
 });
