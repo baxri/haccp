@@ -2,11 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { StackNavigator, DrawerNavigator, SwitchNavigator } from 'react-navigation';
 
-import {EntryPointScreen} from './src/screens/entry-point';
-import {SignInScreen} from './src/screens/auth/signin';
-import {SignInAdminScreen} from './src/screens/auth/signinadmin';
-import {HelloAppScreen} from './src/screens/app/hello-app';
+import { EntryPointScreen } from './src/screens/entry-point';
+import { SignInScreen } from './src/screens/auth/signin';
+import { SignInAdminScreen } from './src/screens/auth/signinadmin';
+import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 
+
+import { HelloAppScreen } from './src/screens/app/hello-app';
+
+console.disableYellowBox = true;
 
 const AuthStack = StackNavigator(
   {
@@ -18,12 +22,22 @@ const AuthStack = StackNavigator(
   }
 );
 
+const SetupAdminStack = StackNavigator(
+  {
+    SetupAdminScreen: SetupAdminScreen,
+  },
+  {
+    initialRouteName: 'SetupAdminScreen',
+  }
+);
+
 
 export default SwitchNavigator(
   {
     EntryPoint: EntryPointScreen,
     App: HelloAppScreen,
     Auth: AuthStack,
+    SetupAdmin: SetupAdminStack,
   },
   {
     initialRouteName: 'EntryPoint',
