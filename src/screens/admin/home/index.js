@@ -8,9 +8,25 @@ import {
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
-import { Menu } from '../../../components/menu';
+import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+
 
 export class AdminHomeIndexScreen extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        const params = navigation.state.params || {};
+
+        return {
+            drawerLabel: 'Dashboard',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name='home' style={{ color: tintColor, }} />
+            ),
+            headerLeft: <NoBackButton />,
+            headerTitle: <LogoTitle HeaderText="Dashboard" />,
+            headerRight: <Menu navigation={navigation} />,
+        };
+    };
+
     constructor(props) {
         super(props);
 
@@ -33,20 +49,6 @@ export class AdminHomeIndexScreen extends React.Component {
             userSessionType: userSessionType,
         });
     };
-
-
-    static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
-
-        return {
-            title: "Dashboard",
-            headerRight: (
-                <Menu navigation={navigation} />
-            ),
-        };
-    };
-
-
 
     render() {
 

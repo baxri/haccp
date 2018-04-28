@@ -7,7 +7,9 @@ import {
     View,
     Text
 } from 'react-native';
-import { Menu } from '../../../components/menu';
+import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+
+
 
 export class AdminHomeDetailsScreen extends React.Component {
 
@@ -15,8 +17,8 @@ export class AdminHomeDetailsScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            title: "Dashboard Details",
-            headerRight: (<Menu navigation={navigation} />),
+            headerTitle: <LogoTitle HeaderText="Dashboard" />,
+            headerRight: <Menu navigation={navigation} />,
         };
     };
 

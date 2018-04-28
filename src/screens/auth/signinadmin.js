@@ -63,11 +63,7 @@ export class SignInAdminScreen extends React.Component {
             await AsyncStorage.setItem('userSessionType', 'admin');
 
             //Navigate to application home page       
-            this.props.navigation.navigate('StackAdmin', {
-                func: () => {
-                    ToastAndroid.show('Succssfully logged in!', ToastAndroid.LONG);
-                }
-            });
+            this.props.navigation.navigate('StackAdmin');
         } catch (error) {
             ToastAndroid.show(error.message, ToastAndroid.LONG);
         }
@@ -82,32 +78,32 @@ export class SignInAdminScreen extends React.Component {
         }
 
         return (
-                <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                    <Content>
-                        <View style={{ padding: 30 }}>
-                            <H1>Administrator manage users and departments</H1>
-                        </View>
-                        <View style={{ alignItems: 'center', }}>
-                            <Form>
-                                <Item floatingLabel style={styles.input}>
-                                    <Label>Enter password </Label>
-                                    <Input onChangeText={(value) => { this.setState({ password: value }) }} />
-                                </Item>
-                                <View style={{ alignItems: 'center', marginBottom: 10 }}>
+            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
+                <Content>
+                    <View style={{ padding: 30 }}>
+                        <H1>Administrator manage users and departments</H1>
+                    </View>
+                    <View style={{ alignItems: 'center', }}>
+                        <Form>
+                            <Item floatingLabel style={styles.input}>
+                                <Label>Enter password </Label>
+                                <Input onChangeText={(value) => { this.setState({ password: value }) }} />
+                            </Item>
+                            <View style={{ alignItems: 'center', marginBottom: 10 }}>
 
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Button primary style={styles.button} onPress={() => { this._loginAdmin() }}>
-                                        <Text>LOGIN</Text>
-                                    </Button>
-                                    <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
-                                        <Text>SIGN IN AS USER</Text>
-                                    </Button>
-                                </View>
-                            </Form>
-                        </View>
-                    </Content >
-                </Container>
+                            </View>
+                            <View style={{ alignItems: 'center' }}>
+                                <Button primary style={styles.button} onPress={() => { this._loginAdmin() }}>
+                                    <Text>LOGIN</Text>
+                                </Button>
+                                <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
+                                    <Text>SIGN IN AS USER</Text>
+                                </Button>
+                            </View>
+                        </Form>
+                    </View>
+                </Content >
+            </Container>
         );
     }
 }

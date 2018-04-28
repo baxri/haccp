@@ -14,11 +14,15 @@ import { HelloAppScreen } from './src/screens/app/hello-app';
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
-
 import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
+
+
+import { LogOutScreen } from './src/screens/auth/logout';
 
 console.disableYellowBox = true;
 
+const headerBackground = '#1E2EB4';
+const headerTextColor = 'white';
 
 
 const AuthStack = StackNavigator(
@@ -61,6 +65,12 @@ const AdminHomeStack = StackNavigator(
   },
   {
     initialRouteName: 'AdminHomeIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
   }
 );
 
@@ -70,12 +80,19 @@ const AdminUsersStack = StackNavigator(
   },
   {
     initialRouteName: 'AdminUsersIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
   }
 );
 
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
   AdminUsers: AdminUsersStack,
+  AdminLogout: LogOutScreen,
 },
   {
     initialRouteName: 'AdminHome',

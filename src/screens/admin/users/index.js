@@ -5,9 +5,10 @@ import {
     StatusBar,
     StyleSheet,
     View,
-    Text
+    
 } from 'react-native';
-import { Menu } from '../../../components/menu';
+import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 
 
 export class AdminUsersIndexScreen extends React.Component {
@@ -16,8 +17,13 @@ export class AdminUsersIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            title: "User Managment",
-            headerRight: (<Menu navigation={navigation} />),
+            drawerLabel: 'Users',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name='people' style={{ color: tintColor, }} />
+            ),
+            headerLeft: <NoBackButton />,
+            headerTitle: <LogoTitle HeaderText="Dashboard" />,
+            headerRight: <Menu navigation={navigation} />,
         };
     };
 
