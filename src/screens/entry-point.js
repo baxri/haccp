@@ -24,15 +24,25 @@ export class EntryPointScreen extends React.Component {
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
 
+        // Set up navigation stack for admin and user (default is Auth)
+        let stack = 'Auth';
+
+        if (userSession) {
+            stack = 'StackUser';
+
+            if (userSessionType == 'admin') {
+                stack = 'StackAdmin';
+            }
+        }
+
+        //You can remove timeout it just to show loader with more duration :)
         setTimeout(() => {
-            this.props.navigation.navigate((userSession ? 'App' : 'Auth'), {
+            this.props.navigation.navigate(stack, {
                 func: () => {
 
                 }
             });
         }, 1000);
-
-
     };
 
     render() {

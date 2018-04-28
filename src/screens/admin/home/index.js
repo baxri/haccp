@@ -8,7 +8,7 @@ import {
     Text
 } from 'react-native';
 
-export class HelloAppScreen extends React.Component {
+export class AdminHomeIndexScreen extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,9 +19,6 @@ export class HelloAppScreen extends React.Component {
         };
 
         this._bootstrapAsync();
-
-        // Need func parameter (this is a requred parameter for this screen)
-        // this.props.navigation.state.params.func();
     }
 
     _bootstrapAsync = async () => {
@@ -34,7 +31,7 @@ export class HelloAppScreen extends React.Component {
             userSessionType: userSessionType,
         });
     };
-    
+
 
     static navigationOptions = {
         title: 'EntryPoint',
@@ -50,7 +47,7 @@ export class HelloAppScreen extends React.Component {
 
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Hello My App: {this.state.userSession}</Text>
+                <Text>ADMIN HOME INDEX SCREEN: {this.state.userSession}</Text>
                 <Text>Type: {this.state.userSessionType}</Text>
             </View>
         );

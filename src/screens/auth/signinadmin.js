@@ -63,7 +63,7 @@ export class SignInAdminScreen extends React.Component {
             await AsyncStorage.setItem('userSessionType', 'admin');
 
             //Navigate to application home page       
-            this.props.navigation.navigate('App', {
+            this.props.navigation.navigate('StackAdmin', {
                 func: () => {
                     ToastAndroid.show('Succssfully logged in!', ToastAndroid.LONG);
                 }

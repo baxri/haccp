@@ -34,10 +34,31 @@ const SetupAdminStack = StackNavigator(
 );
 
 
+const DrawerStackFront = DrawerNavigator({
+  HelloAppFront: HelloAppScreen
+},
+  {
+    initialRouteName: 'HelloAppFront',
+    // headerMode: 'none',
+  });
+
+
+const DrawerStackAdmin = DrawerNavigator({
+  HelloAppAdmin: HelloAppScreen
+},
+  {
+    initialRouteName: 'HelloAppAdmin',
+    // headerMode: 'none',
+  });
+
+
+
+
 export default SwitchNavigator(
   {
     EntryPoint: EntryPointScreen,
-    App: HelloAppScreen,
+    StackFront: DrawerStackFront,
+    StackAdmin: DrawerStackAdmin,
     Auth: AuthStack,
     SetupAdmin: SetupAdminStack,
   },
@@ -45,7 +66,6 @@ export default SwitchNavigator(
     initialRouteName: 'EntryPoint',
   }
 );
-
 
 
 
