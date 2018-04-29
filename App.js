@@ -16,6 +16,9 @@ import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
 import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
 
+import { AdminDepartmentsIndexScreen } from './src/screens/admin/departments/index';
+import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item';
+
 
 import { LogOutScreen } from './src/screens/auth/logout';
 
@@ -89,8 +92,25 @@ const AdminUsersStack = StackNavigator(
   }
 );
 
+const AdminDepartmentsStack = StackNavigator(
+  {
+    AdminDepartmentsIndex: AdminDepartmentsIndexScreen,
+    AdminDepartmentsItem: AdminDepartmentsItemScreen,
+  },
+  {
+    initialRouteName: 'AdminDepartmentsIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
+  AdminDepartments: AdminDepartmentsStack,
   AdminUsers: AdminUsersStack,
   AdminLogout: LogOutScreen,
 },

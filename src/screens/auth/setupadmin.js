@@ -92,7 +92,7 @@ export class SetupAdminScreen extends React.Component {
                                         <Text>I WILL CREATE LATER</Text>
                                     </Left>
                                     <Right>
-                                        <Icon name='arrow-back' />
+                                        <Icon name='arrow-back' />                                        
                                     </Right>
                                 </Button>
                             </View>
