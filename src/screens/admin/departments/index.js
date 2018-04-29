@@ -7,9 +7,10 @@ import {
     View,
     ListView,
     FlatList,
+    RefreshControl,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, RefreshControl } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, DeleteDepartment } from '../../../database/realm';
 
@@ -68,7 +69,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
     _loadItems() {
         Departments().then(items => {
-            this.setState({ listViewData: items });
+            this.setState({ listViewData: items, refreshing: false });
         }).catch(error => {
             alert(error);
         });;
@@ -87,7 +88,8 @@ export class AdminDepartmentsIndexScreen extends React.Component {
     }
 
     _onRefresh() {
-        this.setState({ refreshig: true });
+        this._loadItems();
+        // this.setState({ refreshig: true });
     }
 
     render() {
@@ -100,10 +102,12 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
         return (
             <Container>
-                <Content>
+                <Content refreshControl={<RefreshControl
+                    refreshing={this.state.refreshing}
+                    onRefresh={() => { this._onRefresh() }} />
+                }>
                     <List
-                        refreshing={this.state.refreshig}
-                        onRefresh={this._onRefresh}
+
 
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
