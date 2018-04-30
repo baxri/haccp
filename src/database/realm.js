@@ -159,6 +159,11 @@ export const editUser = (departmentId, item) => new Promise((resolve, reject) =>
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Update Realm objects and write to local storage
+
+            let departmentObject = realm.objectForPrimaryKey('Department', departmentId);
+
+            item.department = departmentObject;
+
             realm.write(() => {
                 let department = realm.create('User', item, true);
                 resolve(department);

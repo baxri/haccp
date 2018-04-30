@@ -108,11 +108,10 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                 }>
                     <List
 
-
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
                             <ListItem style={{ height: 70, padding: 15, }}>
-                                <Text> {data.name} </Text>
+                                <Text> {data.name} ({data.users.length}) </Text>
                             </ListItem>}
                         renderLeftHiddenRow={data =>
                             <Button full onPress={_ => this._editRow(data)}>

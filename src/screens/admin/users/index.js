@@ -10,7 +10,7 @@ import {
     RefreshControl,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem,Left,Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
 
@@ -112,7 +112,12 @@ export class AdminUsersIndexScreen extends React.Component {
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
                             <ListItem style={{ height: 70, padding: 15, }}>
-                                <Text> {data.name} </Text>
+                                <Left>
+                                    <Text>Name: {data.name}</Text>
+                                </Left>
+                                <Right>
+                                    <Text>Department: {data.department.name}</Text>
+                                </Right>
                             </ListItem>}
                         renderLeftHiddenRow={data =>
                             <Button full onPress={_ => this._editRow(data)}>
@@ -136,6 +141,9 @@ export class AdminUsersIndexScreen extends React.Component {
                         this.props.navigation.navigate('AdminUsersItem', {
                             id: "",
                             name: "",
+                            department: {
+                                id: ''
+                            }
                         });
                     }}>
                     <Icon name="add" />

@@ -38,7 +38,7 @@ export class AdminUsersItemScreen extends React.Component {
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
-            department: null,
+            department: this.props.navigation.state.params.department.id,
         };
 
         this._bootstrapAsync();
