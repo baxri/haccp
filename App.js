@@ -15,6 +15,7 @@ import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
 import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
+import { AdminUsersItemScreen } from './src/screens/admin/users/item';
 
 import { AdminDepartmentsIndexScreen } from './src/screens/admin/departments/index';
 import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item';
@@ -80,6 +81,7 @@ const AdminHomeStack = StackNavigator(
 const AdminUsersStack = StackNavigator(
   {
     AdminUsersIndex: AdminUsersIndexScreen,
+    AdminUsersItem: AdminUsersItemScreen,
   },
   {
     initialRouteName: 'AdminUsersIndex',

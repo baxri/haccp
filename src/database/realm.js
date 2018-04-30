@@ -3,6 +3,18 @@ import React from 'react';
 const Realm = require('realm');
 
 
+const UserSchema = {
+    primaryKey: 'id',
+    name: 'User',
+
+    properties: {
+        id: 'string',    // primary key        
+        name: 'string',
+        department: 'Department',
+    }
+};
+
+
 const DepartmentSchema = {
     primaryKey: 'id',
     name: 'Department',
@@ -10,8 +22,32 @@ const DepartmentSchema = {
     properties: {
         id: 'string',    // primary key
         name: 'string',
+        users: { type: 'linkingObjects', objectType: 'User', property: 'department' }
     }
 };
+
+// const DepartmentSchema = {
+//     primaryKey: 'id',
+//     name: 'Department',
+
+//     properties: {
+//         id: 'string',    // primary key
+//         name: 'string',
+//         users: 'User[]'
+//     }
+// };
+
+// const UserSchema = {
+//     primaryKey: 'id',
+//     name: 'User',
+
+//     properties: {
+//         id: 'string',    // primary key
+//         name: 'string',
+//         departments: {type: 'linkingObjects', objectType: 'Department', property: 'users'}
+//     }
+// };
+
 
 const _guid = () => {
     function s4() {
@@ -22,12 +58,13 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+const schemaVersion = 7;
+const schemas = [UserSchema, DepartmentSchema];
 
-// const schemas = [DepartmentSchema];
 
 export const addDepartment = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: [DepartmentSchema], schemaVersion: 2, })
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Create Realm objects and write to local storage
             realm.write(() => {
@@ -47,7 +84,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
 
 export const editDepartment = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: [DepartmentSchema], schemaVersion: 2, })
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Update Realm objects and write to local storage
             realm.write(() => {
@@ -63,7 +100,7 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
 
 export const Departments = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: [DepartmentSchema], schemaVersion: 2, })
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             const items = realm.objects('Department');
             resolve(items);
@@ -75,10 +112,82 @@ export const Departments = (item) => new Promise((resolve, reject) => {
 
 export const DeleteDepartment = (id) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: [DepartmentSchema], schemaVersion: 2, })
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
                 let department = realm.create('Department', { id: id }, true);
+                realm.delete(department);
+                resolve();
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+
+
+
+
+export const addUser = (departmentId, item) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            // Create Realm objects and write to local storage
+            realm.write(() => {
+
+                let departmentObject = realm.objectForPrimaryKey('Department', departmentId);
+
+                const department = realm.create('User', {
+                    id: _guid(),
+                    name: item.name,
+                    department: departmentObject,
+                });
+
+                resolve(department);
+
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const editUser = (departmentId, item) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            // Update Realm objects and write to local storage
+            realm.write(() => {
+                let department = realm.create('User', item, true);
+                resolve(department);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+export const Users = (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const items = realm.objects('User');
+            resolve(items);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const DeleteUser = (id) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let department = realm.create('User', { id: id }, true);
                 realm.delete(department);
                 resolve();
             });
