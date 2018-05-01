@@ -67,16 +67,23 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         });
     };
 
-    _loadItems() {
-        Departments().then(items => {
-            this.setState({ listViewData: items, refreshing: false });
-        }).catch(error => {
-            alert(error);
-        });;
+    _loadItems = async () => {
+        let items = await Departments();
+        this.setState({ listViewData: items, refreshing: false });
     }
 
-    _deleteRow(id) {
+
+    // _loadItems() {
+    //     Departments().then(items => {
+    //         this.setState({ listViewData: items, refreshing: false });
+    //     }).catch(error => {
+    //         alert(error);
+    //     });;
+    // }
+
+    _deleteRow(id, secId, rowId, rowMap) {
         DeleteDepartment(id).then(item => {
+            rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
         }).catch(error => {
             alert(error);
@@ -118,7 +125,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                                 <Icon active name="build" />
                             </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-                            <Button full danger onPress={_ => this._deleteRow(data.id)}>
+                            <Button full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
                                 <Icon active name="trash" />
                             </Button>}
                         leftOpenValue={75}

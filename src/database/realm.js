@@ -102,7 +102,7 @@ export const Departments = (item) => new Promise((resolve, reject) => {
 
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
-            const items = realm.objects('Department');
+            const items = realm.objects('Department').sorted('name', true);
             resolve(items);
         })
         .catch(error => {
@@ -179,7 +179,7 @@ export const Users = (item) => new Promise((resolve, reject) => {
 
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
-            const items = realm.objects('User');
+            const items = realm.objects('User').sorted('name', true);;
             resolve(items);
         })
         .catch(error => {
