@@ -19,7 +19,7 @@ import { AdminUsersItemScreen } from './src/screens/admin/users/item';
 
 import { AdminDepartmentsIndexScreen } from './src/screens/admin/departments/index';
 import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item';
-
+import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { LogOutScreen } from './src/screens/auth/logout';
 
@@ -110,9 +110,23 @@ const AdminDepartmentsStack = StackNavigator(
   }
 );
 
+const AdminDepartmentsStackWithModal = StackNavigator(
+  {
+    AdminDepartmentsStack: AdminDepartmentsStack,
+    AdminDepartmentsEquipmentsModal: AdminDepartmentsEquipmentsModal,
+  },
+  {
+    initialRouteName: 'AdminDepartmentsStack',
+    mode: 'modal',
+    headerMode: 'none',
+  }
+);
+
+
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
-  AdminDepartments: AdminDepartmentsStack,
+  // AdminDepartments: AdminDepartmentsStack,
+  AdminDepartments: AdminDepartmentsStackWithModal,
   AdminUsers: AdminUsersStack,
   AdminLogout: LogOutScreen,
 },

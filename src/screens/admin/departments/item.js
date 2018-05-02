@@ -92,10 +92,20 @@ export class AdminDepartmentsItemScreen extends React.Component {
                                     <Icon name='checkmark' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
+
+                            <Button primary style={styles.button}
+                                onPress={() => this.props.navigation.navigate('AdminDepartmentsEquipmentsModal')}
+                            >
+                                <Left >
+                                    <Text style={{ color: 'white', }}>EQUIPMENTS</Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='checkmark' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
+
                         </View>
                     </Form>
-
-
                 </Content>
             </Container>
         );
