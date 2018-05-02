@@ -95,6 +95,11 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         });
     }
 
+    _confirm() {
+        let checked = this.state.listViewData.filter((row) => row.checked);
+        alert(checked[0].name);
+    }
+
     render() {
         return (
             <Container>
@@ -124,7 +129,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                 </Content>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
-                        <Button full primary onPress={_ => alert("CHOOSE")} styles={{
+                        <Button full primary onPress={_ => this._confirm()} styles={{
                             positon: 'absolute',
                             bottom: 0,
                             height: 100,
