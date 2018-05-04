@@ -67,6 +67,12 @@ export class AdminDepartmentsItemScreen extends React.Component {
         }
     }
 
+    _equipmentsChoosed = (data) => {
+
+        alert(data.length);
+
+    };
+
     render() {
 
         if (this.state.loading) {
@@ -94,7 +100,9 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             </Button>
 
                             <Button primary style={styles.button}
-                                onPress={() => this.props.navigation.navigate('AdminDepartmentsEquipmentsModal')}
+                                onPress={() => this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
+                                    equipmentsChoosed: this._equipmentsChoosed
+                                })}
                             >
                                 <Left >
                                     <Text style={{ color: 'white', }}>EQUIPMENTS</Text>

@@ -19,85 +19,73 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         super(props);
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
+            preCheckedData: [
+                {
+                    id: 2,
+                    name: "equipment-2",
+                },
+            ],
             listViewData: [
                 {
-                    name: "equipment-22",
+                    id: 1,
+                    name: "equipment-1",
                     checked: false,
                 },
                 {
-                    name: "equipment-22",
+                    id: 2,
+                    name: "equipment-2",
                     checked: false,
                 },
                 {
-                    name: "equipment-22",
+                    id: 3,
+                    name: "equipment-3",
                     checked: false,
                 },
                 {
-                    name: "equipment-22",
+                    id: 4,
+                    name: "equipment-4",
                     checked: false,
                 },
                 {
-                    name: "equipment-22",
+                    id: 5,
+                    name: "equipment-5",
                     checked: false,
                 },
                 {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
-                    checked: false,
-                },
-                {
-                    name: "equipment-22",
+                    id: 6,
+                    name: "equipment-6",
                     checked: false,
                 },
             ],
         };
+
+        this._preCheck();
+    }
+
+    _preCheck() {
+        this.state.listViewData.map((item) => {
+            if (this.state.preCheckedData.filter((row) => item.id == row.id).length > 0) {
+                item.checked = true;
+            }
+            return item;
+        });
     }
 
     _toggleCheckbox(rowId) {
-
         let list = this.state.listViewData;
 
-        if (list[rowId].checked) {
+        if (list[rowId].checked)
             list[rowId].checked = false;
-        } else {
+        else
             list[rowId].checked = true;
-        }
 
-        this.setState({
-            listViewData: list,
-        });
+        this.setState({ listViewData: list });
     }
 
     _confirm() {
         let checked = this.state.listViewData.filter((row) => row.checked);
-        alert(checked[0].name);
+        this.props.navigation.goBack();
+        this.props.navigation.state.params.equipmentsChoosed(checked);
     }
 
     render() {

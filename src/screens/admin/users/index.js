@@ -22,7 +22,7 @@ export class AdminUsersIndexScreen extends React.Component {
         return {
             drawerLabel: 'Users',
             drawerIcon: ({ tintColor }) => (
-                <Icon name='briefcase' style={{ color: tintColor, }} />
+                <Icon name='people' style={{ color: tintColor, }} />
             ),
             headerLeft: <NoBackButton />,
             headerTitle: <LogoTitle HeaderText="Users" />,
