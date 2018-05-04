@@ -22,6 +22,7 @@ const DepartmentSchema = {
     properties: {
         id: 'string',    // primary key
         name: 'string',
+        equipments: 'string[]',
         users: { type: 'linkingObjects', objectType: 'User', property: 'department' }
     }
 };
@@ -58,7 +59,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 7;
+const schemaVersion = 9;
 const schemas = [UserSchema, DepartmentSchema];
 
 
@@ -71,6 +72,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
                 const department = realm.create('Department', {
                     id: _guid(),
                     name: item.name,
+                    equipments: item.equipments,
                 });
 
                 resolve(department);

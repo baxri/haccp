@@ -96,7 +96,6 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
     _onRefresh() {
         this._loadItems();
-        // this.setState({ refreshig: true });
     }
 
     render() {
@@ -142,6 +141,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                         this.props.navigation.navigate('AdminDepartmentsItem', {
                             id: "",
                             name: "",
+                            equipments: [],
                         });
                     }}>
                     <Icon name="add" />

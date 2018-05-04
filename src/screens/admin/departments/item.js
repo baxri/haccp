@@ -38,6 +38,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
+            equipments: this.props.navigation.state.params.equipments,
         };
 
         this._bootstrapAsync();
@@ -53,24 +54,31 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
     _saveItem() {
         if (!this.state.id) {
-            addDepartment({ name: this.state.name }).then(res => {
+            addDepartment({
+                name: this.state.name,
+                equipments: this.state.equipments
+            }).then(res => {
                 this.props.navigation.navigate('AdminDepartmentsIndex');
             }).catch(error => {
-                alert(res.name);
+                alert(error);
             });
         } else {
-            editDepartment({ id: this.state.id, name: this.state.name }).then(res => {
+            editDepartment({
+                id: this.state.id,
+                name: this.state.name,
+                equipments: this.state.equipments
+            }).then(res => {
                 this.props.navigation.navigate('AdminDepartmentsIndex');
             }).catch(error => {
-                alert(res.name);
+                alert(error);
             });
         }
     }
 
     _equipmentsChoosed = (data) => {
-
-        alert(data.length);
-
+        this.setState({
+            equipments: data,
+        });
     };
 
     render() {
@@ -101,6 +109,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                             <Button primary style={styles.button}
                                 onPress={() => this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
+                                    value: this.state.equipments,
                                     equipmentsChoosed: this._equipmentsChoosed
                                 })}
                             >
