@@ -10,6 +10,7 @@ const UserSchema = {
     properties: {
         id: 'string',    // primary key        
         name: 'string',
+        lastname: 'string',
         department: 'Department',
     }
 };
@@ -27,28 +28,6 @@ const DepartmentSchema = {
     }
 };
 
-// const DepartmentSchema = {
-//     primaryKey: 'id',
-//     name: 'Department',
-
-//     properties: {
-//         id: 'string',    // primary key
-//         name: 'string',
-//         users: 'User[]'
-//     }
-// };
-
-// const UserSchema = {
-//     primaryKey: 'id',
-//     name: 'User',
-
-//     properties: {
-//         id: 'string',    // primary key
-//         name: 'string',
-//         departments: {type: 'linkingObjects', objectType: 'Department', property: 'users'}
-//     }
-// };
-
 
 const _guid = () => {
     function s4() {
@@ -59,7 +38,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 9;
+const schemaVersion = 10;
 const schemas = [UserSchema, DepartmentSchema];
 
 
@@ -144,6 +123,7 @@ export const addUser = (departmentId, item) => new Promise((resolve, reject) => 
                 const department = realm.create('User', {
                     id: _guid(),
                     name: item.name,
+                    lastname: item.lastname,
                     department: departmentObject,
                 });
 

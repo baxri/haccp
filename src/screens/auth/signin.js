@@ -52,6 +52,10 @@ export class SignInScreen extends React.Component {
     _changeDepartment = async (itemIndex, itemValue) => {
         this.setState({ department: itemValue, user: '' });
         this.setState({ users: this.state.departments[itemIndex].users });
+
+        if (this.state.departments[itemIndex].users.length > 0) {
+            this.setState({ user: this.state.departments[itemIndex].users[0].id });
+        }
     }
 
 
@@ -99,7 +103,7 @@ export class SignInScreen extends React.Component {
                                     selectedValue={this.state.user}
                                     onValueChange={(itemValue, itemIndex) => this.setState({ user: itemValue })} >
                                     {this.state.users.map((item, key) => (
-                                        <Picker.Item label={item.name} value={item.id} key={key} />)
+                                        <Picker.Item label={item.name + " " + item.lastname} value={item.id} key={key} />)
                                     )}
                                 </Picker>
                             </View>}

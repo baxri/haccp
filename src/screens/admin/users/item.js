@@ -39,6 +39,7 @@ export class AdminUsersItemScreen extends React.Component {
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
+            lastname: this.props.navigation.state.params.lastname,
             department: this.props.navigation.state.params.department.id,
         };
 
@@ -63,14 +64,14 @@ export class AdminUsersItemScreen extends React.Component {
 
         if (this.state.department) {
             if (!this.state.id) {
-                addUser(this.state.department, { name: this.state.name }).then(res => {
+                addUser(this.state.department, { name: this.state.name, lastname: this.state.lastname }).then(res => {
                     this.props.navigation.navigate('AdminUsersIndex');
                     Keyboard.dismiss();
                 }).catch(error => {
                     alert(error);
                 });
             } else {
-                editUser(this.state.department, { id: this.state.id, name: this.state.name }).then(res => {
+                editUser(this.state.department, { id: this.state.id, name: this.state.name, lastname: this.state.lastname }).then(res => {
                     this.props.navigation.navigate('AdminUsersIndex');
                     Keyboard.dismiss();
                 }).catch(error => {
@@ -90,32 +91,37 @@ export class AdminUsersItemScreen extends React.Component {
 
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <Content padder style={{ flex: 1 }}>
-                    <Form>
+                <Content padder style={{ flex: 1, }}>
+                    <Form style={{ borderWidth: 0, alignItems: 'center', justifyContent: 'center' }}>
 
-                        <Picker
-                            mode="dropdown"
-                            style={styles.dropdown}
-                            selectedValue={this.state.department}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ department: itemValue })}
-                        >
-                            <Picker.Item label="Select Department" value="" />
+                        <View style={styles.dropdownView}>
+                            <Picker
+                                mode="dropdown"
+                                style={styles.dropdown}
+                                selectedValue={this.state.department}
+                                onValueChange={(itemValue, itemIndex) => this.setState({ department: itemValue })}
+                            >
+                                <Picker.Item label="SELECT DEPARTMENT" value="" />
 
-                            {this.state.departments.map((i, index) => (
-                                <Picker.Item key={index} label={i.name} value={i.id} />
-                            ))}
-
-
-                        </Picker>
+                                {this.state.departments.map((i, index) => (
+                                    <Picker.Item key={index} label={i.name} value={i.id} />
+                                ))}
 
 
-                        <Item floatingLabel style={styles.input}>
-                            <Label>User Name </Label>
-                            <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                        </Item>
+                            </Picker>
+                        </View>
+                        <View style={{ borderWidth: 0, flex: 1 }}>
+                            <Item floatingLabel style={styles.input}>
+                                <Label>First Name </Label>
+                                <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                            </Item>
+                            <Item floatingLabel style={styles.input}>
+                                <Label>Last Name </Label>
+                                <Input value={this.state.lastname} onChangeText={(value) => { this.setState({ lastname: value }) }} />
+                            </Item>
+                        </View>
 
-
-                        <View style={{ alignItems: 'center' }}>
+                        <View style={{ borderWidth: 0, flex: 1 }}>
                             <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
                                     <Text style={{ color: 'white', }}>SAVE DEPARTMENT</Text>
@@ -139,22 +145,20 @@ const styles = StyleSheet.create({
     input: {
         width: 400,
         paddingBottom: 10,
+
     },
 
     button: {
         width: 400,
         height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 15,
         marginBottom: 40,
-        marginLeft: 15,
         padding: 20,
     },
 
     dropdown: {
         flex: 1,
-        marginBottom: 100,
+
     },
     dropdownView: {
         width: 400,
@@ -162,7 +166,8 @@ const styles = StyleSheet.create({
         padding: 5,
         borderBottomWidth: 2,
         borderStyle: 'solid',
-        marginBottom: 20,
+        marginBottom: 50,
         borderBottomColor: 'lightgray',
+        marginLeft: 15,
     },
 });

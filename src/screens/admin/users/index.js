@@ -122,7 +122,7 @@ export class AdminUsersIndexScreen extends React.Component {
                         renderRow={data =>
                             <ListItem style={{ height: 70, padding: 15, }}>
                                 <Left>
-                                    <Text>{data.name} ({data.department.name})</Text>
+                                    <Text>{data.name} {data.lastname} ({data.department.name})</Text>
                                 </Left>
                                 <Right>
                                     <Text></Text>
@@ -152,6 +152,7 @@ export class AdminUsersIndexScreen extends React.Component {
                     onPress={() => this.props.navigation.navigate('AdminUsersItem', {
                         id: "",
                         name: "",
+                        lastname: "",
                         department: {
                             id: ''
                         }

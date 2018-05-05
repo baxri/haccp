@@ -8,6 +8,8 @@ import {
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import { Col, Row, Grid } from "react-native-easy-grid";
+
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 
 
@@ -31,43 +33,59 @@ export class AdminHomeIndexScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 1,
-            userSession: '',
-            userSessionType: '',
+            loading: 0,
         };
 
         this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
-        const userSession = await AsyncStorage.getItem('userSession');
-        const userSessionType = await AsyncStorage.getItem('userSessionType');
 
-        this.setState({
-            loading: 0,
-            userSession: userSession,
-            userSessionType: userSessionType,
-        });
     };
 
     render() {
-
-        if (this.state.loading) {
-            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator />
-            </View>
-        }
-
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>ADMIN HOME INDEX SCREEN: {this.state.userSession}</Text>
-                <Text>Type: {this.state.userSessionType}</Text>
+            <Container>
+                <Grid>
+                    <Row >
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Departments</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='people' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Users</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                    <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert("It must be implemented at the end")}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='sync' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Backup</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert("Cleaning Schedule (leave that for now I have to define that)")}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='snow' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Cleaning Schedule</Text>
+                                </View>
+                            </Button>
+                        </Col>
 
-
-                {/* <Button onPress={() => { this.props.navigation.navigate('AdminHomeDetails'); }}>
-                    <Text>GO TO DETAILS</Text>
-                </Button> */}
-            </View>
+                    </Row>
+                </Grid>
+            </Container>
         );
     }
 }
