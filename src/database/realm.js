@@ -41,9 +41,11 @@ const _guid = () => {
 const schemaVersion = 10;
 const schemas = [UserSchema, DepartmentSchema];
 
+export const file = () => {
+    return Realm.defaultPath;
+}
 
 export const addDepartment = (item) => new Promise((resolve, reject) => {
-
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Create Realm objects and write to local storage

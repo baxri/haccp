@@ -66,8 +66,8 @@ export class AdminHomeIndexScreen extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                    <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert("It must be implemented at the end")}>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='sync' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
                                     <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Backup</Text>

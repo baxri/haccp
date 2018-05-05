@@ -21,6 +21,8 @@ import { AdminDepartmentsIndexScreen } from './src/screens/admin/departments/ind
 import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item';
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
+import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
+
 import { LogOutScreen } from './src/screens/auth/logout';
 
 console.disableYellowBox = true;
@@ -157,12 +159,27 @@ const AdminDepartmentsStackWithModal = StackNavigator(
   }
 );
 
+const AdminBackupStack = StackNavigator(
+  {
+    AdminBackupIndex: AdminBackupIndexScreen,
+  },
+  {
+    initialRouteName: 'AdminBackupIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
 
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
   AdminDepartments: AdminDepartmentsStack,
   // AdminDepartments: AdminDepartmentsStackWithModal,
   AdminUsers: AdminUsersStack,
+  AdminBackup: AdminBackupStack,
   AdminLogout: LogOutScreen,
 },
   {
