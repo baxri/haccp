@@ -92,18 +92,6 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         });;
     }
 
-    _editRow(data, secId, rowId, rowMap) {
-
-        this._showLoader();
-        rowMap[`${secId}${rowId}`].props.closeRow();
-
-        setTimeout(() => {
-            this.props.navigation.navigate('AdminDepartmentsItem', data);
-            this._hideLoader();
-        }, 700);
-
-    }
-
     _onRefresh() {
         this._loadItems();
     }
@@ -111,9 +99,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
     render() {
         return (
             <Container>
-
                 <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
-
                 <Content refreshControl={<RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={() => { this._onRefresh() }} />
