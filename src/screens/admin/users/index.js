@@ -86,8 +86,10 @@ export class AdminUsersIndexScreen extends React.Component {
     }
 
     _deleteRow(id, secId, rowId, rowMap) {
+
+        rowMap[`${secId}${rowId}`].props.closeRow();
+
         DeleteUser(id).then(item => {
-            rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
         }).catch(error => {
             alert(error);
