@@ -11,6 +11,7 @@ import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'nati
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Departments, Users } from '../../../database/realm';
 
 
 export class AdminHomeIndexScreen extends React.Component {
@@ -34,6 +35,8 @@ export class AdminHomeIndexScreen extends React.Component {
 
         this.state = {
             loading: 0,
+            departments: [],
+            users: [],
         };
 
         this._bootstrapAsync();
@@ -42,6 +45,21 @@ export class AdminHomeIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
 
     };
+
+    componentDidMount() {
+        this._loadItems();
+    };
+
+    componentDidFocus() {
+        this._loadItems();
+    };
+
+    _loadItems = async () => {
+        let departments = await Departments();
+        let users = await Users();
+
+        this.setState({ departments: departments, users: users });
+    }
 
     render() {
         return (
@@ -52,7 +70,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Departments</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Departments ({this.state.departments.length})</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -60,7 +78,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='people' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Users</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Users ({this.state.users.length})</Text>
                                 </View>
                             </Button>
                         </Col>

@@ -4,7 +4,8 @@ import {
     AsyncStorage,
     StatusBar,
     StyleSheet,
-    View
+    View,
+    ToastAndroid
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
@@ -56,7 +57,8 @@ export class AdminBackupIndexScreen extends React.Component {
 
         setTimeout(() => {
             this._hideLoader();
-
+            this.props.navigation.navigate("AdminHome");
+            ToastAndroid.show("Data successfully Syncronized!", ToastAndroid.LONG);
         }, 3000);
 
     };
