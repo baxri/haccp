@@ -85,7 +85,8 @@ const SetupAdminStack = StackNavigator(
 
 
 const DrawerStackFront = DrawerNavigator({
-  HelloAppFront: HelloAppScreen
+  HelloAppFront: HelloAppScreen,
+  AdminLogout: LogOutScreen,
 },
   {
     initialRouteName: 'HelloAppFront',
@@ -94,7 +95,7 @@ const DrawerStackFront = DrawerNavigator({
   });
 
 
-// =====================================================================
+// ADMIN =====================================================================
 const AdminHomeStack = StackNavigator(
   {
     AdminHomeIndex: AdminHomeIndexScreen,

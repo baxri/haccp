@@ -5,8 +5,8 @@ import {
     StatusBar,
     StyleSheet,
     View,
-
-    Alert
+    Alert,
+    ToastAndroid,
 } from 'react-native';
 
 // import { Text } from 'react-native-elements';
@@ -59,8 +59,26 @@ export class SignInScreen extends React.Component {
     }
 
 
-    GetSelectedPickerItem = () => {
-        Alert.alert(this.state.user);
+    _login = async () => {
+
+        try {
+
+            let token = Math.floor(Date.now() / 1000);
+
+            //Store token data
+            await AsyncStorage.setItem('userSession', token + "");
+
+            // Store user type
+            // user - fron user
+            // admin - admin user
+            await AsyncStorage.setItem('userSessionType', 'user');
+            await AsyncStorage.setItem('userSessionId', this.state.user);
+
+            //Navigate to application home page       
+            this.props.navigation.navigate('StackFront');
+        } catch (error) {
+            ToastAndroid.show(error.message, ToastAndroid.LONG);
+        }
     }
 
     render() {
@@ -109,7 +127,7 @@ export class SignInScreen extends React.Component {
                             </View>}
 
                             <View>
-                                {this.state.user.length > 0 && <Button primary style={styles.button} onPress={this.GetSelectedPickerItem}>
+                                {this.state.user.length > 0 && <Button primary style={styles.button} onPress={this._login}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>CONNECTION</Text>
                                     </Left>
