@@ -8,6 +8,7 @@ import {
     ListView,
     FlatList,
     RefreshControl,
+    ToastAndroid,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, Left, Right } from 'native-base';
@@ -135,17 +136,13 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                             </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
                             <View style={{ flex: 1, }}>
-
                                 {data.users.length > 0 && <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
                                     <Icon active name="trash" />
                                 </Button>}
-
                                 {data.users.length == 0 && <Button full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
                                     <Icon active name="trash" />
                                 </Button>}
                             </View>
-
-
                         }
                         leftOpenValue={75}
                         rightOpenValue={-75}
