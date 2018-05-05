@@ -17,13 +17,11 @@ export class SignInAdminScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 1,
+            loading: 0,
             password: '',
         };
 
-        this._bootstrapAsync();
-
-        // Need func parameter (this is a requred parameter for this screen)
+        // this._bootstrapAsync();
         this.props.navigation.state.params.func();
     }
 
@@ -32,20 +30,11 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV2');
 
-        this.setState({
-            loading: 0,
-        });
-
-        // If admin not exists yet lets create/setup it
-        if (!adminPassword) {
-            this.props.navigation.navigate('SetupAdmin');
-        }
     };
 
     _loginAdmin = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV2');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV4');
 
         try {
 
@@ -72,11 +61,11 @@ export class SignInAdminScreen extends React.Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator />
-            </View>
-        }
+        // if (this.state.loading) {
+        //     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        //         <ActivityIndicator />
+        //     </View>
+        // }
 
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
@@ -88,7 +77,7 @@ export class SignInAdminScreen extends React.Component {
                         <Form>
                             <Item floatingLabel style={styles.input}>
                                 <Label>Enter password </Label>
-                                <Input onChangeText={(value) => { this.setState({ password: value }) }} />
+                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
                             </Item>
                             <View style={{ alignItems: 'center', marginBottom: 10 }}>
 
@@ -102,7 +91,10 @@ export class SignInAdminScreen extends React.Component {
                                         <Icon name='log-in' style={{ color: 'white', }} />
                                     </Right>
                                 </Button>
-                                <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
+                                <Button light style={styles.button}
+                                    onPress={() => { this.props.navigation.navigate('SignIn'); }}
+
+                                >
                                     <Left >
                                         <Text>BACK (SIGN IN)</Text>
                                     </Left>

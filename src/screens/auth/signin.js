@@ -38,7 +38,7 @@ export class SignInScreen extends React.Component {
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content >
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <H1>HACCP User/Login</H1>
+                        <H1>HACCP</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <View style={styles.dropdownView}>

@@ -5,13 +5,15 @@ import {
     StatusBar,
     StyleSheet,
     View,
+    Keyboard,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addDepartment, editDepartment } from '../../../database/realm';
 
-
+import Spinner from 'react-native-loading-spinner-overlay';
+import PopupDialog from 'react-native-popup-dialog';
 
 export class AdminDepartmentsItemScreen extends React.Component {
 
@@ -44,7 +46,6 @@ export class AdminDepartmentsItemScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-
     _bootstrapAsync = async () => {
 
         this.setState({
@@ -52,27 +53,46 @@ export class AdminDepartmentsItemScreen extends React.Component {
         });
     };
 
+    _showLoader() {
+        this.setState({ loading: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loading: 0 });
+    }
+
     _saveItem() {
-        if (!this.state.id) {
-            addDepartment({
-                name: this.state.name,
-                equipments: this.state.equipments
-            }).then(res => {
-                this.props.navigation.navigate('AdminDepartmentsIndex');
-            }).catch(error => {
-                alert(error);
-            });
-        } else {
-            editDepartment({
-                id: this.state.id,
-                name: this.state.name,
-                equipments: this.state.equipments
-            }).then(res => {
-                this.props.navigation.navigate('AdminDepartmentsIndex');
-            }).catch(error => {
-                alert(error);
-            });
-        }
+
+        this._showLoader();
+
+        setTimeout(() => {
+            if (!this.state.id) {
+                addDepartment({
+                    name: this.state.name,
+                    equipments: this.state.equipments
+                }).then(res => {
+                    this.props.navigation.navigate('AdminDepartmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+
+                }).catch(error => {
+                    alert(error);
+                });
+            } else {
+                editDepartment({
+                    id: this.state.id,
+                    name: this.state.name,
+                    equipments: this.state.equipments
+                }).then(res => {
+                    this.props.navigation.navigate('AdminDepartmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+
+                }).catch(error => {
+                    alert(error);
+                });
+            }
+        }, 500);
     }
 
     _equipmentsChoosed = (data) => {
@@ -82,15 +102,16 @@ export class AdminDepartmentsItemScreen extends React.Component {
     };
 
     render() {
-
-        if (this.state.loading) {
-            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator />
-            </View>
-        }
-
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
+                <PopupDialog
+                    ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+                >
+                    <View>
+                        <Text>Hello</Text>
+                    </View>
+                </PopupDialog>
+                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                 <Content padder style={{ flex: 1 }}>
                     <Form>
                         <Item floatingLabel style={styles.input}>
@@ -107,18 +128,25 @@ export class AdminDepartmentsItemScreen extends React.Component {
                                 </Right>
                             </Button>
 
-                            <Button primary style={styles.button}
-                                onPress={() => this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
-                                    value: this.state.equipments,
-                                    equipmentsChoosed: this._equipmentsChoosed
-                                })}
+                            <Button transparent style={styles.button}
+
+                                onPress={() => {
+
+                                    this._showLoader();
+
+                                    setTimeout(() => {
+                                        this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
+                                            value: this.state.equipments,
+                                            equipmentsChoosed: this._equipmentsChoosed
+                                        })
+
+                                        this._hideLoader();
+                                    }, 100);
+
+                                }}
                             >
-                                <Left >
-                                    <Text style={{ color: 'white', }}>EQUIPMENTS</Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='checkmark' style={{ color: 'white', }} />
-                                </Right>
+                                <Text>EQUIPMENTS ({this.state.equipments.length})</Text>
+
                             </Button>
 
                         </View>

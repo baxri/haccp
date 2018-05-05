@@ -11,9 +11,18 @@ import {
 
 } from 'react-native';
 import { Container, Footer, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, CheckBox, Left, Right, FooterTab } from 'native-base';
-
+import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 
 export class AdminDepartmentsEquipmentsModal extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        const params = navigation.state.params || {};
+
+        return {
+            headerTitle: <LogoTitle HeaderText="Choose equipments" />,
+            headerRight: <Menu navigation={navigation} />,
+        };
+    };
 
     constructor(props) {
         super(props);
@@ -21,6 +30,9 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
 
         this.state = {
             preCheckedData: this.props.navigation.state.params.value,
+            // preCheckedData: [
+            //     "2:equipment-2:true",
+            // ],
             listViewData: [
                 "1:equipment-1:false",
                 "2:equipment-2:false",
@@ -28,52 +40,88 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                 "4:equipment-4:false",
                 "5:equipment-5:false",
             ],
+
+            formatedData: [
+
+            ],
         };
 
 
     }
 
-    componentDidMount() {
-        this._preCheck();
+    componentDidMount = async () => {
+        let populate = await this._unserializeList();
+
+        this.setState({ formatedData: populate });
+
     };
 
-    componentDidFocus() {
+    componentDidFocus = async () => {
+
     };
 
+    _serializeList() {
+        return new Promise((resolve => {
+            let populate = [];
 
-    _preCheck() {
-
-        let checkedList = this.state.listViewData.map((item) => {
-
-            let checked = this.state.preCheckedData.filter((row) => {
-                return this._id(item) == this._id(row)
+            this.state.formatedData.map((item) => {
+                if (item.checked) {
+                    let str = item.id + ":" + item.name + ":true";
+                    populate.push(str);
+                }
             });
 
-            if (checked.length > 0) {
-                item = this._check(item);
-            }
+            resolve(populate);
+        }));
+    }
 
-            return item;
-        });
+    _unserializeList() {
+        return new Promise((resolve => {
+            let populate = [];
 
-        // this.setState({ listViewData: [] });
+            this.state.listViewData.map((item) => {
 
-        this.setState({ listViewData: checkedList });
+                let obj = {
+                    id: this._id(item),
+                    name: this._name(item),
+                    checked: this._checked(item),
+                }
+
+                let checked = this.state.preCheckedData.filter((row) => {
+                    return this._id(item) == this._id(row)
+                });
+
+                if (checked.length > 0) {
+                    obj.checked = true;
+                }
+
+                populate.push(obj);
+            });
+
+            resolve(populate);
+        }));
     }
 
     _toggleCheckbox(rowId) {
-        let list = this.state.listViewData;
 
-        if (this._checked(list[rowId]))
-            list[rowId] = this._uncheck(list[rowId]);
+        let list = this.state.formatedData;
+
+        // alert(list[rowId].name);
+
+        if (list[rowId].checked)
+            list[rowId].checked = false;
         else
-            list[rowId] = this._check(list[rowId]);
+            list[rowId].checked = true;
 
-        this.setState({ listViewData: list });
+        this.setState({ formatedData: list });
     }
 
-    _confirm() {
-        let checked = this.state.listViewData.filter((row) => this._checked(row));
+    _confirm = async () => {
+
+        let checked = await this._serializeList();
+
+        // alert(checked);
+
         this.props.navigation.goBack();
         this.props.navigation.state.params.equipmentsChoosed(checked);
     }
@@ -110,14 +158,14 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
             <Container>
                 <Content>
                     <List
-                        dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+                        dataSource={this.ds.cloneWithRows(this.state.formatedData)}
                         renderRow={(data, secId, rowId, rowMap) =>
                             <ListItem style={{ height: 70, padding: 15, }} onPress={() => { this._toggleCheckbox(rowId) }}>
                                 <Left>
-                                    <Text>{this._name(data)}</Text>
+                                    <Text>{data.name}</Text>
                                 </Left>
                                 <Right>
-                                    <CheckBox checked={this._checked(data)} onPress={() => { this._toggleCheckbox(rowId) }} />
+                                    <CheckBox checked={data.checked} onPress={() => { this._toggleCheckbox(rowId) }} />
                                 </Right>
                             </ListItem>}
                         renderLeftHiddenRow={data =>
@@ -134,6 +182,9 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                 </Content>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
+                        <Button light onPress={() => this.props.navigation.goBack()}>
+                            <Text>BACK</Text>
+                        </Button>
                         <Button full primary onPress={_ => this._confirm()} styles={{
                             positon: 'absolute',
                             bottom: 0,

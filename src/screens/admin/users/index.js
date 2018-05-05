@@ -14,6 +14,8 @@ import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
 
+import Spinner from 'react-native-loading-spinner-overlay';
+
 export class AdminUsersIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
@@ -46,6 +48,14 @@ export class AdminUsersIndexScreen extends React.Component {
         };
 
         this._bootstrapAsync();
+    }
+
+    _showLoader() {
+        this.setState({ loading: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loading: 0 });
     }
 
     componentDidMount() {
@@ -84,44 +94,41 @@ export class AdminUsersIndexScreen extends React.Component {
         });;
     }
 
-    _editRow(data) {
-        this.props.navigation.navigate('AdminUsersItem', data);
-    }
-
     _onRefresh() {
         this._loadItems();
-        // this.setState({ refreshig: true });
     }
 
     render() {
 
-        if (this.state.loading) {
-            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator />
-            </View>
-        }
 
         return (
             <Container>
+                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+
                 <Content refreshControl={<RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={() => { this._onRefresh() }} />
                 }>
+
+                    {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                        <Icon name='people' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
+                        <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no users yet</Text>
+                    </View>}
+
                     <List
-
-
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
                             <ListItem style={{ height: 70, padding: 15, }}>
                                 <Left>
-                                    <Text>Name: {data.name}</Text>
+                                    <Text>{data.name} ({data.department.name})</Text>
                                 </Left>
                                 <Right>
-                                    {/* <Text>Department: {data.department.name}</Text> */}
+                                    <Text></Text>
                                 </Right>
                             </ListItem>}
-                        renderLeftHiddenRow={data =>
-                            <Button full onPress={_ => this._editRow(data)}>
+                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                            <Button full
+                                onPress={() => this.props.navigation.navigate('AdminUsersItem', data)}>
                                 <Icon active name="build" />
                             </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
@@ -131,6 +138,7 @@ export class AdminUsersIndexScreen extends React.Component {
                         leftOpenValue={75}
                         rightOpenValue={-75}
                     />
+
                 </Content>
                 <Fab
                     active={true}
@@ -138,15 +146,14 @@ export class AdminUsersIndexScreen extends React.Component {
                     containerStyle={{}}
                     style={{ backgroundColor: '#5067FF' }}
                     position="bottomRight"
-                    onPress={() => {
-                        this.props.navigation.navigate('AdminUsersItem', {
-                            id: "",
-                            name: "",
-                            department: {
-                                id: ''
-                            }
-                        });
-                    }}>
+
+                    onPress={() => this.props.navigation.navigate('AdminUsersItem', {
+                        id: "",
+                        name: "",
+                        department: {
+                            id: ''
+                        }
+                    })}>
                     <Icon name="add" />
                 </Fab>
             </Container>

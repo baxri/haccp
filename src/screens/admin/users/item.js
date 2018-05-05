@@ -5,6 +5,7 @@ import {
     StatusBar,
     StyleSheet,
     View,
+    Keyboard,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
@@ -64,12 +65,14 @@ export class AdminUsersItemScreen extends React.Component {
             if (!this.state.id) {
                 addUser(this.state.department, { name: this.state.name }).then(res => {
                     this.props.navigation.navigate('AdminUsersIndex');
+                    Keyboard.dismiss();
                 }).catch(error => {
                     alert(error);
                 });
             } else {
                 editUser(this.state.department, { id: this.state.id, name: this.state.name }).then(res => {
                     this.props.navigation.navigate('AdminUsersIndex');
+                    Keyboard.dismiss();
                 }).catch(error => {
                     alert(error);
                 });
@@ -89,10 +92,6 @@ export class AdminUsersItemScreen extends React.Component {
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content padder style={{ flex: 1 }}>
                     <Form>
-                        <Item floatingLabel style={styles.input}>
-                            <Label>User Name </Label>
-                            <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                        </Item>
 
                         <Picker
                             mode="dropdown"
@@ -108,6 +107,14 @@ export class AdminUsersItemScreen extends React.Component {
 
 
                         </Picker>
+
+
+                        <Item floatingLabel style={styles.input}>
+                            <Label>User Name </Label>
+                            <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                        </Item>
+
+
                         <View style={{ alignItems: 'center' }}>
                             <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
@@ -147,6 +154,7 @@ const styles = StyleSheet.create({
 
     dropdown: {
         flex: 1,
+        marginBottom: 100,
     },
     dropdownView: {
         width: 400,

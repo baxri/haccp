@@ -45,7 +45,7 @@ export class SetupAdminScreen extends React.Component {
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV2', password);
+            await AsyncStorage.setItem('adminPasswordV4', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {
@@ -62,37 +62,30 @@ export class SetupAdminScreen extends React.Component {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content padder style={{ flex: 1 }}>
-                    <View style={{ padding: 30 }}>
-                        <H1>Create New Administrator</H1>
+                    <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
+                        <H1>Setup Administrator</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
                             <Item floatingLabel style={styles.input}>
                                 <Label>Enter new password </Label>
-                                <Input onChangeText={(value) => { this.setState({ password: value }) }} />
+                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
                             </Item>
                             <Item floatingLabel style={styles.input}>
                                 <Label>Confirm password</Label>
-                                <Input onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
+                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
                             </Item>
                             <View style={{ alignItems: 'center', marginBottom: 10 }}>
 
                             </View>
                             <View style={{ alignItems: 'center' }}>
-                                <Button primary style={styles.button} onPress={() => { this._setupAdmin() }}>
+                                <Button primary style={styles.button}
+                                    onPress={() => { this._setupAdmin() }}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>CREATE</Text>
+                                        <Text style={{ color: 'white', }}>SETUP</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='bookmark' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>
-                                <Button light style={styles.button} onPress={() => { this.props.navigation.navigate('EntryPoint'); }}>
-                                    <Left >
-                                        <Text>I WILL CREATE LATER</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='arrow-back' />                                        
                                     </Right>
                                 </Button>
                             </View>

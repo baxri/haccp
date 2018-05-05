@@ -10,9 +10,12 @@ import {
     RefreshControl,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, DeleteDepartment } from '../../../database/realm';
+
+import Spinner from 'react-native-loading-spinner-overlay';
+import PopupDialog from 'react-native-popup-dialog';
 
 export class AdminDepartmentsIndexScreen extends React.Component {
 
@@ -48,6 +51,14 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
+    _showLoader() {
+        this.setState({ loading: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loading: 0 });
+    }
+
     componentDidMount() {
         this._loadItems();
     };
@@ -72,15 +83,6 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         this.setState({ listViewData: items, refreshing: false });
     }
 
-
-    // _loadItems() {
-    //     Departments().then(items => {
-    //         this.setState({ listViewData: items, refreshing: false });
-    //     }).catch(error => {
-    //         alert(error);
-    //     });;
-    // }
-
     _deleteRow(id, secId, rowId, rowMap) {
         DeleteDepartment(id).then(item => {
             rowMap[`${secId}${rowId}`].props.closeRow();
@@ -90,8 +92,16 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         });;
     }
 
-    _editRow(data) {
-        this.props.navigation.navigate('AdminDepartmentsItem', data);
+    _editRow(data, secId, rowId, rowMap) {
+
+        this._showLoader();
+        rowMap[`${secId}${rowId}`].props.closeRow();
+
+        setTimeout(() => {
+            this.props.navigation.navigate('AdminDepartmentsItem', data);
+            this._hideLoader();
+        }, 700);
+
     }
 
     _onRefresh() {
@@ -99,28 +109,35 @@ export class AdminDepartmentsIndexScreen extends React.Component {
     }
 
     render() {
-
-        if (this.state.loading) {
-            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator />
-            </View>
-        }
-
         return (
             <Container>
+
+                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+
                 <Content refreshControl={<RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={() => { this._onRefresh() }} />
                 }>
-                    <List
 
+                    {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                        <Icon name='briefcase' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
+                        <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no departments yet</Text>
+                    </View>}
+
+                    <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data =>
                             <ListItem style={{ height: 70, padding: 15, }}>
-                                <Text> {data.name} ({data.users.length}) </Text>
+                                <Left>
+                                    <Text> {data.name}  (Users: {data.users.length}) </Text>
+                                </Left>
+                                <Right style={{ width: 200, }}>
+                                    <Text>Equip:  ({data.equipments.length}) </Text>
+                                </Right>
                             </ListItem>}
-                        renderLeftHiddenRow={data =>
-                            <Button full onPress={_ => this._editRow(data)}>
+                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                            <Button full
+                                onPress={() => this.props.navigation.navigate('AdminDepartmentsItem', data)}>
                                 <Icon active name="build" />
                             </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
@@ -137,13 +154,13 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                     containerStyle={{}}
                     style={{ backgroundColor: '#5067FF' }}
                     position="bottomRight"
-                    onPress={() => {
-                        this.props.navigation.navigate('AdminDepartmentsItem', {
-                            id: "",
-                            name: "",
-                            equipments: [],
-                        });
-                    }}>
+
+                    onPress={() => this.props.navigation.navigate('AdminDepartmentsItem', {
+                        id: "",
+                        name: "",
+                        equipments: [],
+                    })}>
+
                     <Icon name="add" />
                 </Fab>
             </Container>

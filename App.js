@@ -25,6 +25,39 @@ import { LogOutScreen } from './src/screens/auth/logout';
 
 console.disableYellowBox = true;
 
+
+
+if (!__DEV__) {
+  // eslint-disable-line no-undef
+  [
+    'assert',
+    'clear',
+    'count',
+    'debug',
+    'dir',
+    'dirxml',
+    'error',
+    'exception',
+    'group',
+    'groupCollapsed',
+    'groupEnd',
+    'info',
+    'log',
+    'profile',
+    'profileEnd',
+    'table',
+    'time',
+    'timeEnd',
+    'timeStamp',
+    'trace',
+    'warn',
+  ].forEach(methodName => {
+    console[methodName] = () => {
+      /* noop */
+    };
+  });
+}
+
 const headerBackground = '#1E2EB4';
 const headerTextColor = 'white';
 
@@ -98,6 +131,7 @@ const AdminDepartmentsStack = StackNavigator(
   {
     AdminDepartmentsIndex: AdminDepartmentsIndexScreen,
     AdminDepartmentsItem: AdminDepartmentsItemScreen,
+    AdminDepartmentsEquipmentsModal: AdminDepartmentsEquipmentsModal,
   },
   {
     initialRouteName: 'AdminDepartmentsIndex',
@@ -125,8 +159,8 @@ const AdminDepartmentsStackWithModal = StackNavigator(
 
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
-  // AdminDepartments: AdminDepartmentsStack,
-  AdminDepartments: AdminDepartmentsStackWithModal,
+  AdminDepartments: AdminDepartmentsStack,
+  // AdminDepartments: AdminDepartmentsStackWithModal,
   AdminUsers: AdminUsersStack,
   AdminLogout: LogOutScreen,
 },
@@ -156,12 +190,6 @@ export default () =>
   <Root>
     <RootWrapper />
   </Root>;
-
-
-
-
-
-
 
 
 // import React, { Component } from 'react';
