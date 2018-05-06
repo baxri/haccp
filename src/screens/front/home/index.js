@@ -14,7 +14,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, Users } from '../../../database/realm';
 
 
-export class AdminHomeIndexScreen extends React.Component {
+export class HomeIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};
@@ -67,40 +67,76 @@ export class AdminHomeIndexScreen extends React.Component {
                 <Grid>
                     <Row >
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Departments ({this.state.departments.length})</Text>
+                                    <Icon name='camera' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Traceability</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='people' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Users ({this.state.users.length})</Text>
+                                    <Icon name='eye' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Reception check</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='snow' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Controle froid</Text>
                                 </View>
                             </Button>
                         </Col>
                     </Row>
                     <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='sync' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Backup</Text>
+                                    <Icon name='thermometer' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Controrle chaud</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert("Cleaning Schedule (leave that for now I have to define that)")}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='snow' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Cleaning Schedule</Text>
+                                    <Icon name='water' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Cleaning</Text>
                                 </View>
                             </Button>
                         </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='archive' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Archive</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='alert' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center',}} >Product control</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='keypad' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Summary</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
 
+                        </Col>
                     </Row>
                 </Grid>
             </Container>

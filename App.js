@@ -11,6 +11,8 @@ import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 
 import { HelloAppScreen } from './src/screens/app/hello-app';
 
+// Admin Screens
+
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
@@ -22,6 +24,17 @@ import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
+
+// End Admin Screens
+
+
+// Front Screens
+import { HomeIndexScreen } from './src/screens/front/home/index';
+
+
+
+// End Front Screens
+
 
 import { LogOutScreen } from './src/screens/auth/logout';
 
@@ -54,14 +67,31 @@ const SetupAdminStack = StackNavigator(
 );
 
 // START FRONT =====================================================================
+
+const HomeStack = StackNavigator(
+  {
+    HomeIndex: HomeIndexScreen,
+  },
+  {
+    initialRouteName: 'HomeIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
+
+
+
 const DrawerStackFront = DrawerNavigator({
-  HelloAppFront: HelloAppScreen,
+  AdminHome: HomeStack,
   AdminLogout: LogOutScreen,
 },
   {
-    initialRouteName: 'HelloAppFront',
-
-    // headerMode: 'none',
+    initialRouteName: 'AdminHome',
   });
 // END FRONT =====================================================================
 
