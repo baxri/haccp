@@ -28,38 +28,6 @@ import { LogOutScreen } from './src/screens/auth/logout';
 console.disableYellowBox = true;
 
 
-
-if (!__DEV__) {
-  // eslint-disable-line no-undef
-  [
-    'assert',
-    'clear',
-    'count',
-    'debug',
-    'dir',
-    'dirxml',
-    'error',
-    'exception',
-    'group',
-    'groupCollapsed',
-    'groupEnd',
-    'info',
-    'log',
-    'profile',
-    'profileEnd',
-    'table',
-    'time',
-    'timeEnd',
-    'timeStamp',
-    'trace',
-    'warn',
-  ].forEach(methodName => {
-    console[methodName] = () => {
-      /* noop */
-    };
-  });
-}
-
 const headerBackground = '#1E2EB4';
 const headerTextColor = 'white';
 
@@ -85,7 +53,7 @@ const SetupAdminStack = StackNavigator(
   }
 );
 
-
+// START FRONT =====================================================================
 const DrawerStackFront = DrawerNavigator({
   HelloAppFront: HelloAppScreen,
   AdminLogout: LogOutScreen,
@@ -95,9 +63,9 @@ const DrawerStackFront = DrawerNavigator({
 
     // headerMode: 'none',
   });
+// END FRONT =====================================================================
 
-
-// ADMIN =====================================================================
+// START ADMIN =====================================================================
 const AdminHomeStack = StackNavigator(
   {
     AdminHomeIndex: AdminHomeIndexScreen,
@@ -186,7 +154,7 @@ const DrawerStackAdmin = DrawerNavigator({
     initialRouteName: 'AdminHome',
   });
 
-// =====================================================================
+// END ADMIN =====================================================================
 
 
 
