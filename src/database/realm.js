@@ -4,12 +4,12 @@ const Realm = require('realm');
 
 const PictureSchema = {
     primaryKey: 'id',
-    name: 'Department',
+    name: 'Picture',
 
     properties: {
         id: 'string',    // primary key
-        dateString: 'string',
         source: 'string',
+        date: 'string',
         created_at: 'date',
         user: 'User',
     }
@@ -24,6 +24,7 @@ const UserSchema = {
         name: 'string',
         lastname: 'string',
         department: 'Department',
+        pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'user' }
     }
 };
 
@@ -50,8 +51,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 10;
-const schemas = [UserSchema, DepartmentSchema];
+const schemaVersion = 11;
+const schemas = [UserSchema, DepartmentSchema, PictureSchema];
 
 export const file = () => {
     return Realm.defaultPath;
@@ -197,3 +198,46 @@ export const DeleteUser = (id) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+
+// PICTURES ============================================================================
+
+export const addPicture = (userId, item) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            // Create Realm objects and write to local storage
+            realm.write(() => {
+
+                let userObject = realm.objectForPrimaryKey('User', userId);
+
+                const picture = realm.create('Picture', {
+                    id: _guid(),
+                    source: item.source,
+                    date: item.date,
+                    created_at: item.created_at,
+                    user: userObject,
+                });
+
+                resolve(picture);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+export const Pictures = (userId) => new Promise((resolve, reject) => {
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            let userObject = realm.objectForPrimaryKey('User', userId);
+            resolve(userObject.pictures);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+// END PICTURES ============================================================================

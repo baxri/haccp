@@ -6,13 +6,14 @@ import {
     StyleSheet,
     View,
     Image,
+    ToastAndroid,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Departments, Users } from '../../../database/realm';
+import { addPicture, Pictures } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 
@@ -29,7 +30,7 @@ export class TraceIndexScreen extends React.Component {
                 <Icon name='camera' style={{ color: tintColor, }} />
             ),
             headerLeft: <NoBackButton />,
-            headerTitle: <LogoTitle HeaderText="Traceability" />,
+            headerTitle: <LogoTitle HeaderText={"Traceability" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
             headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -40,16 +41,26 @@ export class TraceIndexScreen extends React.Component {
         this.state = {
             loading: 0,
 
-            created_at: new Date(),
-            dateString: new Date().toISOString().substring(0, 10),
+            userId: null,
             source: '',
+            date: new Date().toISOString().substring(0, 10),
+            created_at: new Date(),
         };
 
         this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
+        const userID = await AsyncStorage.getItem('userSessionId');
+        const pics = await Pictures(userID);
 
+        this.setState({
+            userId: userID,
+        });
+
+        this.props.navigation.setParams({
+            test: pics.length
+        });
     };
 
     _showLoader() {
@@ -61,6 +72,9 @@ export class TraceIndexScreen extends React.Component {
     }
 
     componentDidMount() {
+
+
+
         this._loadItems();
     };
 
@@ -99,11 +113,31 @@ export class TraceIndexScreen extends React.Component {
 
     _confirm() {
 
+        if (this.state.userId == null) {
+            ToastAndroid.show("UserId is NULL", ToastAndroid.LONG);
+            return;
+        }
+
+        if (this.state.source.length == 0) {
+            ToastAndroid.show("Please take a picture", ToastAndroid.LONG);
+            return;
+        }
+
         this._showLoader();
 
         setTimeout(() => {
-            this._hideLoader();
-            alert(this.state.source);
+            addPicture(this.state.userId, {
+                source: this.state.source,
+                date: this.state.date,
+                created_at: this.state.created_at,
+            }).then(res => {
+                this.props.navigation.navigate('Home');
+                this._hideLoader();
+                ToastAndroid.show("Image successfully saved!", ToastAndroid.LONG);
+            }).catch(error => {
+                alert(error);
+            });
+
         }, 2000);
     }
 
