@@ -30,6 +30,7 @@ import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
 
 // Front Screens
 import { HomeIndexScreen } from './src/screens/front/home/index';
+import { TraceIndexScreen } from './src/screens/front/Trace/index';
 
 
 
@@ -83,15 +84,31 @@ const HomeStack = StackNavigator(
   }
 );
 
+const TraceStack = StackNavigator(
+  {
+    TraceIndex: TraceIndexScreen,
+  },
+  {
+    initialRouteName: 'TraceIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 
 
 
 const DrawerStackFront = DrawerNavigator({
-  AdminHome: HomeStack,
+  Home: HomeStack,
+  Trace: TraceStack,
   AdminLogout: LogOutScreen,
 },
   {
-    initialRouteName: 'AdminHome',
+    initialRouteName: 'Home',
   });
 // END FRONT =====================================================================
 

@@ -2,6 +2,18 @@ import React from 'react';
 // import { Realm } from 'realm';
 const Realm = require('realm');
 
+const PictureSchema = {
+    primaryKey: 'id',
+    name: 'Department',
+
+    properties: {
+        id: 'string',    // primary key
+        dateString: 'string',
+        source: 'string',
+        created_at: 'date',
+        user: 'User',
+    }
+};
 
 const UserSchema = {
     primaryKey: 'id',
