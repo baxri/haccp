@@ -29,9 +29,9 @@ export class TraceIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='camera' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={"Traceability" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -166,10 +166,16 @@ export class TraceIndexScreen extends React.Component {
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
                         <Button light onPress={() => this.props.navigation.navigate('Home')}>
-                            <Text>CANCEL</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ paddingTop: 5, }}>CANCEL</Text>
+                                <Icon name='close' />
+                            </View>
                         </Button>
                         <Button full primary onPress={_ => this._confirm()} >
-                            <Text style={{ color: 'white', }}>CONFIRM</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>CONFIRM</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
                         </Button>
                     </FooterTab>
                 </Footer>

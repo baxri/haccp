@@ -23,18 +23,18 @@ import SignatureView from './signature';
 import Modal from "react-native-modal";
 
 
-export class ControleIndexScreen extends React.Component {
+export class FroidIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Controle reception',
+            drawerLabel: 'Controle froid',
             drawerIcon: ({ tintColor }) => (
-                <Icon name='eye' style={{ color: tintColor, }} />
+                <Icon name='snow' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={"Controle reception" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={"Controle froid" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -52,7 +52,6 @@ export class ControleIndexScreen extends React.Component {
                 lastname: '',
             },
 
-            source: null,
             signature: null,
 
             produit: '',
@@ -111,32 +110,6 @@ export class ControleIndexScreen extends React.Component {
 
     }
 
-    _pickImage = () => {
-
-        var options = {
-            quality: 0.5,
-            maxWidth: 500,
-            maxHeight: 500,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
-
-            let source = { uri: response.uri };
-
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            this.setState({
-                source: source.uri,
-            });
-
-        });
-    };
-
-
     _showSignatureView() {
         this._signatureView.show(true);
     }
@@ -185,10 +158,6 @@ export class ControleIndexScreen extends React.Component {
     }
 
     _save(confirmed = 0) {
-
-        if (!this.state.source) {
-            ToastAndroid.show("Please take a picture!", ToastAndroid.LONG); return;
-        }
 
         if (!this.state.signature) {
             ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
@@ -245,16 +214,6 @@ export class ControleIndexScreen extends React.Component {
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>
                         <Grid style={{ width: 550 }}>
                             <Row>
-                                <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
-                                    {!this.state.source && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
-                                        <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
-                                    </Button>}
-                                    {this.state.source && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
-                                        resizeMode={'contain'}
-                                        style={{ flex: 1, }}
-                                        source={{ uri: this.state.source }}
-                                    /></View>}
-                                </Col>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
                                     {!this.state.signature && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
                                         <Icon name='create' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
