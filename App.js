@@ -31,8 +31,7 @@ import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
 // Front Screens
 import { HomeIndexScreen } from './src/screens/front/home/index';
 import { TraceIndexScreen } from './src/screens/front/Trace/index';
-
-
+import { ControleIndexScreen } from './src/screens/front//controle/index';
 
 // End Front Screens
 
@@ -100,11 +99,28 @@ const TraceStack = StackNavigator(
 );
 
 
+const ControleStack = StackNavigator(
+  {
+    ControleIndex: ControleIndexScreen,
+  },
+  {
+    initialRouteName: 'ControleIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
+
 
 
 const DrawerStackFront = DrawerNavigator({
   Home: HomeStack,
   Trace: TraceStack,
+  Controle: ControleStack,
   AdminLogout: LogOutScreen,
 },
   {

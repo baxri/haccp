@@ -75,7 +75,7 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('ControleIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='eye' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
                                     <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Reception check</Text>

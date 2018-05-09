@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import io.realm.react.RealmReactPackage; // add this import
 import com.imagepicker.ImagePickerPackage; // <-- add this import
+import com.rssignaturecapture.RSSignatureCapturePackage;
+import com.rnfs.RNFSPackage; // <------- add package
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,7 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RealmReactPackage(),
-          new ImagePickerPackage() // <-- add this line     
+          new ImagePickerPackage(),
+          new RSSignatureCapturePackage(),
+          new RNFSPackage()
       );
     }
 
