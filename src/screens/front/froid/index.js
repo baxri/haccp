@@ -206,19 +206,15 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
         }
 
-        if (!confirmed) {
-            this._toggleModal();
-        } else {
-            Alert.alert(
-                'Controle froid',
-                'Do want to save this product?',
-                [
-                    { text: 'Cancel', style: 'cancel' },
-                    { text: 'OK', onPress: () => this._store(confirmed) },
-                ],
-                { cancelable: false }
-            )
-        }
+        Alert.alert(
+            'Controle froid',
+            'Do want to save this product?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'OK', onPress: () => this._store(confirmed) },
+            ],
+            { cancelable: false }
+        )
     }
 
     _store(confirmed) {
