@@ -28,9 +28,9 @@ export class AdminDepartmentsIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='briefcase' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="Departments" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 

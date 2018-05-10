@@ -27,7 +27,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText="Departments Item" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 

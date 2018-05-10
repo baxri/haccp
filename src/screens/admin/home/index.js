@@ -24,9 +24,9 @@ export class AdminHomeIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='home' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="Dashboard" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 

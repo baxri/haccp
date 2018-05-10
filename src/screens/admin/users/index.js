@@ -26,9 +26,9 @@ export class AdminUsersIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='people' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="Users" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 

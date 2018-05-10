@@ -23,9 +23,9 @@ export class AdminBackupIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='sync' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="Backup" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
