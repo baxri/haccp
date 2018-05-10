@@ -53,16 +53,7 @@ export class FroidIndexScreen extends React.Component {
             },
 
             signature: null,
-
-            produit: '',
-            fourniser: '',
-            dubl: '',
-
-            aspect: 0,
-            du_produit: '',
-
-            intact: 0,
-            conforme: 0,
+            equipments: [],
 
             autres: '',
             actions: '',
@@ -79,6 +70,8 @@ export class FroidIndexScreen extends React.Component {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
 
+        this._parseEquipments(user.department.equipments);
+
         this.setState({
             userId: userID,
             userObj: user,
@@ -89,6 +82,54 @@ export class FroidIndexScreen extends React.Component {
             test: pics.length
         });
     };
+
+    _parseEquipments(equipments) {
+
+        let ret = [];
+
+        equipments.map(equipment => {
+
+            let slice = equipment.split(":");
+
+            let obj = {
+                id: slice[0],
+                name: slice[1],
+                value: 0,
+            };
+
+            ret.push(obj);
+        });
+
+        this.setState({ equipments: ret });
+    }
+
+    _changeEquipment(row, value) {
+
+        let ret = [];
+
+        this.state.equipments.map(equipment => {
+
+            if (equipment.id == row.id) {
+                equipment.value = value;
+            }
+
+            ret.push(equipment);
+        });
+
+        this.setState({ equipments: ret });
+    }
+
+    _encodeEquipment() {
+
+        let ret = [];
+
+        this.state.equipments.map(equipment => {
+            let str = equipment.id + ":" + equipment.name + ":" + equipment.value;
+            ret.push(str);
+        });
+
+        return ret;
+    }
 
     _showLoader() {
         this.setState({ loading: 1 });
@@ -158,6 +199,10 @@ export class FroidIndexScreen extends React.Component {
     }
 
     _save(confirmed = 0) {
+
+        let equipments = this._encodeEquipment();
+
+        alert(equipments[0]);
 
         if (!this.state.signature) {
             ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
@@ -229,90 +274,20 @@ export class FroidIndexScreen extends React.Component {
                         </Grid>
                     </View>
 
+                    {this.state.equipments.map((row) => {
+                        return <Item style={styles.input}>
+                            <Label>{row.name}</Label>
+                            <Input value={row.value} onChangeText={(value) => { this._changeEquipment(row, value) }} />
+                            <Icon active name='swap' onPress={() => this._changeEquipment(row, ((row.value*1) + 1))} />
+                        </Item>
+                    })}
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>Product</Label>
-                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
-                    </Item>
-                    <Item floatingLabel style={styles.input}>
-                        <Label>Fourniser</Label>
-                        <Input value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
-                    </Item>
-                    <Item floatingLabel style={styles.input}>
-                        <Label>DUBL</Label>
-                        <Input value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
-                    </Item>
-
-
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>Aspect: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(0) }}>Bon</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.aspect)} onPress={() => { this._checkAspect(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(1) }}>Mauvais</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.aspect)} onPress={() => { this._checkAspect(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
-
-
-                    <Item floatingLabel style={styles.input}>
-                        <Label>Du Produit</Label>
-                        <Input value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
+                    <Item style={styles.input}>
+                        <Label>Autres</Label>
+                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ autres: value }) }} />
                     </Item>
 
-
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>Embalage intatc: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(0) }}>Oui</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.intact)} onPress={() => { this._checkIntact(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(1) }}>No</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.intact)} onPress={() => { this._checkIntact(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
-
-
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>Etiqutage conforme: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(0) }}>Oui</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.conforme)} onPress={() => { this._checkConforme(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(1) }}>No</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.conforme)} onPress={() => { this._checkConforme(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
-
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Autres" onChangeText={(value) => { this.setState({ autres: value }) }} />
+                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Autres corectivets" onChangeText={(value) => { this.setState({ actions: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}
