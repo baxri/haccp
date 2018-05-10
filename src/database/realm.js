@@ -58,6 +58,21 @@ export const file = () => {
     return Realm.defaultPath;
 }
 
+
+export const User = (userId) => new Promise((resolve, reject) => {
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let userObject = realm.objectForPrimaryKey('User', userId);
+                resolve(userObject);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
 export const addDepartment = (item) => new Promise((resolve, reject) => {
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {

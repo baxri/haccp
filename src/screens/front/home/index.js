@@ -24,9 +24,9 @@ export class HomeIndexScreen extends React.Component {
             drawerIcon: ({ tintColor }) => (
                 <Icon name='home' style={{ color: tintColor, }} />
             ),
-            headerLeft: <NoBackButton />,
+            headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="Dashboard" />,
-            headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -70,23 +70,23 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('TraceIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='camera' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Traceability</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Traceability</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('ControleIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='eye' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Reception check</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Reception check</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('FroidIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Controle froid</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Controle froid</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -96,7 +96,7 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='thermometer' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Controrle chaud</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Controrle chaud</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -104,7 +104,7 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='water' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center'}} >Cleaning</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Cleaning</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -112,7 +112,7 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='archive' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Archive</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Archive</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -122,7 +122,7 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='alert' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center',}} >Product control</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center', }} >Product control</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -130,7 +130,7 @@ export class HomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert('navigate')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='keypad' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, textAlign: 'center' }} >Summary</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Summary</Text>
                                 </View>
                             </Button>
                         </Col>
