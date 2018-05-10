@@ -9,9 +9,10 @@ import {
     FlatList,
     RefreshControl,
     ToastAndroid,
+    Text
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, Left, Right } from 'native-base';
+import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, DeleteDepartment } from '../../../database/realm';
 
@@ -120,13 +121,31 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-                        renderRow={data =>
-                            <ListItem style={{ height: 70, padding: 15, }}>
+                        renderRow={(data, secId, rowId, rowMap) =>
+                            <ListItem style={{ height: 100, paddingLeft: 15, }}>
                                 <Left>
-                                    <Text> {data.name}  (Users: {data.users.length}) </Text>
+                                    <View style={{ textAlign: 'left', }}>
+                                        <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} </Text>
+                                        <Text style={{ marginBottom: 5 }}>Users: {data.users.length} </Text>
+                                        <Text>Equipments:  ({data.equipments.length}) </Text>
+                                    </View>
+
                                 </Left>
-                                <Right style={{ width: 200, }}>
-                                    <Text>Equip:  ({data.equipments.length}) </Text>
+                                <Right>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
+
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
+                                            onPress={() => this.props.navigation.navigate('AdminDepartmentsItem', data)}>
+                                            <Icon active name="build" />
+                                        </Button>
+
+                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                            <Icon active name="trash" />
+                                        </Button>}
+                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                            <Icon active name="trash" />
+                                        </Button>}
+                                    </View>
                                 </Right>
                             </ListItem>}
                         renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
@@ -144,8 +163,11 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                                 </Button>}
                             </View>
                         }
-                        leftOpenValue={75}
-                        rightOpenValue={-75}
+                        // leftOpenValue={75}
+                        // rightOpenValue={-75}
+
+                        leftOpenValue={0}
+                        rightOpenValue={0}
                     />
                 </Content>
                 <Fab

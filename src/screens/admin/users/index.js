@@ -8,9 +8,10 @@ import {
     ListView,
     FlatList,
     RefreshControl,
+    Text,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, Left, Right } from 'native-base';
+import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
 
@@ -119,13 +120,24 @@ export class AdminUsersIndexScreen extends React.Component {
 
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-                        renderRow={data =>
-                            <ListItem style={{ height: 70, padding: 15, }}>
+                        renderRow={(data, secId, rowId, rowMap) =>
+                            <ListItem style={{ height: 100, padding: 15, }}>
                                 <Left>
-                                    <Text>{data.name} {data.lastname} ({data.department.name})</Text>
+                                    <View style={{ textAlign: 'left', }}>
+                                        <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} {data.lastname}</Text>
+                                        <Text style={{ marginBottom: 5 }}>Department: {data.department.name} </Text>
+                                    </View>
                                 </Left>
                                 <Right>
-                                    <Text></Text>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
+                                            onPress={() => this.props.navigation.navigate('AdminUsersItem', data)}>
+                                            <Icon active name="build" />
+                                        </Button>
+                                        <Button full danger style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                            <Icon active name="trash" />
+                                        </Button>
+                                    </View>
                                 </Right>
                             </ListItem>}
                         renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
@@ -137,8 +149,8 @@ export class AdminUsersIndexScreen extends React.Component {
                             <Button full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
                                 <Icon active name="trash" />
                             </Button>}
-                        leftOpenValue={75}
-                        rightOpenValue={-75}
+                        leftOpenValue={0}
+                        rightOpenValue={0}
                     />
 
                 </Content>

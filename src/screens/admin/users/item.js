@@ -25,7 +25,7 @@ export class AdminUsersItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText="User Item" />,
-            // headerRight: <Menu navigation={navigation} />,
+            // headerRight: <Menu navigation={navigation} />rr,
         };
     };
 
