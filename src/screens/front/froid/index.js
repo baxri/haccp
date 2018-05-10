@@ -94,7 +94,7 @@ export class FroidIndexScreen extends React.Component {
             let obj = {
                 id: slice[0],
                 name: slice[1],
-                value: 0,
+                value: "0",
             };
 
             ret.push(obj);
@@ -110,7 +110,7 @@ export class FroidIndexScreen extends React.Component {
         this.state.equipments.map(equipment => {
 
             if (equipment.id == row.id) {
-                equipment.value = value;
+                equipment.value = value + "";
             }
 
             ret.push(equipment);
@@ -202,9 +202,7 @@ export class FroidIndexScreen extends React.Component {
 
         let equipments = this._encodeEquipment();
 
-        alert(equipments[0]);
-
-        if (!this.state.signature) {
+        if (confirmed == 0 && !this.state.signature) {
             ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
         }
 
@@ -212,11 +210,11 @@ export class FroidIndexScreen extends React.Component {
             this._toggleModal();
         } else {
             Alert.alert(
-                'Reception check',
-                'Do want to confirm this product?',
+                'Controle froid',
+                'Do want to save this product?',
                 [
                     { text: 'Cancel', style: 'cancel' },
-                    { text: 'OK', onPress: () => this._store(1) },
+                    { text: 'OK', onPress: () => this._store(confirmed) },
                 ],
                 { cancelable: false }
             )
@@ -242,7 +240,7 @@ export class FroidIndexScreen extends React.Component {
 
             this.props.navigation.navigate('Home');
             this._hideLoader();
-            ToastAndroid.show("Product successfully saved!", ToastAndroid.LONG);
+            ToastAndroid.show("Controle froid successfully saved!", ToastAndroid.LONG);
 
         }, 2000);
     }
@@ -275,16 +273,21 @@ export class FroidIndexScreen extends React.Component {
                     </View>
 
                     {this.state.equipments.map((row) => {
-                        return <Item style={styles.input}>
-                            <Label>{row.name}</Label>
+                        return <Item fixedLabel style={styles.input}>
+                            <Label>
+                                {row.name}
+                            </Label>
+                            <Icon active name='thermometer' />
                             <Input value={row.value} onChangeText={(value) => { this._changeEquipment(row, value) }} />
-                            <Icon active name='swap' onPress={() => this._changeEquipment(row, ((row.value*1) + 1))} />
+                            <Icon active name='add-circle' onPress={() => this._changeEquipment(row, ((row.value * 1) + 1))} />
                         </Item>
                     })}
 
-                    <Item style={styles.input}>
+                    <Item fixedLabel style={styles.input}>
                         <Label>Autres</Label>
-                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                        <Icon active name='thermometer' />
+                        <Input value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                        <Icon active name='chatboxes' style={{ color: 'white' }} />
                     </Item>
 
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Autres corectivets" onChangeText={(value) => { this.setState({ actions: value }) }} />
