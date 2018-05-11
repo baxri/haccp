@@ -9,7 +9,8 @@ import {
     FlatList,
     RefreshControl,
     ToastAndroid,
-    Text
+    Text,
+    Alert,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
@@ -85,6 +86,18 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         this.setState({ listViewData: items, refreshing: false });
     }
 
+    _deleteRowAsk(id, secId, rowId, rowMap) {
+        Alert.alert(
+            'DELETE',
+            'Do want to delete this item?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'OK', onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
+            ],
+            { cancelable: false }
+        )
+    }
+
     _deleteRow(id, secId, rowId, rowMap) {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
@@ -139,10 +152,10 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                                             <Icon active name="build" />
                                         </Button>
 
-                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} disabled full onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
-                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>

@@ -9,6 +9,7 @@ import {
     FlatList,
     RefreshControl,
     Text,
+    Alert,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
@@ -31,6 +32,7 @@ export class AdminUsersIndexScreen extends React.Component {
             headerTitle: <LogoTitle HeaderText="Users" />,
             // headerRight: <Menu navigation={navigation} />,
         };
+
     };
 
     constructor(props) {
@@ -86,6 +88,20 @@ export class AdminUsersIndexScreen extends React.Component {
         });;
     }
 
+    _deleteRowAsk(id, secId, rowId, rowMap) {
+
+        Alert.alert(
+            'DELETE',
+            'Do want to delete this item?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'OK', onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
+            ],
+            { cancelable: false }
+        )
+
+    }
+
     _deleteRow(id, secId, rowId, rowMap) {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
@@ -134,7 +150,7 @@ export class AdminUsersIndexScreen extends React.Component {
                                             onPress={() => this.props.navigation.navigate('AdminUsersItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        <Button full danger style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                        <Button full danger style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>
                                     </View>
