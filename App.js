@@ -34,6 +34,8 @@ import { TraceIndexScreen } from './src/screens/front/Trace/index';
 import { ControleIndexScreen } from './src/screens/front/controle/index';
 import { FroidIndexScreen } from './src/screens/front/froid/index';
 
+import { ArchiveIndexScreen } from './src/screens/front/archive/index';
+
 // End Front Screens
 
 
@@ -130,7 +132,20 @@ const FroidStack = StackNavigator(
   }
 );
 
-
+const ArchiveStack = StackNavigator(
+  {
+    ArchiveIndex: ArchiveIndexScreen,
+  },
+  {
+    initialRouteName: 'ArchiveIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
 
 
 const DrawerStackFront = DrawerNavigator({
@@ -138,6 +153,7 @@ const DrawerStackFront = DrawerNavigator({
   Trace: TraceStack,
   Controle: ControleStack,
   Froid: FroidStack,
+  Archive: ArchiveStack,
   AdminLogout: LogOutScreen,
 },
   {
