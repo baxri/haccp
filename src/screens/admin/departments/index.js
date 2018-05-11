@@ -98,6 +98,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         )
     }
 
+    
     _deleteRow(id, secId, rowId, rowMap) {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
