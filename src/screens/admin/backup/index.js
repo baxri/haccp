@@ -5,8 +5,8 @@ import {
     StatusBar,
     StyleSheet,
     View,
-    ToastAndroid
-
+    ToastAndroid,
+    NetInfo
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -34,7 +34,10 @@ export class AdminBackupIndexScreen extends React.Component {
 
         this.state = {
             loading: 0,
+            connected: 0,
         };
+
+
 
         this._bootstrapAsync();
     }
@@ -48,7 +51,8 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
-
+        let connected = await NetInfo.isConnected.fetch();
+        this.setState({ connected: connected ? 1 : 0 });
     };
 
     _sync = async () => {
@@ -75,14 +79,26 @@ export class AdminBackupIndexScreen extends React.Component {
                     <View style={{ alignItems: 'center', }}>
                         <Form>
                             <View style={{ alignItems: 'center' }}>
-                                <Button primary style={styles.button} onPress={() => { this._sync() }}>
+
+                                {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>SYNCRONIZATION</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='sync' style={{ color: 'white', }} />
                                     </Right>
-                                </Button>
+                                </Button>}
+
+                                {!this.state.connected && <Button danger style={styles.button}>
+                                    <Left >
+                                        <Text style={{ color: 'white', }}>NO CONNECTION</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='wifi' style={{ color: 'white', }} />
+                                    </Right>
+                                </Button>}
+
+
                             </View>
                         </Form>
                     </View>
