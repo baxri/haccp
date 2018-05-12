@@ -15,6 +15,8 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -36,12 +38,20 @@ export class ArchiveIndexScreen extends React.Component {
         super(props);
 
         this.state = {
+            loading: 1,
+            disabledDays: [],
             selectedStartDate: new Date().toISOString().substring(0, 10),
         };
         this.onDateChange = this.onDateChange.bind(this);
+        this.onMonthChange = this.onMonthChange.bind(this);
 
         this._bootstrapAsync();
     }
+
+    _bootstrapAsync = async () => {
+
+        this._setDisabledDays((new Date()).getMonth() + 1, (new Date()).getFullYear());
+    };
 
     onDateChange(date) {
         this.setState({
@@ -53,9 +63,57 @@ export class ArchiveIndexScreen extends React.Component {
         });
     }
 
-    _bootstrapAsync = async () => {
+    onMonthChange(date) {
+        this._setDisabledDays(date.format('M'), date.format('YYYY'));
+    }
+
+    componentDidMount() {
 
     };
+
+    componentDidFocus() {
+    };
+
+    _showLoader() {
+        this.setState({ loading: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loading: 0 });
+    }
+
+    _setDisabledDays = async (month, year) => {
+
+        this._showLoader();
+
+        let userID = await AsyncStorage.getItem('userSessionId');
+        let pictures = await Pictures(userID, null, month, year);
+
+        setTimeout(() => {
+            month = month * 1 - 1;
+            var date = new Date(year, month, 1);
+            var days = [];
+            while (date.getMonth() === month) {
+                date.setDate(date.getDate() + 1);
+
+                let str = new Date(date).toISOString().substring(0, 10);
+                let add = 1;
+
+                pictures.map(row => {
+                    if (row.date == str) {
+                        add = 0;
+                    }
+                });
+
+                if (add) {
+                    days.push(str);
+                }
+            }
+
+            this.setState({ disabledDays: days });
+            this._hideLoader();
+        }, 500)
+    }
 
     render() {
         const { selectedStartDate } = this.state;
@@ -63,8 +121,9 @@ export class ArchiveIndexScreen extends React.Component {
 
         return (
             <Container style={{ paddingTop: 20, }}>
+                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                 <Content>
-                    <CalendarPicker onDateChange={this.onDateChange} />
+                    <CalendarPicker onDateChange={this.onDateChange} onMonthChange={this.onMonthChange} disabledDates={this.state.disabledDays} />
                 </Content>
                 <Footer styles={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
                     <FooterTab styles={{ height: 100, }}>

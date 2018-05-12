@@ -106,7 +106,7 @@ export class ArchiveListScreen extends React.Component {
                     <Row>
                         <Col style={{ backgroundColor: 'black' }}>
                             <Content>
-                                {!this.state.controles.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                                {!this.state.pictures.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                                     <Icon name='camera' fontSize={50} size={50} style={{ color: 'white', fontSize: 100, }} />
                                     <Text style={{ color: 'white', fontSize: 25, }} >There is no Pictures</Text>
                                 </View>}
