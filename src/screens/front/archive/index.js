@@ -9,12 +9,12 @@ import {
     ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures } from '../../../database/realm';
-
+import CalendarPicker from 'react-native-calendar-picker';
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -36,25 +36,45 @@ export class ArchiveIndexScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 0,
+            selectedStartDate: new Date().toISOString().substring(0, 10),
         };
+        this.onDateChange = this.onDateChange.bind(this);
 
         this._bootstrapAsync();
     }
+
+    onDateChange(date) {
+        this.setState({
+            selectedStartDate: date.format('YYYY-MM-DD'),            
+        });
+
+        alert(this.state.selectedStartDate);
+    }
+
 
     _bootstrapAsync = async () => {
 
     };
 
     render() {
-        let { image } = this.state;
+        const { selectedStartDate } = this.state;
+        const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+
         return (
-            <Container style={{ alignItems: 'center' }}>
+            <Container style={{ paddingTop: 20, }}>
                 <Content>
-                    <View>
-                        <H3>CALENDAR</H3>
-                    </View>
+
+                    <CalendarPicker onDateChange={this.onDateChange} />
+
+
                 </Content>
+                <Footer styles={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <FooterTab styles={{ height: 100, }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <H2 style={{color: 'white'}}>{startDate}</H2>
+                        </View>
+                    </FooterTab>
+                </Footer>
             </Container>
         );
     }
