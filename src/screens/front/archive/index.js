@@ -49,7 +49,7 @@ export class ArchiveIndexScreen extends React.Component {
         });
 
         this.props.navigation.navigate('ArchiveList', {
-            selectedStartDate: this.state.selectedStartDate
+            selectedStartDate: date.format('YYYY-MM-DD')
         });
     }
 

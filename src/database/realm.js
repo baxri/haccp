@@ -356,11 +356,12 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 });
 
 
-export const Controles = (userId) => new Promise((resolve, reject) => {
+export const Controles = (userId, date = null) => new Promise((resolve, reject) => {
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
-            resolve(userObject.controles);
+
+            resolve(userObject.controles.filtered('date = $0', date));
         })
         .catch(error => {
             reject(error);
