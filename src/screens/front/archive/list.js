@@ -22,13 +22,7 @@ export class ArchiveListScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            // drawerLabel: 'Pictures and',
-            // drawerIcon: ({ tintColor }) => (
-            //     <Icon name='calendar' style={{ color: tintColor, }} />
-            // ),
-            // headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={(typeof params.title == "undefined" ? '' : params.title)} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -36,7 +30,7 @@ export class ArchiveListScreen extends React.Component {
         super(props);
 
         this.state = {
-            selectedStartDate: 'OK OK OK',
+            selectedStartDate: this.props.navigation.state.params.selectedStartDate,
         };
 
         this._bootstrapAsync();
@@ -53,11 +47,21 @@ export class ArchiveListScreen extends React.Component {
 
         const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
+
         return (
             <Container>
-                <Content>
-                    <H2>{startDate}</H2>
-                </Content>
+                <Grid>
+                    <Row >
+                        <Col style={{ borderBottomWidth: 1, borderColor: 'lightgray' }}>
+
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+
+                        </Col>
+                    </Row>
+                </Grid>
             </Container>
         );
     }
