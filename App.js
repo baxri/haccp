@@ -35,6 +35,7 @@ import { ControleIndexScreen } from './src/screens/front/controle/index';
 import { FroidIndexScreen } from './src/screens/front/froid/index';
 
 import { ArchiveIndexScreen } from './src/screens/front/archive/index';
+import { ArchiveListScreen } from './src/screens/front/archive/list';
 
 // End Front Screens
 
@@ -135,6 +136,7 @@ const FroidStack = StackNavigator(
 const ArchiveStack = StackNavigator(
   {
     ArchiveIndex: ArchiveIndexScreen,
+    ArchiveList: ArchiveListScreen,
   },
   {
     initialRouteName: 'ArchiveIndex',

@@ -45,12 +45,13 @@ export class ArchiveIndexScreen extends React.Component {
 
     onDateChange(date) {
         this.setState({
-            selectedStartDate: date.format('YYYY-MM-DD'),            
+            selectedStartDate: date.format('YYYY-MM-DD'),
         });
 
-        alert(this.state.selectedStartDate);
+        this.props.navigation.navigate('ArchiveList', {
+            selectedStartDate: this.state.selectedStartDate
+        });
     }
-
 
     _bootstrapAsync = async () => {
 
@@ -63,15 +64,12 @@ export class ArchiveIndexScreen extends React.Component {
         return (
             <Container style={{ paddingTop: 20, }}>
                 <Content>
-
                     <CalendarPicker onDateChange={this.onDateChange} />
-
-
                 </Content>
                 <Footer styles={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
                     <FooterTab styles={{ height: 100, }}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <H2 style={{color: 'white'}}>{startDate}</H2>
+                            <H2 style={{ color: 'white' }}>{startDate}</H2>
                         </View>
                     </FooterTab>
                 </Footer>
