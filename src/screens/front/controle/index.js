@@ -14,7 +14,7 @@ import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, F
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, User } from '../../../database/realm';
+import { addControle, Controles, Pictures, User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -52,8 +52,8 @@ export class ControleIndexScreen extends React.Component {
                 lastname: '',
             },
 
-            source: null,
-            signature: null,
+            source: '',
+            signature: '',
 
             produit: '',
             fourniser: '',
@@ -79,6 +79,7 @@ export class ControleIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
+        const controles = await Controles(userID);
 
         this.setState({
             userId: userID,
@@ -87,7 +88,7 @@ export class ControleIndexScreen extends React.Component {
         });
 
         this.props.navigation.setParams({
-            test: pics.length
+            test: controles.length
         });
     };
 
@@ -150,8 +151,7 @@ export class ControleIndexScreen extends React.Component {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
                     this.setState({ signature: 'file://' + path });
-                    alert('file://' + path);
-
+                    // alert('file://' + path);
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
@@ -190,7 +190,7 @@ export class ControleIndexScreen extends React.Component {
             ToastAndroid.show("Please take a picture!", ToastAndroid.LONG); return;
         }
 
-        if (!this.state.signature) {
+        if (confirmed == 0 && !this.state.signature) {
             ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
         }
 
@@ -214,21 +214,36 @@ export class ControleIndexScreen extends React.Component {
 
         setTimeout(() => {
 
-            // addPicture(this.state.userId, {
-            //     source: this.state.source,
-            //     date: this.state.date,
-            //     created_at: this.state.created_at,
-            // }).then(res => {
-            //     this.props.navigation.navigate('Home');
-            //     this._hideLoader();
-            //     ToastAndroid.show("Image successfully saved!", ToastAndroid.LONG);
-            // }).catch(error => {
-            //     alert(error);
-            // });
+            addControle(this.state.userId, {
+                source: this.state.source,
+                signature: this.state.signature,
 
-            this.props.navigation.navigate('Home');
-            this._hideLoader();
-            ToastAndroid.show("Product successfully saved!", ToastAndroid.LONG);
+                produit: this.state.produit,
+                fourniser: this.state.fourniser,
+                dubl: this.state.dubl,
+
+                aspect: this.state.aspect,
+                du_produit: this.state.du_produit,
+
+                intact: this.state.intact,
+                conforme: this.state.conforme,
+                autres: this.state.autres,
+                actions: this.state.actions,
+                confirmed: this.state.confirmed,
+
+                date: this.state.date,
+                created_at: this.state.created_at,
+            }).then(res => {
+                this.props.navigation.navigate('Home');
+                this._hideLoader();
+                ToastAndroid.show("Controle successfully saved! (" + res.produit + ")", ToastAndroid.LONG);
+            }).catch(error => {
+                alert(error);
+            });
+
+            // this.props.navigation.navigate('Home');
+            // this._hideLoader();
+            // ToastAndroid.show("Controle successfully saved!", ToastAndroid.LONG);
 
         }, 2000);
     }
@@ -246,21 +261,21 @@ export class ControleIndexScreen extends React.Component {
                         <Grid style={{ width: 550 }}>
                             <Row>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
-                                    {!this.state.source && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
+                                    {this.state.source == '' && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
                                         <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                                     </Button>}
-                                    {this.state.source && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
+                                    {this.state.source != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
                                         source={{ uri: this.state.source }}
                                     /></View>}
                                 </Col>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
-                                    {!this.state.signature && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
+                                    {this.state.signature == '' && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
                                         <Icon name='create' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                                     </Button>}
 
-                                    {this.state.signature && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
+                                    {this.state.signature != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
                                         source={{ uri: this.state.signature }}

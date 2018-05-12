@@ -2,6 +2,60 @@ import React from 'react';
 // import { Realm } from 'realm';
 const Realm = require('realm');
 
+// id: _guid(),
+// user: userObject,
+
+// source: item.source,
+// signature: item.signature,
+
+// produit: item.produit,
+// fourniser: item.fourniser,
+// dubl: item.dubl,
+
+// aspect: item.aspect,
+// du_produit: item.du_produit,
+
+// intact: item.intact,
+// conforme: item.conforme,
+
+// autres: item.autres,
+// actions: item.actions,
+
+// confirmed: item.confirmed,
+// date: item.date,
+// created_at: item.created_at,
+
+const ControleSchema = {
+    primaryKey: 'id',
+    name: 'Controle',
+
+    properties: {
+        id: 'string',    // primary key
+        source: 'string',
+        signature: 'string',
+
+        produit: 'string',
+        fourniser: 'string',
+        dubl: 'string',
+
+        aspect: 'int',
+        du_produit: 'string',
+
+        intact: 'int',
+        conforme: 'int',
+
+        autres: 'string',
+        actions: 'string',
+
+        confirmed: 'int',
+
+        date: 'string',
+        created_at: 'date',
+        user: 'User',
+    }
+};
+
+
 const PictureSchema = {
     primaryKey: 'id',
     name: 'Picture',
@@ -24,7 +78,8 @@ const UserSchema = {
         name: 'string',
         lastname: 'string',
         department: 'Department',
-        pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'user' }
+        pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'user' },
+        controles: { type: 'linkingObjects', objectType: 'Controle', property: 'user' },
     }
 };
 
@@ -51,8 +106,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 11;
-const schemas = [UserSchema, DepartmentSchema, PictureSchema];
+const schemaVersion = 12;
+const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
 
 export const file = () => {
     return Realm.defaultPath;
@@ -256,3 +311,61 @@ export const Pictures = (userId) => new Promise((resolve, reject) => {
 
 
 // END PICTURES ============================================================================
+
+
+// CONTROLE RECEPS ============================================================================
+
+export const addControle = (userId, item) => new Promise((resolve, reject) => {
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let userObject = realm.objectForPrimaryKey('User', userId);
+
+                const controle = realm.create('Controle', {
+                    id: _guid(),
+                    user: userObject,
+
+                    source: item.source,
+                    signature: item.signature,
+
+                    produit: item.produit,
+                    fourniser: item.fourniser,
+                    dubl: item.dubl,
+
+                    aspect: item.aspect,
+                    du_produit: item.du_produit,
+
+                    intact: item.intact,
+                    conforme: item.conforme,
+
+                    autres: item.autres,
+                    actions: item.actions,
+
+                    confirmed: item.confirmed,
+                    date: item.date,
+                    created_at: item.created_at,
+                });
+                resolve(controle);
+            });
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+
+export const Controles = (userId) => new Promise((resolve, reject) => {
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            let userObject = realm.objectForPrimaryKey('User', userId);
+            resolve(userObject.controles);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+// END CONTROLE RECEPS ============================================================================
