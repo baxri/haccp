@@ -7,6 +7,8 @@ import {
     View,
     Image,
     ToastAndroid,
+    Dimensions,
+    Modal
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer, List, ListItem, Left, Right, Body, Thumbnail } from 'native-base';
@@ -30,6 +32,12 @@ export class ArchiveListScreen extends React.Component {
         super(props);
 
         this.state = {
+            imagePerRow: 4,
+            imageSize: {
+                width: 0,
+                height: 0,
+            },
+            images: [],
             pictures: [],
             controles: [],
             selectedStartDate: this.props.navigation.state.params.selectedStartDate,
@@ -52,7 +60,15 @@ export class ArchiveListScreen extends React.Component {
             pictures: pictures,
             controles: controles,
         });
+
+        this._calculateSize();
     };
+
+    _calculateSize() {
+        let windowWidth = Dimensions.get('window').width;
+        let size = windowWidth / this.state.imagePerRow
+        this.setState({ imageSize: { width: size, height: size } })
+    }
 
     render() {
         const { selectedStartDate } = this.state;
@@ -66,7 +82,7 @@ export class ArchiveListScreen extends React.Component {
                             <Content>
                                 {!this.state.controles.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                                     <Icon name='eye' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                                    <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no Recep. controls yet</Text>
+                                    <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no Recep. controls</Text>
                                 </View>}
                                 <List>
                                     {this.state.controles.map(row => {
@@ -88,8 +104,38 @@ export class ArchiveListScreen extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col style={{ backgroundColor: 'black' }}>
+                            <Content>
 
+                                {!this.state.controles.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                                    <Icon name='camera' fontSize={50} size={50} style={{ color: 'white', fontSize: 100, }} />
+                                    <Text style={{ color: 'white', fontSize: 25, }} >There is no Pictures</Text>
+                                </View>}
+
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        flexWrap: 'wrap',
+                                    }}
+                                >
+
+                                    {this.state.pictures.map((row, index) => {
+                                        return <Button
+                                            style={{ width: this.state.imageSize.width, height: this.state.imageSize.height }}
+                                            onPress={() => this.props.navigation.navigate('ArchiveGallery', {
+                                                index: index,
+                                                pictures: this.state.pictures,
+                                            })}>
+                                            <Image
+                                                resizeMode={'cover'}
+                                                style={{ width: this.state.imageSize.width, height: this.state.imageSize.height }}
+                                                source={{ uri: row.source }}
+
+                                            />
+                                        </Button>
+                                    })}
+                                </View>
+                            </Content>
                         </Col>
                     </Row>
                 </Grid>

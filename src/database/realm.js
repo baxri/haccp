@@ -298,11 +298,11 @@ export const addPicture = (userId, item) => new Promise((resolve, reject) => {
 });
 
 
-export const Pictures = (userId) => new Promise((resolve, reject) => {
+export const Pictures = (userId, date = null) => new Promise((resolve, reject) => {
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
-            resolve(userObject.pictures);
+            resolve(userObject.pictures.filtered('date = $0', date));
         })
         .catch(error => {
             reject(error);
@@ -360,7 +360,6 @@ export const Controles = (userId, date = null) => new Promise((resolve, reject) 
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
-
             resolve(userObject.controles.filtered('date = $0', date));
         })
         .catch(error => {
