@@ -86,7 +86,7 @@ export class ArchiveListScreen extends React.Component {
                                 </View>}
                                 <List>
                                     {this.state.controles.map(row => {
-                                        return <ListItem avatar onPress={() => alert("OK")} style={{ marginTop: 15, }}>
+                                        return <ListItem avatar onPress={() => this.props.navigation.navigate('ArchiveDetails', { controle: row })} style={{ marginTop: 15, }}>
                                             <Left>
                                                 <Thumbnail source={{ uri: row.source }} />
                                             </Left>

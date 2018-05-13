@@ -37,6 +37,7 @@ import { FroidIndexScreen } from './src/screens/front/froid/index';
 import { ArchiveIndexScreen } from './src/screens/front/archive/index';
 import { ArchiveListScreen } from './src/screens/front/archive/list';
 import { ArchiveGalleryScreen } from './src/screens/front/archive/gallery';
+import { ArchiveDetailsScreen } from './src/screens/front/archive/details';
 
 // End Front Screens
 
@@ -139,6 +140,7 @@ const ArchiveStack = StackNavigator(
     ArchiveIndex: ArchiveIndexScreen,
     ArchiveList: ArchiveListScreen,
     ArchiveGallery: ArchiveGalleryScreen,
+    ArchiveDetails: ArchiveDetailsScreen,
   },
   {
     initialRouteName: 'ArchiveIndex',

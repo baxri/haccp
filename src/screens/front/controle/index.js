@@ -186,6 +186,8 @@ export class ControleIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
+        this.setState({ confirmed: confirmed });
+
         if (!this.state.source) {
             ToastAndroid.show("Please take a picture!", ToastAndroid.LONG); return;
         }

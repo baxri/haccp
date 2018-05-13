@@ -369,15 +369,24 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 });
 
 
-export const Controles = (userId, date = null) => new Promise((resolve, reject) => {
+export const Controles = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
 
-            if (date == null)
-                resolve(userObject.controles);
-            else
-                resolve(userObject.controles.filtered('date = $0', date));
+            if (month != null && year != null) {
+
+                month = month * 1 - 1;
+                var from = new Date(year, month, 1);
+                var to = new Date(year, month, 31);
+
+                resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
+            } else {
+                if (date == null)
+                    resolve(userObject.controles);
+                else
+                    resolve(userObject.controles.filtered('date = $0', date));
+            }
         })
         .catch(error => {
             reject(error);
