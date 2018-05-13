@@ -108,8 +108,16 @@ export class HomeIndexScreen extends React.Component {
                                 </View>
                             </Button>
                         </Col>
-                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                        {/* <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('ArchiveIndex')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='calendar' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Archive</Text>
+                                </View>
+                            </Button>
+                        </Col> */}
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert('working on it :)')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='calendar' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
                                     <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >Archive</Text>
