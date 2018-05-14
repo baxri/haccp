@@ -8,6 +8,7 @@ const strings = {
     ARE_YOU_SURE: 'ARE_YOU_SURE',
     CANCEL: 'CANCEL',
     OK: 'OK',
+    SAVE: 'SAVE',
     CONFIRM: 'CONFIRM',
     CONFIRMED: 'CONFIRMED',
     NOT_CONFIRM: 'NOT_CONFIRM',
