@@ -109,7 +109,7 @@ const _guid = () => {
 const schemaVersion = 12;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
 
-export const file = () => {
+export const RealmFile = () => {
     return Realm.defaultPath;
 }
 

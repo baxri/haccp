@@ -12,6 +12,7 @@ import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
+import { RealmFile } from '../../../database/realm';
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -57,13 +58,17 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _sync = async () => {
 
-        this._showLoader();
+        let file = RealmFile();
 
-        setTimeout(() => {
-            this._hideLoader();
-            this.props.navigation.navigate("AdminHome");
-            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-        }, 3000);
+        alert(file);
+
+        // this._showLoader();
+
+        // setTimeout(() => {
+        //     this._hideLoader();
+        //     this.props.navigation.navigate("AdminHome");
+        //     ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+        // }, 3000);
 
     };
 
