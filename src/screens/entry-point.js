@@ -8,6 +8,7 @@ import {
     Text
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Strings from '../../src/language/fr';
 
 export class EntryPointScreen extends React.Component {
     constructor(props) {
@@ -16,14 +17,14 @@ export class EntryPointScreen extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'EntryPoint',
+        title: 'ENTRYPOINT',
     };
 
     _bootstrapAsync = async () => {
 
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV4');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV5');
 
         // Set up navigation stack for admin and user (default is Auth)
         let stack = 'Auth';
@@ -53,7 +54,7 @@ export class EntryPointScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Spinner visible={true} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={true} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
             </View>
         );
     }

@@ -21,6 +21,7 @@ var ImagePicker = require('react-native-image-picker');
 import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
+import Strings from '../../../language/fr';
 
 
 export class ControleIndexScreen extends React.Component {
@@ -29,12 +30,12 @@ export class ControleIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Controle reception',
+            drawerLabel: Strings.RECEPTION_CHECK,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='eye' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={"Controle reception" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };

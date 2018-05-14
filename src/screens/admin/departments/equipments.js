@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Container, Footer, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, CheckBox, Left, Right, FooterTab } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import Strings from '../../../language/fr'
 
 export class AdminDepartmentsEquipmentsModal extends React.Component {
 
@@ -19,7 +20,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            headerTitle: <LogoTitle HeaderText="Choose equipments" />,
+            headerTitle: <LogoTitle HeaderText={Strings.CHOOSE_EQUIPMENTS} />,
             headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -45,7 +46,6 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
 
             ],
         };
-
 
     }
 
@@ -183,7 +183,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
                         <Button light onPress={() => this.props.navigation.goBack()}>
-                            <Text>BACK</Text>
+                            <Text>{Strings.BACK}</Text>
                         </Button>
                         <Button full primary onPress={_ => this._confirm()} styles={{
                             positon: 'absolute',
@@ -191,7 +191,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                             height: 100,
                             padding: 20,
                         }}>
-                            <Text style={{ color: 'white', }}>CONFIRM</Text>
+                            <Text style={{ color: 'white', }}>{Strings.CONFIRM}</Text>
                         </Button>
                     </FooterTab>
                 </Footer>

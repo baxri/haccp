@@ -8,6 +8,7 @@ import {
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import Strings from '../../language/fr';
 
 export class LogOutScreen extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export class LogOutScreen extends React.Component {
     }
 
     static navigationOptions = {
-        drawerLabel: 'LogOut',
+        drawerLabel: Strings.LOGOUT,
         drawerIcon: ({ tintColor }) => (
             <Icon name='log-out' style={{ color: tintColor, }} />
         ),

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
-
+import Strings from '../../language/fr'
 
 export class SignInAdminScreen extends React.Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export class SignInAdminScreen extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'SignIn Administrator',
+        title: 'ADMINISTRATOR_LOGIN',
     };
 
     _bootstrapAsync = async () => {
@@ -34,12 +34,12 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _loginAdmin = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV4');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV5');
 
         try {
 
             if (adminPassword !== this.state.password) {
-                throw Error('Password is incorrect');
+                throw Error(Strings.INVALID_PASSWORD);
             }
 
             let token = Math.floor(Date.now() / 1000);
@@ -71,12 +71,12 @@ export class SignInAdminScreen extends React.Component {
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <H1>Administrator Login</H1>
+                        <H1>{Strings.ADMINISTRATOR_LOGIN}</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
                             <Item floatingLabel style={styles.input}>
-                                <Label>Enter password </Label>
+                                <Label>{Strings.ENTER_PASSWORD}</Label>
                                 <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
                             </Item>
                             <View style={{ alignItems: 'center', marginBottom: 10 }}>
@@ -85,7 +85,7 @@ export class SignInAdminScreen extends React.Component {
                             <View style={{ alignItems: 'center' }}>
                                 <Button primary style={styles.button} onPress={() => { this._loginAdmin() }}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>CONNECTION</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='log-in' style={{ color: 'white', }} />
@@ -96,7 +96,7 @@ export class SignInAdminScreen extends React.Component {
 
                                 >
                                     <Left >
-                                        <Text>BACK (SIGN IN)</Text>
+                                        <Text>{Strings.BACK_TO_SIGNIN}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='arrow-back' />

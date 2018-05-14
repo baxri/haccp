@@ -11,7 +11,7 @@ import {
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addUser, editUser, Departments } from '../../../database/realm';
-
+import Strings from '../../../language/fr'
 
 export class AdminUsersItemScreen extends React.Component {
 
@@ -19,12 +19,12 @@ export class AdminUsersItemScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'User Item',
+            drawerLabel: Strings.USER,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='briefcase' style={{ color: tintColor, }} />
             ),
 
-            headerTitle: <LogoTitle HeaderText="User Item" />,
+            headerTitle: <LogoTitle HeaderText={Strings.USER} />,
             // headerRight: <Menu navigation={navigation} />rr,
         };
     };
@@ -101,7 +101,7 @@ export class AdminUsersItemScreen extends React.Component {
                                 selectedValue={this.state.department}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ department: itemValue })}
                             >
-                                <Picker.Item label="SELECT DEPARTMENT" value="" />
+                                <Picker.Item label={Strings.SELECT_DEPARTMENT} value="" />
 
                                 {this.state.departments.map((i, index) => (
                                     <Picker.Item key={index} label={i.name} value={i.id} />
@@ -112,11 +112,11 @@ export class AdminUsersItemScreen extends React.Component {
                         </View>
                         <View style={{ borderWidth: 0, flex: 1 }}>
                             <Item floatingLabel style={styles.input}>
-                                <Label>First Name </Label>
+                                <Label>{Strings.FIRST_NAME}</Label>
                                 <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                             </Item>
                             <Item floatingLabel style={styles.input}>
-                                <Label>Last Name </Label>
+                                <Label>{Strings.LAST_NAME} </Label>
                                 <Input value={this.state.lastname} onChangeText={(value) => { this.setState({ lastname: value }) }} />
                             </Item>
                         </View>
@@ -124,7 +124,7 @@ export class AdminUsersItemScreen extends React.Component {
                         <View style={{ borderWidth: 0, flex: 1 }}>
                             <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
-                                    <Text style={{ color: 'white', }}>SAVE DEPARTMENT</Text>
+                                    <Text style={{ color: 'white', }}>{Strings.SAVE_USER}</Text>
                                 </Left>
                                 <Right>
                                     <Icon name='checkmark' style={{ color: 'white', }} />

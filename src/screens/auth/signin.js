@@ -12,7 +12,7 @@ import {
 // import { Text } from 'react-native-elements';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon, Left, Right } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import Strings from '../../language/fr'
 import { Departments } from '../../database/realm';
 
 export class SignInScreen extends React.Component {
@@ -29,7 +29,7 @@ export class SignInScreen extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'EntryPoint',
+        title: 'SIGNIN',
     };
 
     componentDidMount() {
@@ -92,7 +92,7 @@ export class SignInScreen extends React.Component {
                     </View>
 
                     {this.state.departments.length == 0 && <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <Text style={{ color: 'red' }}>There is no departments yet</Text>
+                        <Text style={{ color: 'red' }}>{Strings.THERE_IS_NO_DEPARTMENTS}</Text>
                     </View>}
 
                     <View style={{ alignItems: 'center', }}>
@@ -111,7 +111,7 @@ export class SignInScreen extends React.Component {
                             </View>
 
                             {this.state.users.length == 0 && <View style={styles.dropdownView}>
-                                <Text style={{ color: 'red' }}>There is no users for this department</Text>
+                                <Text style={{ color: 'red' }}>{Strings.THERE_IS_NO_USERS}</Text>
                             </View>}
 
                             {this.state.users.length > 0 && <View style={styles.dropdownView}>
@@ -129,7 +129,7 @@ export class SignInScreen extends React.Component {
                             <View>
                                 {this.state.user.length > 0 && <Button primary style={styles.button} onPress={this._login}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>CONNECTION</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='log-in' style={{ color: 'white', }} />
@@ -138,7 +138,7 @@ export class SignInScreen extends React.Component {
 
                                 {!this.state.user.length && <Button disabled style={styles.button}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>CONNECTION</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='log-in' style={{ color: 'white', }} />
@@ -155,19 +155,14 @@ export class SignInScreen extends React.Component {
                                 });
                             }}>
                                 <Left >
-                                    <Text>SIGN IN AS ADMIN</Text>
+                                    <Text>{Strings.SIGN_IN_AS_ADMIN}</Text>
                                 </Left>
                                 <Right>
                                     <Icon name='settings' />
                                 </Right>
                             </Button>
                         </View>
-
-
-
                     </View>
-
-
                 </Content>
             </Container>
         );

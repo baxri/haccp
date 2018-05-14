@@ -14,6 +14,7 @@ import { addDepartment, editDepartment } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
+import Strings from '../../../language/fr'
 
 export class AdminDepartmentsItemScreen extends React.Component {
 
@@ -21,12 +22,12 @@ export class AdminDepartmentsItemScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Departments Item',
+            drawerLabel: Strings.DEPARTMENT,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='briefcase' style={{ color: tintColor, }} />
             ),
 
-            headerTitle: <LogoTitle HeaderText="Departments Item" />,
+            headerTitle: <LogoTitle HeaderText={Strings.DEPARTMENT} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -111,17 +112,17 @@ export class AdminDepartmentsItemScreen extends React.Component {
                         <Text>Hello</Text>
                     </View>
                 </PopupDialog>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content padder style={{ flex: 1 }}>
                     <Form>
                         <Item floatingLabel style={styles.input}>
-                            <Label>Department Name </Label>
+                            <Label>{Strings.DEPARTMENT_NAME}</Label>
                             <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                         </Item>
                         <View style={{ alignItems: 'center' }}>
                             <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
-                                    <Text style={{ color: 'white', }}>SAVE DEPARTMENT</Text>
+                                    <Text style={{ color: 'white', }}>{Strings.SAVE_DEPARTMENT}</Text>
                                 </Left>
                                 <Right>
                                     <Icon name='checkmark' style={{ color: 'white', }} />
@@ -145,7 +146,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                                 }}
                             >
-                                <Text>EQUIPMENTS ({this.state.equipments.length})</Text>
+                                <Text>{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
 
                             </Button>
 

@@ -12,7 +12,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, Users } from '../../../database/realm';
-
+import Strings from '../../../language/fr'
 
 export class AdminHomeIndexScreen extends React.Component {
 
@@ -20,12 +20,12 @@ export class AdminHomeIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Dashboard',
+            drawerLabel: Strings.DASHBOARD,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='home' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText="Dashboard" />,
+            headerTitle: <LogoTitle HeaderText={Strings.DASHBOARD} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -70,7 +70,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Departments ({this.state.departments.length})</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >{Strings.DEPARTMENTS} ({this.state.departments.length})</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -78,7 +78,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='people' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Users ({this.state.users.length})</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >{Strings.USERS} ({this.state.users.length})</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -88,15 +88,15 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='sync' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Backup</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >{Strings.BACKUP}</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert("Cleaning Schedule (leave that for now I have to define that)")}>
+                            <Button full light style={{ flex: 1 }} onPress={() => alert(Strings.COMMING_SOON)}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 100, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >Cleaning Schedule</Text>
+                                    <Text style={{ color: '#5783FF', fontSize: 25, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>
                                 </View>
                             </Button>
                         </Col>

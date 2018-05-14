@@ -11,7 +11,7 @@ import {
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import Strings from '../../../language/fr'
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -19,12 +19,12 @@ export class AdminBackupIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Backup',
+            drawerLabel: Strings.BACKUP,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='sync' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText="Backup" />,
+            headerTitle: <LogoTitle HeaderText={Strings.BACKUP} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -62,7 +62,7 @@ export class AdminBackupIndexScreen extends React.Component {
         setTimeout(() => {
             this._hideLoader();
             this.props.navigation.navigate("AdminHome");
-            ToastAndroid.show("Data successfully Syncronized!", ToastAndroid.LONG);
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         }, 3000);
 
     };
@@ -70,11 +70,11 @@ export class AdminBackupIndexScreen extends React.Component {
     render() {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
 
                 <Content>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <H1>Backup Realm Data</H1>
+                        <H1>{Strings.BACKUP}</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
@@ -82,7 +82,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>SYNCRONIZATION</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.UPLOAD}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='sync' style={{ color: 'white', }} />
@@ -91,7 +91,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 {!this.state.connected && <Button danger style={styles.button}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>NO CONNECTION</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.NO_CONNECTION}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='wifi' style={{ color: 'white', }} />

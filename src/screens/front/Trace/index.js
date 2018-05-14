@@ -15,7 +15,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import Strings from '../../../language/fr';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -25,12 +25,12 @@ export class TraceIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Traceability',
+            drawerLabel: Strings.TRACEABILITY,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='camera' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={"Traceability" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.TRACEABILITY + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -114,12 +114,12 @@ export class TraceIndexScreen extends React.Component {
     _confirm() {
 
         if (this.state.userId == null) {
-            ToastAndroid.show("UserId is NULL", ToastAndroid.LONG);
+            ToastAndroid.show("USER_ID_IS_NULL", ToastAndroid.LONG);
             return;
         }
 
         if (this.state.source.length == 0) {
-            ToastAndroid.show("Please take a picture", ToastAndroid.LONG);
+            ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG);
             return;
         }
 
@@ -133,7 +133,7 @@ export class TraceIndexScreen extends React.Component {
             }).then(res => {
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
-                ToastAndroid.show("Image successfully saved!", ToastAndroid.LONG);
+                ToastAndroid.show(Strings.PICTURE_SUCCESSFULL_SAVED, ToastAndroid.LONG);
             }).catch(error => {
                 alert(error);
             });
@@ -145,7 +145,7 @@ export class TraceIndexScreen extends React.Component {
         let { image } = this.state;
         return (
             <Container style={{ alignItems: 'center', paddingTop: 110, }}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content>
                     <View style={{ width: 400, height: 300 }}>
                         {this.state.source.length == 0 && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
@@ -160,20 +160,20 @@ export class TraceIndexScreen extends React.Component {
                         />}
                     </View>
                     <View style={{ alignItems: 'center', paddingTop: 40, }}>
-                        <H3>Today is : {this.state.created_at.toDateString()}</H3>
+                        <H3>{this.state.created_at.toDateString()}</H3>
                     </View>
                 </Content>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
                         <Button light onPress={() => this.props.navigation.navigate('Home')}>
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ paddingTop: 5, }}>CANCEL</Text>
+                                <Text style={{ paddingTop: 5, }}>{Strings.CANCEL}</Text>
                                 <Icon name='close' />
                             </View>
                         </Button>
                         <Button full primary onPress={_ => this._confirm()} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>CONFIRM</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>

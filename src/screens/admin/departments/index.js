@@ -19,6 +19,7 @@ import { Departments, DeleteDepartment } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
+import Strings from '../../../language/fr'
 
 export class AdminDepartmentsIndexScreen extends React.Component {
 
@@ -26,12 +27,12 @@ export class AdminDepartmentsIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Departments',
+            drawerLabel: Strings.DEPARTMENTS,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='briefcase' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText="Departments" />,
+            headerTitle: <LogoTitle HeaderText={Strings.DEPARTMENTS} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -88,17 +89,17 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
     _deleteRowAsk(id, secId, rowId, rowMap) {
         Alert.alert(
-            'DELETE',
-            'Do want to delete this item?',
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
             [
-                { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
             ],
             { cancelable: false }
         )
     }
 
-    
+
     _deleteRow(id, secId, rowId, rowMap) {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
@@ -122,7 +123,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
     render() {
         return (
             <Container>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content refreshControl={<RefreshControl
                     refreshing={this.state.refreshing}
                     onRefresh={() => { this._onRefresh() }} />
@@ -130,7 +131,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
 
                     {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                         <Icon name='briefcase' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                        <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no departments yet</Text>
+                        <Text style={{ color: 'lightgray', fontSize: 25, }} >{Strings.THERE_IS_NO_DEPARTMENTS_YET}</Text>
                     </View>}
 
                     <List
@@ -140,8 +141,8 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 5 }}>Users: {data.users.length} </Text>
-                                        <Text>Equipments:  ({data.equipments.length}) </Text>
+                                        <Text style={{ marginBottom: 5 }}>{Strings.USERS}: {data.users.length} </Text>
+                                        <Text>{Strings.EQUIPMENTS}:  ({data.equipments.length}) </Text>
                                     </View>
 
                                 </Left>

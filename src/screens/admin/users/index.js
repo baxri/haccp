@@ -15,7 +15,7 @@ import {
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
-
+import Strings from '../../../language/fr'
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export class AdminUsersIndexScreen extends React.Component {
@@ -24,12 +24,12 @@ export class AdminUsersIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Users',
+            drawerLabel: Strings.USERS,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='people' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText="Users" />,
+            headerTitle: <LogoTitle HeaderText={Strings.USERS} />,
             // headerRight: <Menu navigation={navigation} />,
         };
 
@@ -91,11 +91,11 @@ export class AdminUsersIndexScreen extends React.Component {
     _deleteRowAsk(id, secId, rowId, rowMap) {
 
         Alert.alert(
-            'DELETE',
-            'Do want to delete this item?',
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
             [
-                { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
             ],
             { cancelable: false }
         )
@@ -131,7 +131,7 @@ export class AdminUsersIndexScreen extends React.Component {
 
                     {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                         <Icon name='people' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                        <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no users yet</Text>
+                        <Text style={{ color: 'lightgray', fontSize: 25, }} >{Strings.THERE_IS_NO_USERS_YET}</Text>
                     </View>}
 
                     <List
@@ -141,7 +141,7 @@ export class AdminUsersIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} {data.lastname}</Text>
-                                        <Text style={{ marginBottom: 5 }}>Department: {data.department.name} </Text>
+                                        <Text style={{ marginBottom: 5 }}>{Strings.DEPARTMENT}: {data.department.name} </Text>
                                     </View>
                                 </Left>
                                 <Right>

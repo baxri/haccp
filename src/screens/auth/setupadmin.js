@@ -9,6 +9,7 @@ import {
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import Strings from '../../language/fr';
 
 export class SetupAdminScreen extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export class SetupAdminScreen extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'Setup Administrator',
+        title: Strings.SETUP_ADMINISTRATOR,
     };
 
     _bootstrapAsync = async () => {
@@ -37,20 +38,20 @@ export class SetupAdminScreen extends React.Component {
         try {
 
             if (password.length == 0) {
-                throw Error('Please enter password');
+                throw Error(Strings.PASSWORD_REQUIRED);
             }
 
             if (password != passwordConfirm) {
-                throw Error("Password dont mutches");
+                throw Error(Strings.PASSWORD_NOT_MUTCHED);
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV4', password);
+            await AsyncStorage.setItem('adminPasswordV5', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {
                 func: () => {
-                    ToastAndroid.show('Administrator Succssfully created', ToastAndroid.LONG);
+                    ToastAndroid.show(Strings.ADMINISTRATOR_SUCCESSFULLY_CREATED, ToastAndroid.LONG);
                 }
             });
         } catch (error) {
@@ -63,16 +64,16 @@ export class SetupAdminScreen extends React.Component {
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <Content padder style={{ flex: 1 }}>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <H1>Setup Administrator</H1>
+                        <H1>{Strings.SETUP_ADMINISTRATOR}</H1>
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
                             <Item floatingLabel style={styles.input}>
-                                <Label>Enter new password </Label>
+                                <Label>{Strings.ENTER_PASSWORD}</Label>
                                 <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
                             </Item>
                             <Item floatingLabel style={styles.input}>
-                                <Label>Confirm password</Label>
+                                <Label>{Strings.CONFIRM_PASSWORD}</Label>
                                 <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
                             </Item>
                             <View style={{ alignItems: 'center', marginBottom: 10 }}>
@@ -82,7 +83,7 @@ export class SetupAdminScreen extends React.Component {
                                 <Button primary style={styles.button}
                                     onPress={() => { this._setupAdmin() }}>
                                     <Left >
-                                        <Text style={{ color: 'white', }}>SETUP</Text>
+                                        <Text style={{ color: 'white', }}>{Strings.SETUP}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='bookmark' style={{ color: 'white', }} />
