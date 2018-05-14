@@ -16,7 +16,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import Strings from '../../../language/fr';
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -24,12 +24,12 @@ export class ArchiveIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Archive',
+            drawerLabel: Strings.ARCHIVE,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='calendar' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={"Archive"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.ARCHIVE} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -130,7 +130,7 @@ export class ArchiveIndexScreen extends React.Component {
 
         return (
             <Container style={{ paddingTop: 20, }}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content>
                     <CalendarPicker onDateChange={this.onDateChange} onMonthChange={this.onMonthChange} disabledDates={this.state.disabledDays} />
                 </Content>

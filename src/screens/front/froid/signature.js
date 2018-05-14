@@ -6,8 +6,7 @@ import ReactNative, {
     View, Modal, Platform, Alert
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
-
-
+import Strings from '../../../language/fr';
 import SignatureCapture from 'react-native-signature-capture';
 
 const toolbarHeight = Platform.select({
@@ -43,7 +42,7 @@ export default class SignatureView extends React.Component {
                     <View style={{ padding: 10, flexDirection: 'row' }}>
                         <Text onPress={this._onPressClose.bind(this)}>{' x '}</Text>
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ fontSize: 14 }}>Please write your signature.</Text>
+                            <Text style={{ fontSize: 14 }}>{Strings.PLEASE_WRITE_YOUR_SIGNATURE}</Text>
                         </View>
                     </View>
                     <SignatureCapture

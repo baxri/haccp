@@ -12,6 +12,7 @@ import {
 import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer, H1, H3 } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import Strings from '../../../language/fr';
 
 export class ArchiveDetailsScreen extends React.Component {
 
@@ -19,7 +20,7 @@ export class ArchiveDetailsScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            headerTitle: <LogoTitle HeaderText={"Reception Details"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK} />,
         };
     };
 
@@ -51,34 +52,31 @@ export class ArchiveDetailsScreen extends React.Component {
                     </View>
 
                     <View style={{ paddingTop: 20, }}>
-                        <H1 style={{ marginBottom: 25, }}>PRODUCT: {this.state.item.produit}</H1>
+                        <H1 style={{ marginBottom: 25, }}>{Strings.PRODUCT}: {this.state.item.produit}</H1>
 
                         {this.state.item.confirmed == 1 && <View style={{ flexDirection: 'row' }}>
                             <Button iconLeft success>
                                 <Icon name='checkmark' />
-                                <Text>CONFIRMED</Text>
+                                <Text>{Strings.CONFIRMED}</Text>
                             </Button>
                         </View>}
                         {this.state.item.confirmed == 0 && <View><Button iconLeft danger>
                             <Icon name='close' />
-                            <Text>NOT CONFIRMED</Text>
+                            <Text>{Strings.NOT_CONFIRMED}</Text>
                         </Button></View>}
 
-                        <H3 style={{ marginTop: 20, }}>FOURNISER: {this.state.item.fourniser}</H3>
-                        <H3>DUBL: {this.state.item.dubl}</H3>
-                        <H3>ASPECT: {this.state.item.aspect}</H3>
-                        <H3>DU PRODUIT: {this.state.item.du_produit}</H3>
-                        <H3>intact: {this.state.item.intact}</H3>
-                        <H3>conforme: {this.state.item.conforme}</H3>
-                        <H3>autres: {this.state.item.autres}</H3>
-                        <H3>actions: {this.state.item.actions}</H3>
+                        <H3 style={{ marginTop: 20, }}>{Strings.FOURNISER}: {this.state.item.fourniser}</H3>
+                        <H3>{Strings.DUBL}: {this.state.item.dubl}</H3>
+                        <H3>{Strings.ASPECT}: {this.state.item.aspect}</H3>
+                        <H3>{Strings.DUPRODUIT}T: {this.state.item.du_produit}</H3>
+                        <H3>{Strings.EMBALAGE_INTATC}: {this.state.item.intact}</H3>
+                        <H3>{Strings.ETIQUTAGE_CONF}: {this.state.item.conforme}</H3>
+                        <H3>{Strings.AUTRES}: {this.state.item.autres}</H3>
+                        <H3>{Strings.ACTION_CORECTIVES}: {this.state.item.actions}</H3>
 
-                        <H3>date: {this.state.item.date}</H3>
-                        <H3>created_at: {this.state.item.created_at.toString()}</H3>
-
-
+                        <H3>{Strings.DATE}: {this.state.item.date}</H3>
+                        <H3>{Strings.DATETIME}: {this.state.item.created_at.toString()}</H3>
                     </View>
-
                 </View>
             </Container>
         );

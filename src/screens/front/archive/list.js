@@ -17,6 +17,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
+import Strings from '../../../language/fr';
 
 export class ArchiveListScreen extends React.Component {
 
@@ -82,7 +83,7 @@ export class ArchiveListScreen extends React.Component {
                             <Content>
                                 {!this.state.controles.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                                     <Icon name='eye' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                                    <Text style={{ color: 'lightgray', fontSize: 25, }} >There is no Recep. controls</Text>
+                                    <Text style={{ color: 'lightgray', fontSize: 25, }} >{Strings.THERE_IS_NO_RECEP_CONTROLS}</Text>
                                 </View>}
                                 <List>
                                     {this.state.controles.map(row => {
@@ -108,7 +109,7 @@ export class ArchiveListScreen extends React.Component {
                             <Content>
                                 {!this.state.pictures.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                                     <Icon name='camera' fontSize={50} size={50} style={{ color: 'white', fontSize: 100, }} />
-                                    <Text style={{ color: 'white', fontSize: 25, }} >There is no Pictures</Text>
+                                    <Text style={{ color: 'white', fontSize: 25, }} >{Strings.THERE_IS_NO_PICTURES}</Text>
                                 </View>}
 
                                 <View
@@ -128,7 +129,6 @@ export class ArchiveListScreen extends React.Component {
                                                 resizeMode={'cover'}
                                                 style={{ width: this.state.imageSize.width, height: this.state.imageSize.height }}
                                                 source={{ uri: row.source }}
-
                                             />
                                         </Button>
                                     })}

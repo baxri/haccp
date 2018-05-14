@@ -190,22 +190,22 @@ export class ControleIndexScreen extends React.Component {
         this.setState({ confirmed: confirmed });
 
         if (!this.state.source) {
-            ToastAndroid.show("Please take a picture!", ToastAndroid.LONG); return;
+            ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
         }
 
         if (confirmed == 0 && !this.state.signature) {
-            ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
+            ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
         if (!confirmed) {
             this._toggleModal();
         } else {
             Alert.alert(
-                'Reception check',
-                'Do want to confirm this product?',
+                Strings.RECEPTION_CHECK,
+                Strings.ARE_YOU_SURE,
                 [
-                    { text: 'Cancel', style: 'cancel' },
-                    { text: 'OK', onPress: () => this._store(1) },
+                    { text: Strings.CANCEL, style: 'cancel' },
+                    { text: Strings.OK, onPress: () => this._store(1) },
                 ],
                 { cancelable: false }
             )
@@ -239,7 +239,7 @@ export class ControleIndexScreen extends React.Component {
             }).then(res => {
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
-                ToastAndroid.show("Controle successfully saved! (" + res.produit + ")", ToastAndroid.LONG);
+                ToastAndroid.show(Strings.RECEPTION_CHECK_SUCCESSFULL_SAVED, ToastAndroid.LONG);
             }).catch(error => {
                 alert(error);
             });
@@ -290,15 +290,15 @@ export class ControleIndexScreen extends React.Component {
 
 
                     <Item floatingLabel style={styles.input}>
-                        <Label>Product</Label>
+                        <Label>{Strings.PRODUCT}</Label>
                         <Input value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
                     </Item>
                     <Item floatingLabel style={styles.input}>
-                        <Label>Fourniser</Label>
+                        <Label>{Strings.FOURNISER}</Label>
                         <Input value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
                     </Item>
                     <Item floatingLabel style={styles.input}>
-                        <Label>DUBL</Label>
+                        <Label>{Strings.DUBL}</Label>
                         <Input value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
                     </Item>
 
@@ -306,17 +306,17 @@ export class ControleIndexScreen extends React.Component {
                     <Grid style={{ marginBottom: 25 }}>
                         <Row>
                             <Col>
-                                <Text>Aspect: </Text>
+                                <Text>{Strings.ASPECT}: </Text>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(0) }}>Bon</Text>
+                                    <Text onPress={() => { this._checkAspect(0) }}>{Strings.BON}</Text>
                                     <Radio selected={this._radioSelected(0, this.state.aspect)} onPress={() => { this._checkAspect(0) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(1) }}>Mauvais</Text>
+                                    <Text onPress={() => { this._checkAspect(1) }}>{Strings.MAUVAIS}</Text>
                                     <Radio selected={this._radioSelected(1, this.state.aspect)} onPress={() => { this._checkAspect(1) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
@@ -325,7 +325,7 @@ export class ControleIndexScreen extends React.Component {
 
 
                     <Item floatingLabel style={styles.input}>
-                        <Label>Du Produit</Label>
+                        <Label>{Strings.DUPRODUIT}t</Label>
                         <Input value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
                     </Item>
 
@@ -333,17 +333,17 @@ export class ControleIndexScreen extends React.Component {
                     <Grid style={{ marginBottom: 25 }}>
                         <Row>
                             <Col>
-                                <Text>Embalage intatc: </Text>
+                                <Text>{Strings.EMBALAGE_INTATC}: </Text>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(0) }}>Oui</Text>
+                                    <Text onPress={() => { this._checkIntact(0) }}>{Strings.NO}</Text>
                                     <Radio selected={this._radioSelected(0, this.state.intact)} onPress={() => { this._checkIntact(0) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(1) }}>No</Text>
+                                    <Text onPress={() => { this._checkIntact(1) }}>{Strings.YES}</Text>
                                     <Radio selected={this._radioSelected(1, this.state.intact)} onPress={() => { this._checkIntact(1) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
@@ -354,24 +354,24 @@ export class ControleIndexScreen extends React.Component {
                     <Grid style={{ marginBottom: 25 }}>
                         <Row>
                             <Col>
-                                <Text>Etiqutage conforme: </Text>
+                                <Text>{Strings.ETIQUTAGE_CONF}: </Text>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(0) }}>Oui</Text>
+                                    <Text onPress={() => { this._checkConforme(0) }}>{Strings.NO}</Text>
                                     <Radio selected={this._radioSelected(0, this.state.conforme)} onPress={() => { this._checkConforme(0) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
                             <Col>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(1) }}>No</Text>
+                                    <Text onPress={() => { this._checkConforme(1) }}>{Strings.YES}</Text>
                                     <Radio selected={this._radioSelected(1, this.state.conforme)} onPress={() => { this._checkConforme(1) }} style={{ marginLeft: 20, }} />
                                 </View>
                             </Col>
                         </Row>
                     </Grid>
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Autres" onChangeText={(value) => { this.setState({ autres: value }) }} />
+                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -382,17 +382,17 @@ export class ControleIndexScreen extends React.Component {
                     <Modal isVisible={this.state.isModalVisible}>
                         <View style={{ flex: 1, backgroundColor: 'white', padding: 20, }}>
                             <Text style={{ marginBottom: 20, }}>Action corectives</Text>
-                            <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Action corectives" onChangeText={(value) => { this.setState({ actions: value }) }} />
+                            <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.ACTION_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
                             <View style={{ flexDirection: 'row' }}>
                                 <Button danger onPress={this._toggleModal} >
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: 'white', paddingTop: 5, }}>CLOSE</Text>
+                                        <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CANCEL}</Text>
                                         <Icon name='close' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
                                 <Button full success onPress={_ => this._store(0)} style={{ marginLeft: 20, }} >
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: 'white', paddingTop: 5, }}>SAVE</Text>
+                                        <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                         <Icon name='checkmark' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
@@ -404,13 +404,13 @@ export class ControleIndexScreen extends React.Component {
                     <FooterTab styles={{ height: 100 }}>
                         <Button danger onPress={_ => this._save(0)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>NOT CONFIRM</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.NOT_CONFIRM}</Text>
                                 <Icon name='close' style={{ color: 'white', }} />
                             </View>
                         </Button>
                         <Button full success onPress={_ => this._save(1)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>CONFIRM</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>

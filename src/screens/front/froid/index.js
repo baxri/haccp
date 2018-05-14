@@ -21,6 +21,7 @@ var ImagePicker = require('react-native-image-picker');
 import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
+import Strings from '../../../language/fr';
 
 
 export class FroidIndexScreen extends React.Component {
@@ -29,12 +30,12 @@ export class FroidIndexScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'Controle froid',
+            drawerLabel: Strings.CONTROLE_FROID,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='snow' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={"Controle froid" + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.CONTROLE_FROID + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -203,15 +204,15 @@ export class FroidIndexScreen extends React.Component {
         let equipments = this._encodeEquipment();
 
         if (confirmed == 0 && !this.state.signature) {
-            ToastAndroid.show("Please add a signature!", ToastAndroid.LONG); return;
+            ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
         Alert.alert(
-            'Controle froid',
-            'Do want to save this product?',
+            Strings.CONTROLE_FROID,
+            Strings.ARE_YOU_SURE,
             [
-                { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => this._store(confirmed) },
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._store(confirmed) },
             ],
             { cancelable: false }
         )
@@ -236,7 +237,7 @@ export class FroidIndexScreen extends React.Component {
 
             this.props.navigation.navigate('Home');
             this._hideLoader();
-            ToastAndroid.show("Controle froid successfully saved!", ToastAndroid.LONG);
+            ToastAndroid.show(Strings.CONTROLE_FROID_SUCCESSFULL_SAVED, ToastAndroid.LONG);
 
         }, 2000);
     }
@@ -245,7 +246,7 @@ export class FroidIndexScreen extends React.Component {
         let { image } = this.state;
         return (
             <Container style={{ alignItems: 'center', paddingTop: 60, }}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content>
                     <View style={{ alignItems: 'center', paddingBottom: 20, }}>
                         <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
@@ -280,13 +281,13 @@ export class FroidIndexScreen extends React.Component {
                     })}
 
                     <Item fixedLabel style={styles.input}>
-                        <Label>Autres</Label>
+                        <Label>{Strings.AUTRES}</Label>
                         <Icon active name='thermometer' />
                         <Input value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
                         <Icon active name='chatboxes' style={{ color: 'white' }} />
                     </Item>
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Autres corectivets" onChangeText={(value) => { this.setState({ actions: value }) }} />
+                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -297,17 +298,17 @@ export class FroidIndexScreen extends React.Component {
                     <Modal isVisible={this.state.isModalVisible}>
                         <View style={{ flex: 1, backgroundColor: 'white', padding: 20, }}>
                             <Text style={{ marginBottom: 20, }}>Action corectives</Text>
-                            <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder="Action corectives" onChangeText={(value) => { this.setState({ actions: value }) }} />
+                            <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.ACTION_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
                             <View style={{ flexDirection: 'row' }}>
                                 <Button danger onPress={this._toggleModal} >
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: 'white', paddingTop: 5, }}>CLOSE</Text>
+                                        <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CANCEL}</Text>
                                         <Icon name='close' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
                                 <Button full success onPress={_ => this._store(0)} style={{ marginLeft: 20, }} >
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: 'white', paddingTop: 5, }}>SAVE</Text>
+                                        <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                         <Icon name='checkmark' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
@@ -319,13 +320,13 @@ export class FroidIndexScreen extends React.Component {
                     <FooterTab styles={{ height: 100 }}>
                         <Button danger onPress={_ => this._save(0)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>NOT CONFIRM</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.NOT_CONFIRM}</Text>
                                 <Icon name='close' style={{ color: 'white', }} />
                             </View>
                         </Button>
                         <Button full success onPress={_ => this._save(1)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>CONFIRM</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>
