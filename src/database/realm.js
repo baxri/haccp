@@ -129,7 +129,16 @@ export const User = (userId) => new Promise((resolve, reject) => {
 
 
 export const addDepartment = (item) => new Promise((resolve, reject) => {
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+
+    let user = Realm.Sync.User.current
+
+    let rr = {
+        user: user,
+        url: "realms://bibihaccp.us1.cloud.realm.io/~/userRealm",
+        error: err => alert(err)
+    };
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, sync: rr })
         .then(realm => {
             // Create Realm objects and write to local storage
             realm.write(() => {
@@ -144,6 +153,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
             });
         })
         .catch(error => {
+            alert(error);
             reject(error);
         });
 });
@@ -166,7 +176,16 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
 
 export const Departments = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    let user = Realm.Sync.User.current
+    let vaa = Realm.Sync.User.login('https://bibihaccp.us1.cloud.realm.io/', 'test', 'test');
+
+    let rr = {
+        user: user,
+        url: "realms://bibihaccp.us1.cloud.realm.io/~/userRealm",
+        error: err => alert(err)
+    };
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, sync: rr })
         .then(realm => {
             const items = realm.objects('Department').sorted('name', true);
             resolve(items);
@@ -174,6 +193,14 @@ export const Departments = (item) => new Promise((resolve, reject) => {
         .catch(error => {
             reject(error);
         });
+
+    // Realm.Sync.User.login('https://bibihaccp.us1.cloud.realm.io/', 'test', 'test')
+    //     .then((user) => {
+
+
+
+    //     })
+
 });
 
 export const DeleteDepartment = (id) => new Promise((resolve, reject) => {
