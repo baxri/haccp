@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+    NetInfo
+} from 'react-native';
 // import { Realm } from 'realm';
 const Realm = require('realm');
 
@@ -134,7 +137,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
 
     let rr = {
         user: user,
-        url: "realms://bibihaccp.us1.cloud.realm.io/~/userRealm",
+        url: "realms://bibihaccp.us1.cloud.realm.io/~/homeRealm",
         error: err => alert(err)
     };
 
@@ -173,17 +176,29 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
         });
 });
 
+async function getUser() {
+    return Realm.Sync.User.login('https://bibihaccp.us1.cloud.realm.io/', 'test', 'test');
+}
 
-export const Departments = (item) => new Promise((resolve, reject) => {
+export const Departments = async (item) => new Promise((resolve, reject) => {
 
-    let vaa = Realm.Sync.User.login('https://bibihaccp.us1.cloud.realm.io/', 'test', 'test');
-    let user = Realm.Sync.User.current
     
+
+
+
+    NetInfo.isConnected.fetch().then(isConnected => {
+        if (isConnected) {
+
+        }
+    });
+
+    let user = Realm.Sync.User.current
+
 
     let rr = {
         user: user,
-        url: "realms://bibihaccp.us1.cloud.realm.io/~/userRealm",
-        error: err => alert(err)
+        url: "realms://bibihaccp.us1.cloud.realm.io/~/homeRealm",
+        error: err => alert(err.state)
     };
 
     Realm.open({ schema: schemas, schemaVersion: schemaVersion, sync: rr })
