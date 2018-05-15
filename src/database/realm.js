@@ -176,8 +176,9 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
 
 export const Departments = (item) => new Promise((resolve, reject) => {
 
-    let user = Realm.Sync.User.current
     let vaa = Realm.Sync.User.login('https://bibihaccp.us1.cloud.realm.io/', 'test', 'test');
+    let user = Realm.Sync.User.current
+    
 
     let rr = {
         user: user,
