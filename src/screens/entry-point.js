@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../src/language/fr';
+import { Login } from '../../src/database/realm';
 
 export class EntryPointScreen extends React.Component {
     constructor(props) {
@@ -22,33 +23,37 @@ export class EntryPointScreen extends React.Component {
 
     _bootstrapAsync = async () => {
 
-        const userSession = await AsyncStorage.getItem('userSession');
-        const userSessionType = await AsyncStorage.getItem('userSessionType');
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV5');
+        Login().then(user = async () => {
+            const userSession = await AsyncStorage.getItem('userSession');
+            const userSessionType = await AsyncStorage.getItem('userSessionType');
+            const adminPassword = await AsyncStorage.getItem('adminPasswordV5');
 
-        // Set up navigation stack for admin and user (default is Auth)
-        let stack = 'Auth';
+            // Set up navigation stack for admin and user (default is Auth)
+            let stack = 'Auth';
 
-        if (userSession) {
-            stack = 'StackFront';
+            if (userSession) {
+                stack = 'StackFront';
 
-            if (userSessionType == 'admin') {
-                stack = 'StackAdmin';
-            }
-        }
-
-        if (!adminPassword) {
-            stack = 'SetupAdmin';
-        }
-
-        //You can remove timeout it just to show loader longer :)
-        setTimeout(() => {
-            this.props.navigation.navigate(stack, {
-                func: () => {
-
+                if (userSessionType == 'admin') {
+                    stack = 'StackAdmin';
                 }
-            });
-        }, 1000);
+            }
+
+            if (!adminPassword) {
+                stack = 'SetupAdmin';
+            }
+
+            //You can remove timeout it just to show loader longer :)
+            setTimeout(() => {
+                this.props.navigation.navigate(stack, {
+                    func: () => {
+
+                    }
+                });
+            }, 1000);
+        });
+
+
     };
 
     render() {
