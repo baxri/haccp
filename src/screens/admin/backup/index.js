@@ -13,6 +13,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import { RealmFile } from '../../../database/realm';
+import Upload from 'react-native-background-upload'
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -58,9 +59,40 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _sync = async () => {
 
+
+       
+
         let file = RealmFile();
 
-        alert(file);
+        const options = {
+            url: 'http://upload.bibi.ge/api/upload',
+            path: file,
+            method: 'POST',
+            field: 'dbfile',
+            type: 'multipart',
+            headers: {
+                'haccp-device': 'unique_device_id_01'
+            },
+        }
+
+        alert(options.file);
+
+        Upload.startUpload(options).then((uploadId) => {
+            alert('upload started!');
+            Upload.addListener('progress', uploadId, (data) => {
+            })
+            Upload.addListener('error', uploadId, (data) => {
+                alert(data.error);
+            })
+            Upload.addListener('cancelled', uploadId, (data) => {
+                alert('Canceled');
+            })
+            Upload.addListener('completed', uploadId, (data) => {
+                alert('completed');
+            })
+        }).catch((err) => {
+            alert('Upload Error!');
+        })
 
         // this._showLoader();
 

@@ -18,6 +18,7 @@ import io.realm.react.RealmReactPackage; // add this import
 import com.imagepicker.ImagePickerPackage; // <-- add this import
 import com.rssignaturecapture.RSSignatureCapturePackage;
 import com.rnfs.RNFSPackage; // <------- add package
+import com.vydia.RNUploader.UploaderReactPackage; 
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RealmReactPackage(),
           new ImagePickerPackage(),
           new RSSignatureCapturePackage(),
-          new RNFSPackage()
+          new RNFSPackage(),
+          new UploaderReactPackage()
       );
     }
 
