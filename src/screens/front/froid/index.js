@@ -14,7 +14,7 @@ import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, F
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, User } from '../../../database/realm';
+import { addControle, Controles, Pictures, User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -53,7 +53,7 @@ export class FroidIndexScreen extends React.Component {
                 lastname: '',
             },
 
-            signature: null,
+            signature: '',
             equipments: [],
 
             autres: '',
@@ -70,6 +70,7 @@ export class FroidIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
+        const controles = await Controles(userID);
 
         this._parseEquipments(user.department.equipments);
 
@@ -80,7 +81,7 @@ export class FroidIndexScreen extends React.Component {
         });
 
         this.props.navigation.setParams({
-            test: pics.length
+            test: controles.length
         });
     };
 
@@ -201,8 +202,6 @@ export class FroidIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
-        let equipments = this._encodeEquipment();
-
         if (confirmed == 0 && !this.state.signature) {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
@@ -223,21 +222,37 @@ export class FroidIndexScreen extends React.Component {
 
         setTimeout(() => {
 
-            // addPicture(this.state.userId, {
-            //     source: this.state.source,
-            //     date: this.state.date,
-            //     created_at: this.state.created_at,
-            // }).then(res => {
-            //     this.props.navigation.navigate('Home');
-            //     this._hideLoader();
-            //     ToastAndroid.show("Image successfully saved!", ToastAndroid.LONG);
-            // }).catch(error => {
-            //     alert(error);
-            // });
+            let equipments = this._encodeEquipment();
 
-            this.props.navigation.navigate('Home');
-            this._hideLoader();
-            ToastAndroid.show(Strings.CONTROLE_FROID_SUCCESSFULL_SAVED, ToastAndroid.LONG);
+            addControle(this.state.userId, {
+                source: '',
+                signature: this.state.signature,
+
+                produit: '',
+                fourniser: '',
+                dubl: '',
+
+                aspect: 0,
+                du_produit: '',
+
+                intact: 0,
+                conforme: 0,
+                autres: this.state.autres,
+                actions: this.state.actions,
+                confirmed: this.state.confirmed,
+
+                equipments: equipments,
+                type: 1,
+
+                date: this.state.date,
+                created_at: this.state.created_at,
+            }).then(res => {
+                this.props.navigation.navigate('Home');
+                this._hideLoader();
+                ToastAndroid.show(Strings.CONTROLE_FROID_SUCCESSFULL_SAVED, ToastAndroid.LONG);
+            }).catch(error => {
+                alert(error);
+            });
 
         }, 2000);
     }
@@ -255,11 +270,11 @@ export class FroidIndexScreen extends React.Component {
                         <Grid style={{ width: 550 }}>
                             <Row>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
-                                    {!this.state.signature && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
+                                    {this.state.signature == '' && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
                                         <Icon name='create' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                                     </Button>}
 
-                                    {this.state.signature && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
+                                    {this.state.signature != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
                                         source={{ uri: this.state.signature }}

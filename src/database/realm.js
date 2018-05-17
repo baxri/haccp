@@ -52,6 +52,9 @@ const ControleSchema = {
 
         confirmed: 'int',
 
+        equipments: 'string[]',
+
+        type: 'int',
         date: 'string',
         created_at: 'date',
         user: 'User',
@@ -109,7 +112,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 12;
+const schemaVersion = 14;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
 
 export const RealmFile = () => {
@@ -133,48 +136,47 @@ export const User = (userId) => new Promise((resolve, reject) => {
 
 export const addDepartment = (item) => new Promise((resolve, reject) => {
 
-    let user = Realm.Sync.User.current
+    // let user = Realm.Sync.User.current
 
-    alert(user);
+    // alert(user);
 
-    let rr = {
-        user: user,
-        // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
-        url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
-        error: err => alert(err)
-    };
+    // let rr = {
+    //     user: user,
+    //     // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
+    //     url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
+    //     error: err => alert(err)
+    // };
 
-    let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
+    // let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
 
-    synchedRealm.write(() => {
-        const department = synchedRealm.create('Department', {
-            id: _guid(),
-            name: item.name,
-            equipments: item.equipments,
-        });
-
-        resolve(department);
-
-    });
-
-    // Realm.open({ schema: schemas, schemaVersion: schemaVersion, sync: rr })
-    //     .then(realm => {
-    //         // Create Realm objects and write to local storage
-    //         realm.write(() => {
-    //             const department = realm.create('Department', {
-    //                 id: _guid(),
-    //                 name: item.name,
-    //                 equipments: item.equipments,
-    //             });
-
-    //             resolve(department);
-
-    //         });
-    //     })
-    //     .catch(error => {
-    //         alert(error);
-    //         reject(error);
+    // synchedRealm.write(() => {
+    //     const department = synchedRealm.create('Department', {
+    //         id: _guid(),
+    //         name: item.name,
+    //         equipments: item.equipments,
     //     });
+
+    //     resolve(department);
+
+    // });
+
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            // Create Realm objects and write to local storage
+            realm.write(() => {
+                const department = realm.create('Department', {
+                    id: _guid(),
+                    name: item.name,
+                    equipments: item.equipments,
+                });
+
+                resolve(department);
+
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
 });
 
 export const editDepartment = (item) => new Promise((resolve, reject) => {
@@ -212,45 +214,40 @@ export const Login = () => new Promise((resolve, reject) => {
 
 export const Departments = async (item) => new Promise((resolve, reject) => {
 
-    NetInfo.isConnected.fetch().then(isConnected => {
-        if (isConnected) {
+    // NetInfo.isConnected.fetch().then(isConnected => {
+    //     if (isConnected) {
 
-        }
-    });
+    //     }
+    // });
 
-    let user = Realm.Sync.User.current
+    // let user = Realm.Sync.User.current
 
-   
 
-    let rr = {
-        user: user,
-        // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
-        url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
-        error: err => alert(err.state)
-    };
 
-    // alert(user);
+    // let rr = {
+    //     user: user,
+    //     // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
+    //     url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
+    //     error: err => alert(err.state)
+    // };
 
-    let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
-    const items = synchedRealm.objects('Department').sorted('name', true);
-    resolve(items);
+    // // alert(user);
 
-    // Realm.open({ schema: schemas, schemaVersion: schemaVersion, sync: rr })
-    //     .then(realm => {
-    //         alert('opened');
+    // let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
+    // const items = synchedRealm.objects('Department').sorted('name', true);
+    // resolve(items);
 
-    //         const items = realm.objects('Department').sorted('name', true);
-
-    //         alert(items.length);
-
-    //         resolve(items);
-    //     })
-    //     .catch(error => {
-    //         setTimeout(() => {
-    //             alert(error);
-    //             reject(error);
-    //         }, 1000);
-    //     });
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('Department').sorted('name', true);
+            resolve(items);
+        })
+        .catch(error => {
+            setTimeout(() => {
+                alert(error);
+                reject(error);
+            }, 1000);
+        });
 
 
 });
@@ -433,6 +430,9 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 
                     autres: item.autres,
                     actions: item.actions,
+
+                    equipments: item.equipments,
+                    type: item.type,
 
                     confirmed: item.confirmed,
                     date: item.date,

@@ -234,6 +234,9 @@ export class ControleIndexScreen extends React.Component {
                 actions: this.state.actions,
                 confirmed: this.state.confirmed,
 
+                equipments: [],
+                type: 0,
+
                 date: this.state.date,
                 created_at: this.state.created_at,
             }).then(res => {
