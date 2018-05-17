@@ -11,7 +11,7 @@ import {
     Modal
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer, List, ListItem, Left, Right, Body, Thumbnail } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H2, H3, Icon, FooterTab, Footer, List, ListItem, Left, Right, Body, Thumbnail } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -89,11 +89,14 @@ export class ArchiveListScreen extends React.Component {
                                     {this.state.controles.map(row => {
                                         return <ListItem avatar onPress={() => this.props.navigation.navigate('ArchiveDetails', { controle: row })} style={{ marginTop: 15, }}>
                                             <Left>
-                                                <Thumbnail source={{ uri: row.source }} />
+
                                             </Left>
                                             <Body >
-                                                <Text>{row.produit}</Text>
-                                                <Text note>{row.fourniser}</Text>
+                                                {row.type == 0 && <H3>{Strings.RECEPTION_CHECK}</H3>}
+                                                {row.type == 1 && <H3>{Strings.CONTROLE_FROID}</H3>}
+                                                <Text>{row.autres}</Text>
+                                                {/* {row.type == 0 && <Thumbnail source={{ uri: row.source }} />} */}
+                                                {/* {row.type == 1 && <Thumbnail source={{ uri: row.signature }} />} */}
                                             </Body>
                                             <Right>
                                                 <Text note> {row.date}</Text>

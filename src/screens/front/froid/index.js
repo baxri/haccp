@@ -202,6 +202,8 @@ export class FroidIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
+        this.setState({ confirmed: confirmed });
+
         if (confirmed == 0 && !this.state.signature) {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
