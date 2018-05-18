@@ -8,12 +8,14 @@ import {
     ToastAndroid,
     NetInfo
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import { RealmFile } from '../../../database/realm';
 import Upload from 'react-native-background-upload'
+import DeviceInfo from 'react-native-device-info';
+var RNFS = require('react-native-fs');
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -37,6 +39,7 @@ export class AdminBackupIndexScreen extends React.Component {
         this.state = {
             loading: 0,
             connected: 0,
+            date: new Date().toISOString().substring(0, 10),
         };
 
 
@@ -59,11 +62,10 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _sync = async () => {
 
-
-       
-
+        let ID = DeviceInfo.getUniqueID();
         let file = RealmFile();
 
+        this._showLoader();
         const options = {
             url: 'http://upload.bibi.ge/api/upload',
             path: file,
@@ -71,37 +73,40 @@ export class AdminBackupIndexScreen extends React.Component {
             field: 'dbfile',
             type: 'multipart',
             headers: {
-                'haccp-device': 'unique_device_id_01'
+                'content-type': 'application/octet-stream',
+                'haccp-device': ID,
             },
         }
 
-        alert(options.file);
+        setTimeout(() => {
 
-        Upload.startUpload(options).then((uploadId) => {
-            alert('upload started!');
-            Upload.addListener('progress', uploadId, (data) => {
-            })
-            Upload.addListener('error', uploadId, (data) => {
-                alert(data.error);
-            })
-            Upload.addListener('cancelled', uploadId, (data) => {
-                alert('Canceled');
-            })
-            Upload.addListener('completed', uploadId, (data) => {
-                alert('completed');
-            })
-        }).catch((err) => {
-            alert('Upload Error!');
-        })
+            Upload.startUpload(options).then((uploadId) => {
 
-        // this._showLoader();
+                Upload.addListener('progress', uploadId, (data) => {
+                })
 
-        // setTimeout(() => {
-        //     this._hideLoader();
-        //     this.props.navigation.navigate("AdminHome");
-        //     ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-        // }, 3000);
+                Upload.addListener('error', uploadId, (data) => {
+                    this._hideLoader();
+                    Talert(data.error);
+                })
 
+                Upload.addListener('cancelled', uploadId, (data) => {
+                    this._hideLoader();
+                    ToastAndroid.show(Strings.DATA_UPLOADED_CANCELED, ToastAndroid.LONG);
+                })
+
+                Upload.addListener('completed', uploadId, (data) => {
+                    this._hideLoader();
+                    this.props.navigation.navigate("AdminHome");
+                    ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                })
+
+            }).catch((err) => {
+                this._hideLoader();
+                alert(err);
+            })
+
+        }, 500);
     };
 
     render() {
@@ -116,6 +121,9 @@ export class AdminBackupIndexScreen extends React.Component {
                     <View style={{ alignItems: 'center', }}>
                         <Form>
                             <View style={{ alignItems: 'center' }}>
+
+                                <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
+                                <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
 
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >

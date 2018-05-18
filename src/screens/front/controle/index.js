@@ -22,7 +22,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-
+import Upload from 'react-native-background-upload'
 
 export class ControleIndexScreen extends React.Component {
 
@@ -151,8 +151,60 @@ export class ControleIndexScreen extends React.Component {
         RNFS.mkdir(dir).then((res) => {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
-                    this.setState({ signature: 'file://' + path });
-                    // alert('file://' + path);
+                    this.setState({ signature: 'file:/' + path });
+
+
+                    const options = {
+                        url: 'http://upload.bibi.ge/api/upload',
+                        path: this.state.signature,
+                        method: 'POST',
+                        field: 'dbfile',
+                        type: 'multipart',
+                        headers: {
+                            'haccp-device': 'signature',
+                        },
+                    }
+
+                    alert(this.state.signature);
+
+                    setTimeout(() => {
+
+
+
+                        Upload.startUpload(options).then((uploadId) => {
+
+                            Upload.addListener('progress', uploadId, (data) => {
+                            })
+
+                            Upload.addListener('error', uploadId, (data) => {
+                                this._hideLoader();
+                                alert(data.error);
+                            })
+
+                            Upload.addListener('cancelled', uploadId, (data) => {
+                                this._hideLoader();
+                                ToastAndroid.show(Strings.DATA_UPLOADED_CANCELED, ToastAndroid.LONG);
+                            })
+
+                            Upload.addListener('completed', uploadId, (data) => {
+                                this._hideLoader();
+                                this.props.navigation.navigate("AdminHome");
+                                ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                            })
+
+                        }).catch((err) => {                           
+                            alert(err);
+                        })
+
+                    }, 500);
+
+
+
+
+
+
+
+
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));

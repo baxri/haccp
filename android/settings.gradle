@@ -38,3 +38,9 @@ project(':react-native-fs').projectDir = new File(settingsDir, '../node_modules/
 
 include ':react-native-background-upload'
 project(':react-native-background-upload').projectDir = new File(settingsDir, '../node_modules/react-native-background-upload/android')
+
+include ':react-native-device-info'
+project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
+
+include ':react-native-upload-file' 
+project(':react-native-upload-file').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-upload-file/android')

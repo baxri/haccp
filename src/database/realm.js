@@ -5,29 +5,6 @@ import {
 // import { Realm } from 'realm';
 const Realm = require('realm');
 
-// id: _guid(),
-// user: userObject,
-
-// source: item.source,
-// signature: item.signature,
-
-// produit: item.produit,
-// fourniser: item.fourniser,
-// dubl: item.dubl,
-
-// aspect: item.aspect,
-// du_produit: item.du_produit,
-
-// intact: item.intact,
-// conforme: item.conforme,
-
-// autres: item.autres,
-// actions: item.actions,
-
-// confirmed: item.confirmed,
-// date: item.date,
-// created_at: item.created_at,
-
 const ControleSchema = {
     primaryKey: 'id',
     name: 'Controle',

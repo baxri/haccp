@@ -156,6 +156,8 @@ dependencies {
     compile project(':reactnativesignaturecapture')
     compile project(':react-native-fs')
     compile project(':react-native-background-upload')
+    compile project(':react-native-device-info')
+    compile project(':react-native-upload-file')
 }
 
 // Run this once to be able to run the application with BUCK

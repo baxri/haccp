@@ -18,7 +18,8 @@ import io.realm.react.RealmReactPackage; // add this import
 import com.imagepicker.ImagePickerPackage; // <-- add this import
 import com.rssignaturecapture.RSSignatureCapturePackage;
 import com.rnfs.RNFSPackage; // <------- add package
-import com.vydia.RNUploader.UploaderReactPackage; 
+import com.vydia.RNUploader.UploaderReactPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+          new RNDeviceInfo(),
           new MainReactPackage(),
           new RealmReactPackage(),
           new ImagePickerPackage(),
