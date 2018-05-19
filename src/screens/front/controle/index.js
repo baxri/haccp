@@ -8,6 +8,7 @@ import {
     Image,
     ToastAndroid,
     Alert,
+    Dimensions,
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -46,6 +47,7 @@ export class ControleIndexScreen extends React.Component {
         this.state = {
             loading: 1,
             isModalVisible: false,
+            dimesions: { width, height } = Dimensions.get('window'),
 
             userId: null,
             userObj: {
@@ -192,7 +194,7 @@ export class ControleIndexScreen extends React.Component {
                                 ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
                             })
 
-                        }).catch((err) => {                           
+                        }).catch((err) => {
                             alert(err);
                         })
 
@@ -306,12 +308,16 @@ export class ControleIndexScreen extends React.Component {
         }, 2000);
     }
 
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
+    }
+
     render() {
         let { image } = this.state;
         return (
-            <Container style={{ alignItems: 'center', paddingTop: 60, }}>
+            <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
-                <Content>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ alignItems: 'center', paddingBottom: 20, }}>
                         <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
                     </View>
@@ -477,10 +483,8 @@ export class ControleIndexScreen extends React.Component {
 }
 
 
-
 const styles = StyleSheet.create({
     input: {
-        width: 550,
         paddingBottom: 10,
         marginBottom: 25,
     },

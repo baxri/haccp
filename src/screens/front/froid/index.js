@@ -8,6 +8,7 @@ import {
     Image,
     ToastAndroid,
     Alert,
+    Dimensions
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -46,6 +47,7 @@ export class FroidIndexScreen extends React.Component {
         this.state = {
             loading: 1,
             isModalVisible: false,
+            dimesions: { width, height } = Dimensions.get('window'),
 
             userId: null,
             userObj: {
@@ -283,12 +285,17 @@ export class FroidIndexScreen extends React.Component {
         }, 2000);
     }
 
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
+    }
+
     render() {
         let { image } = this.state;
+
         return (
-            <Container style={{ alignItems: 'center', paddingTop: 60, }}>
+            <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-                <Content>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ alignItems: 'center', paddingBottom: 20, }}>
                         <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
                     </View>
@@ -315,12 +322,16 @@ export class FroidIndexScreen extends React.Component {
                             <Text style={{ marginBottom: 10, }}>{row.name}</Text>
                             {row.value.map((val, index) => {
                                 return <Item fixedLabel style={styles.input}>
-                                    <Label>TEMPERATURE</Label>
+                                    <Label>{Strings.TEMPERATURE}</Label>
                                     <Icon active name='thermometer' />
                                     <Input value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
-                                    {(row.value.length - 1) == index && <Icon active name='add-circle' onPress={() => this._addRow(row)} />}
                                 </Item>
                             })}
+                            <View style={{ flex: 1 }}>
+                                <Button transparent onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
+                                    <Icon active name='add-circle' />
+                                </Button>
+                            </View>
                         </View>
                     })}
 
@@ -328,7 +339,6 @@ export class FroidIndexScreen extends React.Component {
                         <Label>{Strings.AUTRES}</Label>
                         <Icon active name='thermometer' />
                         <Input value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
-                        <Icon active name='chatboxes' style={{ color: 'white' }} />
                     </Item>
 
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
@@ -385,7 +395,6 @@ export class FroidIndexScreen extends React.Component {
 
 const styles = StyleSheet.create({
     input: {
-        width: 550,
         paddingBottom: 10,
         marginBottom: 25,
     },
