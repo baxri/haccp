@@ -116,7 +116,7 @@ export class ControleIndexScreen extends React.Component {
     _pickImage = () => {
 
         var options = {
-            quality: 0.5,
+            quality: 1,
             maxWidth: 500,
             maxHeight: 500,
             storageOptions: {
