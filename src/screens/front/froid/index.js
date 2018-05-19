@@ -96,23 +96,40 @@ export class FroidIndexScreen extends React.Component {
             let obj = {
                 id: slice[0],
                 name: slice[1],
-                value: "0",
+                value: [0],
             };
 
             ret.push(obj);
         });
 
+
+
         this.setState({ equipments: ret });
     }
 
-    _changeEquipment(row, value) {
+    _changeEquipment(row, index, value) {
 
         let ret = [];
 
         this.state.equipments.map(equipment => {
 
             if (equipment.id == row.id) {
-                equipment.value = value + "";
+                equipment.value[index] = value;
+            }
+
+            ret.push(equipment);
+        });
+
+        this.setState({ equipments: ret });
+    }
+
+    _addRow(row) {
+        let ret = [];
+
+        this.state.equipments.map(equipment => {
+
+            if (equipment.id == row.id) {
+                equipment.value.push(0);
             }
 
             ret.push(equipment);
@@ -126,7 +143,12 @@ export class FroidIndexScreen extends React.Component {
         let ret = [];
 
         this.state.equipments.map(equipment => {
-            let str = equipment.id + ":" + equipment.name + ":" + equipment.value;
+
+
+            let str = equipment.id + ":" + equipment.name + ":" + equipment.value.join(",");
+
+            console.log(str);
+
             ret.push(str);
         });
 
@@ -201,6 +223,8 @@ export class FroidIndexScreen extends React.Component {
     }
 
     _save(confirmed = 0) {
+
+        let equipments = this._encodeEquipment();
 
         this.setState({ confirmed: confirmed });
 
@@ -287,14 +311,17 @@ export class FroidIndexScreen extends React.Component {
                     </View>
 
                     {this.state.equipments.map((row) => {
-                        return <Item fixedLabel style={styles.input}>
-                            <Label>
-                                {row.name}
-                            </Label>
-                            <Icon active name='thermometer' />
-                            <Input value={row.value} onChangeText={(value) => { this._changeEquipment(row, value) }} />
-                            <Icon active name='add-circle' onPress={() => this._changeEquipment(row, ((row.value * 1) + 1))} />
-                        </Item>
+                        return <View style={{ marginBottom: 20, }}>
+                            <Text style={{ marginBottom: 10, }}>{row.name}</Text>
+                            {row.value.map((val, index) => {
+                                return <Item fixedLabel style={styles.input}>
+                                    <Label>TEMPERATURE</Label>
+                                    <Icon active name='thermometer' />
+                                    <Input value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
+                                    {(row.value.length - 1) == index && <Icon active name='add-circle' onPress={() => this._addRow(row)} />}
+                                </Item>
+                            })}
+                        </View>
                     })}
 
                     <Item fixedLabel style={styles.input}>

@@ -109,7 +109,12 @@ export class ArchiveDetailsScreen extends React.Component {
 
                         {this.state.equipments.length > 0 && <View style={{ marginTop: 20, marginBottom: 20, }}>
                             {this.state.equipments.map((row) => {
-                                return <H3>{row.name}: {row.value}</H3>;
+                                return <View style={{ marginBottom: 20, }}>
+                                    <H3 style={{ marginBottom: 10, }}>{row.name}</H3>
+                                    {row.value.split(",").map(val => {
+                                        return <Text>{val}</Text>
+                                    })}
+                                </View>;
                             })}
                         </View>}
 
