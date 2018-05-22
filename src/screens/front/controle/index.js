@@ -154,7 +154,7 @@ export class ControleIndexScreen extends React.Component {
         RNFS.mkdir(dir).then((res) => {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
-                    this.setState({ signature: 'file:/' + path });
+                    this.setState({ signature: 'file://' + path });
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));

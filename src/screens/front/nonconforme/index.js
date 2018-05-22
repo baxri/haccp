@@ -147,7 +147,7 @@ export class NonConformeIndexScreen extends React.Component {
         RNFS.mkdir(dir).then((res) => {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
-                    this.setState({ signature: 'file:/' + path });
+                    this.setState({ signature: 'file://' + path });
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
@@ -315,7 +315,7 @@ export class NonConformeIndexScreen extends React.Component {
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
 
                     <DatePicker
-                        style={{ width: 200 }}
+                        style={{ width: 200, marginBottom: 30,  }}
                         date={this.state.traitment_date}
                         mode="date"
                         placeholder="select date"

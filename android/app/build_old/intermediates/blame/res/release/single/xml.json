@@ -1,10 +1,10 @@
 [
     {
-        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\xml\\provider_paths.xml",
-        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\haccp\\react-native-image-picker\\unspecified\\res\\xml\\provider_paths.xml"
+        "merged": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\xml\\preferences.xml",
+        "source": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.3\\res\\xml\\preferences.xml"
     },
     {
-        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\xml\\preferences.xml",
-        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.3\\res\\xml\\preferences.xml"
+        "merged": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\xml\\provider_paths.xml",
+        "source": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\haccp\\react-native-image-picker\\unspecified\\res\\xml\\provider_paths.xml"
     }
 ]

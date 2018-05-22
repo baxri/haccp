@@ -1,4 +1,4 @@
-#Fri May 18 11:26:52 GET 2018
-base.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Tue May 22 19:52:39 GET 2018
+base.0=E\:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=E\:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

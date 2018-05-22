@@ -190,8 +190,6 @@ export class FroidIndexScreen extends React.Component {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
                     this.setState({ signature: 'file://' + path });
-                    alert('file://' + path);
-
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
