@@ -36,6 +36,7 @@ const ControleSchema = {
         causes: 'string',
         devenir: 'string',
         traitment: 'string',
+        traitment_date: 'date?',
 
         type: 'int',
         date: 'string',
@@ -95,7 +96,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 16;
+const schemaVersion = 17;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
 
 export const RealmFile = () => {
@@ -422,6 +423,7 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     causes: item.causes,
                     devenir: item.devenir,
                     traitment: item.traitment,
+                    traitment_date: item.traitment_date,
 
                     confirmed: item.confirmed,
                     date: item.date,

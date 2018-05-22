@@ -118,6 +118,7 @@ export class ArchiveDetailsScreen extends React.Component {
                             })}
                         </View>}
 
+                        {this.state.item.type == 2 && <H3>{Strings.TRAITMENT_DATE}: {this.state.item.traitment_date.toString()}</H3>}
                         <H3>{Strings.DATE}: {this.state.item.date}</H3>
                         <H3>{Strings.DATETIME}: {this.state.item.created_at.toString()}</H3>
                     </View>

@@ -24,6 +24,7 @@ import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
+import DatePicker from 'react-native-datepicker'
 
 export class NonConformeIndexScreen extends React.Component {
 
@@ -63,6 +64,7 @@ export class NonConformeIndexScreen extends React.Component {
             causes: '',
             devenir: '',
             traitment: '',
+            traitment_date: new Date().toISOString().substring(0, 10),
 
             date: new Date().toISOString().substring(0, 10),
             created_at: new Date(),
@@ -232,6 +234,7 @@ export class NonConformeIndexScreen extends React.Component {
                 causes: this.state.causes,
                 devenir: this.state.devenir,
                 traitment: this.state.traitment,
+                traitment_date: this.state.traitment_date,
 
                 date: this.state.date,
                 created_at: this.state.created_at,
@@ -310,6 +313,17 @@ export class NonConformeIndexScreen extends React.Component {
 
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
+
+                    <DatePicker
+                        style={{ width: 200 }}
+                        date={this.state.traitment_date}
+                        mode="date"
+                        placeholder="select date"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                       
+                        onDateChange={(date) => { this.setState({ traitment_date: date }) }}
+                    />
 
                     <SignatureView
                         ref={r => this._signatureView = r}

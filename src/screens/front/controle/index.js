@@ -244,6 +244,7 @@ export class ControleIndexScreen extends React.Component {
                 causes: '',
                 devenir: '',
                 traitment: '',
+                traitment_date: this.state.date,
 
                 date: this.state.date,
                 created_at: this.state.created_at,

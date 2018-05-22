@@ -92,14 +92,14 @@ export class ArchiveListScreen extends React.Component {
 
                                             </Left>
                                             <Body >
-                                                {row.type == 0 && <H3>{Strings.RECEPTION_CHECK}</H3>}
-                                                {row.type == 1 && <H3>{Strings.CONTROLE_FROID}</H3>}
-                                                <Text>{row.autres}</Text>
+                                                {row.type == 0 && <H3>{Strings.RECEPTION_CHECK} - {row.user.name}</H3>}
+                                                {row.type == 1 && <H3>{Strings.CONTROLE_FROID} - {row.user.name}</H3>}
+                                                {row.type == 2 && <H3>{Strings.NONCONFORME} - {row.user.name}</H3>}
                                                 {/* {row.type == 0 && <Thumbnail source={{ uri: row.source }} />} */}
                                                 {/* {row.type == 1 && <Thumbnail source={{ uri: row.signature }} />} */}
                                             </Body>
                                             <Right>
-                                                <Text note> {row.date}</Text>
+                                                <H3 note> {row.date}</H3>
                                             </Right>
                                         </ListItem>;
                                     })}
