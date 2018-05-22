@@ -15,7 +15,6 @@ import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 import { HelloAppScreen } from './src/screens/app/hello-app';
 
 // Admin Screens
-
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
