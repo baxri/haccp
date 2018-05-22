@@ -32,6 +32,7 @@ import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
 import { HomeIndexScreen } from './src/screens/front/home/index';
 import { TraceIndexScreen } from './src/screens/front/Trace/index';
 import { ControleIndexScreen } from './src/screens/front/controle/index';
+import { NonConformeIndexScreen } from './src/screens/front/nonconforme/index';
 import { FroidIndexScreen } from './src/screens/front/froid/index';
 
 import { ArchiveIndexScreen } from './src/screens/front/archive/index';
@@ -135,6 +136,21 @@ const FroidStack = StackNavigator(
   }
 );
 
+const NonConformeStack = StackNavigator(
+  {
+    NonConformeIndex: NonConformeIndexScreen,
+  },
+  {
+    initialRouteName: 'NonConformeIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const ArchiveStack = StackNavigator(
   {
     ArchiveIndex: ArchiveIndexScreen,
@@ -160,6 +176,7 @@ const DrawerStackFront = DrawerNavigator({
   Controle: ControleStack,
   Froid: FroidStack,
   Archive: ArchiveStack,
+  NonConforme: NonConformeStack,
   AdminLogout: LogOutScreen,
 },
   {

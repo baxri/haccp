@@ -72,6 +72,7 @@ export class ControleIndexScreen extends React.Component {
             actions: '',
 
             confirmed: 0,
+
             date: new Date().toISOString().substring(0, 10),
             created_at: new Date(),
         };
@@ -154,59 +155,6 @@ export class ControleIndexScreen extends React.Component {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
                     this.setState({ signature: 'file:/' + path });
-
-
-                    const options = {
-                        url: 'http://upload.bibi.ge/api/upload',
-                        path: this.state.signature,
-                        method: 'POST',
-                        field: 'dbfile',
-                        type: 'multipart',
-                        headers: {
-                            'haccp-device': 'signature',
-                        },
-                    }
-
-                    alert(this.state.signature);
-
-                    setTimeout(() => {
-
-
-
-                        Upload.startUpload(options).then((uploadId) => {
-
-                            Upload.addListener('progress', uploadId, (data) => {
-                            })
-
-                            Upload.addListener('error', uploadId, (data) => {
-                                this._hideLoader();
-                                alert(data.error);
-                            })
-
-                            Upload.addListener('cancelled', uploadId, (data) => {
-                                this._hideLoader();
-                                ToastAndroid.show(Strings.DATA_UPLOADED_CANCELED, ToastAndroid.LONG);
-                            })
-
-                            Upload.addListener('completed', uploadId, (data) => {
-                                this._hideLoader();
-                                this.props.navigation.navigate("AdminHome");
-                                ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                            })
-
-                        }).catch((err) => {
-                            alert(err);
-                        })
-
-                    }, 500);
-
-
-
-
-
-
-
-
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
@@ -244,7 +192,7 @@ export class ControleIndexScreen extends React.Component {
         this.setState({ confirmed: confirmed });
 
         if (!this.state.source) {
-            ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
+            // ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
         }
 
         if (confirmed == 0 && !this.state.signature) {
@@ -290,6 +238,12 @@ export class ControleIndexScreen extends React.Component {
 
                 equipments: [],
                 type: 0,
+
+                quantity: 0,
+                valorisation: '',
+                causes: '',
+                devenir: '',
+                traitment: '',
 
                 date: this.state.date,
                 created_at: this.state.created_at,

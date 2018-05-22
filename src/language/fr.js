@@ -82,6 +82,7 @@ const strings = {
     CONTROLE_CHAUD: 'Contrôle chaud',
     CLEANING: 'Nettoyage',
     ARCHIVE: 'Archive',
+    NONCONFORME: 'NONCONFORME',
 
     //TRACEABILITY
     PLEASE_TAKE_A_PICTURE: 'Ajouter une photo',
@@ -109,6 +110,14 @@ const strings = {
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',
     THERE_IS_NO_PICTURES: 'Aucunne image',
+
+     //NON CONFORME
+     CONTROLE_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
+     QUANTITY: 'QUANTITY',
+     VALORISATION: 'VALORISATION',
+     CAUSES: 'CAUSES',
+     DEVENIR: 'DEVENIR',
+     TRAITMENT_DATE: 'TRAITMENT_DATE',
 
 
 };

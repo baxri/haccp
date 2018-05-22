@@ -8,7 +8,7 @@ import {
     Image,
     ToastAndroid,
     Alert,
-    Dimensions
+    Dimensions,
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -23,21 +23,20 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
+import Upload from 'react-native-background-upload'
 
-
-export class FroidIndexScreen extends React.Component {
+export class NonConformeIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: Strings.CONTROLE_FROID,
+            drawerLabel: Strings.NONCONFORME,
             drawerIcon: ({ tintColor }) => (
-                <Icon name='snow' style={{ color: tintColor, }} />
+                <Icon name='alert' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={Strings.CONTROLE_FROID + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
-            // headerRight: <Menu navigation={navigation} />,
+            headerTitle: <LogoTitle HeaderText={Strings.NONCONFORME} />,
         };
     };
 
@@ -55,13 +54,16 @@ export class FroidIndexScreen extends React.Component {
                 lastname: '',
             },
 
+            source: '',
             signature: '',
-            equipments: [],
 
-            autres: '',
-            actions: '',
+            produit: '',
+            quantity: 0,
+            valorisation: '',
+            causes: '',
+            devenir: '',
+            traitment: '',
 
-            confirmed: 0,
             date: new Date().toISOString().substring(0, 10),
             created_at: new Date(),
         };
@@ -74,8 +76,6 @@ export class FroidIndexScreen extends React.Component {
         const user = await User(userID);
         const controles = await Controles(userID);
 
-        this._parseEquipments(user.department.equipments);
-
         this.setState({
             userId: userID,
             userObj: user,
@@ -86,76 +86,6 @@ export class FroidIndexScreen extends React.Component {
             test: controles.length
         });
     };
-
-    _parseEquipments(equipments) {
-
-        let ret = [];
-
-        equipments.map(equipment => {
-
-            let slice = equipment.split(":");
-
-            let obj = {
-                id: slice[0],
-                name: slice[1],
-                value: [0],
-            };
-
-            ret.push(obj);
-        });
-
-
-
-        this.setState({ equipments: ret });
-    }
-
-    _changeEquipment(row, index, value) {
-
-        let ret = [];
-
-        this.state.equipments.map(equipment => {
-
-            if (equipment.id == row.id) {
-                equipment.value[index] = value;
-            }
-
-            ret.push(equipment);
-        });
-
-        this.setState({ equipments: ret });
-    }
-
-    _addRow(row) {
-        let ret = [];
-
-        this.state.equipments.map(equipment => {
-
-            if (equipment.id == row.id) {
-                equipment.value.push(0);
-            }
-
-            ret.push(equipment);
-        });
-
-        this.setState({ equipments: ret });
-    }
-
-    _encodeEquipment() {
-
-        let ret = [];
-
-        this.state.equipments.map(equipment => {
-
-
-            let str = equipment.id + ":" + equipment.name + ":" + equipment.value.join(",");
-
-            console.log(str);
-
-            ret.push(str);
-        });
-
-        return ret;
-    }
 
     _showLoader() {
         this.setState({ loading: 1 });
@@ -177,6 +107,32 @@ export class FroidIndexScreen extends React.Component {
 
     }
 
+    _pickImage = () => {
+
+        var options = {
+            quality: 1,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+                cameraRoll: false,
+            }
+        };
+
+        ImagePicker.launchCamera(options, (response) => {
+
+            let source = { uri: response.uri };
+
+            // You can also display the image using data:
+            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+            this.setState({
+                source: source.uri,
+            });
+
+        });
+    };
+
+
     _showSignatureView() {
         this._signatureView.show(true);
     }
@@ -189,9 +145,7 @@ export class FroidIndexScreen extends React.Component {
         RNFS.mkdir(dir).then((res) => {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
-                    this.setState({ signature: 'file://' + path });
-                    alert('file://' + path);
-
+                    this.setState({ signature: 'file:/' + path });
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
@@ -226,20 +180,22 @@ export class FroidIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
-        let equipments = this._encodeEquipment();
-
         this.setState({ confirmed: confirmed });
 
-        if (confirmed == 0 && !this.state.signature) {
-            ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
+        if (!this.state.source) {
+            // ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
+        }
+
+        if (!this.state.signature) {
+            // ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
         Alert.alert(
-            Strings.CONTROLE_FROID,
+            Strings.RECEPTION_CHECK,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._store(confirmed) },
+                { text: Strings.OK, onPress: () => this._store(1) },
             ],
             { cancelable: false }
         )
@@ -250,13 +206,12 @@ export class FroidIndexScreen extends React.Component {
 
         setTimeout(() => {
 
-            let equipments = this._encodeEquipment();
-
             addControle(this.state.userId, {
-                source: '',
+                source: this.state.source,
                 signature: this.state.signature,
 
-                produit: '',
+                produit: this.state.produit,
+
                 fourniser: '',
                 dubl: '',
 
@@ -265,28 +220,32 @@ export class FroidIndexScreen extends React.Component {
 
                 intact: 0,
                 conforme: 0,
-                autres: this.state.autres,
-                actions: this.state.actions,
+                autres: '',
+                actions: '',
                 confirmed: this.state.confirmed,
 
-                equipments: equipments,
-                type: 1,
+                equipments: [],
+                type: 2,
 
-                quantity: 0,
-                valorisation: '',
-                causes: '',
-                devenir: '',
-                traitment: '',
+                quantity: this.state.quantity,
+                valorisation: this.state.valorisation,
+                causes: this.state.causes,
+                devenir: this.state.devenir,
+                traitment: this.state.traitment,
 
                 date: this.state.date,
                 created_at: this.state.created_at,
             }).then(res => {
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
-                ToastAndroid.show(Strings.CONTROLE_FROID_SUCCESSFULL_SAVED, ToastAndroid.LONG);
+                ToastAndroid.show(Strings.RECEPTION_CHECK_SUCCESSFULL_SAVED, ToastAndroid.LONG);
             }).catch(error => {
                 alert(error);
             });
+
+            // this.props.navigation.navigate('Home');
+            // this._hideLoader();
+            // ToastAndroid.show("Controle successfully saved!", ToastAndroid.LONG);
 
         }, 2000);
     }
@@ -297,10 +256,9 @@ export class FroidIndexScreen extends React.Component {
 
     render() {
         let { image } = this.state;
-
         return (
             <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
-                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ alignItems: 'center', paddingBottom: 20, }}>
                         <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
@@ -308,6 +266,16 @@ export class FroidIndexScreen extends React.Component {
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>
                         <Grid style={{ width: 550 }}>
                             <Row>
+                                <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
+                                    {this.state.source == '' && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
+                                        <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
+                                    </Button>}
+                                    {this.state.source != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
+                                        resizeMode={'contain'}
+                                        style={{ flex: 1, }}
+                                        source={{ uri: this.state.source }}
+                                    /></View>}
+                                </Col>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
                                     {this.state.signature == '' && <Button style={{ flex: 1, }} full light onPress={this._showSignatureView.bind(this)} >
                                         <Icon name='create' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
@@ -323,31 +291,25 @@ export class FroidIndexScreen extends React.Component {
                         </Grid>
                     </View>
 
-                    {this.state.equipments.map((row) => {
-                        return <View style={{ marginBottom: 20, }}>
-                            <Text style={{ marginBottom: 10, }}>{row.name}</Text>
-                            {row.value.map((val, index) => {
-                                return <Item fixedLabel style={styles.input}>
-                                    <Label>{Strings.TEMPERATURE}</Label>
-                                    <Icon active name='thermometer' />
-                                    <Input value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
-                                </Item>
-                            })}
-                            <View style={{ flex: 1 }}>
-                                <Button transparent onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
-                                    <Icon active name='add-circle' />
-                                </Button>
-                            </View>
-                        </View>
-                    })}
 
-                    <Item fixedLabel style={styles.input}>
-                        <Label>{Strings.AUTRES}</Label>
-                        <Icon active name='thermometer' />
-                        <Input value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                    <Item floatingLabel style={styles.input}>
+                        <Label>{Strings.PRODUCT}</Label>
+                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
                     </Item>
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
+                    <Item floatingLabel style={styles.input}>
+                        <Label>{Strings.QUANTITY}</Label>
+                        <Input value={this.state.quantity} onChangeText={(value) => { this.setState({ quantity: value }) }} />
+                    </Item>
+
+                    <Item floatingLabel style={styles.input}>
+                        <Label>{Strings.VALORISATION}</Label>
+                        <Input value={this.state.valorisation} onChangeText={(value) => { this.setState({ valorisation: value }) }} />
+                    </Item>
+
+
+                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
+                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -378,15 +340,9 @@ export class FroidIndexScreen extends React.Component {
                 </Content>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
-                        <Button danger onPress={_ => this._save(0)} >
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.NOT_CONFIRM}</Text>
-                                <Icon name='close' style={{ color: 'white', }} />
-                            </View>
-                        </Button>
                         <Button full success onPress={_ => this._save(1)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.SAVE}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>
@@ -396,7 +352,6 @@ export class FroidIndexScreen extends React.Component {
         );
     }
 }
-
 
 
 const styles = StyleSheet.create({

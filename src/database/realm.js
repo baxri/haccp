@@ -31,6 +31,12 @@ const ControleSchema = {
 
         equipments: 'string[]',
 
+        quantity: 'int',
+        valorisation: 'double',
+        causes: 'string',
+        devenir: 'string',
+        traitment: 'string',
+
         type: 'int',
         date: 'string',
         created_at: 'date',
@@ -89,7 +95,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 14;
+const schemaVersion = 16;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
 
 export const RealmFile = () => {
@@ -410,6 +416,12 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 
                     equipments: item.equipments,
                     type: item.type,
+
+                    quantity: item.quantity*1,
+                    valorisation: item.valorisation*1,
+                    causes: item.causes,
+                    devenir: item.devenir,
+                    traitment: item.traitment,
 
                     confirmed: item.confirmed,
                     date: item.date,
