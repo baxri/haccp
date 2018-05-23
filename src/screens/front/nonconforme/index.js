@@ -25,6 +25,7 @@ import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
+import {reverseFormat} from '../../../utilities/index';
 
 export class NonConformeIndexScreen extends React.Component {
 
@@ -314,15 +315,17 @@ export class NonConformeIndexScreen extends React.Component {
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
 
+                    {/* <H3>{this.state.traitment_date}</H3> */}
+
                     <DatePicker
                         style={{ width: 200, marginBottom: 30,  }}
-                        date={this.state.traitment_date}
+                        date={reverseFormat(this.state.traitment_date)}
                         mode="date"
                         placeholder="select date"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
-                       
-                        onDateChange={(date) => { this.setState({ traitment_date: date }) }}
+                        format="DD-MM-YYYY"
+                        onDateChange={(date) => { this.setState({ traitment_date: reverseFormat(date) }) }}
                     />
 
                     <SignatureView

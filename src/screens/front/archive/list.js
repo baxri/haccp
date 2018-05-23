@@ -18,6 +18,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Strings from '../../../language/fr';
+import { reverseFormat } from '../../../utilities/index';
 
 export class ArchiveListScreen extends React.Component {
 
@@ -25,7 +26,7 @@ export class ArchiveListScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            headerTitle: <LogoTitle HeaderText={(typeof params.title == "undefined" ? '' : params.title)} />,
+            headerTitle: <LogoTitle HeaderText={(typeof params.title == "undefined" ? '' : reverseFormat(params.title))} />,
         };
     };
 
@@ -99,7 +100,7 @@ export class ArchiveListScreen extends React.Component {
                                                 {/* {row.type == 1 && <Thumbnail source={{ uri: row.signature }} />} */}
                                             </Body>
                                             <Right>
-                                                <H3 note> {row.date}</H3>
+                                                <H3 note> {reverseFormat(row.date)}</H3>
                                             </Right>
                                         </ListItem>;
                                     })}

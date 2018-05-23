@@ -191,6 +191,14 @@ export class ControleIndexScreen extends React.Component {
 
         this.setState({ confirmed: confirmed });
 
+        if(!this.state.produit){
+            ToastAndroid.show(Strings.PRODUCT, ToastAndroid.LONG); return;
+        }
+
+        if(!this.state.fourniser){
+            ToastAndroid.show(Strings.FOURNISER, ToastAndroid.LONG); return;
+        }
+
         if (!this.state.source) {
             // ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
         }
@@ -341,8 +349,8 @@ export class ControleIndexScreen extends React.Component {
 
 
                     <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.DUPRODUIT}t</Label>
-                        <Input value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
+                        <Label>{Strings.DUPRODUIT}</Label>
+                        <Input keyboardType="numeric" value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
                     </Item>
 
 

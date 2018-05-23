@@ -16,6 +16,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
+import {reverseFormat} from '../../../utilities/index';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -160,7 +161,7 @@ export class TraceIndexScreen extends React.Component {
                         />}
                     </View>
                     <View style={{ alignItems: 'center', paddingTop: 40, }}>
-                        <H3>{this.state.created_at.toDateString()}</H3>
+                        <H3>{reverseFormat(this.state.date)}</H3>
                     </View>
                 </Content>
                 <Footer styles={{ height: 100 }}>

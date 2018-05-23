@@ -13,6 +13,8 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr';
+import { reverseFormat } from '../../../utilities/index';
+
 
 export class ArchiveDetailsScreen extends React.Component {
 

@@ -17,6 +17,7 @@ import { addPicture, Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
+import { reverseFormat } from '../../../utilities/index';
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -132,12 +133,19 @@ export class ArchiveIndexScreen extends React.Component {
             <Container style={{ paddingTop: 20, }}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content>
-                    <CalendarPicker onDateChange={this.onDateChange} onMonthChange={this.onMonthChange} disabledDates={this.state.disabledDays} />
+                    <CalendarPicker
+                        weekdays={[Strings.MON, Strings.TUE, Strings.WED, Strings.THU, Strings.FRI, Strings.SAT, Strings.SUN]}
+                        months={[Strings.JANUARY, Strings.FEBRUARY, Strings.MARCH, Strings.APRIL, Strings.MAY, Strings.JUNE, Strings.JULE, Strings.AUGUST, Strings.SEPTEMBER, Strings.OCTOBER, Strings.NOVEMBER, Strings.DECEMBER]}
+                        previousTitle={Strings.PREVIOUS}
+                        nextTitle={Strings.NEXT}
+                        onDateChange={this.onDateChange}
+                        onMonthChange={this.onMonthChange}
+                        disabledDates={this.state.disabledDays} />
                 </Content>
                 <Footer styles={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
                     <FooterTab styles={{ height: 100, }}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <H2 style={{ color: 'white' }}>{startDate}</H2>
+                            <H2 style={{ color: 'white' }}>{reverseFormat(startDate)}</H2>
                         </View>
                     </FooterTab>
                 </Footer>

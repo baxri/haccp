@@ -326,10 +326,10 @@ export class FroidIndexScreen extends React.Component {
                         return <View style={{ marginBottom: 20, }}>
                             <Text style={{ marginBottom: 10, }}>{row.name}</Text>
                             {row.value.map((val, index) => {
-                                return <Item fixedLabel style={styles.input}>
-                                    <Label>{Strings.TEMPERATURE}</Label>
+                                return <Item inlineLabel style={styles.input}>
+                                    <Label>{Strings.TEMPERATURE}</Label>                                    
+                                    <Input keyboardType="numeric" value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
                                     <Icon active name='thermometer' />
-                                    <Input value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
                                 </Item>
                             })}
                             <View style={{ flex: 1 }}>
@@ -340,10 +340,10 @@ export class FroidIndexScreen extends React.Component {
                         </View>
                     })}
 
-                    <Item fixedLabel style={styles.input}>
-                        <Label>{Strings.AUTRES}</Label>
+                    <Item inlineLabel style={styles.input}>
+                        <Label>{Strings.AUTRES}</Label>                        
+                        <Input keyboardType="numeric" value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
                         <Icon active name='thermometer' />
-                        <Input value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
                     </Item>
 
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />

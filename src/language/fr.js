@@ -82,7 +82,7 @@ const strings = {
     CONTROLE_CHAUD: 'Contrôle chaud',
     CLEANING: 'Nettoyage',
     ARCHIVE: 'Archive',
-    NONCONFORME: 'NONCONFORME',
+    NONCONFORME: 'Contrôle des produits non conformes',
 
     //TRACEABILITY
     PLEASE_TAKE_A_PICTURE: 'Ajouter une photo',
@@ -97,7 +97,7 @@ const strings = {
     ASPECT: 'Aspect du produit',
     BON: 'Bon',
     MAUVAIS: 'Mauvais',
-    DUPRODUIT: 'DUPRODUIT',
+    DUPRODUIT: 'Température du produit',
     EMBALAGE_INTATC: 'Emballage intact',
     ETIQUTAGE_CONF: 'Etiquetage conforme',
     AUTRES: 'Autres',
@@ -111,15 +111,39 @@ const strings = {
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',
     THERE_IS_NO_PICTURES: 'Aucunne image',
 
-     //NON CONFORME
-     CONTROLE_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
-     QUANTITY: 'QUANTITY',
-     VALORISATION: 'VALORISATION',
-     CAUSES: 'CAUSES',
-     DEVENIR: 'DEVENIR',
-     TRAITMENT_DATE: 'TRAITMENT_DATE',
+    //NON CONFORME
+    CONTROLE_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
+    QUANTITY: 'Quantité',
+    VALORISATION: 'VALORISATION',
+    CAUSES: 'CAUSES',
+    DEVENIR: 'DEVENIR',
+    TRAITMENT_DATE: 'TRAITMENT_DATE',
 
+    NEXT: 'NEXT',
+    PREVIOUS: 'PREVIOUS',
 
+    //WEEK DAYS
+    MON: 'MON',
+    TUE: 'TUE',
+    WED: 'WED',
+    THU: 'THU',
+    FRI: 'FRI',
+    SAT: 'SAT',
+    SUN: 'SUN',
+
+    //MONTH
+    JANUARY: 'JANUARY',
+    FEBRUARY: 'FEBRUARY',
+    MARCH: 'MARCH',
+    APRIL: 'APRIL',
+    MAY: 'MAY',
+    JUNE: 'JUNE',
+    JULE: 'JULE',
+    AUGUST: 'AUGUST',
+    SEPTEMBER: 'SEPTEMBER',
+    OCTOBER: 'OCTOBER',
+    NOVEMBER: 'NOVEMBER',
+    DECEMBER: 'DECEMBER',
 };
 
 export default strings;
