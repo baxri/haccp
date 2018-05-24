@@ -55,7 +55,8 @@ import { LogOutScreen } from './src/screens/auth/logout';
 console.disableYellowBox = true;
 
 
-const headerBackground = '#1E2EB4';
+// const headerBackground = '#1E2EB4';
+const headerBackground = '#f00000';
 const headerTextColor = 'white';
 
 
