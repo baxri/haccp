@@ -42,6 +42,10 @@ import { ArchiveListScreen } from './src/screens/front/archive/list';
 import { ArchiveGalleryScreen } from './src/screens/front/archive/gallery';
 import { ArchiveDetailsScreen } from './src/screens/front/archive/details';
 
+
+import { NonconflistIndexScreen } from './src/screens/front/nonconflist/index';
+
+
 // End Front Screens
 
 
@@ -172,13 +176,30 @@ const ArchiveStack = StackNavigator(
 );
 
 
+const NonconlistfStack = StackNavigator(
+  {
+    NonconflistIndex: NonconflistIndexScreen,   
+  },
+  {
+    initialRouteName: 'NonconflistIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
+
 const DrawerStackFront = DrawerNavigator({
   Home: HomeStack,
   Trace: TraceStack,
   Controle: ControleStack,
   Froid: FroidStack,
-  Archive: ArchiveStack,
   NonConforme: NonConformeStack,
+  Archive: ArchiveStack,
+  Nonconlistf: NonconlistfStack,  
   AdminLogout: LogOutScreen,
 },
   {

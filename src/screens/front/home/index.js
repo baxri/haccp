@@ -100,10 +100,10 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert(Strings.COMMING_SOON)}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('NonconflistIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='water' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
-                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.CLEANING}</Text>
+                                    <Icon name='list-box' fontSize={50} size={50} style={{ color: '#5783FF', fontSize: 80, }} />
+                                    <Text style={{ color: '#5783FF', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.NONCONFORMELIST}</Text>
                                 </View>
                             </Button>
                         </Col>

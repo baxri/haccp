@@ -2,6 +2,7 @@ import React from 'react';
 import {
     NetInfo
 } from 'react-native';
+import { Form } from 'native-base';
 // import { Realm } from 'realm';
 const Realm = require('realm');
 
@@ -418,8 +419,8 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     equipments: item.equipments,
                     type: item.type,
 
-                    quantity: item.quantity*1,
-                    valorisation: item.valorisation*1,
+                    quantity: item.quantity * 1,
+                    valorisation: item.valorisation * 1,
                     causes: item.causes,
                     devenir: item.devenir,
                     traitment: item.traitment,
@@ -449,7 +450,7 @@ export const Controles = (userId, date = null, month = null, year = null) => new
                 month = month * 1 - 1;
                 var from = new Date(year, month, 1);
                 var to = new Date(year, month, 31);
-
+                
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
                 if (date == null)
@@ -457,6 +458,21 @@ export const Controles = (userId, date = null, month = null, year = null) => new
                 else
                     resolve(userObject.controles.filtered('date = $0', date));
             }
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+
+export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Promise((resolve, reject) => {
+    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            let userObject = realm.objectForPrimaryKey('User', userId);
+            var from = new Date(dateFrom);
+            var to = new Date(DateTo);
+            to.setDate(to.getDate() + 1);
+            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
         })
         .catch(error => {
             reject(error);
