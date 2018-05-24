@@ -123,7 +123,7 @@ export class NonconflistIndexScreen extends React.Component {
 
                     <List>
                         {this.state.controles.map(row => {
-                            return <ListItem avatar onPress={() => alert("OK")}>
+                            return <ListItem avatar onPress={() => this.props.navigation.navigate('NonConformeDetails', { controle: row })} style={{ marginTop: 15, }}>
                                 <Left>
 
                                 </Left>

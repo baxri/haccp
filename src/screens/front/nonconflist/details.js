@@ -16,7 +16,7 @@ import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
 
 
-export class ArchiveDetailsScreen extends React.Component {
+export class NonConformeDetailsScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};

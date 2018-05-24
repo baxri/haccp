@@ -44,6 +44,7 @@ import { ArchiveDetailsScreen } from './src/screens/front/archive/details';
 
 
 import { NonconflistIndexScreen } from './src/screens/front/nonconflist/index';
+import { NonConformeDetailsScreen } from './src/screens/front//nonconflist/details';
 
 
 // End Front Screens
@@ -179,6 +180,7 @@ const ArchiveStack = StackNavigator(
 const NonconlistfStack = StackNavigator(
   {
     NonconflistIndex: NonconflistIndexScreen,   
+    NonConformeDetails: NonConformeDetailsScreen,
   },
   {
     initialRouteName: 'NonconflistIndex',
