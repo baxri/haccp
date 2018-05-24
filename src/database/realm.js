@@ -472,7 +472,7 @@ export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Pr
             var from = new Date(dateFrom);
             var to = new Date(DateTo);
             to.setDate(to.getDate() + 1);
-            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
+            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1 and type=2', from, to));
         })
         .catch(error => {
             reject(error);
