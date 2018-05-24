@@ -1,5 +1,5 @@
 // Luncher icon generator
-//https://reiszecke.github.io/AndroidAssetStudioFullsize/icons-launcher.html#foreground.type=clipart&foreground.space.trim=1&foreground.space.pad=0.05&foreground.clipart=res%2Fclipart%2Ficons%2Faction_visibility.svg&foreColor=016da1%2C0&crop=0&backgroundShape=square&backColor=ebfaff%2C100&effects=score
+// https://romannurik.github.io/AndroidAssetStudio/
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
