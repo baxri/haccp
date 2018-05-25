@@ -109,7 +109,7 @@ export class ArchiveListScreen extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col style={{ backgroundColor: 'black' }}>
+                        <Col style={{ backgroundColor: '#2E2E2E' }}>
                             <Content>
                                 {!this.state.pictures.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                                     <Icon name='camera' fontSize={50} size={50} style={{ color: 'white', fontSize: 100, }} />

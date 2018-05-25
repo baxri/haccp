@@ -122,7 +122,7 @@ export class AdminUsersItemScreen extends React.Component {
                         </View>
 
                         <View style={{ borderWidth: 0, flex: 1 }}>
-                            <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
+                            <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
                                     <Text style={{ color: 'white', }}>{Strings.SAVE_USER}</Text>
                                 </Left>

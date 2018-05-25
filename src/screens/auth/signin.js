@@ -127,7 +127,7 @@ export class SignInScreen extends React.Component {
                             </View>}
 
                             <View>
-                                {this.state.user.length > 0 && <Button primary style={styles.button} onPress={this._login}>
+                                {this.state.user.length > 0 && <Button danger style={styles.button} onPress={this._login}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
                                     </Left>

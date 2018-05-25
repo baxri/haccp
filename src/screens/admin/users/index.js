@@ -174,7 +174,7 @@ export class AdminUsersIndexScreen extends React.Component {
                     active={true}
                     direction="up"
                     containerStyle={{}}
-                    style={{ backgroundColor: '#5067FF' }}
+                    style={{ backgroundColor: '#494949' }}
                     position="bottomRight"
 
                     onPress={() => this.props.navigation.navigate('AdminUsersItem', {

@@ -120,7 +120,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                         </Item>
                         <View style={{ alignItems: 'center' }}>
-                            <Button primary style={styles.button} onPress={() => { this._saveItem() }}>
+                            <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
                                 <Left >
                                     <Text style={{ color: 'white', }}>{Strings.SAVE_DEPARTMENT}</Text>
                                 </Left>

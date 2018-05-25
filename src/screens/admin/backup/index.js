@@ -6,7 +6,7 @@ import {
     StyleSheet,
     View,
     ToastAndroid,
-    NetInfo
+    NetInfo,
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -41,8 +41,6 @@ export class AdminBackupIndexScreen extends React.Component {
             connected: 0,
             date: new Date().toISOString().substring(0, 10),
         };
-
-
 
         this._bootstrapAsync();
     }
@@ -124,6 +122,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
+                                <H3 style={{ marginBottom: 30, }}>DB: {RealmFile()}</H3>
 
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >

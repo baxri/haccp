@@ -56,7 +56,7 @@ console.disableYellowBox = true;
 
 
 // const headerBackground = '#1E2EB4';
-const headerBackground = '#f00000';
+const headerBackground = '#BB0000';
 const headerTextColor = 'white';
 
 
@@ -180,7 +180,7 @@ const ArchiveStack = StackNavigator(
 
 const NonconlistfStack = StackNavigator(
   {
-    NonconflistIndex: NonconflistIndexScreen,   
+    NonconflistIndex: NonconflistIndexScreen,
     NonConformeDetails: NonConformeDetailsScreen,
   },
   {
@@ -202,11 +202,19 @@ const DrawerStackFront = DrawerNavigator({
   Froid: FroidStack,
   NonConforme: NonConformeStack,
   Archive: ArchiveStack,
-  Nonconlistf: NonconlistfStack,  
+  Nonconlistf: NonconlistfStack,
   AdminLogout: LogOutScreen,
 },
   {
     initialRouteName: 'Home',
+    drawerBackgroundColor: '#2E2E2E',
+    activeTintColor: 'white',
+    contentOptions: {
+      activeTintColor: '#BB0000',
+      inactiveTintColor: 'white',
+      activeBackgroundColor: '#D6D6D6',
+    }
+
   });
 // END FRONT =====================================================================
 
@@ -290,13 +298,19 @@ const AdminBackupStack = StackNavigator(
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
   AdminDepartments: AdminDepartmentsStack,
-  // AdminDepartments: AdminDepartmentsStackWithModal,
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
   AdminLogout: LogOutScreen,
 },
   {
     initialRouteName: 'AdminHome',
+    drawerBackgroundColor: '#2E2E2E',
+    activeTintColor: 'white',
+    contentOptions: {
+      activeTintColor: '#BB0000',
+      inactiveTintColor: 'white',
+      activeBackgroundColor: '#D6D6D6',
+    }
   });
 
 // END ADMIN =====================================================================
@@ -316,61 +330,7 @@ const RootWrapper = SwitchNavigator(
   }
 );
 
-
 export default () =>
   <Root>
     <RootWrapper />
   </Root>;
-
-
-// import React, { Component } from 'react';
-// import {
-//   Platform,
-//   StyleSheet,
-//   Text,
-//   View
-// } from 'react-native';
-
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' +
-//     'Cmd+D or shake for dev menu',
-//   android: 'Double tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu',
-// });
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           Welcome to React Native!
-//         </Text>
-//         <Text style={styles.instructions}>
-//           To get started, edit App.js
-//         </Text>
-//         <Text style={styles.instructions}>
-//           {instructions}
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });

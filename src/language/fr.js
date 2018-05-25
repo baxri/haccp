@@ -82,8 +82,8 @@ const strings = {
     CONTROLE_CHAUD: 'Contrôle chaud',
     CLEANING: 'Nettoyage',
     ARCHIVE: 'Archive',
-    NONCONFORME: 'Contrôle des produits non conformes',
-    NONCONFORMELIST: 'NONCONFORMELIST',
+    NONCONFORME: 'Contrôle des produits non conf.',
+    NONCONFORMELIST: 'des produits non conf.',
 
     //TRACEABILITY
     PLEASE_TAKE_A_PICTURE: 'Ajouter une photo',

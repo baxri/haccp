@@ -120,8 +120,8 @@ export class ControleIndexScreen extends React.Component {
 
         var options = {
             quality: 1,
-            maxWidth: 500,
-            maxHeight: 500,
+            // maxWidth: 500,
+            // maxHeight: 500,
             storageOptions: {
                 cameraRoll: false,
             }
@@ -130,6 +130,8 @@ export class ControleIndexScreen extends React.Component {
         ImagePicker.launchCamera(options, (response) => {
 
             let source = { uri: response.uri };
+
+            alert(response.uri);
 
             // You can also display the image using data:
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -155,6 +157,7 @@ export class ControleIndexScreen extends React.Component {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
                     this.setState({ signature: 'file://' + path });
+                    alert('file://' + path);
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
@@ -264,9 +267,6 @@ export class ControleIndexScreen extends React.Component {
                 alert(error);
             });
 
-            // this.props.navigation.navigate('Home');
-            // this._hideLoader();
-            // ToastAndroid.show("Controle successfully saved!", ToastAndroid.LONG);
 
         }, 2000);
     }

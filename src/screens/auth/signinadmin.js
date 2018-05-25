@@ -83,7 +83,7 @@ export class SignInAdminScreen extends React.Component {
 
                             </View>
                             <View style={{ alignItems: 'center' }}>
-                                <Button primary style={styles.button} onPress={() => { this._loginAdmin() }}>
+                                <Button danger style={styles.button} onPress={() => { this._loginAdmin() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
                                     </Left>

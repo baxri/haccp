@@ -142,13 +142,7 @@ export class ArchiveIndexScreen extends React.Component {
                         onMonthChange={this.onMonthChange}
                         disabledDates={this.state.disabledDays} />
                 </Content>
-                <Footer styles={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                    <FooterTab styles={{ height: 100, }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <H2 style={{ color: 'white' }}>{reverseFormat(startDate)}</H2>
-                        </View>
-                    </FooterTab>
-                </Footer>
+                
             </Container>
         );
     }

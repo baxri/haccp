@@ -80,7 +80,7 @@ export class SetupAdminScreen extends React.Component {
 
                             </View>
                             <View style={{ alignItems: 'center' }}>
-                                <Button primary style={styles.button}
+                                <Button danger style={styles.button}
                                     onPress={() => { this._setupAdmin() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.SETUP}</Text>

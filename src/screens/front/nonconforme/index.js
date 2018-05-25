@@ -114,8 +114,8 @@ export class NonConformeIndexScreen extends React.Component {
 
         var options = {
             quality: 1,
-            maxWidth: 500,
-            maxHeight: 500,
+            // maxWidth: 500,
+            // maxHeight: 500,
             storageOptions: {
                 cameraRoll: false,
             }
@@ -303,12 +303,12 @@ export class NonConformeIndexScreen extends React.Component {
 
                     <Item floatingLabel style={styles.input}>
                         <Label>{Strings.QUANTITY}</Label>
-                        <Input value={this.state.quantity} onChangeText={(value) => { this.setState({ quantity: value }) }} />
+                        <Input keyboardType="numeric" value={this.state.quantity} onChangeText={(value) => { this.setState({ quantity: value }) }} />
                     </Item>
 
                     <Item floatingLabel style={styles.input}>
                         <Label>{Strings.VALORISATION}</Label>
-                        <Input value={this.state.valorisation} onChangeText={(value) => { this.setState({ valorisation: value }) }} />
+                        <Input keyboardType="numeric" value={this.state.valorisation} onChangeText={(value) => { this.setState({ valorisation: value }) }} />
                     </Item>
 
 
