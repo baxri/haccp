@@ -16,6 +16,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addControle, Controles, Pictures, User } from '../../../database/realm';
+import { movePicture, writePicture } from '../../../utilities/index';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -24,6 +25,8 @@ import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
+import RNFetchBlob from 'react-native-fetch-blob';
+
 
 export class ControleIndexScreen extends React.Component {
 
@@ -131,7 +134,7 @@ export class ControleIndexScreen extends React.Component {
 
             let source = { uri: response.uri };
 
-            alert(response.uri);
+            // alert(response.uri);
 
             // You can also display the image using data:
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -148,19 +151,29 @@ export class ControleIndexScreen extends React.Component {
         this._signatureView.show(true);
     }
 
-    _onSave(result) {
+
+    _onSave = async (result) => {
         var dir = RNFS.ExternalStorageDirectoryPath + '/signatures/';
         var filename = Math.floor(Date.now() / 1000) + '.png';
         var path = dir + filename;
 
+        // writePicture(result.encoded).then(filename => {
+        // //    this.setState({ signature: 'file://' + pathttt });  
+        //    this.setState({ signature: 'file://' + RNFetchBlob.fs.dirs.PictureDir + '/HACCPIMAGES/' + filename });  
+        // });
+       
+
         RNFS.mkdir(dir).then((res) => {
             RNFS.writeFile(path, result.encoded, 'base64')
                 .then((success) => {
-                    this.setState({ signature: 'file://' + path });
-                    alert('file://' + path);
+                    this.setState({ signature: 'file://' + path });                  
                 })
                 .catch((err) => { alert(err.message) });
         }).catch((err => { alert(err) }));
+
+
+
+
         this._signatureView.show(false);
     }
 
@@ -194,11 +207,11 @@ export class ControleIndexScreen extends React.Component {
 
         this.setState({ confirmed: confirmed });
 
-        if(!this.state.produit){
+        if (!this.state.produit) {
             ToastAndroid.show(Strings.PRODUCT, ToastAndroid.LONG); return;
         }
 
-        if(!this.state.fourniser){
+        if (!this.state.fourniser) {
             ToastAndroid.show(Strings.FOURNISER, ToastAndroid.LONG); return;
         }
 

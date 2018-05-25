@@ -20,6 +20,7 @@ import com.rssignaturecapture.RSSignatureCapturePackage;
 import com.rnfs.RNFSPackage; // <------- add package
 import com.vydia.RNUploader.UploaderReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.RNFetchBlob.RNFetchBlobPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -38,7 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ImagePickerPackage(),
           new RSSignatureCapturePackage(),
           new RNFSPackage(),
-          new UploaderReactPackage()
+          new UploaderReactPackage(),
+          new RNFetchBlobPackage()
       );
     }
 

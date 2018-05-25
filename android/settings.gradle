@@ -44,3 +44,6 @@ project(':react-native-device-info').projectDir = new File(rootProject.projectDi
 
 include ':react-native-upload-file' 
 project(':react-native-upload-file').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-upload-file/android')
+
+include ':react-native-fetch-blob'
+project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
