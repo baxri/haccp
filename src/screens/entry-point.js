@@ -10,6 +10,7 @@ import {
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../src/language/fr';
 import { Login } from '../../src/database/realm';
+import { initFolders } from '../../src/utilities/index';
 
 export class EntryPointScreen extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ export class EntryPointScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
+        initFolders();
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
         const adminPassword = await AsyncStorage.getItem('adminPasswordV5');

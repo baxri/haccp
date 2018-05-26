@@ -25,7 +25,8 @@ import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
-import {reverseFormat} from '../../../utilities/index';
+import { reverseFormat } from '../../../utilities/index';
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 
 export class NonConformeIndexScreen extends React.Component {
 
@@ -114,45 +115,27 @@ export class NonConformeIndexScreen extends React.Component {
 
         var options = {
             quality: 1,
-            // maxWidth: 500,
-            // maxHeight: 500,
             storageOptions: {
                 cameraRoll: false,
             }
         };
 
         ImagePicker.launchCamera(options, (response) => {
-
-            let source = { uri: response.uri };
-
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            this.setState({
-                source: source.uri,
+            writePicture(response.data).then(filename => {
+                this.setState({ source: filename });
             });
-
         });
     };
 
+    _onSave = async (result) => {
+        writePicture(result.encoded).then(filename => {
+            this.setState({ signature: filename });
+            this._signatureView.show(false);
+        });
+    }
 
     _showSignatureView() {
         this._signatureView.show(true);
-    }
-
-    _onSave(result) {
-        var dir = RNFS.ExternalStorageDirectoryPath + '/signatures/';
-        var filename = Math.floor(Date.now() / 1000) + '.png';
-        var path = dir + filename;
-
-        RNFS.mkdir(dir).then((res) => {
-            RNFS.writeFile(path, result.encoded, 'base64')
-                .then((success) => {
-                    this.setState({ signature: 'file://' + path });
-                })
-                .catch((err) => { alert(err.message) });
-        }).catch((err => { alert(err) }));
-        this._signatureView.show(false);
     }
 
     _checkAspect(value) {
@@ -184,6 +167,10 @@ export class NonConformeIndexScreen extends React.Component {
     _save(confirmed = 0) {
 
         this.setState({ confirmed: confirmed });
+
+        if (!this.state.produit) {
+            ToastAndroid.show(Strings.PRODUCT, ToastAndroid.LONG); return;
+        }
 
         if (!this.state.source) {
             // ToastAndroid.show(Strings.PLEASE_TAKE_A_PICTURE, ToastAndroid.LONG); return;
@@ -277,7 +264,7 @@ export class NonConformeIndexScreen extends React.Component {
                                     {this.state.source != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
-                                        source={{ uri: this.state.source }}
+                                        source={{ uri: FilePicturePath() + this.state.source }}
                                     /></View>}
                                 </Col>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
@@ -288,7 +275,7 @@ export class NonConformeIndexScreen extends React.Component {
                                     {this.state.signature != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
-                                        source={{ uri: this.state.signature }}
+                                        source={{ uri: FilePicturePath() + this.state.signature }}
                                     /></View>}
                                 </Col>
                             </Row>
@@ -318,13 +305,15 @@ export class NonConformeIndexScreen extends React.Component {
                     {/* <H3>{this.state.traitment_date}</H3> */}
 
                     <DatePicker
-                        style={{ width: 200, marginBottom: 30,  }}
+                        style={{ width: 300 }}
+                        customStyles={{ marginBottom: 30, backgroundColor: 'red', }}
                         date={reverseFormat(this.state.traitment_date)}
                         mode="date"
                         placeholder="select date"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
                         format="DD-MM-YYYY"
+                        androidMode="spinner"
                         onDateChange={(date) => { this.setState({ traitment_date: reverseFormat(date) }) }}
                     />
 

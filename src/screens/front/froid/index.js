@@ -23,7 +23,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 
 export class FroidIndexScreen extends React.Component {
 
@@ -37,7 +37,6 @@ export class FroidIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.CONTROLE_FROID + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -181,19 +180,11 @@ export class FroidIndexScreen extends React.Component {
         this._signatureView.show(true);
     }
 
-    _onSave(result) {
-        var dir = RNFS.ExternalStorageDirectoryPath + '/signatures/';
-        var filename = Math.floor(Date.now() / 1000) + '.png';
-        var path = dir + filename;
-
-        RNFS.mkdir(dir).then((res) => {
-            RNFS.writeFile(path, result.encoded, 'base64')
-                .then((success) => {
-                    this.setState({ signature: 'file://' + path });
-                })
-                .catch((err) => { alert(err.message) });
-        }).catch((err => { alert(err) }));
-        this._signatureView.show(false);
+    _onSave = async (result) => {
+        writePicture(result.encoded).then(filename => {
+            this.setState({ signature: filename });
+            this._signatureView.show(false);
+        });
     }
 
     _checkAspect(value) {
@@ -315,7 +306,7 @@ export class FroidIndexScreen extends React.Component {
                                     {this.state.signature != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
-                                        source={{ uri: this.state.signature }}
+                                        source={{ uri: FilePicturePath() + this.state.signature }}
                                     /></View>}
                                 </Col>
                             </Row>
@@ -327,7 +318,7 @@ export class FroidIndexScreen extends React.Component {
                             <Text style={{ marginBottom: 10, }}>{row.name}</Text>
                             {row.value.map((val, index) => {
                                 return <Item inlineLabel style={styles.input}>
-                                    <Label>{Strings.TEMPERATURE}</Label>                                    
+                                    <Label>{Strings.TEMPERATURE}</Label>
                                     <Input keyboardType="numeric" value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
                                     <Icon active name='thermometer' />
                                 </Item>
@@ -341,7 +332,7 @@ export class FroidIndexScreen extends React.Component {
                     })}
 
                     <Item inlineLabel style={styles.input}>
-                        <Label>{Strings.AUTRES}</Label>                        
+                        <Label>{Strings.AUTRES}</Label>
                         <Input keyboardType="numeric" value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
                         <Icon active name='thermometer' />
                     </Item>

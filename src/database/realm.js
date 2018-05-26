@@ -1,9 +1,9 @@
 import React from 'react';
-import {
-    NetInfo
-} from 'react-native';
+import { NetInfo } from 'react-native';
 import { Form } from 'native-base';
-// import { Realm } from 'realm';
+import { realmFilePath } from '../../src/utilities/index';
+
+
 const Realm = require('realm');
 
 const ControleSchema = {
@@ -99,14 +99,15 @@ const _guid = () => {
 
 const schemaVersion = 17;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
+const realmPath = realmFilePath();
 
 export const RealmFile = () => {
-    return Realm.defaultPath;
+    // return Realm.defaultPath;
+    return realmPath;
 }
 
-
 export const User = (userId) => new Promise((resolve, reject) => {
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
                 let userObject = realm.objectForPrimaryKey('User', userId);
@@ -118,34 +119,8 @@ export const User = (userId) => new Promise((resolve, reject) => {
         });
 });
 
-
 export const addDepartment = (item) => new Promise((resolve, reject) => {
-
-    // let user = Realm.Sync.User.current
-
-    // alert(user);
-
-    // let rr = {
-    //     user: user,
-    //     // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
-    //     url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
-    //     error: err => alert(err)
-    // };
-
-    // let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
-
-    // synchedRealm.write(() => {
-    //     const department = synchedRealm.create('Department', {
-    //         id: _guid(),
-    //         name: item.name,
-    //         equipments: item.equipments,
-    //     });
-
-    //     resolve(department);
-
-    // });
-
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             // Create Realm objects and write to local storage
             realm.write(() => {
@@ -166,7 +141,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
 
 export const editDepartment = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Update Realm objects and write to local storage
             realm.write(() => {
@@ -179,50 +154,9 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
         });
 });
 
-export const Login = () => new Promise((resolve, reject) => {
-
-    // let users = Realm.Sync.User.all;
-
-    // let i = 0;
-
-    // for (const key in users) {
-    //     // users[key].logout()
-    //     // do something with the user object.
-    // }
-
-
-    // let user = Realm.Sync.User.current
-    Realm.Sync.User.login('http://178.62.42.68:9080', 'test@test.com', 'test').then((user) => {
-        resolve(user);
-    });
-});
-
 export const Departments = async (item) => new Promise((resolve, reject) => {
 
-    // NetInfo.isConnected.fetch().then(isConnected => {
-    //     if (isConnected) {
-
-    //     }
-    // });
-
-    // let user = Realm.Sync.User.current
-
-
-
-    // let rr = {
-    //     user: user,
-    //     // url: "realms://bibihaccp.us1.cloud.realm.io/~/RealmV1",
-    //     url: "realm://178.62.42.68:9080/~/DigitalOceanRealmV3",
-    //     error: err => alert(err.state)
-    // };
-
-    // // alert(user);
-
-    // let synchedRealm = new Realm({ schema: schemas, schemaVersion: schemaVersion, sync: rr });
-    // const items = synchedRealm.objects('Department').sorted('name', true);
-    // resolve(items);
-
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             const items = realm.objects('Department').sorted('name', true);
             resolve(items);
@@ -239,7 +173,7 @@ export const Departments = async (item) => new Promise((resolve, reject) => {
 
 export const DeleteDepartment = (id) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
                 let department = realm.create('Department', { id: id }, true);
@@ -259,7 +193,7 @@ export const DeleteDepartment = (id) => new Promise((resolve, reject) => {
 
 export const addUser = (departmentId, item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Create Realm objects and write to local storage
             realm.write(() => {
@@ -284,7 +218,7 @@ export const addUser = (departmentId, item) => new Promise((resolve, reject) => 
 
 export const editUser = (departmentId, item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Update Realm objects and write to local storage
 
@@ -305,7 +239,7 @@ export const editUser = (departmentId, item) => new Promise((resolve, reject) =>
 
 export const Users = (item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             const items = realm.objects('User').sorted('name', true);;
             resolve(items);
@@ -317,7 +251,7 @@ export const Users = (item) => new Promise((resolve, reject) => {
 
 export const DeleteUser = (id) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
                 let department = realm.create('User', { id: id }, true);
@@ -335,7 +269,7 @@ export const DeleteUser = (id) => new Promise((resolve, reject) => {
 
 export const addPicture = (userId, item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             // Create Realm objects and write to local storage
             realm.write(() => {
@@ -360,7 +294,7 @@ export const addPicture = (userId, item) => new Promise((resolve, reject) => {
 
 
 export const Pictures = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
 
@@ -391,7 +325,7 @@ export const Pictures = (userId, date = null, month = null, year = null) => new 
 
 export const addControle = (userId, item) => new Promise((resolve, reject) => {
 
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
                 let userObject = realm.objectForPrimaryKey('User', userId);
@@ -441,7 +375,7 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 
 
 export const Controles = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
 
@@ -450,7 +384,7 @@ export const Controles = (userId, date = null, month = null, year = null) => new
                 month = month * 1 - 1;
                 var from = new Date(year, month, 1);
                 var to = new Date(year, month, 31);
-                
+
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
                 if (date == null)
@@ -466,7 +400,7 @@ export const Controles = (userId, date = null, month = null, year = null) => new
 
 
 export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Promise((resolve, reject) => {
-    Realm.open({ schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
             var from = new Date(dateFrom);

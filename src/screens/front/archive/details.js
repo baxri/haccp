@@ -13,8 +13,7 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr';
-import { reverseFormat } from '../../../utilities/index';
-
+import { reverseFormat, FilePicturePath } from '../../../utilities/index';
 
 export class ArchiveDetailsScreen extends React.Component {
 
@@ -75,13 +74,13 @@ export class ArchiveDetailsScreen extends React.Component {
                         {this.state.item.source != '' && <View style={{ backgroundColor: 'white', margin: 10, }}><Image
                             resizeMode={'cover'}
                             style={{ width: 200, height: 200, }}
-                            source={{ uri: this.state.item.source }}
+                            source={{ uri: FilePicturePath() + this.state.item.source }}
                         /></View>}
 
                         {this.state.item.signature != '' && <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, }}><Image
                             resizeMode={'cover'}
                             style={{ width: 200, height: 200, }}
-                            source={{ uri: this.state.item.signature }}
+                            source={{ uri: FilePicturePath() + this.state.item.signature }}
                         /></View>}
                     </View>
 

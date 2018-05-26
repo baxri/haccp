@@ -15,6 +15,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures } from '../../../database/realm';
 import Gallery from 'react-native-image-gallery';
+import { reverseFormat, FilePicturePath } from '../../../utilities/index';
 
 export class ArchiveGalleryScreen extends React.Component {
 
@@ -43,7 +44,7 @@ export class ArchiveGalleryScreen extends React.Component {
         pictures.map(row => {
             images.push({
                 caption: row.date,
-                source: { uri: row.source }
+                source: { uri: FilePicturePath() + row.source }
             });
         });
 

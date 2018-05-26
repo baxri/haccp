@@ -92,6 +92,7 @@ export class NonconflistIndexScreen extends React.Component {
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
                         format="DD-MM-YYYY"
+                        androidMode="spinner"
                         onDateChange={(date) => {
                             this.setState({
                                 start_date: reverseFormat(date)
@@ -106,6 +107,7 @@ export class NonconflistIndexScreen extends React.Component {
                         placeholder="select date"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
+                        androidMode="spinner"
                         format="DD-MM-YYYY"
                         onDateChange={(date) => {
                             this.setState({

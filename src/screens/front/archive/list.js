@@ -18,7 +18,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Strings from '../../../language/fr';
-import { reverseFormat } from '../../../utilities/index';
+import { reverseFormat, FilePicturePath } from '../../../utilities/index';
 
 export class ArchiveListScreen extends React.Component {
 
@@ -96,8 +96,6 @@ export class ArchiveListScreen extends React.Component {
                                                 {row.type == 0 && <H3>{Strings.RECEPTION_CHECK} - {row.user.name}</H3>}
                                                 {row.type == 1 && <H3>{Strings.CONTROLE_FROID} - {row.user.name}</H3>}
                                                 {row.type == 2 && <H3>{Strings.NONCONFORME} - {row.user.name}</H3>}
-                                                {/* {row.type == 0 && <Thumbnail source={{ uri: row.source }} />} */}
-                                                {/* {row.type == 1 && <Thumbnail source={{ uri: row.signature }} />} */}
                                             </Body>
                                             <Right>
                                                 <H3 note> {reverseFormat(row.date)}</H3>
@@ -132,7 +130,7 @@ export class ArchiveListScreen extends React.Component {
                                             <Image
                                                 resizeMode={'cover'}
                                                 style={{ width: this.state.imageSize.width, height: this.state.imageSize.height }}
-                                                source={{ uri: row.source }}
+                                                source={{ uri: FilePicturePath() + row.source }}
                                             />
                                         </Button>
                                     })}

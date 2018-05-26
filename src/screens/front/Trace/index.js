@@ -16,7 +16,9 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addPicture, Pictures } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
-import {reverseFormat} from '../../../utilities/index';
+import { reverseFormat } from '../../../utilities/index';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -91,24 +93,18 @@ export class TraceIndexScreen extends React.Component {
 
         var options = {
             quality: 1,
-            // maxWidth: 500,
-            // maxHeight: 500,
             storageOptions: {
                 cameraRoll: false,
             }
         };
 
         ImagePicker.launchCamera(options, (response) => {
-
-            let source = { uri: response.uri };
-
-            // You can also display the image using data:
+            // let source = { uri: response.uri };
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-            this.setState({
-                source: source.uri,
+            writePicture(response.data).then(filename => {
+                this.setState({ source: filename });
             });
-
         });
     };
 
@@ -152,12 +148,10 @@ export class TraceIndexScreen extends React.Component {
                         {this.state.source.length == 0 && <Button style={{ flex: 1, }} full light onPress={this._pickImage} >
                             <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                         </Button>}
-                        {/* <Text>IMAGE URL: {this.state.avatarSource}</Text> */}
-
                         {this.state.source.length > 0 && <Image
                             resizeMode={'contain'}
                             style={{ flex: 1, }}
-                            source={{ uri: this.state.source }}
+                            source={{ uri: FilePicturePath() + this.state.source }}
                         />}
                     </View>
                     <View style={{ alignItems: 'center', paddingTop: 40, }}>

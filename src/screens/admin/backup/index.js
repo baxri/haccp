@@ -17,6 +17,8 @@ import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'react-native-fetch-blob';
+import { PATH, realmFilePath } from '../../../utilities/index';
+
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -123,8 +125,8 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
-                                <H3 style={{ marginBottom: 30, }}>DB: {RealmFile()}</H3>
-                                <H3 style={{ marginBottom: 30, }}>PICTURES: {RNFetchBlob.fs.dirs.PictureDir}</H3>
+                                <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
+                                <H3 style={{ marginBottom: 30, }}>{PATH}</H3>
 
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >
@@ -143,8 +145,6 @@ export class AdminBackupIndexScreen extends React.Component {
                                         <Icon name='wifi' style={{ color: 'white', }} />
                                     </Right>
                                 </Button>}
-
-
                             </View>
                         </Form>
                     </View>

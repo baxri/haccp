@@ -16,7 +16,6 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addControle, Controles, Pictures, User } from '../../../database/realm';
-import { movePicture, writePicture } from '../../../utilities/index';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -26,6 +25,7 @@ import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 
 
 export class ControleIndexScreen extends React.Component {
@@ -123,58 +123,27 @@ export class ControleIndexScreen extends React.Component {
 
         var options = {
             quality: 1,
-            // maxWidth: 500,
-            // maxHeight: 500,
             storageOptions: {
                 cameraRoll: false,
             }
         };
 
         ImagePicker.launchCamera(options, (response) => {
-
-            let source = { uri: response.uri };
-
-            // alert(response.uri);
-
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            this.setState({
-                source: source.uri,
+            writePicture(response.data).then(filename => {
+                this.setState({ source: filename });
             });
-
         });
     };
 
+    _onSave = async (result) => {
+        writePicture(result.encoded).then(filename => {
+            this.setState({ signature: filename });
+            this._signatureView.show(false);
+        });
+    }
 
     _showSignatureView() {
         this._signatureView.show(true);
-    }
-
-
-    _onSave = async (result) => {
-        var dir = RNFS.ExternalStorageDirectoryPath + '/signatures/';
-        var filename = Math.floor(Date.now() / 1000) + '.png';
-        var path = dir + filename;
-
-        // writePicture(result.encoded).then(filename => {
-        // //    this.setState({ signature: 'file://' + pathttt });  
-        //    this.setState({ signature: 'file://' + RNFetchBlob.fs.dirs.PictureDir + '/HACCPIMAGES/' + filename });  
-        // });
-       
-
-        RNFS.mkdir(dir).then((res) => {
-            RNFS.writeFile(path, result.encoded, 'base64')
-                .then((success) => {
-                    this.setState({ signature: 'file://' + path });                  
-                })
-                .catch((err) => { alert(err.message) });
-        }).catch((err => { alert(err) }));
-
-
-
-
-        this._signatureView.show(false);
     }
 
     _checkAspect(value) {
@@ -307,7 +276,7 @@ export class ControleIndexScreen extends React.Component {
                                     {this.state.source != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
-                                        source={{ uri: this.state.source }}
+                                        source={{ uri: FilePicturePath() + this.state.source }}
                                     /></View>}
                                 </Col>
                                 <Col style={{ padding: 5, borderColor: 'red', flex: 0.5, }}>
@@ -318,7 +287,7 @@ export class ControleIndexScreen extends React.Component {
                                     {this.state.signature != '' && <View style={{ flex: 1, backgroundColor: 'white' }}><Image
                                         resizeMode={'contain'}
                                         style={{ flex: 1, }}
-                                        source={{ uri: this.state.signature }}
+                                        source={{ uri: FilePicturePath() + this.state.signature }}
                                     /></View>}
                                 </Col>
                             </Row>
