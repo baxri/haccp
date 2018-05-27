@@ -17,7 +17,7 @@ import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'react-native-fetch-blob';
-import { PATH, realmFilePath } from '../../../utilities/index';
+import { PATH, PATH_REALM_FILE, realmFilePath } from '../../../utilities/index';
 
 
 export class AdminBackupIndexScreen extends React.Component {
@@ -32,7 +32,6 @@ export class AdminBackupIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.BACKUP} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -63,50 +62,36 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _sync = async () => {
 
+        this._showLoader();
+
         let ID = DeviceInfo.getUniqueID();
         let file = RealmFile();
 
-        this._showLoader();
-        const options = {
-            url: 'http://upload.bibi.ge/api/upload',
-            path: file,
-            method: 'POST',
-            field: 'dbfile',
-            type: 'multipart',
-            headers: {
-                'content-type': 'application/octet-stream',
-                'haccp-device': ID,
-            },
-        }
-
         setTimeout(() => {
 
-            Upload.startUpload(options).then((uploadId) => {
+            RNFetchBlob.fs.ls(PATH)
+                .then((files) => {
+                    let formFiles = [];
+                    formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(RealmFile()) });
 
-                Upload.addListener('progress', uploadId, (data) => {
-                })
+                    if (files.length > 0) {
+                        files.map((file => {
+                            formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
+                        }));
+                    }
 
-                Upload.addListener('error', uploadId, (data) => {
-                    this._hideLoader();
-                    Talert(data.error);
-                })
-
-                Upload.addListener('cancelled', uploadId, (data) => {
-                    this._hideLoader();
-                    ToastAndroid.show(Strings.DATA_UPLOADED_CANCELED, ToastAndroid.LONG);
-                })
-
-                Upload.addListener('completed', uploadId, (data) => {
-                    this._hideLoader();
-                    this.props.navigation.navigate("AdminHome");
-                    ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                })
-
-            }).catch((err) => {
-                this._hideLoader();
-                alert(err);
-            })
-
+                    RNFetchBlob.fetch('POST', 'http://upload.bibi.ge/api/upload', {
+                        'haccp-device': ID,
+                        'Content-Type': 'multipart/form-data',
+                    }, formFiles).then((resp) => {
+                        this._hideLoader();
+                        this.props.navigation.navigate("AdminHome");
+                        ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                    }).catch((err) => {
+                        this._hideLoader();
+                        alert(err);
+                    });
+                });
         }, 500);
     };
 
@@ -125,8 +110,8 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
-                                {/* <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
-                                <H3 style={{ marginBottom: 30, }}>{PATH}</H3> */}
+                                <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
+                                <H3 style={{ marginBottom: 30, }}>{PATH}</H3>
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.UPLOAD}</Text>
