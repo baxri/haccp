@@ -70,7 +70,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 25, marginTop: 20, }} >{Strings.DEPARTMENTS} ({this.state.departments.length})</Text>
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.DEPARTMENTS} ({this.state.departments.length})</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -78,7 +78,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='people' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 25, marginTop: 20, }} >{Strings.USERS} ({this.state.users.length})</Text>
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.USERS} ({this.state.users.length})</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -88,7 +88,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='sync' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 25, marginTop: 20, }} >{Strings.BACKUP}</Text>
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.BACKUP}</Text>
                                 </View>
                             </Button>
                         </Col>
@@ -96,7 +96,7 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => alert(Strings.COMMING_SOON)}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 25, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>
                                 </View>
                             </Button>
                         </Col>
