@@ -11,13 +11,13 @@
                     "endOffset": 208
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 283,
+                        "startOffset": 245,
                         "endColumn": 103,
-                        "endOffset": 386
+                        "endOffset": 348
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 405
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 0,
-                        "startOffset": 387,
+                        "startOffset": 349,
                         "endColumn": 196,
-                        "endOffset": 583
+                        "endOffset": 545
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 541
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 0,
-                        "startOffset": 584,
+                        "startOffset": 546,
                         "endColumn": 131,
-                        "endOffset": 715
+                        "endOffset": 677
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 651
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 0,
-                        "startOffset": 716,
+                        "startOffset": 678,
                         "endColumn": 105,
-                        "endOffset": 821
+                        "endOffset": 783
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 864
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 0,
-                        "startOffset": 822,
+                        "startOffset": 784,
                         "endColumn": 212,
-                        "endOffset": 1034
+                        "endOffset": 996
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 1002
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 0,
-                        "startOffset": 1035,
+                        "startOffset": 997,
                         "endColumn": 133,
-                        "endOffset": 1168
+                        "endOffset": 1130
                     }
                 }
             },
@@ -121,17 +121,17 @@
                     "startLine": 8,
                     "startColumn": 4,
                     "startOffset": 1007,
-                    "endColumn": 141,
-                    "endOffset": 1144
+                    "endColumn": 156,
+                    "endOffset": 1159
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 0,
-                        "startOffset": 1169,
-                        "endColumn": 137,
-                        "endOffset": 1306
+                        "startOffset": 1131,
+                        "endColumn": 152,
+                        "endOffset": 1283
                     }
                 }
             },
@@ -139,18 +139,18 @@
                 "to": {
                     "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 1149,
-                    "endColumn": 209,
-                    "endOffset": 1354
+                    "startOffset": 1164,
+                    "endColumn": 141,
+                    "endOffset": 1301
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
-                        "startLine": 4,
+                        "startLine": 11,
                         "startColumn": 0,
-                        "startOffset": 285,
-                        "endColumn": 209,
-                        "endOffset": 494
+                        "startOffset": 1284,
+                        "endColumn": 137,
+                        "endOffset": 1421
                     }
                 }
             },
@@ -158,18 +158,18 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 1359,
-                    "endColumn": 225,
-                    "endOffset": 1580
+                    "startOffset": 1306,
+                    "endColumn": 209,
+                    "endOffset": 1511
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
-                        "startLine": 11,
+                        "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 1307,
-                        "endColumn": 225,
-                        "endOffset": 1532
+                        "startOffset": 247,
+                        "endColumn": 209,
+                        "endOffset": 456
                     }
                 }
             },
@@ -177,18 +177,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 1585,
-                    "endColumn": 109,
-                    "endOffset": 1690
+                    "startOffset": 1516,
+                    "endColumn": 225,
+                    "endOffset": 1737
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 0,
-                        "startOffset": 1533,
-                        "endColumn": 105,
-                        "endOffset": 1638
+                        "startOffset": 1422,
+                        "endColumn": 225,
+                        "endOffset": 1647
                     }
                 }
             },
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1695,
-                    "endColumn": 198,
-                    "endOffset": 1889
+                    "startOffset": 1742,
+                    "endColumn": 109,
+                    "endOffset": 1847
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 0,
-                        "startOffset": 1639,
-                        "endColumn": 198,
-                        "endOffset": 1837
+                        "startOffset": 1648,
+                        "endColumn": 105,
+                        "endOffset": 1753
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1894,
-                    "endColumn": 137,
-                    "endOffset": 2027
+                    "startOffset": 1852,
+                    "endColumn": 198,
+                    "endOffset": 2046
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 0,
-                        "startOffset": 1838,
-                        "endColumn": 133,
-                        "endOffset": 1971
+                        "startOffset": 1754,
+                        "endColumn": 198,
+                        "endOffset": 1952
                     }
                 }
             },
@@ -234,18 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 2032,
-                    "endColumn": 220,
-                    "endOffset": 2248
+                    "startOffset": 2051,
+                    "endColumn": 137,
+                    "endOffset": 2184
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 0,
-                        "startOffset": 1972,
-                        "endColumn": 220,
-                        "endOffset": 2192
+                        "startOffset": 1953,
+                        "endColumn": 133,
+                        "endOffset": 2086
                     }
                 }
             },
@@ -253,18 +253,18 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 2253,
-                    "endColumn": 195,
-                    "endOffset": 2444
+                    "startOffset": 2189,
+                    "endColumn": 220,
+                    "endOffset": 2405
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 0,
-                        "startOffset": 2193,
-                        "endColumn": 191,
-                        "endOffset": 2384
+                        "startOffset": 2087,
+                        "endColumn": 220,
+                        "endOffset": 2307
                     }
                 }
             },
@@ -272,18 +272,18 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 2449,
-                    "endColumn": 94,
-                    "endOffset": 2539
+                    "startOffset": 2410,
+                    "endColumn": 195,
+                    "endOffset": 2601
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 0,
-                        "startOffset": 2385,
-                        "endColumn": 90,
-                        "endOffset": 2475
+                        "startOffset": 2308,
+                        "endColumn": 191,
+                        "endOffset": 2499
                     }
                 }
             },
@@ -291,18 +291,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 2544,
-                    "endColumn": 96,
-                    "endOffset": 2636
+                    "startOffset": 2606,
+                    "endColumn": 94,
+                    "endOffset": 2696
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 0,
-                        "startOffset": 2476,
-                        "endColumn": 92,
-                        "endOffset": 2568
+                        "startOffset": 2500,
+                        "endColumn": 90,
+                        "endOffset": 2590
                     }
                 }
             },
@@ -310,18 +310,75 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 2641,
-                    "endColumn": 110,
-                    "endOffset": 2747
+                    "startOffset": 2701,
+                    "endColumn": 96,
+                    "endOffset": 2793
                 },
                 "from": {
-                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-hy\\values.xml",
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 0,
-                        "startOffset": 2569,
+                        "startOffset": 2591,
+                        "endColumn": 92,
+                        "endOffset": 2683
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 2798,
+                    "endColumn": 110,
+                    "endOffset": 2904
+                },
+                "from": {
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-hy\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 0,
+                        "startOffset": 2684,
                         "endColumn": 106,
-                        "endOffset": 2675
+                        "endOffset": 2790
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 2909,
+                    "endColumn": 102,
+                    "endOffset": 3007
+                },
+                "from": {
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-gcm\\15.0.1\\res\\values-hy\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 0,
+                        "startOffset": 190,
+                        "endColumn": 98,
+                        "endOffset": 288
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 3012,
+                    "endColumn": 100,
+                    "endOffset": 3108
+                },
+                "from": {
+                    "file": "E:\\BIBI\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\support-compat\\26.1.0\\res\\values-hy\\values-hy.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 100,
+                        "endOffset": 151
                     }
                 }
             }

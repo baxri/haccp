@@ -6,6 +6,17 @@ import { realmFilePath } from '../../src/utilities/index';
 
 const Realm = require('realm');
 
+
+const EquipmentSchema = {
+    primaryKey: 'id',
+    name: 'Equipment',
+
+    properties: {
+        id: 'string',    // primary key
+        name: 'string',
+    }
+};
+
 const ControleSchema = {
     primaryKey: 'id',
     name: 'Controle',
@@ -97,8 +108,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 17;
-const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema];
+const schemaVersion = 18;
+const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema];
 const realmPath = realmFilePath();
 
 export const RealmFile = () => {

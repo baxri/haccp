@@ -51,6 +51,7 @@ MERGED from [com.google.android.gms:play-services-iid:11.0.4] E:\BIBI\react\hacc
 MERGED from [com.google.android.gms:play-services-base:11.0.4] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\11.0.4\AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-tasks:11.0.4] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\11.0.4\AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-basement:11.0.4] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\11.0.4\AndroidManifest.xml:19:5-21:19
+MERGED from [haccp:react-native-fetch-blob:unspecified] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\haccp\react-native-fetch-blob\unspecified\AndroidManifest.xml:11:5-12:19
 MERGED from [com.facebook.react:react-native:0.55.3] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.3\AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:25.3.1] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:support-v4:25.3.1] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.3.1\AndroidManifest.xml:29:5-20
@@ -113,6 +114,7 @@ MERGED from [com.google.android.gms:play-services-base:11.0.4] E:\BIBI\react\hac
 MERGED from [com.google.android.gms:play-services-tasks:11.0.4] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\11.0.4\AndroidManifest.xml:3:5-43
 MERGED from [com.google.android.gms:play-services-basement:11.0.4] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\11.0.4\AndroidManifest.xml:17:5-43
 MERGED from [haccp:react-native-upload-file:unspecified] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\haccp\react-native-upload-file\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [haccp:react-native-fetch-blob:unspecified] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\haccp\react-native-fetch-blob\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.3] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.3\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:25.3.1] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.3.1\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:support-v4:25.3.1] E:\BIBI\react\haccp\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.3.1\AndroidManifest.xml:21:5-23:54
