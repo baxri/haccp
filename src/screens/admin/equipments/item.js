@@ -106,7 +106,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                 <Content padder style={{ flex: 1 }}>
                     <Form>
                         <Item floatingLabel style={styles.input}>
-                            <Label>{Strings.DEPARTMENT_NAME}</Label>
+                            <Label>{Strings.EQUIPMENT_NAME}</Label>
                             <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                         </Item>
                         <View style={{ alignItems: 'center' }}>
