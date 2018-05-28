@@ -95,13 +95,6 @@ export class AdminEquipmentsItemScreen extends React.Component {
     render() {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <PopupDialog
-                    ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-                >
-                    <View>
-                        <Text>Hello</Text>
-                    </View>
-                </PopupDialog>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content padder style={{ flex: 1 }}>
                     <Form>
