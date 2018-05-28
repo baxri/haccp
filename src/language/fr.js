@@ -51,6 +51,10 @@ const strings = {
     CLEANING_SCHEDULE: 'Planning de nettoyage',
     EQUIPMENTS: 'Equipements',
 
+    // EQUIPMENTS
+    THERE_IS_NO_EQUIPMENTS_YET: 'THERE_IS_NO_EQUIPMENTS_YET',
+    SAVE_EQUIPMENT: 'EQUIPMENT',
+
     // DEPARTMENTS
     DEPARTMENT: 'Rayons',
     DEPARTMENT_NAME: 'Nom du rayon',

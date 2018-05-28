@@ -15,8 +15,13 @@ import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 import { HelloAppScreen } from './src/screens/app/hello-app';
 
 // Admin Screens
+
+
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
+
+import { AdminEquipmentsIndexScreen } from './src/screens/admin/equipments/index';
+import { AdminEquipmentsItemScreen } from './src/screens/admin/equipments/item';
 
 import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
 import { AdminUsersItemScreen } from './src/screens/admin/users/item';
@@ -235,6 +240,22 @@ const AdminHomeStack = StackNavigator(
   }
 );
 
+const AdminEquipmentsStack = StackNavigator(
+  {
+    AdminEquipmentsIndex: AdminEquipmentsIndexScreen,
+    AdminEquipmentsItem: AdminEquipmentsItemScreen,
+  },
+  {
+    initialRouteName: 'AdminEquipmentsIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const AdminUsersStack = StackNavigator(
   {
     AdminUsersIndex: AdminUsersIndexScreen,
@@ -297,6 +318,7 @@ const AdminBackupStack = StackNavigator(
 
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
+  AdminEquipments: AdminEquipmentsStack,
   AdminDepartments: AdminDepartmentsStack,
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
