@@ -83,7 +83,7 @@ const strings = {
     CLEANING: 'Nettoyage',
     ARCHIVE: 'Archive',
     NONCONFORME: 'Contrôle des produits non conf.',
-    NONCONFORMELIST: 'des produits non conf.',
+    NONCONFORMELIST: 'Liste des produits non conf.',
 
     //TRACEABILITY
     PLEASE_TAKE_A_PICTURE: 'Ajouter une photo',
