@@ -21,6 +21,7 @@ import com.rnfs.RNFSPackage; // <------- add package
 import com.vydia.RNUploader.UploaderReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import com.rnziparchive.RNZipArchivePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -40,7 +41,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RSSignatureCapturePackage(),
           new RNFSPackage(),
           new UploaderReactPackage(),
-          new RNFetchBlobPackage()
+          new RNFetchBlobPackage(),
+          new RNZipArchivePackage()
       );
     }
 
