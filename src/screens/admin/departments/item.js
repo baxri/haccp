@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addDepartment, editDepartment } from '../../../database/realm';
+import { addDepartment, editDepartment, Equipments } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -38,6 +38,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
         // Need id and name parameters (this is a requred parameter for this screen)
         this.state = {
             loading: 0,
+            equipments_select: [],
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
@@ -49,8 +50,11 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
     _bootstrapAsync = async () => {
 
+        let equipments = await Equipments();
+
         this.setState({
             loading: 0,
+            equipments_select: equipments,
         });
     };
 
@@ -103,6 +107,9 @@ export class AdminDepartmentsItemScreen extends React.Component {
     };
 
     render() {
+
+        
+
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
                 <PopupDialog
@@ -137,6 +144,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                                     setTimeout(() => {
                                         this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
+                                            equipments_select: this.state.equipments_select,
                                             value: this.state.equipments,
                                             equipmentsChoosed: this._equipmentsChoosed
                                         })

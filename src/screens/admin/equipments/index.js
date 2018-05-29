@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Equipments, DeleteEquipment } from '../../../database/realm';
+import { Equipments, DeleteEquipment, Departments } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -49,6 +49,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
             refreshig: false,
             basic: true,
             listViewData: [],
+            departments: [],
         };
 
         this._bootstrapAsync();
@@ -73,11 +74,13 @@ export class AdminEquipmentsIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
+        const departments = await Departments();
 
         this.setState({
             loading: 0,
             userSession: userSession,
             userSessionType: userSessionType,
+            departments: departments,
         });
     };
 
@@ -98,10 +101,31 @@ export class AdminEquipmentsIndexScreen extends React.Component {
         )
     }
 
+    _allowDelete(id) {
+
+        let choosed = [];
+
+        this.state.departments.map(department => {
+            department.equipments.map(item => {
+
+                let idE = item.split(":")[0]
+
+                if (idE == id) {
+                    choosed.push(1);
+                }
+            });
+        });
+
+        if (choosed.length == 0) {
+            return true;
+        }
+
+        return false;
+    }
 
     _deleteRow(id, secId, rowId, rowMap) {
 
-        rowMap[`${secId}${rowId}`].props.closeRow();        
+        rowMap[`${secId}${rowId}`].props.closeRow();
 
         DeleteEquipment(id).then(item => {
             rowMap[`${secId}${rowId}`].props.closeRow();
@@ -145,7 +169,10 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                                             onPress={() => this.props.navigation.navigate('AdminEquipmentsItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        {true && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                            <Icon active name="trash" />
+                                        </Button>}
+                                        {!this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full disabled>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>

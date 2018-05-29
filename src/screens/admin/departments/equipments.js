@@ -31,6 +31,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
 
         this.state = {
             preCheckedData: this.props.navigation.state.params.value,
+            equipments_select: this.props.navigation.state.params.equipments_select,
             // preCheckedData: [
             //     "2:equipment-2:true",
             // ],
@@ -55,10 +56,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         this.setState({ formatedData: populate });
 
     };
-
-    componentDidFocus = async () => {
-
-    };
+   
 
     _serializeList() {
         return new Promise((resolve => {
@@ -79,16 +77,22 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         return new Promise((resolve => {
             let populate = [];
 
-            this.state.listViewData.map((item) => {
+           
+            this.state.equipments_select.map((item) => {
 
                 let obj = {
-                    id: this._id(item),
-                    name: this._name(item),
-                    checked: this._checked(item),
+                    // id: this._id(item),
+                    // name: this._name(item),
+                    // checked: this._checked(item),
+
+                    id: item.id,
+                    name: item.name,
+                    checked: false,
                 }
 
                 let checked = this.state.preCheckedData.filter((row) => {
-                    return this._id(item) == this._id(row)
+                    // return this._id(item) == this._id(row)
+                    return item.id == this._id(row)
                 });
 
                 if (checked.length > 0) {
@@ -153,7 +157,8 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
         return id + ":" + name + ":false";
     }
 
-    render() {
+    render() {        
+
         return (
             <Container>
                 <Content>
