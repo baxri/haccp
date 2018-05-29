@@ -319,7 +319,7 @@ export class FroidIndexScreen extends React.Component {
                             {row.value.map((val, index) => {
                                 return <Item inlineLabel style={styles.input}>
                                     <Label>{Strings.TEMPERATURE}</Label>
-                                    <Input keyboardType="numeric" value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
+                                    <Input autoFocus={true} keyboardType="numeric" value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
                                     <Icon active name='thermometer' />
                                 </Item>
                             })}

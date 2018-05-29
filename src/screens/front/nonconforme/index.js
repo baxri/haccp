@@ -302,7 +302,7 @@ export class NonConformeIndexScreen extends React.Component {
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
                     <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
 
-                    {/* <H3>{this.state.traitment_date}</H3> */}
+                    <Text style={{marginBottom: 15,}}>{Strings.TRAITMENT_DATE}</Text>
 
                     <DatePicker
                         style={{ width: 300 }}

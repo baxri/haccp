@@ -68,8 +68,8 @@ export class ControleIndexScreen extends React.Component {
             aspect: 0,
             du_produit: '',
 
-            intact: 0,
-            conforme: 0,
+            intact: 1,
+            conforme: 1,
 
             autres: '',
             actions: '',
