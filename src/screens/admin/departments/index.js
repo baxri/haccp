@@ -14,7 +14,7 @@ import {
 
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
 import { Departments, DeleteDepartment } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -33,7 +33,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.DEPARTMENTS} />,
-            // headerRight: <Menu navigation={navigation} />,
+            headerRight: <Equipments navigation={navigation} />,
         };
     };
 

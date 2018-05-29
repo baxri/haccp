@@ -23,6 +23,20 @@ export class Menu extends React.Component {
     }
 }
 
+export class Equipments extends React.Component {
+    render() {
+        return (
+            <View>
+                <Button style={{ height: 55, padding: 10, color: 'red', }} transparent onPress={() => {
+                    this.props.navigation.navigate('AdminEquipments');
+                }}>
+                    <Icon name='analytics'  style={{ color: 'white', }} />
+                </Button>
+            </View>
+        );
+    }
+}
+
 export class NoBackButton extends React.Component {
     render() {
         return (
