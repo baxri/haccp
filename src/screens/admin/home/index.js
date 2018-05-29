@@ -67,6 +67,14 @@ export class AdminHomeIndexScreen extends React.Component {
                 <Grid>
                     <Row >
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminEquipments')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='analytics' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
+                                </View>
+                            </Button>
+                        </Col>
+                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminDepartments')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='briefcase' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
@@ -74,6 +82,9 @@ export class AdminHomeIndexScreen extends React.Component {
                                 </View>
                             </Button>
                         </Col>
+
+                    </Row>
+                    <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminUsers')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -82,8 +93,6 @@ export class AdminHomeIndexScreen extends React.Component {
                                 </View>
                             </Button>
                         </Col>
-                    </Row>
-                    <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -92,21 +101,13 @@ export class AdminHomeIndexScreen extends React.Component {
                                 </View>
                             </Button>
                         </Col>
+                    </Row>
+                    <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => alert(Strings.COMMING_SOON)}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>
-                                </View>
-                            </Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminEquipments')}>
-                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='analytics' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
                                 </View>
                             </Button>
                         </Col>
