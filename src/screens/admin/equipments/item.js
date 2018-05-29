@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addDepartment, editDepartment } from '../../../database/realm';
+import { addEquipment, editEquipment } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -65,10 +65,10 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
         setTimeout(() => {
             if (!this.state.id) {
-                addDepartment({
+                addEquipment({
                     name: this.state.name,
                 }).then(res => {
-                    this.props.navigation.navigate('AdminDepartmentsIndex');
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
 
@@ -76,15 +76,13 @@ export class AdminEquipmentsItemScreen extends React.Component {
                     alert(error);
                 });
             } else {
-                editDepartment({
+                editEquipment({
                     id: this.state.id,
-                    name: this.state.name,
-                    equipments: this.state.equipments
+                    name: this.state.name,                   
                 }).then(res => {
-                    this.props.navigation.navigate('AdminDepartmentsIndex');
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
-
                 }).catch(error => {
                     alert(error);
                 });

@@ -130,6 +130,78 @@ export const User = (userId) => new Promise((resolve, reject) => {
         });
 });
 
+// Equipments ==============================================================================
+
+export const addEquipment = (item) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            // Create Realm objects and write to local storage
+            realm.write(() => {
+                const department = realm.create('Equipment', {
+                    id: _guid(),
+                    name: item.name,
+                });
+
+                resolve(department);
+
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const editEquipment = (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            // Update Realm objects and write to local storage
+            realm.write(() => {
+                let department = realm.create('Equipment', item, true);
+                resolve(department);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const Equipments = async (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('Equipment').sorted('name', true);
+            resolve(items);
+        })
+        .catch(error => {
+            setTimeout(() => {
+                alert(error);
+                reject(error);
+            }, 1000);
+        });
+
+
+});
+
+export const DeleteEquipment = (id) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let department = realm.create('Equipment', { id: id }, true);
+                realm.delete(department);
+                resolve();
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+// END Equipments ==============================================================================
+
+
+
 export const addDepartment = (item) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -274,6 +346,7 @@ export const DeleteUser = (id) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
 
 
 // PICTURES ============================================================================

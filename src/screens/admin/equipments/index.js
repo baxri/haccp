@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Departments, DeleteDepartment } from '../../../database/realm';
+import { Equipments, DeleteEquipment } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -82,7 +82,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
     };
 
     _loadItems = async () => {
-        let items = await Departments();
+        let items = await Equipments();
         this.setState({ listViewData: items, refreshing: false });
     }
 
@@ -101,13 +101,9 @@ export class AdminEquipmentsIndexScreen extends React.Component {
 
     _deleteRow(id, secId, rowId, rowMap) {
 
-        rowMap[`${secId}${rowId}`].props.closeRow();
+        rowMap[`${secId}${rowId}`].props.closeRow();        
 
-        if (this.state.listViewData[rowId].users.length > 0) {
-            return;
-        }
-
-        DeleteDepartment(id).then(item => {
+        DeleteEquipment(id).then(item => {
             rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
         }).catch(error => {
@@ -140,23 +136,16 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 5 }}>{Strings.USERS}: {data.users.length} </Text>
-                                        <Text>{Strings.EQUIPMENTS}:  ({data.equipments.length}) </Text>
                                     </View>
-
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
 
                                         <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
-                                            onPress={() => this.props.navigation.navigate('AdminDepartmentsItem', data)}>
+                                            onPress={() => this.props.navigation.navigate('AdminEquipmentsItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-
-                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} disabled full onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
-                                            <Icon active name="trash" />
-                                        </Button>}
-                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {true && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>
@@ -169,10 +158,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                             </Button>}
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
                             <View style={{ flex: 1, }}>
-                                {data.users.length > 0 && <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
-                                    <Icon active name="trash" />
-                                </Button>}
-                                {data.users.length == 0 && <Button full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                {true && <Button full danger onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
                                     <Icon active name="trash" />
                                 </Button>}
                             </View>

@@ -11,7 +11,7 @@ import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'nati
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Departments, Users } from '../../../database/realm';
+import { Departments, Users, Equipments } from '../../../database/realm';
 import Strings from '../../../language/fr'
 
 export class AdminHomeIndexScreen extends React.Component {
@@ -26,7 +26,6 @@ export class AdminHomeIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.DASHBOARD} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -37,6 +36,7 @@ export class AdminHomeIndexScreen extends React.Component {
             loading: 0,
             departments: [],
             users: [],
+            equipments: [],
         };
 
         this._bootstrapAsync();
@@ -57,8 +57,8 @@ export class AdminHomeIndexScreen extends React.Component {
     _loadItems = async () => {
         let departments = await Departments();
         let users = await Users();
-
-        this.setState({ departments: departments, users: users });
+        let equipments = await Equipments();
+        this.setState({ departments: departments, users: users, equipments: equipments });
     }
 
     render() {
@@ -106,14 +106,13 @@ export class AdminHomeIndexScreen extends React.Component {
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminEquipments')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='analytics' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.EQUIPMENTS}</Text>
+                                    <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, }} >{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
                                 </View>
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
 
                         </Col>
-
                     </Row>
                 </Grid>
             </Container>
