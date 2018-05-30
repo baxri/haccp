@@ -81,17 +81,29 @@ export class NonConformeDetailsScreen extends React.Component {
                         <CardItem bordered>
                             <Body>
                                 <View style={{ padding: 10, flexDirection: 'row' }}>
-                                    {this.state.item.source != '' && <View style={{ backgroundColor: 'white', margin: 10, }}><Image
-                                        resizeMode={'cover'}
+                                    {this.state.item.source != '' && <Button
                                         style={{ width: 70, height: 70, borderRadius: 100, }}
-                                        source={{ uri: FilePicturePath() + this.state.item.source }}
-                                    /></View>}
+                                        onPress={() => this.props.navigation.navigate('NonConformeGallery', {
+                                            index: 0,
+                                            pictures: [{ source: this.state.item.source }],
+                                        })}><View style={{ backgroundColor: 'white', borderRadius: 100, borderWidth: 1, }}>
+                                            <Image
+                                                resizeMode={'cover'}
+                                                style={{ width: 70, height: 70, borderRadius: 100, }}
+                                                source={{ uri: FilePicturePath() + this.state.item.source }}
+                                            /></View></Button>}
 
-                                    {this.state.item.signature != '' && <View style={{ backgroundColor: 'white', margin: 10, borderRadius: 100, borderWidth: 1 }}><Image
-                                        resizeMode={'cover'}
-                                        style={{ width: 70, height: 70, borderRadius: 100, borderWidth: 1, }}
-                                        source={{ uri: FilePicturePath() + this.state.item.signature }}
-                                    /></View>}
+                                    {this.state.item.signature != '' && <Button
+                                        style={{ width: 70, height: 70, borderRadius: 100, }}
+                                        onPress={() => this.props.navigation.navigate('NonConformeGallery', {
+                                            index: 1,
+                                            pictures: [{ source: this.state.item.signature }],
+                                        })}><View style={{ backgroundColor: 'white', borderRadius: 100, borderWidth: 1, }}>
+                                            <Image
+                                                resizeMode={'cover'}
+                                                style={{ width: 70, height: 70, borderRadius: 100, }}
+                                                source={{ uri: FilePicturePath() + this.state.item.signature }}
+                                            /></View></Button>}
                                 </View>
                             </Body>
                         </CardItem>

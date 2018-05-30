@@ -187,6 +187,7 @@ const NonconlistfStack = StackNavigator(
   {
     NonconflistIndex: NonconflistIndexScreen,
     NonConformeDetails: NonConformeDetailsScreen,
+    NonConformeGallery: ArchiveGalleryScreen,
   },
   {
     initialRouteName: 'NonconflistIndex',
