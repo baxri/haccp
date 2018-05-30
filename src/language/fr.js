@@ -52,9 +52,9 @@ const strings = {
     EQUIPMENTS: 'Equipements',
 
     // EQUIPMENTS
-    THERE_IS_NO_EQUIPMENTS_YET: 'THERE_IS_NO_EQUIPMENTS_YET',
-    SAVE_EQUIPMENT: 'SAVE_EQUIPMENT',
-    EQUIPMENT_NAME: 'EQUIPMENT_NAME',
+    THERE_IS_NO_EQUIPMENTS_YET: 'Aucun équipement',
+    SAVE_EQUIPMENT: 'Sauvegarder l\'équipement',
+    EQUIPMENT_NAME: 'Description',
 
     // DEPARTMENTS
     DEPARTMENT: 'Rayons',
