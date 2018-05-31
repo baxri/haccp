@@ -26,7 +26,7 @@ export class EntryPointScreen extends React.Component {
         initFolders();
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV5');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV6');
 
         // Set up navigation stack for admin and user (default is Auth)
         let stack = 'Auth';

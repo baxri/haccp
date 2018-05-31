@@ -46,7 +46,7 @@ export class SetupAdminScreen extends React.Component {
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV5', password);
+            await AsyncStorage.setItem('adminPasswordV6', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {

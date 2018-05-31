@@ -119,15 +119,15 @@ export class ArchiveIndexScreen extends React.Component {
                 }
 
                 if(add == 0){
-                    alert(str);
+                    // alert(str);
                 }
 
                 if (add) {
-                    days.push(str);
+                    // days.push(str);
                 }
             }
 
-            alert(controles.length);
+            // alert(controles.length);
 
             this.setState({ disabledDays: days });
             this._hideLoader();
