@@ -465,9 +465,9 @@ export const Controles = (userId, date = null, month = null, year = null) => new
 
             if (month != null && year != null) {
 
-                month = month * 1 - 1;
+                month = month * 1;
                 var from = new Date(year, month, 1);
-                var to = new Date(year, month, 31);
+                var to = new Date(year, month, 32);
 
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
