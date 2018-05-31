@@ -108,6 +108,8 @@ const strings = {
     ETIQUTAGE_CONF: 'Etiquetage conforme',
     AUTRES: 'Autres',
     ACTION_CORECTIVES: 'Actions correctives',
+    CONFORM: 'Conforme',
+    NOT_CONFORM: 'Non conforme',
 
     //CONTROLE_FROID
     CONTROLE_FROID_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
