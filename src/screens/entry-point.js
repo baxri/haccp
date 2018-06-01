@@ -28,7 +28,6 @@ export class EntryPointScreen extends React.Component {
         const userSessionType = await AsyncStorage.getItem('userSessionType');
         const adminPassword = await AsyncStorage.getItem('adminPasswordV6');
 
-        // Set up navigation stack for admin and user (default is Auth)
         let stack = 'Auth';
 
         if (userSession) {
@@ -43,7 +42,6 @@ export class EntryPointScreen extends React.Component {
             stack = 'SetupAdmin';
         }
 
-        //You can remove timeout it just to show loader longer :)
         setTimeout(() => {
             this.props.navigation.navigate(stack, {
                 func: () => {
