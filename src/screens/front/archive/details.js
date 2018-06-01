@@ -237,6 +237,13 @@ export class ArchiveDetailsScreen extends React.Component {
 
                         {true && <CardItem bordered>
                             <Body>
+                                {/* <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text> */}
+                                <Text>{Strings.DATETIME}: {this.state.item.created_at.toString()}</Text>
+                            </Body>
+                        </CardItem>}
+
+                         {true && <CardItem bordered>
+                            <Body>
                                 <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text>
                             </Body>
                         </CardItem>}

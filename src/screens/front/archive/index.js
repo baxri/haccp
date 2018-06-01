@@ -65,7 +65,7 @@ export class ArchiveIndexScreen extends React.Component {
     }
 
     onMonthChange(date) {
-        this._setDisabledDays(date.format('M'), date.format('YYYY'));
+        this._setDisabledDays(date.format('M') - 1, date.format('YYYY'));
     }
 
     componentDidMount() {
@@ -92,7 +92,6 @@ export class ArchiveIndexScreen extends React.Component {
         let controles = await Controles(userID, null, month, year);
 
         setTimeout(() => {
-            // month = month * 1 + 1;
             month = month * 1;
 
             var date = new Date(year, month);
@@ -102,6 +101,9 @@ export class ArchiveIndexScreen extends React.Component {
                 date.setDate(date.getDate() + 1);
 
                 let str = new Date(date).toISOString().substring(0, 10);
+
+                // console.log(str);
+
                 let add = 1;
 
                 pictures.map(row => {
@@ -118,16 +120,18 @@ export class ArchiveIndexScreen extends React.Component {
                     });
                 }
 
-                if(add == 0){
+                if (add == 0) {
                     // alert(str);
                 }
 
                 if (add) {
-                    // days.push(str);
+                    days.push(str);
                 }
             }
 
-            // alert(controles.length);
+
+
+          
 
             this.setState({ disabledDays: days });
             this._hideLoader();
@@ -151,7 +155,7 @@ export class ArchiveIndexScreen extends React.Component {
                         onMonthChange={this.onMonthChange}
                         disabledDates={this.state.disabledDays} />
                 </Content>
-                
+
             </Container>
         );
     }
