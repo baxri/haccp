@@ -18,7 +18,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
 import RNFetchBlob from 'react-native-fetch-blob';
-import { FilePicturePath, writePicture } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -46,7 +46,7 @@ export class TraceIndexScreen extends React.Component {
 
             userId: null,
             source: '',
-            date: new Date().toISOString().substring(0, 10),
+            date: toDate((new Date())),
             created_at: new Date(),
         };
 
@@ -75,9 +75,6 @@ export class TraceIndexScreen extends React.Component {
     }
 
     componentDidMount() {
-
-
-
         this._loadItems();
     };
 
@@ -99,6 +96,7 @@ export class TraceIndexScreen extends React.Component {
         };
 
         ImagePicker.launchCamera(options, (response) => {
+
             // let source = { uri: response.uri };
             // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 

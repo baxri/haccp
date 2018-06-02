@@ -14,9 +14,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
-import { FilePicturePath, writePicture } from '../../../utilities/index';
-
-
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 
 export class NonConformeDetailsScreen extends React.Component {
 
@@ -218,7 +216,7 @@ export class NonConformeDetailsScreen extends React.Component {
 
                         {true && <CardItem bordered>
                             <Body>
-                                <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text>
+                                <Text>{Strings.DATETIME}: {reverseFormat(toDate(this.state.item.created_at))}</Text>
                             </Body>
                         </CardItem>}
 

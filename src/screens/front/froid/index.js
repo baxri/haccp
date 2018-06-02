@@ -23,7 +23,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 
 export class FroidIndexScreen extends React.Component {
 
@@ -61,7 +61,7 @@ export class FroidIndexScreen extends React.Component {
             actions: '',
 
             confirmed: 0,
-            date: new Date().toISOString().substring(0, 10),
+            date: toDate(new Date()),
             created_at: new Date(),
         };
 

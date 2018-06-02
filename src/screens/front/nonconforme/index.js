@@ -26,7 +26,7 @@ import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
 import { reverseFormat } from '../../../utilities/index';
-import { FilePicturePath, writePicture } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 
 export class NonConformeIndexScreen extends React.Component {
 
@@ -66,9 +66,9 @@ export class NonConformeIndexScreen extends React.Component {
             causes: '',
             devenir: '',
             traitment: '',
-            traitment_date: new Date().toISOString().substring(0, 10),
+            traitment_date: toDate((new Date())),
 
-            date: new Date().toISOString().substring(0, 10),
+            date: toDate((new Date())),
             created_at: new Date(),
         };
 

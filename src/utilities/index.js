@@ -1,11 +1,14 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 
-export const APP_PICTURE_FOLDER = 'HACCPIMAGES';
+export const FILE_VERSION = '2';
+export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
 export const APP_REALM_FOLDER = 'HACCPDATA';
 
 export const PATH = RNFetchBlob.fs.dirs.SDCardDir + '/' + APP_PICTURE_FOLDER;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
-export const PATH_REALM_FILE = 'haccp-db.realm';
+export const PATH_ZIP = RNFetchBlob.fs.dirs.SDCardDir + '/ZIPS';
+
+export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';
 
 export const reverseFormat = (date) => {
     let ar = date.split("-");
@@ -13,12 +16,15 @@ export const reverseFormat = (date) => {
 };
 
 export const initFolders = async () => {
+
     try {
         let a = await RNFetchBlob.fs.mkdir(PATH + '/');
-    } catch (error) { }
+    } catch (error) { rr }
 
     try {
         let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
+
+
     } catch (error) { }
 };
 
@@ -41,3 +47,25 @@ export const writePicture = async (result) => {
         alert(error);
     }
 };
+
+export const writeZip = async (result) => {
+    var filename = Math.floor(Date.now() / 1000) + '.zip';
+    var filepath = PATH_ZIP + "/" + filename;
+
+    try {
+        let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
+        return filename;
+    } catch (error) {
+        alert(error);
+    }
+};
+
+export const toDate = (date) => {
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+
+    return [date.getFullYear(),
+    (mm > 9 ? '' : '0') + mm,
+    (dd > 9 ? '' : '0') + dd
+    ].join('-');
+}

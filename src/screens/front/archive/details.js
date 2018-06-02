@@ -13,7 +13,7 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr';
-import { reverseFormat, FilePicturePath } from '../../../utilities/index';
+import { reverseFormat, FilePicturePath, toDate } from '../../../utilities/index';
 
 export class ArchiveDetailsScreen extends React.Component {
 
@@ -237,8 +237,7 @@ export class ArchiveDetailsScreen extends React.Component {
 
                         {true && <CardItem bordered>
                             <Body>
-                                {/* <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text> */}
-                                <Text>{Strings.DATETIME}: {this.state.item.created_at.toString()}</Text>
+                                <Text>{Strings.DATETIME}: {reverseFormat(toDate(this.state.item.created_at))}</Text>
                             </Body>
                         </CardItem>}
 

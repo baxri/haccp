@@ -25,7 +25,7 @@ import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
-import { FilePicturePath, writePicture } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 
 
 export class ControleIndexScreen extends React.Component {
@@ -76,7 +76,7 @@ export class ControleIndexScreen extends React.Component {
 
             confirmed: 0,
 
-            date: new Date().toISOString().substring(0, 10),
+            date: toDate(new Date()),
             created_at: new Date(),
         };
 

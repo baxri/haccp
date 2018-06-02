@@ -17,8 +17,7 @@ import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'react-native-fetch-blob';
-import { PATH, PATH_REALM_FILE, realmFilePath } from '../../../utilities/index';
-
+import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -39,6 +38,8 @@ export class AdminBackupIndexScreen extends React.Component {
         super(props);
 
         this.state = {
+            name: '',
+            backup_id: '',
             loading: 0,
             connected: 0,
             date: new Date().toISOString().substring(0, 10),
@@ -60,17 +61,77 @@ export class AdminBackupIndexScreen extends React.Component {
         this.setState({ connected: connected ? 1 : 0 });
     };
 
-    _sync = async () => {
+    _restore = async () => {
 
-        this._showLoader();
+        let backup_id = this.state.backup_id;
+
+        if (backup_id.length == 0) {
+            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
+        }
+
+        let download = 'http://upload.bibi.ge/admin/download/10';
+
+        // send http request in a new thread (using native code)
+        RNFetchBlob.fetch('GET', download, {})
+            .then((res) => {
+                let status = res.info().status;
+
+                if (status == 200) {
+                    // the conversion is done in native code
+                    let base64Str = res.base64()
+                    // the following conversions are done in js, it's SYNC
+                    // let text = res.text()
+                    // let json = res.json()
+
+                    let IMAGES = PATH;
+                    let DB = PATH_REALM + "/" + PATH_REALM_FILE;
+
+                    alert(DB);
+                    return;
+
+                    writeZip(base64Str).then(filename => {
+                        
+
+                        alert(PATH_ZIP + "/" + filename);
+
+                    });
+
+                    
+
+                    
+
+                } else {
+                    alert("Error code" + status);
+                }
+            })
+            // Something went wrong:
+            .catch((errorMessage, statusCode) => {
+                
+                alert(errorMessage);
+            })
+
+
+        
+
+    }
+
+    _sync = async () => {
 
         let ID = DeviceInfo.getUniqueID();
         let file = RealmFile();
+        let name = this.state.name;
+
+        if (name.length == 0) {
+            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
+        }
 
         setTimeout(() => {
 
+            console.log(PATH);
+
             RNFetchBlob.fs.ls(PATH)
                 .then((files) => {
+
                     let formFiles = [];
                     formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(RealmFile()) });
 
@@ -82,10 +143,16 @@ export class AdminBackupIndexScreen extends React.Component {
 
                     RNFetchBlob.fetch('POST', 'http://upload.bibi.ge/api/upload', {
                         'haccp-device': ID,
+                        'name': name,
                         'Content-Type': 'multipart/form-data',
                     }, formFiles).then((resp) => {
                         this._hideLoader();
                         this.props.navigation.navigate("AdminHome");
+
+                        if (resp.data.length > 0) {
+                            alert(resp.data);
+                        }
+
                         ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
                     }).catch((err) => {
                         this._hideLoader();
@@ -106,12 +173,20 @@ export class AdminBackupIndexScreen extends React.Component {
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
+
                             <View style={{ alignItems: 'center' }}>
 
                                 <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
                                 {/* <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{PATH}</H3> */}
+
+
+                                <Item floatingLabel style={styles.input}>
+                                    <Label>{Strings.BACKUP_NAME}</Label>
+                                    <Input onChangeText={(value) => { this.setState({ name: value }) }} />
+                                </Item>
+
                                 {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.UPLOAD}</Text>
@@ -129,6 +204,23 @@ export class AdminBackupIndexScreen extends React.Component {
                                         <Icon name='wifi' style={{ color: 'white', }} />
                                     </Right>
                                 </Button>}
+
+                                <View style={{ height: 150, }}></View>
+
+                                <Item floatingLabel style={styles.input}>
+                                    <Label>{Strings.BACKUP_ID}</Label>
+                                    <Input eyboardType="numeric" onChangeText={(value) => { this.setState({ backup_id: value }) }} />
+                                </Item>
+
+                                {true && <Button primary style={styles.button} onPress={() => { this._restore() }}>
+                                    <Left >
+                                        <Text style={{ color: 'white', }}>{Strings.RESTORE}</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='cloud-download' style={{ color: 'white', }} />
+                                    </Right>
+                                </Button>}
+
                             </View>
                         </Form>
                     </View>

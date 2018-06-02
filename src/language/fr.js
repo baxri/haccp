@@ -153,6 +153,13 @@ const strings = {
     OCTOBER: 'Octobre',
     NOVEMBER: 'Novembre',
     DECEMBER: 'Décembre',
+
+    BACKUP_NAME: 'BACKUP_NAME',
+    BACKUP_ID: 'BACKUP_ID',
+    PLEASE_ENTER_BACKUP_NAME: 'PLEASE_ENTER_BACKUP_NAME',
+    PLEASE_ENTER_BACKUP_ID: 'PLEASE_ENTER_BACKUP_ID',
+    RESTORE: 'RESTORE',
+    RESTORE_WARNING: 'RESTORE_WARNING',
 };
 
 export default strings;
