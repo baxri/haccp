@@ -22,6 +22,7 @@ import com.vydia.RNUploader.UploaderReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnziparchive.RNZipArchivePackage;
+import com.rnrestartandroid.RNRestartAndroidPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -42,7 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFSPackage(),
           new UploaderReactPackage(),
           new RNFetchBlobPackage(),
-          new RNZipArchivePackage()
+          new RNZipArchivePackage(),
+          new RNRestartAndroidPackage()
       );
     }
 

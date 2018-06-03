@@ -20,6 +20,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
+import { RestartAndroid } from 'react-native-restart-android'
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -71,62 +72,68 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
-        let download = 'http://upload.bibi.ge/admin/download/21';
+        let download = 'http://upload.bibi.ge/admin/download/' + backup_id;
 
-        let res = await RNFetchBlob.fetch('GET', download, {});
-        let status = res.info().status;
+        this._showLoader();
 
-        if (status == 200) {
-            let base64Str = res.base64();
-            // the following conversions are done in js, it's SYNC
-            // let text = res.text()
-            // let json = res.json()
+        // aetTimeout(async () => {
+        try {
 
-            let IMAGES = PATH;
-            let DB = PATH_REALM + "/" + PATH_REALM_FILE;
+            let res = await RNFetchBlob.fetch('GET', download, {});
+            let status = res.info().status;
 
-            let filename = await writeZip(base64Str);
+            if (status == 200) {
+                let base64Str = res.base64();
 
-            // Delete all images
-            let files = await RNFetchBlob.fs.ls(PATH);
+                let IMAGES = PATH;
+                let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
-            if (files.length > 0) {
-                files.map(file => {
-                    RNFetchBlob.fs.unlink(IMAGES + '/' + file).then(() => { })
-                });
-            }
+                let filename = await writeZip(base64Str);
 
-            //Remove realm file
-            RNFetchBlob.fs.unlink(DB).then(() => { })
+                // Delete all images
+                let files = await RNFetchBlob.fs.ls(PATH);
 
-            const sourcePath = PATH_ZIP + "/" + filename;
-            const targetPath = IMAGES;
+                if (files.length > 0) {
+                    files.map(file => {
+                        RNFetchBlob.fs.unlink(IMAGES + '/' + file).then(() => { })
+                    });
+                }
 
-            unzip(sourcePath, targetPath).then((path) => {
+                //Remove realm file
+                RNFetchBlob.fs.unlink(DB);
+
+                if (!RNFetchBlob.fs.exists(DB)) {
+                    throw Strings.CANNOT_DElETE_DATABASE_FILE;
+                }
+
+                const sourcePath = PATH_ZIP + "/" + filename;
+                const targetPath = IMAGES;
+
+                await unzip(sourcePath, targetPath);
 
                 // Move realm file to db destination
-                RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB).then((mv) => {
+                let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
-                    RNFetchBlob.fs.exists(DB)
-                        .then((exist) => {
-                            RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE).then(() => { });
+                // Check if db file is copied
+                if (!(await RNFetchBlob.fs.exists(DB))) {
+                    throw Strings.CANNOT_COPY_DATABASE_FILE;
+                }
 
-                            alert(exist);
-                        })
-                        .catch((error) => { alert(error) })
+                // Remove db file from zip
+                RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
 
-                }).catch((error) => { alert(error) })
+                this._hideLoader();
+                RestartAndroid.restart();
 
-            })
-                .catch((error) => {
-                    alert(error);
-                });
+            } else {
+                throw Strings.PROBLEM_DOWNLOADING_BACKUP;
+            }
 
-        } else {
-            alert("Error code" + status);
+        } catch (error) {
+            this._hideLoader();
+            alert(error);
         }
-
-        return;
+        // }, 1000);
     }
 
     _sync = async () => {
@@ -185,10 +192,10 @@ export class AdminBackupIndexScreen extends React.Component {
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>{Strings.BACKUP}</H1>
                     </View>
-                    <View style={{ alignItems: 'center', }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                         <Form>
 
-                            <View style={{ alignItems: 'center' }}>
+                            <View style={{ borderWidth: 0, width: 500, alignItems: 'center', justifyContent: 'center' }}>
 
                                 <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
@@ -221,19 +228,23 @@ export class AdminBackupIndexScreen extends React.Component {
 
                                 <View style={{ height: 150, }}></View>
 
+                                <H2 style={{textAlign: 'center', color: 'red', marginBottom: 15, }}>{Strings.DANGER_ZONE}</H2>
+                                <H3 style={{textAlign: 'center', color: 'red', }}>{Strings.RESTORE_WARNING}</H3>
+                                
+
                                 <Item floatingLabel style={styles.input}>
                                     <Label>{Strings.BACKUP_ID}</Label>
                                     <Input eyboardType="numeric" onChangeText={(value) => { this.setState({ backup_id: value }) }} />
                                 </Item>
 
-                                {true && <Button primary style={styles.button} onPress={() => { this._restore() }}>
+                                <Button danger style={styles.button} onPress={() => { this._restore() }}>
                                     <Left >
                                         <Text style={{ color: 'white', }}>{Strings.RESTORE}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='cloud-download' style={{ color: 'white', }} />
                                     </Right>
-                                </Button>}
+                                </Button>
 
                             </View>
                         </Form>
@@ -254,11 +265,9 @@ const styles = StyleSheet.create({
     button: {
         width: 400,
         height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 15,
-        marginBottom: 40,
-        marginLeft: 15,
+        // marginBottom: 40,
+        marginLeft: 55, 
         padding: 20,
     },
 });

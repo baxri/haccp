@@ -160,6 +160,7 @@ dependencies {
     compile project(':react-native-upload-file')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-zip-archive')
+    compile project(':react-native-restart-android')
 }
 
 // Run this once to be able to run the application with BUCK
