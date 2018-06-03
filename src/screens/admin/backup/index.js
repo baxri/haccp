@@ -18,6 +18,8 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'react-native-fetch-blob';
 import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
+import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
+import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -69,50 +71,62 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
-        let download = 'http://upload.bibi.ge/admin/download/10';
+        let download = 'http://upload.bibi.ge/admin/download/21';
 
-        // send http request in a new thread (using native code)
-        RNFetchBlob.fetch('GET', download, {})
-            .then((res) => {
-                let status = res.info().status;
+        let res = await RNFetchBlob.fetch('GET', download, {});
+        let status = res.info().status;
 
-                if (status == 200) {
-                    // the conversion is done in native code
-                    let base64Str = res.base64()
-                    // the following conversions are done in js, it's SYNC
-                    // let text = res.text()
-                    // let json = res.json()
+        if (status == 200) {
+            let base64Str = res.base64();
+            // the following conversions are done in js, it's SYNC
+            // let text = res.text()
+            // let json = res.json()
 
-                    let IMAGES = PATH;
-                    let DB = PATH_REALM + "/" + PATH_REALM_FILE;
+            let IMAGES = PATH;
+            let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
-                    alert(DB);
-                    return;
+            let filename = await writeZip(base64Str);
 
-                    writeZip(base64Str).then(filename => {
-                        
+            // Delete all images
+            let files = await RNFetchBlob.fs.ls(PATH);
 
-                        alert(PATH_ZIP + "/" + filename);
+            if (files.length > 0) {
+                files.map(file => {
+                    RNFetchBlob.fs.unlink(IMAGES + '/' + file).then(() => { })
+                });
+            }
 
-                    });
+            //Remove realm file
+            RNFetchBlob.fs.unlink(DB).then(() => { })
 
-                    
+            const sourcePath = PATH_ZIP + "/" + filename;
+            const targetPath = IMAGES;
 
-                    
+            unzip(sourcePath, targetPath).then((path) => {
 
-                } else {
-                    alert("Error code" + status);
-                }
+                // Move realm file to db destination
+                RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB).then((mv) => {
+
+                    RNFetchBlob.fs.exists(DB)
+                        .then((exist) => {
+                            RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE).then(() => { });
+
+                            alert(exist);
+                        })
+                        .catch((error) => { alert(error) })
+
+                }).catch((error) => { alert(error) })
+
             })
-            // Something went wrong:
-            .catch((errorMessage, statusCode) => {
-                
-                alert(errorMessage);
-            })
+                .catch((error) => {
+                    alert(error);
+                });
 
+        } else {
+            alert("Error code" + status);
+        }
 
-        
-
+        return;
     }
 
     _sync = async () => {
