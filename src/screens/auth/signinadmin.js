@@ -34,7 +34,7 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _loginAdmin = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV6');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV7');
 
         try {
 

@@ -46,7 +46,7 @@ export class SetupAdminScreen extends React.Component {
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV6', password);
+            await AsyncStorage.setItem('adminPasswordV7', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {
@@ -68,11 +68,23 @@ export class SetupAdminScreen extends React.Component {
                     </View>
                     <View style={{ alignItems: 'center', }}>
                         <Form>
-                            <Item floatingLabel style={styles.input}>
+
+                            <Item style={styles.input}>
+                                <Label>{Strings.ENTER_PASSWORD}</Label>
+                            </Item>
+
+                            <Item regular style={styles.input}>
+                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
+                            </Item>
+                            <Item regular style={styles.input}>
+                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
+                            </Item>
+
+                            <Item regular style={styles.input}>
                                 <Label>{Strings.ENTER_PASSWORD}</Label>
                                 <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
                             </Item>
-                            <Item floatingLabel style={styles.input}>
+                            <Item regular style={styles.input}>
                                 <Label>{Strings.CONFIRM_PASSWORD}</Label>
                                 <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
                             </Item>
@@ -101,6 +113,7 @@ export class SetupAdminScreen extends React.Component {
 const styles = StyleSheet.create({
     input: {
         width: 400,
+        borderWidth: 1,
         paddingBottom: 10,
     },
 
