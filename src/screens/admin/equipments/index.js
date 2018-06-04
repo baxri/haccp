@@ -165,19 +165,18 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
-
-                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full light
                                             onPress={() => this.props.navigation.navigate('AdminEquipmentsItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        {this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
-                                        {!this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full disabled>
+                                        {!this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full disabled>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>
-                                </Right>
+                                </Right>                        
                             </ListItem>}
                         renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
                             <Button full

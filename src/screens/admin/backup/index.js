@@ -250,10 +250,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Icon name='cloud-download' style={{ color: 'white', }} />
                             </Right>
                         </Button>
-
                     </View>
-
-                 
                 </Content >
             </Container>
         );

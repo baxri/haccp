@@ -150,15 +150,15 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
 
-                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full light
                                             onPress={() => this.props.navigation.navigate('AdminDepartmentsItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
 
-                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} disabled full onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {data.users.length > 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} disabled full onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
-                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {data.users.length == 0 && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>

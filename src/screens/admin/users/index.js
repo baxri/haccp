@@ -147,11 +147,11 @@ export class AdminUsersIndexScreen extends React.Component {
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
-                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} full light
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full light
                                             onPress={() => this.props.navigation.navigate('AdminUsersItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        <Button full danger style={{ flex: 0.5, height: 65, borderLeftWidth: 1, }} onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        <Button full danger style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>
                                     </View>

@@ -111,7 +111,7 @@ export const renderField = (settings) => {
                         {defaultText}
                     </Text>
                     <Text style={{ fontSize: inputAndButtonFontSize }}>
-                        <Icon name='arrow-down' />
+                        <Icon name='ios-arrow-down' />
                     </Text>
                 </View>}
                 {selectedItem && (
