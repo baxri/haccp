@@ -7,6 +7,8 @@ import {
     View,
     Alert,
     ToastAndroid,
+    Dimensions,
+    TextInput,
 } from 'react-native';
 
 // import { Text } from 'react-native-elements';
@@ -15,17 +17,28 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../language/fr'
 import { Departments } from '../../database/realm';
 
+import { renderOption, renderField } from '../../utilities/index'
+import { CustomPicker } from 'react-native-custom-picker';
+import { styles, inputAndButtonFontSize } from '../../utilities/styles';
+
+
 export class SignInScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: 0,
             department: '',
-            user: '',
+            user: null,
 
             departments: [],
             users: [],
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     static navigationOptions = {
@@ -44,17 +57,17 @@ export class SignInScreen extends React.Component {
             this.setState({ users: items[0].users });
 
             if (items[0].users.length > 0) {
-                this.setState({ user: items[0].users[0].id });
+                this.setState({ user: items[0].users[0] });
             }
         }
     }
 
-    _changeDepartment = async (itemIndex, itemValue) => {
-        this.setState({ department: itemValue, user: '' });
-        this.setState({ users: this.state.departments[itemIndex].users });
+    _changeDepartment = async (itemValue) => {
+        this.setState({ department: itemValue, user: null });
+        this.setState({ users: itemValue.users });
 
-        if (this.state.departments[itemIndex].users.length > 0) {
-            this.setState({ user: this.state.departments[itemIndex].users[0].id });
+        if (itemValue.users.length > 0) {
+            this.setState({ user: itemValue.users[0] });
         }
     }
 
@@ -72,7 +85,7 @@ export class SignInScreen extends React.Component {
             // user - fron user
             // admin - admin user
             await AsyncStorage.setItem('userSessionType', 'user');
-            await AsyncStorage.setItem('userSessionId', this.state.user);
+            await AsyncStorage.setItem('userSessionId', this.state.user.id);
 
             //Navigate to application home page       
             this.props.navigation.navigate('StackFront');
@@ -84,9 +97,9 @@ export class SignInScreen extends React.Component {
     render() {
 
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
-                <Content >
+            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
+                    <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>HACCP</H1>
                     </View>
@@ -95,100 +108,80 @@ export class SignInScreen extends React.Component {
                         <Text style={{ color: 'red' }}>{Strings.THERE_IS_NO_DEPARTMENTS}</Text>
                     </View>}
 
-                    <View style={{ alignItems: 'center', }}>
+                    <View style={styles.container}>
 
                         {this.state.departments.length > 0 && <View>
-                            <View style={styles.dropdownView}>
-                                <Picker
-                                    mode="dropdown"
-                                    style={styles.dropdown}
-                                    selectedValue={this.state.department}
-                                    onValueChange={(itemValue, itemIndex) => this._changeDepartment(itemIndex, itemValue)} >
-                                    {this.state.departments.map((item, key) => (
-                                        <Picker.Item label={item.name} value={item.id} key={key} />)
-                                    )}
-                                </Picker>
-                            </View>
+                            <CustomPicker
+                                optionTemplate={renderOption}
+                                fieldTemplate={renderField}
+                                placeholder={Strings.SELECT_DEPARTMENT}
+                                getLabel={item => item.name}
 
-                            {this.state.users.length == 0 && <View style={styles.dropdownView}>
-                                <Text style={{ color: 'red' }}>{Strings.THERE_IS_NO_USERS}</Text>
+                                options={this.state.departments}
+                                value={this.state.department}
+
+                                onValueChange={(value) => this._changeDepartment(value)}
+                            />
+
+                            {this.state.users.length == 0 && <View style={{ margin: 15, }}>
+                                <Text style={[styles.text, { color: 'red' }]}>{Strings.THERE_IS_NO_USERS}</Text>
                             </View>}
 
-                            {this.state.users.length > 0 && <View style={styles.dropdownView}>
-                                <Picker
-                                    mode="dropdown"
-                                    style={styles.dropdown}
-                                    selectedValue={this.state.user}
-                                    onValueChange={(itemValue, itemIndex) => this.setState({ user: itemValue })} >
-                                    {this.state.users.map((item, key) => (
-                                        <Picker.Item label={item.name + " " + item.lastname} value={item.id} key={key} />)
-                                    )}
-                                </Picker>
-                            </View>}
+                            {this.state.users.length > 0 && <CustomPicker
+                                optionTemplate={renderOption}
+                                fieldTemplate={renderField}
+                                getLabel={item => item.name}
+                                placeholder={Strings.SELECT_USER}
+                                options={this.state.users}
+                                value={this.state.user}
+
+                                onValueChange={value => {
+                                    this.setState({ user: value });
+                                }}
+                            />}
 
                             <View>
-                                {this.state.user.length > 0 && <Button danger style={styles.button} onPress={this._login}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='log-in' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>}
 
-                                {!this.state.user.length && <Button disabled style={styles.button}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.CONNECTION}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='log-in' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>}
+                                <View>
+                                    {this.state.user && <Button danger style={styles.button} onPress={this._login}>
+                                        <Left >
+                                            <Text style={[styles.text, { color: 'white', }]}>{Strings.CONNECTION}</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name='log-in' style={{ color: 'white', }} />
+                                        </Right>
+                                    </Button>}
+
+                                    {!this.state.user && <Button disabled style={styles.button}>
+                                        <Left >
+                                            <Text style={[styles.text, { color: 'white', }]}>{Strings.CONNECTION}</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name='log-in' style={{ color: 'white', }} />
+                                        </Right>
+                                    </Button>}
+                                </View>
                             </View>
                         </View>}
 
-
                         <View>
-                            <Button light style={styles.button} onPress={() => {
+                            <Button light style={styles.buttonOriginal} onPress={() => {
                                 this.props.navigation.navigate('SignInAdmin', {
                                     func: () => { }
                                 });
                             }}>
                                 <Left >
-                                    <Text>{Strings.SIGN_IN_AS_ADMIN}</Text>
+                                    <Text style={[styles.text]}>{Strings.SIGN_IN_AS_ADMIN}</Text>
                                 </Left>
                                 <Right>
                                     <Icon name='settings' />
                                 </Right>
                             </Button>
                         </View>
+
                     </View>
                 </Content>
             </Container>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    dropdown: {
-        flex: 1,
-    },
-    dropdownView: {
-        width: 400,
-        height: 50,
-        padding: 5,
-        borderBottomWidth: 2,
-        borderStyle: 'solid',
-        marginBottom: 20,
-        borderBottomColor: 'lightgray',
-    },
-
-    button: {
-        width: 400,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-        marginBottom: 40,
-    },
-});

@@ -17,6 +17,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import Spinner from 'react-native-loading-spinner-overlay';
+import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
 export class AdminUsersIndexScreen extends React.Component {
 
@@ -140,7 +141,7 @@ export class AdminUsersIndexScreen extends React.Component {
                             <ListItem style={{ height: 100, padding: 15, }}>
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
-                                        <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} {data.lastname}</Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize }}>{data.name} {data.lastname}</Text>
                                         <Text style={{ marginBottom: 5 }}>{Strings.DEPARTMENT}: {data.department.name} </Text>
                                     </View>
                                 </Left>
@@ -181,9 +182,7 @@ export class AdminUsersIndexScreen extends React.Component {
                         id: "",
                         name: "",
                         lastname: "",
-                        department: {
-                            id: ''
-                        }
+                        department: null
                     })}>
                     <Icon name="add" />
                 </Fab>

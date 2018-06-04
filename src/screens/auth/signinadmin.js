@@ -84,7 +84,7 @@ export class SignInAdminScreen extends React.Component {
                                 <Icon name='log-in' style={{ color: 'white', }} />
                             </Right>
                         </Button>
-                        <Button light style={styles.button}
+                        <Button light style={styles.buttonOriginal}
                             onPress={() => { this.props.navigation.navigate('SignIn'); }}>
                             <Left >
                                 <Text style={[styles.text]}>{Strings.BACK_TO_SIGNIN}</Text>

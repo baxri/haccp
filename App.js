@@ -18,7 +18,7 @@ import { HelloAppScreen } from './src/screens/app/hello-app';
 
 
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
-import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
+// import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
 import { AdminEquipmentsIndexScreen } from './src/screens/admin/equipments/index';
 import { AdminEquipmentsItemScreen } from './src/screens/admin/equipments/item';
@@ -228,7 +228,7 @@ const DrawerStackFront = DrawerNavigator({
 const AdminHomeStack = StackNavigator(
   {
     AdminHomeIndex: AdminHomeIndexScreen,
-    AdminHomeDetails: AdminHomeDetailsScreen,
+    // AdminHomeDetails: AdminHomeDetailsScreen,
   },
   {
     initialRouteName: 'AdminHomeIndex',

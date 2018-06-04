@@ -201,18 +201,10 @@ export class AdminBackupIndexScreen extends React.Component {
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
 
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-
-                    <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
-                        <H1>{Strings.BACKUP}</H1>
-                    </View>
-
-
                     <View style={styles.container}>
 
                         <H3 style={{ marginBottom: 10, textAlign: 'center'}}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                         <H3 style={{ marginBottom: 30, textAlign: 'center'}}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
-                        {/* <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
-                                <H3 style={{ marginBottom: 30, }}>{PATH}</H3> */}
 
                         <TextInput style={styles.input}
                             underlineColorAndroid="transparent"

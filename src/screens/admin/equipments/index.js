@@ -20,6 +20,7 @@ import { Equipments, DeleteEquipment, Departments } from '../../../database/real
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
+import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
 export class AdminEquipmentsIndexScreen extends React.Component {
 
@@ -159,7 +160,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                             <ListItem style={{ height: 100, paddingLeft: 15, }}>
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
-                                        <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize,}}>{data.name} </Text>
                                     </View>
                                 </Left>
                                 <Right>

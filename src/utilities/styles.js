@@ -10,7 +10,9 @@ import {
     TextInput,
 } from 'react-native';
 
-const inputAndButtonFontSize = 20;
+export const inputAndButtonFontSize = 20;
+export const AppColor = '#BB0000';
+export const AppColorSecond = '#494949';
 
 export const styles = StyleSheet.create({
     picker: {
@@ -24,9 +26,12 @@ export const styles = StyleSheet.create({
     },
     input: {
         margin: 15,
-        height: 40,
-        borderColor: 'black',
+        borderLeftColor: AppColor,
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
         borderWidth: 1,
+        borderLeftWidth: 4,        
         height: 70,
         paddingLeft: 15,
         fontSize: inputAndButtonFontSize,
@@ -42,20 +47,51 @@ export const styles = StyleSheet.create({
         marginBottom: 40,
         margin: 15,
         padding: 20,
+        backgroundColor: AppColorSecond,
     },
 
-    dropdown: {
+    buttonOriginal: {
+        height: 70,
+        marginTop: 15,
+        marginBottom: 40,
+        margin: 15,
+        padding: 20,
+    },
+
+    // DropDown selector
+    DropdownContainer: {
+        borderLeftColor: AppColor,
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+        
+        // borderColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        margin: 15,
+    },
+    innerContainer: {
+        padding: 15,
+        paddingTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+   
+    optionContainer: {
+        padding: 10,
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1
+    },
+    optionInnerContainer: {
         flex: 1,
-        fontSize: inputAndButtonFontSize,
+        flexDirection: 'row'
     },
-    dropdownView: {
-        height: 60,
-        padding: 5,
-        borderBottomWidth: 2,
-        borderStyle: 'solid',
-        marginBottom: 50,
-        borderBottomColor: 'lightgray',
-        marginLeft: 15,
-        fontSize: inputAndButtonFontSize,
-    },
+    box: {
+        width: 20,
+        height: 20,
+        marginRight: 10
+    }
+    // @END DropDown selector
+    
 });

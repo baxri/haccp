@@ -1,4 +1,23 @@
 import RNFetchBlob from 'react-native-fetch-blob';
+import React from 'react';
+import {
+    ActivityIndicator,
+    AsyncStorage,
+    StatusBar,
+    StyleSheet,
+    View,
+    Keyboard,
+    Dimensions,
+    TextInput,
+    Picker,
+    TouchableOpacity,
+
+} from 'react-native';
+import { Container, Header, Content, Button, Text, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import Strings from '../language/fr'
+import { styles, inputAndButtonFontSize } from '../utilities/styles';
+import { CustomPicker } from 'react-native-custom-picker';
+
 
 export const FILE_VERSION = '2';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
@@ -69,3 +88,44 @@ export const toDate = (date) => {
     (dd > 9 ? '' : '0') + dd
     ].join('-');
 }
+
+
+export const renderOption = (settings) => {
+    const { item, getLabel } = settings
+    return (
+        <View style={styles.optionContainer}>
+            <View style={styles.innerContainer}>
+                <Text style={{ color: item.color, alignSelf: 'flex-start' }}>{getLabel(item)}</Text>
+            </View>
+        </View>
+    )
+}
+
+export const renderField = (settings) => {
+    const { selectedItem, defaultText, getLabel, clear } = settings
+    return (
+        <View style={styles.DropdownContainer}>
+            <View>
+                {!selectedItem && <View style={styles.innerContainer}>
+                    <Text style={{ fontSize: inputAndButtonFontSize }}>
+                        {defaultText}
+                    </Text>
+                    <Text style={{ fontSize: inputAndButtonFontSize }}>
+                        <Icon name='arrow-down' />
+                    </Text>
+                </View>}
+                {selectedItem && (
+                    <View style={styles.innerContainer}>
+                        <Text style={{ fontSize: inputAndButtonFontSize }}>
+                            {getLabel(selectedItem)}
+                        </Text>
+                        <Text style={{ fontSize: inputAndButtonFontSize }}>
+                            <Icon name='ios-arrow-down' />
+                        </Text>
+                    </View>
+                )}
+            </View>
+        </View>
+    )
+}
+

@@ -20,6 +20,7 @@ import { Departments, DeleteDepartment } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
+import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
 export class AdminDepartmentsIndexScreen extends React.Component {
 
@@ -140,7 +141,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                             <ListItem style={{ height: 100, paddingLeft: 15, }}>
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
-                                        <Text style={{ marginBottom: 10, color: 'black', }}>{data.name} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
                                         <Text style={{ marginBottom: 5 }}>{Strings.USERS}: {data.users.length} </Text>
                                         <Text>{Strings.EQUIPMENTS}:  ({data.equipments.length}) </Text>
                                     </View>
