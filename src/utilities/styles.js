@@ -10,9 +10,15 @@ import {
     TextInput,
 } from 'react-native';
 
-const inputAndButtonFontSize = 25;
+const inputAndButtonFontSize = 20;
 
 export const styles = StyleSheet.create({
+    picker: {
+        transform: [
+            { scaleX: 2 },
+            { scaleY: 2 },
+        ]
+    },
     container: {
         paddingTop: 23
     },

@@ -104,13 +104,11 @@ export class AdminUsersItemScreen extends React.Component {
 
                         <View style={styles.dropdownView}>
                             <Picker
-                                itemStyle={{ fontSize: 25, color: 'red',}}
                                 mode="dialog"
-                                style={styles.dropdown}
                                 selectedValue={this.state.department}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ department: itemValue })}
                             >
-                                <Picker.Item  label={Strings.SELECT_DEPARTMENT} value="" />
+                                <Picker.Item  textStyle={{fontSize: 25}} label={Strings.SELECT_DEPARTMENT} value="" />
 
                                 {this.state.departments.map((i, index) => (
                                     <Picker.Item key={index} label={i.name} value={i.id} />

@@ -7,6 +7,9 @@ import {
     View,
     ToastAndroid,
     NetInfo,
+    TextInput,
+    Dimensions,
+
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -21,6 +24,8 @@ import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
+import { styles } from '../../../utilities/styles';
+
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -46,6 +51,9 @@ export class AdminBackupIndexScreen extends React.Component {
             loading: 0,
             connected: 0,
             date: new Date().toISOString().substring(0, 10),
+
+            dimesions: { width, height } = Dimensions.get('window'),
+
         };
 
         this._bootstrapAsync();
@@ -57,6 +65,10 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _hideLoader() {
         this.setState({ loading: 0 });
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -185,89 +197,74 @@ export class AdminBackupIndexScreen extends React.Component {
 
     render() {
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
+            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
 
-                <Content>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
+
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>{Strings.BACKUP}</H1>
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
-                        <Form>
 
-                            <View style={{ borderWidth: 0, width: 500, alignItems: 'center', justifyContent: 'center' }}>
 
-                                <H3 style={{ marginBottom: 10, }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
-                                <H3 style={{ marginBottom: 30, }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
-                                {/* <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
+                    <View style={styles.container}>
+
+                        <H3 style={{ marginBottom: 10, textAlign: 'center'}}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
+                        <H3 style={{ marginBottom: 30, textAlign: 'center'}}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
+                        {/* <H3 style={{ marginBottom: 30, }}>{RealmFile()}</H3>
                                 <H3 style={{ marginBottom: 30, }}>{PATH}</H3> */}
 
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.BACKUP_NAME}
+                            value={this.state.name}
+                            onChangeText={(value) => { this.setState({ name: value }) }} />
 
-                                <Item floatingLabel style={styles.input}>
-                                    <Label>{Strings.BACKUP_NAME}</Label>
-                                    <Input onChangeText={(value) => { this.setState({ name: value }) }} />
-                                </Item>
+                        {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
+                            <Left >
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.UPLOAD}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='sync' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>}
 
-                                {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.UPLOAD}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='sync' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>}
+                        {!this.state.connected && <Button danger style={styles.button}>
+                            <Left >
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.NO_CONNECTION}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='wifi' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>}
 
-                                {!this.state.connected && <Button danger style={styles.button}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.NO_CONNECTION}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='wifi' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>}
 
-                                <View style={{ height: 150, }}></View>
+                        <View style={{ height: 100, }}></View>
 
-                                <H2 style={{textAlign: 'center', color: 'red', marginBottom: 15, }}>{Strings.DANGER_ZONE}</H2>
-                                <H3 style={{textAlign: 'center', color: 'red', }}>{Strings.RESTORE_WARNING}</H3>
-                                
+                        <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
+                        <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25}}>{Strings.RESTORE_WARNING}</H3>
 
-                                <Item floatingLabel style={styles.input}>
-                                    <Label>{Strings.BACKUP_ID}</Label>
-                                    <Input eyboardType="numeric" onChangeText={(value) => { this.setState({ backup_id: value }) }} />
-                                </Item>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.BACKUP_ID}
+                            value={this.state.name}
+                            onChangeText={(value) => { this.setState({ backup_id: value }) }} />
 
-                                <Button danger style={styles.button} onPress={() => { this._restore() }}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.RESTORE}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='cloud-download' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>
+                        <Button danger style={styles.button} onPress={() => { this._restore() }}>
+                            <Left >
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.RESTORE}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='cloud-download' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
 
-                            </View>
-                        </Form>
                     </View>
+
+                 
                 </Content >
             </Container>
         );
     }
 }
 
-
-
-const styles = StyleSheet.create({
-    input: {
-        width: 400,
-        paddingBottom: 10,
-    },
-    button: {
-        width: 400,
-        height: 60,
-        marginTop: 15,
-        // marginBottom: 40,
-        marginLeft: 55, 
-        padding: 20,
-    },
-});
