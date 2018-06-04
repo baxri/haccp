@@ -6,12 +6,16 @@ import {
     StyleSheet,
     View,
     Keyboard,
+    Dimensions,
+    TextInput,
+    Picker,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import { Container, Header, Content, Button, Text, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addUser, editUser, Departments } from '../../../database/realm';
 import Strings from '../../../language/fr'
+import { styles } from '../../../utilities/styles';
 
 export class AdminUsersItemScreen extends React.Component {
 
@@ -25,14 +29,12 @@ export class AdminUsersItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.USER} />,
-            // headerRight: <Menu navigation={navigation} />rr,
         };
     };
 
     constructor(props) {
         super(props);
 
-        // Need id and name parameters (this is a requred parameter for this screen)
         this.state = {
             loading: 1,
             departments: [],
@@ -41,12 +43,17 @@ export class AdminUsersItemScreen extends React.Component {
             name: this.props.navigation.state.params.name,
             lastname: this.props.navigation.state.params.lastname,
             department: this.props.navigation.state.params.department.id,
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
 
         this._bootstrapAsync();
         this._loadDepartments();
     }
 
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
+    }
 
     _bootstrapAsync = async () => {
 
@@ -90,84 +97,53 @@ export class AdminUsersItemScreen extends React.Component {
         }
 
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <Content padder style={{ flex: 1, }}>
-                    <Form style={{ borderWidth: 0, alignItems: 'center', justifyContent: 'center' }}>
+            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
+
+                    <View style={styles.container}>
 
                         <View style={styles.dropdownView}>
                             <Picker
-                                mode="dropdown"
+                                itemStyle={{ fontSize: 25, color: 'red',}}
+                                mode="dialog"
                                 style={styles.dropdown}
                                 selectedValue={this.state.department}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ department: itemValue })}
                             >
-                                <Picker.Item label={Strings.SELECT_DEPARTMENT} value="" />
+                                <Picker.Item  label={Strings.SELECT_DEPARTMENT} value="" />
 
                                 {this.state.departments.map((i, index) => (
                                     <Picker.Item key={index} label={i.name} value={i.id} />
                                 ))}
 
-
                             </Picker>
                         </View>
-                        <View style={{ borderWidth: 0, flex: 1 }}>
-                            <Item floatingLabel style={styles.input}>
-                                <Label>{Strings.FIRST_NAME}</Label>
-                                <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                            </Item>
-                            <Item floatingLabel style={styles.input}>
-                                <Label>{Strings.LAST_NAME} </Label>
-                                <Input value={this.state.lastname} onChangeText={(value) => { this.setState({ lastname: value }) }} />
-                            </Item>
-                        </View>
 
-                        <View style={{ borderWidth: 0, flex: 1 }}>
-                            <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
-                                <Left >
-                                    <Text style={{ color: 'white', }}>{Strings.SAVE_USER}</Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='checkmark' style={{ color: 'white', }} />
-                                </Right>
-                            </Button>
-                        </View>
-                    </Form>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.FIRST_NAME}
+                            value={this.state.name}
+                            onChangeText={(value) => { this.setState({ name: value }) }} />
 
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.LAST_NAME}
+                            value={this.state.lastname}
+                            onChangeText={(value) => { this.setState({ lastname: value }) }} />
 
+                        <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
+                            <Left >
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_USER}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
+
+                    </View>
                 </Content>
             </Container>
         );
     }
 }
 
-
-const styles = StyleSheet.create({
-    input: {
-        width: 400,
-        paddingBottom: 10,
-
-    },
-
-    button: {
-        width: 400,
-        height: 60,
-        marginTop: 15,
-        marginBottom: 40,
-        padding: 20,
-    },
-
-    dropdown: {
-        flex: 1,
-
-    },
-    dropdownView: {
-        width: 400,
-        height: 60,
-        padding: 5,
-        borderBottomWidth: 2,
-        borderStyle: 'solid',
-        marginBottom: 50,
-        borderBottomColor: 'lightgray',
-        marginLeft: 15,
-    },
-});

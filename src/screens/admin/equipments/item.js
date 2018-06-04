@@ -6,7 +6,8 @@ import {
     StyleSheet,
     View,
     Keyboard,
-
+    Dimensions,
+    TextInput,
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -15,6 +16,7 @@ import { addEquipment, editEquipment } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
+import { styles } from '../../../utilities/styles';
 
 export class AdminEquipmentsItemScreen extends React.Component {
 
@@ -39,9 +41,15 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
 
         this._bootstrapAsync();
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -78,7 +86,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
             } else {
                 editEquipment({
                     id: this.state.id,
-                    name: this.state.name,                   
+                    name: this.state.name,
                 }).then(res => {
                     this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
@@ -92,46 +100,27 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
     render() {
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
+            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-                <Content padder style={{ flex: 1 }}>
-                    <Form>
-                        <Item floatingLabel style={styles.input}>
-                            <Label>{Strings.EQUIPMENT_NAME}</Label>
-                            <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                        </Item>
-                        <View style={{ alignItems: 'center' }}>
-                            <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
-                                <Left >
-                                    <Text style={{ color: 'white', }}>{Strings.SAVE_EQUIPMENT}</Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='checkmark' style={{ color: 'white', }} />
-                                </Right>
-                            </Button>
-                        </View>
-                    </Form>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
+                    <View style={styles.container}>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.EQUIPMENT_NAME}
+                            value={this.state.name}
+                            onChangeText={(value) => { this.setState({ name: value }) }} />
+
+                        <Button danger onPress={() => { this._saveItem() }} style={styles.button}>
+                            <Left>
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_EQUIPMENT}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
+                    </View>
                 </Content>
             </Container>
         );
     }
 }
-
-
-const styles = StyleSheet.create({
-    input: {
-        width: 400,
-        paddingBottom: 10,
-    },
-
-    button: {
-        width: 400,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 15,
-        marginBottom: 40,
-        marginLeft: 15,
-        padding: 20,
-    },
-});

@@ -6,6 +6,8 @@ import {
     StyleSheet,
     View,
     Keyboard,
+    Dimensions,
+    TextInput,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
@@ -15,6 +17,7 @@ import { addDepartment, editDepartment, Equipments } from '../../../database/rea
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
+import { styles } from '../../../utilities/styles';
 
 export class AdminDepartmentsItemScreen extends React.Component {
 
@@ -28,14 +31,12 @@ export class AdminDepartmentsItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.DEPARTMENT} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
     constructor(props) {
         super(props);
 
-        // Need id and name parameters (this is a requred parameter for this screen)
         this.state = {
             loading: 0,
             equipments_select: [],
@@ -43,9 +44,15 @@ export class AdminDepartmentsItemScreen extends React.Component {
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
             equipments: this.props.navigation.state.params.equipments,
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
 
         this._bootstrapAsync();
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -107,59 +114,53 @@ export class AdminDepartmentsItemScreen extends React.Component {
     };
 
     render() {
-
-        
-
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <PopupDialog
-                    ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-                >
-                    <View>
-                        <Text>Hello</Text>
-                    </View>
-                </PopupDialog>
+            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-                <Content padder style={{ flex: 1 }}>
-                    <Form>
-                        <Item floatingLabel style={styles.input}>
-                            <Label>{Strings.DEPARTMENT_NAME}</Label>
-                            <Input value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                        </Item>
-                        <View style={{ alignItems: 'center' }}>
-                            <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
-                                <Left >
-                                    <Text style={{ color: 'white', }}>{Strings.SAVE_DEPARTMENT}</Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='checkmark' style={{ color: 'white', }} />
-                                </Right>
-                            </Button>
-
-                            <Button transparent style={styles.button}
-
-                                onPress={() => {
-
-                                    this._showLoader();
-
-                                    setTimeout(() => {
-                                        this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
-                                            equipments_select: this.state.equipments_select,
-                                            value: this.state.equipments,
-                                            equipmentsChoosed: this._equipmentsChoosed
-                                        })
-
-                                        this._hideLoader();
-                                    }, 100);
-
-                                }}
-                            >
-                                <Text>{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
-
-                            </Button>
-
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
+                    <PopupDialog ref={(popupDialog) => { this.popupDialog = popupDialog; }}>
+                        <View>
+                            <Text>Hello</Text>
                         </View>
-                    </Form>
+                    </PopupDialog>
+
+                    <View style={styles.container}>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.DEPARTMENT_NAME}
+                            value={this.state.name}
+                            onChangeText={(value) => { this.setState({ name: value }) }} />
+
+
+                        <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
+                            <Left >
+                            <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
+
+                        <Button transparent
+                            onPress={() => {
+
+                                this._showLoader();
+
+                                setTimeout(() => {
+                                    this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
+                                        equipments_select: this.state.equipments_select,
+                                        value: this.state.equipments,
+                                        equipmentsChoosed: this._equipmentsChoosed
+                                    })
+
+                                    this._hideLoader();
+                                }, 100);
+
+                            }}
+                        >
+                            <Text style={[{}, styles.text]}>{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
+                        </Button>
+                    </View>
                 </Content>
             </Container>
         );
@@ -167,20 +168,3 @@ export class AdminDepartmentsItemScreen extends React.Component {
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-        width: 400,
-        paddingBottom: 10,
-    },
-
-    button: {
-        width: 400,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 15,
-        marginBottom: 40,
-        marginLeft: 15,
-        padding: 20,
-    },
-});

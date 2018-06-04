@@ -6,10 +6,12 @@ import {
     StyleSheet,
     ToastAndroid,
     View,
-
+    Dimensions,
+    TextInput,
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import Strings from '../../language/fr';
+import {styles} from '../../utilities/styles';
 
 export class SetupAdminScreen extends React.Component {
     constructor(props) {
@@ -19,12 +21,17 @@ export class SetupAdminScreen extends React.Component {
         this.state = {
             password: '',
             passwordConfirm: '',
+            dimesions: { width, height } = Dimensions.get('window'),
         };
     }
 
     static navigationOptions = {
         title: Strings.SETUP_ADMINISTRATOR,
     };
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
+    }
 
     _bootstrapAsync = async () => {
 
@@ -61,70 +68,37 @@ export class SetupAdminScreen extends React.Component {
 
     render() {
         return (
-            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }}>
-                <Content padder style={{ flex: 1 }}>
+            <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>{Strings.SETUP_ADMINISTRATOR}</H1>
                     </View>
-                    <View style={{ alignItems: 'center', }}>
-                        <Form>
 
-                            <Item style={styles.input}>
-                                <Label>{Strings.ENTER_PASSWORD}</Label>
-                            </Item>
+                    <View style={styles.container}>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.ENTER_PASSWORD}
+                            secureTextEntry={true}
+                            onChangeText={(value) => { this.setState({ password: value }) }} />
 
-                            <Item regular style={styles.input}>
-                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
-                            </Item>
-                            <Item regular style={styles.input}>
-                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
-                            </Item>
+                        <TextInput style={styles.input}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.CONFIRM_PASSWORD}
+                            secureTextEntry={true}
+                            onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
 
-                            <Item regular style={styles.input}>
-                                <Label>{Strings.ENTER_PASSWORD}</Label>
-                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ password: value }) }} />
-                            </Item>
-                            <Item regular style={styles.input}>
-                                <Label>{Strings.CONFIRM_PASSWORD}</Label>
-                                <Input secureTextEntry={true} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
-                            </Item>
-                            <View style={{ alignItems: 'center', marginBottom: 10 }}>
-
-                            </View>
-                            <View style={{ alignItems: 'center' }}>
-                                <Button danger style={styles.button}
-                                    onPress={() => { this._setupAdmin() }}>
-                                    <Left >
-                                        <Text style={{ color: 'white', }}>{Strings.SETUP}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name='bookmark' style={{ color: 'white', }} />
-                                    </Right>
-                                </Button>
-                            </View>
-                        </Form>
+                        <Button danger style={styles.button}
+                            onPress={() => { this._setupAdmin() }}>
+                            <Left >
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.SETUP}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='bookmark' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
                     </View>
                 </Content >
             </Container>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    input: {
-        width: 400,
-        borderWidth: 1,
-        paddingBottom: 10,
-    },
-
-    button: {
-        width: 400,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 15,
-        marginBottom: 40,
-        marginLeft: 15,
-        padding: 20,
-    },
-});
