@@ -26,15 +26,72 @@ export const styles = StyleSheet.create({
     },
     input: {
         marginBottom: 20,
+        borderLeftColor: 'gray',
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        paddingLeft: 20,
+        fontSize: inputAndButtonFontSize,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    inputDanger: {
+        marginBottom: 20,
         borderLeftColor: AppColor,
         borderRightColor: 'gray',
         borderTopColor: 'gray',
         borderBottomColor: 'gray',
         borderWidth: 1,
-        borderLeftWidth: 4,        
+        borderLeftWidth: 4,
         height: 70,
-        paddingLeft: 15,
+        paddingLeft: 20,
         fontSize: inputAndButtonFontSize,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    inputSuccess: {
+        marginBottom: 20,
+        borderLeftColor: 'green',
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        paddingLeft: 20,
+        fontSize: inputAndButtonFontSize,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
+    inputInline: {
+        flex: 1,
+        height: 70,
+        fontSize: inputAndButtonFontSize,
+    },
+
+    inputInlineIcon: {
+        margin: 20,
+    },
+
+    inputInlineIconDisabled: {
+        color: 'lightgray',
+        margin: 20,
+    },
+
+    inputInlineIconSuccess: {
+        margin: 20,
+        color: 'green',
+    },
+
+    inputInlineIconDanger: {
+        margin: 20,
+        color: AppColor,
     },
 
     textarea: {
@@ -44,11 +101,10 @@ export const styles = StyleSheet.create({
         borderTopColor: 'gray',
         borderBottomColor: 'gray',
         borderWidth: 1,
-        borderLeftWidth: 4,        
+        borderLeftWidth: 4,
         paddingLeft: 15,
         fontSize: inputAndButtonFontSize,
     },
-
 
     text: {
         fontSize: inputAndButtonFontSize,
@@ -56,7 +112,7 @@ export const styles = StyleSheet.create({
 
     label: {
         fontSize: inputAndButtonFontSize,
-        marginBottom: 5,
+        marginBottom: 10,
     },
 
     button: {
@@ -76,24 +132,38 @@ export const styles = StyleSheet.create({
 
     // DropDown selector
     DropdownContainer: {
-        borderLeftColor: AppColor,
+        borderLeftColor: 'gray',
         borderRightColor: 'gray',
         borderTopColor: 'gray',
         borderBottomColor: 'gray',
-        
+
         // borderColor: 'gray',
         borderWidth: 1,
         borderLeftWidth: 4,
         height: 70,
         marginBottom: 20,
     },
+
+    DropdownContainerDanger: {
+        borderLeftColor: AppColor,
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+
+        // borderColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        marginBottom: 20,
+    },
+
     innerContainer: {
         padding: 15,
         paddingTop: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-   
+
     optionContainer: {
         padding: 10,
         borderBottomColor: 'grey',
@@ -109,5 +179,5 @@ export const styles = StyleSheet.create({
         marginRight: 10
     }
     // @END DropDown selector
-    
+
 });

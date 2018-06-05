@@ -28,6 +28,7 @@ import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 export class ControleIndexScreen extends React.Component {
 
@@ -266,8 +267,19 @@ export class ControleIndexScreen extends React.Component {
 
     render() {
         let { image } = this.state;
+
+        var aspect_props = [
+            { label: Strings.BON, value: 0 },
+            { label: Strings.MAUVAIS, value: 1 }
+        ];
+
+        var yesno_props = [
+            { label: Strings.NO, value: 0 },
+            { label: Strings.YES, value: 1 }
+        ];
+
         return (
-            <Container style={{ flex: 1}} onLayout={this._onLayout.bind(this)}>
+            <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, paddingTop: 35, }}>
 
@@ -301,96 +313,78 @@ export class ControleIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
-                     <Item inlineLabel style={styles.input}>
-                        <Label>{Strings.AUTRES}</Label>
-                        <Input keyboardType="numeric" value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
-                        <Icon active name='thermometer' />
-                    </Item>
+                    <View style={this.state.produit.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <TextInput
+                            style={styles.inputInline}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.PRODUCT}
+                            value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
+                        {this.state.produit.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                        {this.state.produit.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                    </View>
 
-                    <TextInput style={styles.input}
-                        underlineColorAndroid="transparent"
-                        placeholder={Strings.PRODUCT}
-                        value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
+                    <View style={this.state.fourniser.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <TextInput
+                            style={styles.inputInline}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.FOURNISER}
+                            value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
+                        {this.state.fourniser.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                        {this.state.fourniser.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                    </View>
 
-                    <TextInput style={styles.input}
-                        underlineColorAndroid="transparent"
-                        placeholder={Strings.FOURNISER}
-                        value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
-
-                    <TextInput style={styles.input}
+                    <TextInput
+                        style={styles.input}
                         underlineColorAndroid="transparent"
                         placeholder={Strings.DUBL}
                         value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
 
 
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>{Strings.ASPECT}: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(0) }}>{Strings.BON}</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.aspect)} onPress={() => { this._checkAspect(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkAspect(1) }}>{Strings.MAUVAIS}</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.aspect)} onPress={() => { this._checkAspect(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
+                    <Text style={styles.label}>{Strings.ASPECT}</Text>
+                    <RadioForm
+                        radio_props={aspect_props}
+                        initial={0}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
+                        buttonColor={'gray'}
+                        selectedButtonColor={'gray'}
+                        onPress={(value) => { this.setState({ aspect: value }) }}
+                    />
 
-
-                    <TextInput style={styles.input}
+                    <TextInput
+                        keyboardType="numeric"
+                        style={styles.input}
                         underlineColorAndroid="transparent"
                         placeholder={Strings.DUPRODUIT}
-                        keyboardType="numeric" value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
+                        value={this.state.ddu_produitubl} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
 
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>{Strings.EMBALAGE_INTATC}: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(0) }}>{Strings.NO}</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.intact)} onPress={() => { this._checkIntact(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkIntact(1) }}>{Strings.YES}</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.intact)} onPress={() => { this._checkIntact(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
+                    <Text style={styles.label}>{Strings.EMBALAGE_INTATC}</Text>
+                    <RadioForm
+                        radio_props={yesno_props}
+                        initial={1}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        buttonColor={'gray'}
+                        selectedButtonColor={'gray'}
+                        radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
+                        onPress={(value) => { this.setState({ intact: value }) }}
+                    />
 
 
-                    <Grid style={{ marginBottom: 25 }}>
-                        <Row>
-                            <Col>
-                                <Text>{Strings.ETIQUTAGE_CONF}: </Text>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(0) }}>{Strings.NO}</Text>
-                                    <Radio selected={this._radioSelected(0, this.state.conforme)} onPress={() => { this._checkConforme(0) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                            <Col>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text onPress={() => { this._checkConforme(1) }}>{Strings.YES}</Text>
-                                    <Radio selected={this._radioSelected(1, this.state.conforme)} onPress={() => { this._checkConforme(1) }} style={{ marginLeft: 20, }} />
-                                </View>
-                            </Col>
-                        </Row>
-                    </Grid>
+                    <Text style={styles.label}>{Strings.ETIQUTAGE_CONF}</Text>
+                    <RadioForm
+                        radio_props={yesno_props}
+                        initial={1}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        buttonColor={'gray'}
+                        selectedButtonColor={'gray'}
+                        radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
+                        onPress={(value) => { this.setState({ conforme: value }) }}
+                    />
 
-                    <Textarea style={[styles.textarea, {marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                    <Textarea style={[styles.textarea, { marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}

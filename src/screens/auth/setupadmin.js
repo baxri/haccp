@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import Strings from '../../language/fr';
-import {styles} from '../../utilities/styles';
+import { styles } from '../../utilities/styles';
 
 export class SetupAdminScreen extends React.Component {
     constructor(props) {
@@ -75,13 +75,13 @@ export class SetupAdminScreen extends React.Component {
                     </View>
 
                     <View style={styles.container}>
-                        <TextInput style={styles.input}
+                        <TextInput style={styles.inputDanger}
                             underlineColorAndroid="transparent"
                             placeholder={Strings.ENTER_PASSWORD}
                             secureTextEntry={true}
                             onChangeText={(value) => { this.setState({ password: value }) }} />
 
-                        <TextInput style={styles.input}
+                        <TextInput style={styles.inputDanger}
                             underlineColorAndroid="transparent"
                             placeholder={Strings.CONFIRM_PASSWORD}
                             secureTextEntry={true}

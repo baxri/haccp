@@ -70,7 +70,7 @@ export class SignInAdminScreen extends React.Component {
                     </View>
 
                     <View style={styles.container}>
-                        <TextInput style={styles.input}
+                        <TextInput style={styles.inputDanger}
                             underlineColorAndroid="transparent"
                             placeholder={Strings.ENTER_PASSWORD}
                             secureTextEntry={true}

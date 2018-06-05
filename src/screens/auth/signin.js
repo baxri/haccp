@@ -17,7 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../language/fr'
 import { Departments } from '../../database/realm';
 
-import { renderOption, renderField } from '../../utilities/index'
+import { renderOption, renderField, renderFieldDanger } from '../../utilities/index'
 import { CustomPicker } from 'react-native-custom-picker';
 import { styles, inputAndButtonFontSize } from '../../utilities/styles';
 
@@ -113,7 +113,7 @@ export class SignInScreen extends React.Component {
                         {this.state.departments.length > 0 && <View>
                             <CustomPicker
                                 optionTemplate={renderOption}
-                                fieldTemplate={renderField}
+                                fieldTemplate={renderFieldDanger}
                                 placeholder={Strings.SELECT_DEPARTMENT}
                                 getLabel={item => item.name}
 
@@ -129,7 +129,7 @@ export class SignInScreen extends React.Component {
 
                             {this.state.users.length > 0 && <CustomPicker
                                 optionTemplate={renderOption}
-                                fieldTemplate={renderField}
+                                fieldTemplate={renderFieldDanger}
                                 getLabel={item => item.name}
                                 placeholder={Strings.SELECT_USER}
                                 options={this.state.users}
