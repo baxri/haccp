@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         paddingTop: 23
     },
     input: {
-        margin: 15,
+        marginBottom: 20,
         borderLeftColor: AppColor,
         borderRightColor: 'gray',
         borderTopColor: 'gray',
@@ -37,15 +37,32 @@ export const styles = StyleSheet.create({
         fontSize: inputAndButtonFontSize,
     },
 
+    textarea: {
+        marginBottom: 20,
+        borderLeftColor: AppColor,
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,        
+        paddingLeft: 15,
+        fontSize: inputAndButtonFontSize,
+    },
+
+
     text: {
         fontSize: inputAndButtonFontSize,
+    },
+
+    label: {
+        fontSize: inputAndButtonFontSize,
+        marginBottom: 5,
     },
 
     button: {
         height: 70,
         marginTop: 15,
-        marginBottom: 40,
-        margin: 15,
+        marginBottom: 20,
         padding: 20,
         backgroundColor: AppColorSecond,
     },
@@ -53,8 +70,7 @@ export const styles = StyleSheet.create({
     buttonOriginal: {
         height: 70,
         marginTop: 15,
-        marginBottom: 40,
-        margin: 15,
+        marginBottom: 20,
         padding: 20,
     },
 
@@ -69,7 +85,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderLeftWidth: 4,
         height: 70,
-        margin: 15,
+        marginBottom: 20,
     },
     innerContainer: {
         padding: 15,

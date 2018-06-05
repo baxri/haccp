@@ -9,6 +9,7 @@ import {
     ToastAndroid,
     Alert,
     Dimensions,
+    TextInput,
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -26,7 +27,7 @@ import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
-
+import { styles } from '../../../utilities/styles';
 
 export class ControleIndexScreen extends React.Component {
 
@@ -78,9 +79,15 @@ export class ControleIndexScreen extends React.Component {
 
             date: toDate(new Date()),
             created_at: new Date(),
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
 
         this._bootstrapAsync();
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -260,12 +267,10 @@ export class ControleIndexScreen extends React.Component {
     render() {
         let { image } = this.state;
         return (
-            <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
-                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-                    <View style={{ alignItems: 'center', paddingBottom: 20, }}>
-                        <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
-                    </View>
+            <Container style={{ flex: 1}} onLayout={this._onLayout.bind(this)}>
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, paddingTop: 35, }}>
+
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>
                         <Grid style={{ width: 550 }}>
                             <Row>
@@ -294,19 +299,28 @@ export class ControleIndexScreen extends React.Component {
                         </Grid>
                     </View>
 
+                    <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.PRODUCT}</Label>
-                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
+                     <Item inlineLabel style={styles.input}>
+                        <Label>{Strings.AUTRES}</Label>
+                        <Input keyboardType="numeric" value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                        <Icon active name='thermometer' />
                     </Item>
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.FOURNISER}</Label>
-                        <Input value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
-                    </Item>
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.DUBL}</Label>
-                        <Input value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
-                    </Item>
+
+                    <TextInput style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.PRODUCT}
+                        value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
+
+                    <TextInput style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.FOURNISER}
+                        value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
+
+                    <TextInput style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.DUBL}
+                        value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
 
 
                     <Grid style={{ marginBottom: 25 }}>
@@ -330,11 +344,10 @@ export class ControleIndexScreen extends React.Component {
                     </Grid>
 
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.DUPRODUIT}</Label>
-                        <Input keyboardType="numeric" value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
-                    </Item>
-
+                    <TextInput style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.DUPRODUIT}
+                        keyboardType="numeric" value={this.state.du_produit} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
 
                     <Grid style={{ marginBottom: 25 }}>
                         <Row>
@@ -377,7 +390,7 @@ export class ControleIndexScreen extends React.Component {
                         </Row>
                     </Grid>
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                    <Textarea style={[styles.textarea, {marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -422,15 +435,15 @@ export class ControleIndexScreen extends React.Component {
                         </Button>
                     </FooterTab>
                 </Footer>
-            </Container>
+            </Container >
         );
     }
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-        paddingBottom: 10,
-        marginBottom: 25,
-    },
-});
+// const styles = StyleSheet.create({
+//     input: {
+//         paddingBottom: 10,
+//         marginBottom: 25,
+//     },
+// });
