@@ -9,6 +9,8 @@ import {
     ToastAndroid,
     Alert,
     Dimensions,
+    TextInput,
+
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -27,6 +29,8 @@ import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
 import { reverseFormat } from '../../../utilities/index';
 import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { styles } from '../../../utilities/styles';
+
 
 export class NonConformeIndexScreen extends React.Component {
 
@@ -70,9 +74,15 @@ export class NonConformeIndexScreen extends React.Component {
 
             date: toDate((new Date())),
             created_at: new Date(),
+
+            dimesions: { width, height } = Dimensions.get('window'),
         };
 
         this._bootstrapAsync();
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -212,7 +222,8 @@ export class NonConformeIndexScreen extends React.Component {
                 conforme: 0,
                 autres: '',
                 actions: '',
-                confirmed: this.state.confirmed,
+                // confirmed: this.state.confirmed,
+                confirmed: 1,
 
                 equipments: [],
                 type: 2,
@@ -234,10 +245,6 @@ export class NonConformeIndexScreen extends React.Component {
                 alert(error);
             });
 
-            // this.props.navigation.navigate('Home');
-            // this._hideLoader();
-            // ToastAndroid.show("Controle successfully saved!", ToastAndroid.LONG);
-
         }, 2000);
     }
 
@@ -248,12 +255,9 @@ export class NonConformeIndexScreen extends React.Component {
     render() {
         let { image } = this.state;
         return (
-            <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
-                <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
-                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-                    <View style={{ alignItems: 'center', paddingBottom: 20, }}>
-                        <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
-                    </View>
+            <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, paddingTop: 35, }}>
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>
                         <Grid style={{ width: 550 }}>
                             <Row>
@@ -282,31 +286,65 @@ export class NonConformeIndexScreen extends React.Component {
                         </Grid>
                     </View>
 
+                    <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
+                    
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.PRODUCT}</Label>
-                        <Input value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
-                    </Item>
+                    <View style={this.state.produit.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <TextInput
+                            style={styles.inputInline}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.PRODUCT}
+                            value={this.state.produit} onChangeText={(value) => { this.setState({ produit: value }) }} />
+                        {this.state.produit.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                        {this.state.produit.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                    </View>
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.QUANTITY}</Label>
-                        <Input keyboardType="numeric" value={this.state.quantity} onChangeText={(value) => { this.setState({ quantity: value }) }} />
-                    </Item>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.QUANTITY}
+                        value={this.state.quantity} onChangeText={(value) => { this.setState({ quantity: value }) }} />
 
-                    <Item floatingLabel style={styles.input}>
-                        <Label>{Strings.VALORISATION}</Label>
-                        <Input keyboardType="numeric" value={this.state.valorisation} onChangeText={(value) => { this.setState({ valorisation: value }) }} />
-                    </Item>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={styles.input}
+                        underlineColorAndroid="transparent"
+                        placeholder={Strings.VALORISATION}
+                        value={this.state.valorisation} onChangeText={(value) => { this.setState({ valorisation: value }) }} />
 
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
+                    <Textarea style={[styles.textarea,]} rowSpan={5} bordered placeholder={Strings.CAUSES} onChangeText={(value) => { this.setState({ causes: value }) }} />
+                    <Textarea style={[styles.textarea,]} rowSpan={5} bordered placeholder={Strings.DEVENIR} onChangeText={(value) => { this.setState({ devenir: value }) }} />
 
-                    <Text style={{marginBottom: 15,}}>{Strings.TRAITMENT_DATE}</Text>
+                    <Text style={{ marginBottom: 15, }}>{Strings.TRAITMENT_DATE}</Text>
 
                     <DatePicker
-                        style={{ width: 300 }}
-                        customStyles={{ marginBottom: 30, backgroundColor: 'red', }}
+                        style={{ width: 300, height: 70, }}
+                        customStyles={{
+                            dateTouchBody: {
+                                marginBottom: 20,
+                                borderLeftColor: 'green',
+                                borderRightColor: 'gray',
+                                borderTopColor: 'gray',
+                                borderBottomColor: 'gray',
+                                borderWidth: 1,
+                                borderLeftWidth: 4,
+                                height: 70,
+                                fontSize: 20,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+
+                            },
+                            dateText: {
+                                fontSize: 20,
+
+                            },
+                            dateInput: {
+                                borderWidth: 0,
+                                marginLeft: -115,
+                            }
+                        }}
                         date={reverseFormat(this.state.traitment_date)}
                         mode="date"
                         placeholder="select date"
@@ -316,6 +354,10 @@ export class NonConformeIndexScreen extends React.Component {
                         androidMode="spinner"
                         onDateChange={(date) => { this.setState({ traitment_date: reverseFormat(date) }) }}
                     />
+
+
+
+                    <View style={{ height: 100, }}></View>
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -358,11 +400,3 @@ export class NonConformeIndexScreen extends React.Component {
         );
     }
 }
-
-
-const styles = StyleSheet.create({
-    input: {
-        paddingBottom: 10,
-        marginBottom: 25,
-    },
-});

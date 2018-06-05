@@ -8,7 +8,9 @@ import {
     Image,
     ToastAndroid,
     Alert,
-    Dimensions
+    Dimensions,
+    TextInput,
+
 
 } from 'react-native';
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -24,6 +26,8 @@ import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { styles } from '../../../utilities/styles';
+
 
 export class FroidIndexScreen extends React.Component {
 
@@ -63,9 +67,16 @@ export class FroidIndexScreen extends React.Component {
             confirmed: 0,
             date: toDate(new Date()),
             created_at: new Date(),
+
+            dimesions: { width, height } = Dimensions.get('window'),
+
         };
 
         this._bootstrapAsync();
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _bootstrapAsync = async () => {
@@ -289,12 +300,9 @@ export class FroidIndexScreen extends React.Component {
         let { image } = this.state;
 
         return (
-            <Container style={{ alignItems: 'center', paddingTop: 60, }} onLayout={this._onLayout.bind(this)}>
+            <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-                    <View style={{ alignItems: 'center', paddingBottom: 20, }}>
-                        <H3>{this.state.userObj.name} {this.state.userObj.lastname}</H3>
-                    </View>
+                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, paddingTop: 35, }}>
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>
                         <Grid style={{ width: 550 }}>
                             <Row>
@@ -313,31 +321,44 @@ export class FroidIndexScreen extends React.Component {
                         </Grid>
                     </View>
 
+                    <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
+
+
                     {this.state.equipments.map((row) => {
                         return <View style={{ marginBottom: 20, }}>
-                            <Text style={{ marginBottom: 10, }}>{row.name}</Text>
+                            <Text style={[{ marginBottom: 10, }, styles.text]}>{row.name}</Text>
                             {row.value.map((val, index) => {
-                                return <Item inlineLabel style={styles.input}>
-                                    <Label>{Strings.TEMPERATURE}</Label>
-                                    <Input autoFocus={true} keyboardType="numeric" value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
-                                    <Icon active name='thermometer' />
-                                </Item>
+                                return <View style={styles.input}>
+                                    <TextInput
+                                        autoFocus={true}
+                                        keyboardType="numeric"
+                                        style={styles.inputInline}
+                                        underlineColorAndroid="transparent"
+                                        placeholder={Strings.TEMPERATURE}
+                                        value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
+                                    <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
+                                </View>
                             })}
                             <View style={{ flex: 1 }}>
-                                <Button transparent onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
+                                <Button danger onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
                                     <Icon active name='add-circle' />
                                 </Button>
                             </View>
                         </View>
                     })}
 
-                    <Item inlineLabel style={styles.input}>
-                        <Label>{Strings.AUTRES}</Label>
-                        <Input keyboardType="numeric" value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
-                        <Icon active name='thermometer' />
-                    </Item>
+                    <View style={styles.input}>
+                        <TextInput
+                            keyboardType="numeric"
+                            style={styles.inputInline}
+                            underlineColorAndroid="transparent"
+                            placeholder={Strings.AUTRES}
+                            value={this.state.autres} onChangeText={(value) => { this.setState({ autres: value }) }} />
+                        <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
+                    </View>
 
-                    <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
+                    <Textarea style={[styles.textarea, { marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
+
 
                     <SignatureView
                         ref={r => this._signatureView = r}
@@ -387,11 +408,3 @@ export class FroidIndexScreen extends React.Component {
     }
 }
 
-
-
-const styles = StyleSheet.create({
-    input: {
-        paddingBottom: 10,
-        marginBottom: 25,
-    },
-});

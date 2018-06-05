@@ -31,7 +31,6 @@ export class ArchiveIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.ARCHIVE} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
@@ -41,6 +40,7 @@ export class ArchiveIndexScreen extends React.Component {
         this.state = {
             loading: 1,
             disabledDays: [],
+            customDatesStyles: [],
             selectedStartDate: new Date().toISOString().substring(0, 10),
         };
         this.onDateChange = this.onDateChange.bind(this);
@@ -101,37 +101,61 @@ export class ArchiveIndexScreen extends React.Component {
                 date.setDate(date.getDate() + 1);
 
                 let str = new Date(date).toISOString().substring(0, 10);
-
-                // console.log(str);
-
                 let add = 1;
+                let changeColor = true;
+                let dateStyle = null;
 
-                pictures.map(row => {
+                controles.map(row => {
                     if (row.date == str) {
                         add = 0;
+
+                        if (row.confirmed == 1 && changeColor) {
+                            dateStyle = {
+                                date: row.date,
+                                textStyle: {
+                                    color: 'white',
+                                },
+                                style: {
+                                    backgroundColor: "#00BD22",
+                                    color: 'white',
+                                },
+                            };
+                        } else {
+                            dateStyle = {
+                                date: row.date,
+                                textStyle: {
+                                    color: 'white',
+                                },
+                                style: {
+                                    backgroundColor: "#FF846A",
+                                    color: 'white',
+                                },
+                            };
+
+                        }
+
                     }
                 });
 
+                if (dateStyle) {
+                    let customDatesStyles = this.state.customDatesStyles;
+                    customDatesStyles.push(dateStyle);
+                    this.setState({ customDatesStyles: customDatesStyles });
+
+                }
+
                 if (add == 1) {
-                    controles.map(row => {
+                    pictures.map(row => {
                         if (row.date == str) {
                             add = 0;
                         }
                     });
                 }
 
-                if (add == 0) {
-                    // alert(str);
-                }
-
                 if (add) {
                     days.push(str);
                 }
             }
-
-
-
-          
 
             this.setState({ disabledDays: days });
             this._hideLoader();
@@ -153,7 +177,16 @@ export class ArchiveIndexScreen extends React.Component {
                         nextTitle={Strings.NEXT}
                         onDateChange={this.onDateChange}
                         onMonthChange={this.onMonthChange}
-                        disabledDates={this.state.disabledDays} />
+                        disabledDates={this.state.disabledDays}
+                        customDatesStyles={this.state.customDatesStyles}
+                        selectedDayColor='gray'
+                        textStyle={{
+                            fontSize: 20,
+                            color: '#494949',
+                            fontSize: 25,
+                        }}
+
+                    />
                 </Content>
 
             </Container>

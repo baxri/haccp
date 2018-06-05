@@ -42,7 +42,6 @@ export class ControleIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
-            // headerRight: <Menu navigation={navigation} />,
         };
     };
 
