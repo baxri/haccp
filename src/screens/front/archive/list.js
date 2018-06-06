@@ -19,6 +19,7 @@ import { Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Strings from '../../../language/fr';
 import { reverseFormat, FilePicturePath } from '../../../utilities/index';
+import { styles } from '../../../utilities/styles';
 
 export class ArchiveListScreen extends React.Component {
 
@@ -89,16 +90,15 @@ export class ArchiveListScreen extends React.Component {
                                 <List>
                                     {this.state.controles.map(row => {
                                         return <ListItem avatar onPress={() => this.props.navigation.navigate('ArchiveDetails', { controle: row })} style={{ marginTop: 15, }}>
-                                            <Left>
-
-                                            </Left>
                                             <Body >
-                                                {row.type == 0 && <H3>{Strings.RECEPTION_CHECK} - {row.user.name}</H3>}
-                                                {row.type == 1 && <H3>{Strings.CONTROLE_FROID} - {row.user.name}</H3>}
-                                                {row.type == 2 && <H3>{Strings.NONCONFORME} - {row.user.name}</H3>}
+                                                {row.type == 0 && <Text style={styles.text}>{Strings.RECEPTION_CHECK} - {row.user.name}</Text>}
+                                                {row.type == 1 && <Text style={styles.text}>{Strings.CONTROLE_FROID} - {row.user.name}</Text>}
+                                                {row.type == 2 && <Text style={styles.text}>{Strings.NONCONFORME} - {row.user.name}</Text>}
+                                                <Text style={{marginTop: 10, }}>{row.created_at.getTime()}</Text>
                                             </Body>
-                                            <Right>
-                                                <H3 note> {reverseFormat(row.date)}</H3>
+                                            <Right style={{ paddingRight: 30 }}>
+                                                {row.confirmed == 1 && <Icon name='checkmark' style={{ color: 'green', fontSize: 25 }} />}
+                                                {row.confirmed != 1 && <Icon name='close' style={{ color: 'red', fontSize: 25 }} />}
                                             </Right>
                                         </ListItem>;
                                     })}

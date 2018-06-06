@@ -246,39 +246,9 @@ export class ArchiveDetailsScreen extends React.Component {
                                 <Text>{Strings.DATETIME}: {reverseFormat(toDate(this.state.item.created_at))}</Text>
                             </Body>
                         </CardItem>}
-
-                        {true && <CardItem bordered>
-                            <Body>
-                                <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text>
-                            </Body>
-                        </CardItem>}
-
-                        {/* <CardItem bordered>
-                            <Body>
-                                <Text>
-                                    Get on the mobile fast track with NativeBase, the
-                                    fastest-growing platform
-                                    and tool set for iOS and Android development.
-                      </Text>
-                            </Body>
-                        </CardItem>
-                        <CardItem footer bordered>
-                            <Text>GeekyAnts</Text>
-                        </CardItem> */}
                     </Card>
                 </Content>
             </Container >
-        );
-
-        return (
-            <Container>
-                <View style={{ flex: 1, }}>
-
-
-
-
-                </View>
-            </Container>
         );
     }
 }
