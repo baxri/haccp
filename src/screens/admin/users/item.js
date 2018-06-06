@@ -120,6 +120,7 @@ export class AdminUsersItemScreen extends React.Component {
                             onValueChange={value => {
                                 this.setState({ department: value });
                             }}
+                            onFocus={() => Keyboard.dismiss()}
                         />
 
                         {/* <View style={styles.dropdownView}>

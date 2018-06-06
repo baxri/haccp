@@ -10,6 +10,7 @@ import {
     Alert,
     Dimensions,
     TextInput,
+    Keyboard,
 
 
 } from 'react-native';
@@ -25,7 +26,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, renderField, renderFieldDanger, renderOption, renderFieldSuccess } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, renderFieldDanger, renderOption, renderFieldSuccess } from '../../../utilities/index';
 import { CustomPicker } from 'react-native-custom-picker';
 import { styles } from '../../../utilities/styles';
 
@@ -243,6 +244,18 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
         }
 
+        let equipmentError = false;
+
+        this.state.equipments.map(equipment => {
+            equipment.value.map(value => {
+                if (!value) equipmentError = true;
+            });
+        });
+
+        if (equipmentError) {
+            ToastAndroid.show(Strings.EQUIPMENTS_REQUIRED, ToastAndroid.LONG); return;
+        }
+
         Alert.alert(
             Strings.CONTROLE_FROID,
             Strings.ARE_YOU_SURE,
@@ -260,6 +273,9 @@ export class FroidIndexScreen extends React.Component {
         setTimeout(() => {
 
             let equipments = this._encodeEquipment();
+
+
+
 
             addControle(this.state.userId, {
                 source: '',
@@ -336,7 +352,7 @@ export class FroidIndexScreen extends React.Component {
 
                     <CustomPicker
                         optionTemplate={renderOption}
-                        fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
+                        fieldTemplate={renderFieldSuccess}
                         placeholder={Strings.SELECT_FOURNISSEUR}
                         getLabel={item => item.name}
 
@@ -346,6 +362,8 @@ export class FroidIndexScreen extends React.Component {
                         onValueChange={value => {
                             this.setState({ fourniseur: value });
                         }}
+
+                        onFocus={() => Keyboard.dismiss()}
                     />
 
                     {this.state.equipments.map((row) => {
