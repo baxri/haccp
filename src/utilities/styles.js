@@ -157,6 +157,19 @@ export const styles = StyleSheet.create({
         marginBottom: 20,
     },
 
+    DropdownContainerSuccess: {
+        borderLeftColor: 'green',
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+
+        // borderColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        marginBottom: 20,
+    },
+
     innerContainer: {
         padding: 15,
         paddingTop: 20,

@@ -178,6 +178,12 @@ export class ArchiveDetailsScreen extends React.Component {
 
                         {this.state.item.type == 1 && <CardItem bordered>
                             <Body>
+                                <Text>{Strings.FOURNISSEUR}: {this.state.item.fourniseur.name}</Text>
+                            </Body>
+                        </CardItem>}
+
+                        {this.state.item.type == 1 && <CardItem bordered>
+                            <Body>
                                 <View style={{ marginTop: 20, marginBottom: 20, }}>
                                     {this.state.equipments.map((row) => {
                                         return <View style={{ marginBottom: 20, }}>
@@ -241,7 +247,7 @@ export class ArchiveDetailsScreen extends React.Component {
                             </Body>
                         </CardItem>}
 
-                         {true && <CardItem bordered>
+                        {true && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.DATETIME}: {reverseFormat(this.state.item.created_at.toISOString().substring(0, 10))}</Text>
                             </Body>

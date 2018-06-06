@@ -17,7 +17,7 @@ import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, F
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addControle, Controles, Pictures, User } from '../../../database/realm';
+import { addControle, Controles, Pictures, User, Fourniseurs } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -25,7 +25,8 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, renderField, renderFieldDanger, renderOption, renderFieldSuccess } from '../../../utilities/index';
+import { CustomPicker } from 'react-native-custom-picker';
 import { styles } from '../../../utilities/styles';
 
 
@@ -65,10 +66,12 @@ export class FroidIndexScreen extends React.Component {
             actions: '',
 
             confirmed: 0,
+            fourniseur: null,
             date: toDate(new Date()),
             created_at: new Date(),
 
             dimesions: { width, height } = Dimensions.get('window'),
+            fourniseurs: [],
 
         };
 
@@ -83,6 +86,7 @@ export class FroidIndexScreen extends React.Component {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
         const controles = await Controles(userID);
+        const fourniseurs = await Fourniseurs();
 
         this._parseEquipments(user.department.equipments);
 
@@ -90,6 +94,7 @@ export class FroidIndexScreen extends React.Component {
             userId: userID,
             userObj: user,
             loading: 0,
+            fourniseurs: fourniseurs,
         });
 
         this.props.navigation.setParams({
@@ -234,6 +239,10 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
+        if (!this.state.fourniseur) {
+            ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
+        }
+
         Alert.alert(
             Strings.CONTROLE_FROID,
             Strings.ARE_YOU_SURE,
@@ -268,6 +277,8 @@ export class FroidIndexScreen extends React.Component {
                 autres: this.state.autres,
                 actions: this.state.actions,
                 confirmed: this.state.confirmed,
+
+                fourniseur: this.state.fourniseur,
 
                 equipments: equipments,
                 type: 1,
@@ -323,6 +334,19 @@ export class FroidIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
+                    <CustomPicker
+                        optionTemplate={renderOption}
+                        fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
+                        placeholder={Strings.SELECT_FOURNISSEUR}
+                        getLabel={item => item.name}
+
+                        options={this.state.fourniseurs}
+                        value={this.state.fourniseur}
+
+                        onValueChange={value => {
+                            this.setState({ fourniseur: value });
+                        }}
+                    />
 
                     {this.state.equipments.map((row) => {
                         return <View style={{ marginBottom: 20, }}>

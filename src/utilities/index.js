@@ -157,3 +157,30 @@ export const renderFieldDanger = (settings) => {
     )
 }
 
+export const renderFieldSuccess = (settings) => {
+    const { selectedItem, defaultText, getLabel, clear } = settings
+    return (
+        <View style={styles.DropdownContainerSuccess}>
+            <View>
+                {!selectedItem && <View style={styles.innerContainer}>
+                    <Text style={{ fontSize: inputAndButtonFontSize }}>
+                        {defaultText}
+                    </Text>
+                    <Text style={{ fontSize: inputAndButtonFontSize }}>
+                        <Icon name='ios-arrow-down' />
+                    </Text>
+                </View>}
+                {selectedItem && (
+                    <View style={styles.innerContainer }>
+                        <Text style={{ fontSize: inputAndButtonFontSize }}>
+                            {getLabel(selectedItem)}
+                        </Text>
+                        <Text style={{ fontSize: inputAndButtonFontSize }}>
+                            <Icon name='ios-arrow-down' />
+                        </Text>
+                    </View>
+                )}
+            </View>
+        </View>
+    )
+}

@@ -533,6 +533,8 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     traitment: item.traitment,
                     traitment_date: item.traitment_date,
 
+                    fourniseur: (item.fourniseur ? item.fourniseur : null),
+
                     confirmed: item.confirmed,
                     date: item.date,
                     created_at: item.created_at,
