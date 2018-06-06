@@ -17,7 +17,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addUser, editUser, Departments } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
-import { renderOption, renderField } from '../../../utilities/index'
+import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
 import { CustomPicker } from 'react-native-custom-picker';
 
 export class AdminUsersItemScreen extends React.Component {
@@ -110,7 +110,7 @@ export class AdminUsersItemScreen extends React.Component {
 
                         <CustomPicker
                             optionTemplate={renderOption}
-                            fieldTemplate={renderField}
+                            fieldTemplate={this.state.department ?  renderFieldSuccess : renderFieldDanger}
                             placeholder={Strings.SELECT_DEPARTMENT}
                             getLabel={item => item.name}
 
