@@ -352,7 +352,7 @@ export class FroidIndexScreen extends React.Component {
                         return <View style={{ marginBottom: 20, }}>
                             <Text style={[{ marginBottom: 10, }, styles.text]}>{row.name}</Text>
                             {row.value.map((val, index) => {
-                                return <View style={styles.input}>
+                                return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
                                         autoFocus={true}
                                         keyboardType="numeric"
