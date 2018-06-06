@@ -121,7 +121,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 20;
+const schemaVersion = 21;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema];
 const realmPath = realmFilePath();
 
@@ -220,6 +220,7 @@ export const addEquipment = (item) => new Promise((resolve, reject) => {
                 const department = realm.create('Equipment', {
                     id: _guid(),
                     name: item.name,
+                    source:(item.source ? item.source : null) 
                 });
 
                 resolve(department);

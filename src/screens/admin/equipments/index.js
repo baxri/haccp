@@ -204,6 +204,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                     onPress={() => this.props.navigation.navigate('AdminEquipmentsItem', {
                         id: "",
                         name: "",
+                        source: null,
                     })}>
 
                     <Icon name="add" />

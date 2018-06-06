@@ -125,16 +125,27 @@ export class AdminDepartmentsItemScreen extends React.Component {
                     </PopupDialog>
 
                     <View style={styles.container}>
-                        <TextInput style={styles.input}
+
+
+                        {/* <TextInput style={styles.input}
                             underlineColorAndroid="transparent"
                             placeholder={Strings.DEPARTMENT_NAME}
                             value={this.state.name}
-                            onChangeText={(value) => { this.setState({ name: value }) }} />
+                            onChangeText={(value) => { this.setState({ name: value }) }} /> */}
 
+                        <View style={this.state.name.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.EQUIPMENT_NAME}
+                                value={this.state.produit} onChangeText={(value) => { this.setState({ name: value }) }} />
+                            {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger style={styles.button} onPress={() => { this._saveItem() }}>
                             <Left >
-                            <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
+                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
                             </Left>
                             <Right>
                                 <Icon name='checkmark' style={{ color: 'white', }} />

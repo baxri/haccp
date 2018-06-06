@@ -173,6 +173,7 @@ const strings = {
     CANNOT_COPY_DATABASE_FILE: 'CANNOT_COPY_DATABASE_FILE',
     DANGER_ZONE: 'DANGER_ZONE',
     SELECT_USER: 'SELECT_USER',
+    EDIT: 'EDIT',
 };
 
 export default strings;

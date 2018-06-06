@@ -5,18 +5,30 @@ import {
     StatusBar,
     StyleSheet,
     View,
-    Keyboard,
+    Image,
+    ToastAndroid,
+    Alert,
     Dimensions,
     TextInput,
+    Keyboard,
+
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Col, Row, Grid } from "react-native-easy-grid";
+
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { addEquipment, editEquipment } from '../../../database/realm';
-
 import Spinner from 'react-native-loading-spinner-overlay';
-import PopupDialog from 'react-native-popup-dialog';
-import Strings from '../../../language/fr'
+
+var ImagePicker = require('react-native-image-picker');
+import RNFS from 'react-native-fs';
+import Modal from "react-native-modal";
+import Strings from '../../../language/fr';
+import Upload from 'react-native-background-upload'
+import RNFetchBlob from 'react-native-fetch-blob';
+import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 export class AdminEquipmentsItemScreen extends React.Component {
 
@@ -41,6 +53,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
+            source: this.props.navigation.state.params.source,
 
             dimesions: { width, height } = Dimensions.get('window'),
         };
@@ -67,6 +80,29 @@ export class AdminEquipmentsItemScreen extends React.Component {
         this.setState({ loading: 0 });
     }
 
+    _pickImage = () => {
+
+        var options = {
+            quality: 0.5,
+            storageOptions: {
+                cameraRoll: false,
+            }
+        };
+
+        ImagePicker.launchCamera(options, (response) => {
+            writePicture(response.data).then(filename => {
+                this.setState({ source: filename });
+            });
+        });
+    };
+
+    _onSave = async (result) => {
+        writePicture(result.encoded).then(filename => {
+            this.setState({ signature: filename });
+            this._signatureView.show(false);
+        });
+    }
+
     _saveItem() {
 
         this._showLoader();
@@ -75,6 +111,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
             if (!this.state.id) {
                 addEquipment({
                     name: this.state.name,
+                    source: this.state.source,
                 }).then(res => {
                     this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
@@ -87,6 +124,8 @@ export class AdminEquipmentsItemScreen extends React.Component {
                 editEquipment({
                     id: this.state.id,
                     name: this.state.name,
+                    source: this.state.source,
+
                 }).then(res => {
                     this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
@@ -103,12 +142,41 @@ export class AdminEquipmentsItemScreen extends React.Component {
             <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-                    <View style={styles.container}>
-                        <TextInput style={styles.input}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.EQUIPMENT_NAME}
-                            value={this.state.name}
-                            onChangeText={(value) => { this.setState({ name: value }) }} />
+                    <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+
+                        <View style={{ width: 300, height: 300, marginBottom: 50, }}>
+                            {!this.state.source && <Button style={{ flex: 1 }} full light onPress={this._pickImage} >
+                                <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
+                            </Button>}
+                            {this.state.source && <View style={{ flex: 1, }}>
+                                <View style={{ flex: 0.75, zIndex: 0}}>
+                                    <Image
+                                        resizeMode={'contain'}
+                                        style={{ flex: 1 }}
+                                        source={{ uri: FilePicturePath() + this.state.source }}
+                                    />
+                                </View>
+                                <Button style={[styles.button, { zIndex: 1, height: 70, width: 300, position: 'absolute', bottom: 0, }]} onPress={this._pickImage}>
+                                    <Left >
+                                        <Text style={[{ color: 'white', }, styles.text]}>{Strings.EDIT}</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name='attach' style={{ color: 'white', }} />
+                                    </Right>
+                                </Button>
+                            </View>}
+                        </View>
+
+
+                        <View style={this.state.name.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.EQUIPMENT_NAME}
+                                value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                            {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger onPress={() => { this._saveItem() }} style={styles.button}>
                             <Left>
