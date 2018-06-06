@@ -138,7 +138,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
-                                value={this.state.produit} onChangeText={(value) => { this.setState({ name: value }) }} />
+                                value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                             {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                             {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
