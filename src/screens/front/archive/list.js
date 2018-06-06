@@ -94,7 +94,7 @@ export class ArchiveListScreen extends React.Component {
                                                 {row.type == 0 && <Text style={styles.text}>{Strings.RECEPTION_CHECK} - {row.user.name}</Text>}
                                                 {row.type == 1 && <Text style={styles.text}>{Strings.CONTROLE_FROID} - {row.user.name}</Text>}
                                                 {row.type == 2 && <Text style={styles.text}>{Strings.NONCONFORME} - {row.user.name}</Text>}
-                                                <Text style={{marginTop: 10, }}>{row.created_at.getTime()}</Text>
+                                                <Text style={{marginTop: 10, }}>{row.created_at.toLocaleTimeString()}</Text>
                                             </Body>
                                             <Right style={{ paddingRight: 30 }}>
                                                 {row.confirmed == 1 && <Icon name='checkmark' style={{ color: 'green', fontSize: 25 }} />}

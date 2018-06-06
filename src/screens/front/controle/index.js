@@ -181,9 +181,6 @@ export class ControleIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
-        alert(this.state.created_at);
-        return;
-
         this.setState({ confirmed: confirmed });
 
         if (!this.state.produit) {
