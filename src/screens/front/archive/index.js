@@ -91,6 +91,8 @@ export class ArchiveIndexScreen extends React.Component {
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
 
+       
+
         setTimeout(() => {
             month = month * 1;
 
@@ -131,6 +133,8 @@ export class ArchiveIndexScreen extends React.Component {
                                     color: 'white',
                                 },
                             };
+
+                            changeColor = false;
 
                         }
 

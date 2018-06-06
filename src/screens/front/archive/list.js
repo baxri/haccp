@@ -96,7 +96,7 @@ export class ArchiveListScreen extends React.Component {
                                                 {row.type == 2 && <Text style={styles.text}>{Strings.NONCONFORME} - {row.user.name}</Text>}
                                                 <Text style={{marginTop: 10, }}>{row.created_at.toLocaleTimeString()}</Text>
                                             </Body>
-                                            <Right style={{ paddingRight: 30 }}>
+                                            <Right style={{ paddingRight: 30, paddingTop: 20 }}>
                                                 {row.confirmed == 1 && <Icon name='checkmark' style={{ color: 'green', fontSize: 25 }} />}
                                                 {row.confirmed != 1 && <Icon name='close' style={{ color: 'red', fontSize: 25 }} />}
                                             </Right>
