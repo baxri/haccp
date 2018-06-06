@@ -11,7 +11,7 @@ import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'nati
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Departments, Users, Equipments } from '../../../database/realm';
+import { Departments, Users, Equipments, Fourniseurs } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
@@ -38,6 +38,7 @@ export class AdminHomeIndexScreen extends React.Component {
             departments: [],
             users: [],
             equipments: [],
+            fourniseurs: [],
         };
 
         this._bootstrapAsync();
@@ -59,7 +60,8 @@ export class AdminHomeIndexScreen extends React.Component {
         let departments = await Departments();
         let users = await Users();
         let equipments = await Equipments();
-        this.setState({ departments: departments, users: users, equipments: equipments });
+        let fourniseurs = await Fourniseurs();
+        this.setState({ departments: departments, users: users, equipments: equipments, fourniseurs: fourniseurs });
     }
 
     render() {
@@ -95,13 +97,14 @@ export class AdminHomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminFournisseur')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='sync' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
-                                    <Text style={{ color: '#494949', fontSize: inputAndButtonFontSize, marginTop: 20, }} >{Strings.BACKUP}</Text>
+                                    <Icon name='git-compare' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
+                                    <Text style={{ color: '#494949', fontSize: inputAndButtonFontSize, marginTop: 20, }} >{Strings.FOURNISSEUR} ({this.state.fourniseurs.length})</Text>
                                 </View>
                             </Button>
                         </Col>
+
                     </Row>
                     <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
@@ -113,7 +116,12 @@ export class AdminHomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminBackup')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Icon name='sync' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
+                                    <Text style={{ color: '#494949', fontSize: inputAndButtonFontSize, marginTop: 20, }} >{Strings.BACKUP}</Text>
+                                </View>
+                            </Button>
                         </Col>
                     </Row>
                 </Grid>

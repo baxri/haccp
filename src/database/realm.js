@@ -6,13 +6,24 @@ import { realmFilePath } from '../../src/utilities/index';
 
 const Realm = require('realm');
 
+const FourniseurSchema = {
+    primaryKey: 'id',
+    name: 'Fourniseur',
+
+    properties: {
+        id: 'string',    // primary key
+        name: 'string',
+        controles: { type: 'linkingObjects', objectType: 'Controle', property: 'fourniseur' }
+    }
+};
 
 const EquipmentSchema = {
     primaryKey: 'id',
     name: 'Equipment',
 
     properties: {
-        id: 'string',    // primary key
+        id: 'string',
+        source: 'string?',    // primary key
         name: 'string',
     }
 };
@@ -49,6 +60,8 @@ const ControleSchema = {
         devenir: 'string',
         traitment: 'string',
         traitment_date: 'date?',
+
+        fourniseur: 'Fourniseur?',
 
         type: 'int',
         date: 'string',
@@ -108,8 +121,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 18;
-const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema];
+const schemaVersion = 20;
+const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema];
 const realmPath = realmFilePath();
 
 export const RealmFile = () => {
@@ -129,6 +142,73 @@ export const User = (userId) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+
+
+// Fourniseur ==============================================================================
+
+export const addFourniseur = (item) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            // Create Realm objects and write to local storage
+            realm.write(() => {
+                const department = realm.create('Fourniseur', {
+                    id: _guid(),
+                    name: item.name,
+                });
+
+                resolve(department);
+
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const editFourniseur = (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            // Update Realm objects and write to local storage
+            realm.write(() => {
+                let department = realm.create('Fourniseur', item, true);
+                resolve(department);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const Fourniseurs = async (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('Fourniseur').sorted('name', true);
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);           
+        });
+});
+
+export const DeleteFourniseur = (id) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let department = realm.create('Fourniseur', { id: id }, true);
+                realm.delete(department);
+                resolve();
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
 
 // Equipments ==============================================================================
 
@@ -171,13 +251,18 @@ export const Equipments = async (item) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             const items = realm.objects('Equipment').sorted('name', true);
+
+           
+
             resolve(items);
         })
         .catch(error => {
-            setTimeout(() => {
-                alert(error);
-                reject(error);
-            }, 1000);
+            alert(error);
+            reject(error);
+            // setTimeout(() => {
+            //     alert(error);
+            //     reject(error);
+            // }, 1000);
         });
 
 

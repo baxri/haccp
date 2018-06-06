@@ -23,6 +23,9 @@ import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
 import { AdminEquipmentsIndexScreen } from './src/screens/admin/equipments/index';
 import { AdminEquipmentsItemScreen } from './src/screens/admin/equipments/item';
 
+import { AdminFournisseurIndexScreen } from './src/screens/admin/fournisseur/index';
+import { AdminFournisseurItemScreen } from './src/screens/admin/fournisseur/item';
+
 import { AdminUsersIndexScreen } from './src/screens/admin/users/index';
 import { AdminUsersItemScreen } from './src/screens/admin/users/item';
 
@@ -241,6 +244,22 @@ const AdminHomeStack = StackNavigator(
   }
 );
 
+const AdminFournisseurStack = StackNavigator(
+  {
+    AdminFournisseurIndex: AdminFournisseurIndexScreen,
+    AdminFournisseurItem: AdminFournisseurItemScreen,
+  },
+  {
+    initialRouteName: 'AdminFournisseurIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const AdminEquipmentsStack = StackNavigator(
   {
     AdminEquipmentsIndex: AdminEquipmentsIndexScreen,
@@ -319,6 +338,7 @@ const AdminBackupStack = StackNavigator(
 
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
+  AdminFournisseur: AdminFournisseurStack,
   AdminEquipments: AdminEquipmentsStack,
   AdminDepartments: AdminDepartmentsStack,
   AdminUsers: AdminUsersStack,

@@ -19,7 +19,7 @@ import { styles, inputAndButtonFontSize } from '../utilities/styles';
 import { CustomPicker } from 'react-native-custom-picker';
 
 
-export const FILE_VERSION = '2';
+export const FILE_VERSION = '3';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
 export const APP_REALM_FOLDER = 'HACCPDATA';
 
