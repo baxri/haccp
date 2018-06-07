@@ -351,8 +351,8 @@ export class FroidIndexScreen extends React.Component {
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
                     <CustomPicker
-                        optionTemplate={renderOption}
-                        fieldTemplate={renderFieldSuccess}
+                        optionTemplate={ renderOption }
+                        fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
                         placeholder={Strings.SELECT_FOURNISSEUR}
                         getLabel={item => item.name}
 

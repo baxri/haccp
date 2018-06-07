@@ -174,6 +174,7 @@ const strings = {
     DANGER_ZONE: 'DANGER_ZONE',
     SELECT_USER: 'SELECT_USER',
     EDIT: 'EDIT',
+    TIME: 'TIME',
 };
 
 export default strings;
