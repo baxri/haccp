@@ -234,6 +234,8 @@ export class FroidIndexScreen extends React.Component {
 
         let equipments = this._encodeEquipment();
 
+        console.log(equipments);
+
         this.setState({ confirmed: confirmed });
 
         if (confirmed == 0 && !this.state.signature) {
