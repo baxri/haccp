@@ -557,8 +557,8 @@ export const Controles = (userId, date = null, month = null, year = null) => new
             if (month != null && year != null) {
 
                 month = month * 1;
-                var from = new Date(year, month - 1, 1);
-                var to = new Date(year, month + 1, 32);
+                var from = new Date(year, month - 1, 28);
+                var to = new Date(year, month + 1, 1);
 
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
@@ -575,17 +575,12 @@ export const Controles = (userId, date = null, month = null, year = null) => new
         });
 });
 
-export const ControlesGrouped = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
+export const ControlesWithDateAndConfirmed = (userId, date = null, confirmed = null) => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
-
-            month = month * 1;
-            var from = new Date(year, month - 1, 1);
-            var to = new Date(year, month + 1, 32);
-
-            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
+            resolve(userObject.controles.filtered('date = $0 && confirmed = $1', date, confirmed));
         })
         .catch(error => {
             alert(error);

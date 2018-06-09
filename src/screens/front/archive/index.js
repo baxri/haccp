@@ -17,7 +17,7 @@ import { addPicture, Pictures, Controles, ControlesGrouped } from '../../../data
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
-import { reverseFormat } from '../../../utilities/index';
+import { reverseFormat, toDate } from '../../../utilities/index';
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -38,19 +38,21 @@ export class ArchiveIndexScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 0,
+            loading: 1,
             disabledDays: [],
             customDatesStyles: [],
-            selectedStartDate: new Date().toISOString().substring(0, 10),
+            // selectedStartDate: new Date().toISOString().substring(0, 10),
+            selectedStartDate: toDate(new Date()),
         };
         this.onDateChange = this.onDateChange.bind(this);
         this.onMonthChange = this.onMonthChange.bind(this);
+
+        console.log("constructor");
 
         this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
-
         this._setDisabledDays((new Date()).getMonth(), (new Date()).getFullYear());
     };
 
@@ -68,13 +70,6 @@ export class ArchiveIndexScreen extends React.Component {
         this._setDisabledDays(date.format('M') - 1, date.format('YYYY'));
     }
 
-    componentDidMount() {
-
-    };
-
-    componentDidFocus() {
-    };
-
     _showLoader() {
         this.setState({ loading: 1 });
     }
@@ -85,39 +80,30 @@ export class ArchiveIndexScreen extends React.Component {
 
     _setDisabledDays = async (month, year) => {
 
-        // this._showLoader();
+        month = month * 1;
+
+        this._showLoader();
 
         let userID = await AsyncStorage.getItem('userSessionId');
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
-        let controlesGrouped = await ControlesGrouped(userID, null, month, year);
 
-        let activeDates = [];
-        
-        // pictures.map(row => { 
-        //     activeDates.push({
-        //         color: 'gray',
-        //         date: row.date
-        //     })
-        // });
-
-        alert(controlesGrouped.length);
-        return;
-        
+        // console.log(controles);
 
         setTimeout(() => {
-            month = month * 1;
 
             var date = new Date(year, month);
             var days = [];
 
             while (date.getMonth() === month) {
-                date.setDate(date.getDate() + 1);
 
-                let str = new Date(date).toISOString().substring(0, 10);
+                // let str = new Date(date).toISOString().substring(0, 10);
+                let str = toDate(date);
                 let add = 1;
                 let changeColor = true;
                 let dateStyle = null;
+
+                // console.log(str);
 
                 controles.map(row => {
                     if (row.date == str) {
@@ -171,7 +157,11 @@ export class ArchiveIndexScreen extends React.Component {
                 if (add) {
                     days.push(str);
                 }
+
+                date.setDate(date.getDate() + 1);
             }
+
+            // console.log(days);
 
             this.setState({ disabledDays: days });
             this._hideLoader();
