@@ -38,13 +38,18 @@ export const initFolders = async () => {
 
     try {
         let a = await RNFetchBlob.fs.mkdir(PATH + '/');
-    } catch (error) { rr }
+    } catch (error) {
+        // alert(error)
+    }
 
     try {
         let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
 
 
-    } catch (error) { }
+    } catch (error) {
+        // alert(error)
+    }
+
 };
 
 export const realmFilePath = () => {
@@ -193,9 +198,9 @@ export const renderRadios = (label, items, click, value = 0) => {
             </View>
             <View style={{ flexDirection: 'row' }}>
                 {items.map(item => {
-                    return <Button onPress={()=>{click(item.value)}} style={value == item.value ? styles.radioButtonSelected : styles.radioButton}><Text style={styles.text}>{item.text}</Text></Button>;
+                    return <Button onPress={() => { click(item.value) }} style={value == item.value ? styles.radioButtonSelected : styles.radioButton}><Text style={styles.text}>{item.text}</Text></Button>;
                 })}
-                
+
             </View>
         </View>
     )

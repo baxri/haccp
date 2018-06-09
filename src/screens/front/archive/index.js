@@ -13,7 +13,7 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, Controles } from '../../../database/realm';
+import { addPicture, Pictures, Controles, ControlesGrouped } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
@@ -38,7 +38,7 @@ export class ArchiveIndexScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 1,
+            loading: 0,
             disabledDays: [],
             customDatesStyles: [],
             selectedStartDate: new Date().toISOString().substring(0, 10),
@@ -85,13 +85,25 @@ export class ArchiveIndexScreen extends React.Component {
 
     _setDisabledDays = async (month, year) => {
 
-        this._showLoader();
+        // this._showLoader();
 
         let userID = await AsyncStorage.getItem('userSessionId');
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
+        let controlesGrouped = await ControlesGrouped(userID, null, month, year);
 
-       
+        let activeDates = [];
+        
+        // pictures.map(row => { 
+        //     activeDates.push({
+        //         color: 'gray',
+        //         date: row.date
+        //     })
+        // });
+
+        alert(controlesGrouped.length);
+        return;
+        
 
         setTimeout(() => {
             month = month * 1;

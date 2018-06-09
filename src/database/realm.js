@@ -190,7 +190,7 @@ export const Fourniseurs = async (item) => new Promise((resolve, reject) => {
         })
         .catch(error => {
             alert(error);
-            reject(error);           
+            reject(error);
         });
 });
 
@@ -220,7 +220,7 @@ export const addEquipment = (item) => new Promise((resolve, reject) => {
                 const department = realm.create('Equipment', {
                     id: _guid(),
                     name: item.name,
-                    source:(item.source ? item.source : null) 
+                    source: (item.source ? item.source : null)
                 });
 
                 resolve(department);
@@ -248,35 +248,23 @@ export const editEquipment = (item) => new Promise((resolve, reject) => {
 });
 
 export const Equipments = async () => new Promise((resolve, reject) => {
-
-    
-
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-           
+
             // alert("opened");
 
-            try{
+            try {
                 const items = realm.objects('Equipment').sorted('name', true);
 
-           
-
                 resolve(items);
-            }catch(error){
+            } catch (error) {
                 alert(error);
             }
-
         })
         .catch(error => {
             alert(error);
             reject(error);
-            // setTimeout(() => {
-            //     alert(error);
-            //     reject(error);
-            // }, 1000);
         });
-
-
 });
 
 export const DeleteEquipment = (id) => new Promise((resolve, reject) => {
@@ -485,8 +473,8 @@ export const Pictures = (userId, date = null, month = null, year = null) => new 
                 // var to = new Date(year, month, 31);
 
                 month = month * 1;
-                var from = new Date(year, month-1, 1);
-                var to = new Date(year, month+1, 32);
+                var from = new Date(year, month - 1, 1);
+                var to = new Date(year, month + 1, 32);
 
                 resolve(userObject.pictures.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
@@ -569,17 +557,35 @@ export const Controles = (userId, date = null, month = null, year = null) => new
             if (month != null && year != null) {
 
                 month = month * 1;
-                var from = new Date(year, month-1, 1);
-                var to = new Date(year, month+1, 32);
+                var from = new Date(year, month - 1, 1);
+                var to = new Date(year, month + 1, 32);
 
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
-                if (date == null){
+                if (date == null) {
                     let controles = userObject.controles;
                     resolve(controles);
-                }else
+                } else
                     resolve(userObject.controles.filtered('date = $0', date));
             }
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const ControlesGrouped = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            let userObject = realm.objectForPrimaryKey('User', userId);
+
+            month = month * 1;
+            var from = new Date(year, month - 1, 1);
+            var to = new Date(year, month + 1, 32);
+
+            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
         })
         .catch(error => {
             alert(error);
