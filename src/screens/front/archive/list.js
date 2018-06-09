@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H2, H3, Icon, FooterTab, Footer, List, ListItem, Left, Right, Body, Thumbnail } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
-
+import Spinner from 'react-native-loading-spinner-overlay';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures, Controles } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
@@ -36,6 +36,7 @@ export class ArchiveListScreen extends React.Component {
         super(props);
 
         this.state = {
+            loading: 1,
             imagePerRow: 4,
             imageSize: {
                 width: 0,
@@ -48,6 +49,14 @@ export class ArchiveListScreen extends React.Component {
         };
 
         this._bootstrapAsync();
+    }
+
+    _showLoader() {
+        this.setState({ loading: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loading: 0 });
     }
 
     _bootstrapAsync = async () => {
@@ -65,6 +74,7 @@ export class ArchiveListScreen extends React.Component {
             controles: controles,
         });
 
+        this._hideLoader();
         this._calculateSize();
     };
 
@@ -80,6 +90,7 @@ export class ArchiveListScreen extends React.Component {
 
         return (
             <Container>
+                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Grid>
                     <Row>
                         <Col style={{ borderBottomWidth: 1, borderColor: 'lightgray' }}>
@@ -95,7 +106,7 @@ export class ArchiveListScreen extends React.Component {
                                                 {row.type == 0 && <Text style={styles.text}>{Strings.RECEPTION_CHECK} - {row.user.name}</Text>}
                                                 {row.type == 1 && <Text style={styles.text}>{Strings.CONTROLE_FROID} - {row.user.name}</Text>}
                                                 {row.type == 2 && <Text style={styles.text}>{Strings.NONCONFORME} - {row.user.name}</Text>}
-                                                <Text style={{marginTop: 10, }}>{strings.TIME}: {row.created_at.toLocaleTimeString()}</Text>
+                                                <Text style={{ marginTop: 10, }}>{strings.TIME}: {row.created_at.toLocaleTimeString()}</Text>
                                             </Body>
                                             <Right style={{ paddingRight: 30, paddingTop: 20 }}>
                                                 {row.confirmed == 1 && <Icon name='checkmark' style={{ color: 'green', fontSize: 25 }} />}
@@ -123,7 +134,7 @@ export class ArchiveListScreen extends React.Component {
 
                                     {this.state.pictures.map((row, index) => {
                                         return <Button
-                                            style={{ width: this.state.imageSize.width-0.5, height: this.state.imageSize.height }}
+                                            style={{ width: this.state.imageSize.width - 0.1, height: this.state.imageSize.height }}
                                             onPress={() => this.props.navigation.navigate('ArchiveGallery', {
                                                 index: index,
                                                 pictures: this.state.pictures,

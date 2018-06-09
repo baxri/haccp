@@ -121,7 +121,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 21;
+const schemaVersion = 22;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema];
 const realmPath = realmFilePath();
 
@@ -247,15 +247,25 @@ export const editEquipment = (item) => new Promise((resolve, reject) => {
         });
 });
 
-export const Equipments = async (item) => new Promise((resolve, reject) => {
+export const Equipments = async () => new Promise((resolve, reject) => {
+
+    
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-            const items = realm.objects('Equipment').sorted('name', true);
+           
+            alert("opened");
+
+            try{
+                const items = realm.objects('Equipment').sorted('name', true);
 
            
 
-            resolve(items);
+                resolve(items);
+            }catch(error){
+                alert(error);
+            }
+
         })
         .catch(error => {
             alert(error);
@@ -551,6 +561,7 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
 
 
 export const Controles = (userId, date = null, month = null, year = null) => new Promise((resolve, reject) => {
+
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             let userObject = realm.objectForPrimaryKey('User', userId);
@@ -563,13 +574,15 @@ export const Controles = (userId, date = null, month = null, year = null) => new
 
                 resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
-                if (date == null)
-                    resolve(userObject.controles);
-                else
+                if (date == null){
+                    let controles = userObject.controles;
+                    resolve(controles);
+                }else
                     resolve(userObject.controles.filtered('date = $0', date));
             }
         })
         .catch(error => {
+            alert(error);
             reject(error);
         });
 });

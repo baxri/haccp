@@ -49,7 +49,7 @@ export class ControleIndexScreen extends React.Component {
         super(props);
 
         this.state = {
-            loading: 1,
+            loader: 1,
             isModalVisible: false,
             dimesions: { width, height } = Dimensions.get('window'),
 
@@ -98,8 +98,9 @@ export class ControleIndexScreen extends React.Component {
         this.setState({
             userId: userID,
             userObj: user,
-            loading: 0,
         });
+
+        this._hideLoader();
 
         this.props.navigation.setParams({
             test: controles.length
@@ -107,11 +108,11 @@ export class ControleIndexScreen extends React.Component {
     };
 
     _showLoader() {
-        this.setState({ loading: 1 });
+        this.setState({ loader: 1 });
     }
 
     _hideLoader() {
-        this.setState({ loading: 0 });
+        this.setState({ loader: 0 });
     }
 
     componentDidMount() {
@@ -279,7 +280,7 @@ export class ControleIndexScreen extends React.Component {
 
         return (
             <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
-                <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <Spinner visible={this.state.loader} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, paddingTop: 35, }}>
 
                     <View style={{ alignItems: 'center', width: 550, height: 220, marginBottom: 50, }}>

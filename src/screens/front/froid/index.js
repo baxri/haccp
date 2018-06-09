@@ -153,7 +153,7 @@ export class FroidIndexScreen extends React.Component {
             ret.push(equipment);
         });
 
-        this.setState({ equipments: ret });
+        this.setState({ equipments: ret, clickedAdd: true });
     }
 
     _encodeEquipment() {
@@ -310,6 +310,8 @@ export class FroidIndexScreen extends React.Component {
 
                 date: this.state.date,
                 created_at: this.state.created_at,
+
+                clickedAdd: false,
             }).then(res => {
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
@@ -374,7 +376,7 @@ export class FroidIndexScreen extends React.Component {
                             {row.value.map((val, index) => {
                                 return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
-                                        autoFocus={true}
+                                        autoFocus={this.state.clickedAdd && true}
                                         keyboardType="numeric"
                                         style={styles.inputInline}
                                         underlineColorAndroid="transparent"
