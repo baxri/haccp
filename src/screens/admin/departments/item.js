@@ -133,14 +133,14 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             value={this.state.name}
                             onChangeText={(value) => { this.setState({ name: value }) }} /> */}
 
-                        <View style={this.state.name.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
                                 value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                            {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
                         <Button danger style={styles.button} onPress={() => { this._saveItem() }}>

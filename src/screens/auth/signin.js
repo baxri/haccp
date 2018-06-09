@@ -17,7 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../language/fr'
 import { Departments } from '../../database/realm';
 
-import { renderOption, renderField, renderFieldDanger } from '../../utilities/index'
+import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../utilities/index'
 import { CustomPicker } from 'react-native-custom-picker';
 import { styles, inputAndButtonFontSize } from '../../utilities/styles';
 
@@ -27,7 +27,7 @@ export class SignInScreen extends React.Component {
         super(props);
         this.state = {
             loading: 0,
-            department: '',
+            department: null,
             user: null,
 
             departments: [],
@@ -54,6 +54,7 @@ export class SignInScreen extends React.Component {
         this.setState({ departments: items });
 
         if (items.length > 0) {
+            this.setState({ department: items[0] });
             this.setState({ users: items[0].users });
 
             if (items[0].users.length > 0) {
@@ -113,7 +114,7 @@ export class SignInScreen extends React.Component {
                         {this.state.departments.length > 0 && <View>
                             <CustomPicker
                                 optionTemplate={renderOption}
-                                fieldTemplate={renderFieldDanger}
+                                fieldTemplate={renderFieldSuccess}
                                 placeholder={Strings.SELECT_DEPARTMENT}
                                 getLabel={item => item.name}
 
@@ -129,8 +130,8 @@ export class SignInScreen extends React.Component {
 
                             {this.state.users.length > 0 && <CustomPicker
                                 optionTemplate={renderOption}
-                                fieldTemplate={renderFieldDanger}
-                                getLabel={item => item.name}
+                                fieldTemplate={renderFieldSuccess}
+                                getLabel={item => item.name + " " + item.lastname}
                                 placeholder={Strings.SELECT_USER}
                                 options={this.state.users}
                                 value={this.state.user}
@@ -165,7 +166,7 @@ export class SignInScreen extends React.Component {
                         </View>}
 
                         <View>
-                            <Button light style={styles.buttonOriginal} onPress={() => {
+                            <Button light style={[styles.buttonOriginal]} onPress={() => {
                                 this.props.navigation.navigate('SignInAdmin', {
                                     func: () => { }
                                 });

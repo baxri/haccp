@@ -123,24 +123,24 @@ export class AdminUsersItemScreen extends React.Component {
                             onFocus={() => Keyboard.dismiss()}
                         />
 
-                      <View style={this.state.name.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                      <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
                                 value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                            {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
-                        <View style={this.state.lastname.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <View style={this.state.lastname.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
                                 value={this.state.lastname} onChangeText={(value) => { this.setState({ lastname: value }) }} />
-                            {this.state.lastname.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.lastname.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            {this.state.lastname.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.lastname.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
                         

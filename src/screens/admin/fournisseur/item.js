@@ -104,11 +104,16 @@ export class AdminFournisseurItemScreen extends React.Component {
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
-                        <TextInput style={styles.input}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.FOURNISSEUR_NAME}
-                            value={this.state.name}
-                            onChangeText={(value) => { this.setState({ name: value }) }} />
+
+                        <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.FOURNISSEUR_NAME}
+                                value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger onPress={() => { this._saveItem() }} style={styles.button}>
                             <Left>

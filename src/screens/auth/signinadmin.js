@@ -37,7 +37,7 @@ export class SignInAdminScreen extends React.Component {
     }
 
     _loginAdmin = async () => {
-        const adminPassword = await AsyncStorage.getItem('adminPasswordV7');
+        const adminPassword = await AsyncStorage.getItem('adminPasswordV8');
 
         try {
 
@@ -70,11 +70,17 @@ export class SignInAdminScreen extends React.Component {
                     </View>
 
                     <View style={styles.container}>
-                        <TextInput style={styles.inputDanger}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.ENTER_PASSWORD}
-                            secureTextEntry={true}
-                            onChangeText={(value) => { this.setState({ password: value }) }} />
+
+                        <View style={this.state.password.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                secureTextEntry={true}
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.ENTER_PASSWORD}
+                                value={this.state.password} onChangeText={(value) => { this.setState({ password: value }) }} />
+                            {this.state.password.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.password.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger style={styles.button} onPress={() => { this._loginAdmin() }}>
                             <Left >

@@ -53,7 +53,7 @@ export class SetupAdminScreen extends React.Component {
             }
 
             //Save admin password
-            await AsyncStorage.setItem('adminPasswordV7', password);
+            await AsyncStorage.setItem('adminPasswordV8', password);
 
             //Navigate to admin login page           
             this.props.navigation.navigate('SignInAdmin', {
@@ -75,17 +75,28 @@ export class SetupAdminScreen extends React.Component {
                     </View>
 
                     <View style={styles.container}>
-                        <TextInput style={styles.inputDanger}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.ENTER_PASSWORD}
-                            secureTextEntry={true}
-                            onChangeText={(value) => { this.setState({ password: value }) }} />
 
-                        <TextInput style={styles.inputDanger}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.CONFIRM_PASSWORD}
-                            secureTextEntry={true}
-                            onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
+                        <View style={this.state.password.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                secureTextEntry={true}
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.ENTER_PASSWORD}
+                                value={this.state.password} onChangeText={(value) => { this.setState({ password: value }) }} />
+                            {this.state.password.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.password.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
+
+                        <View style={this.state.passwordConfirm.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                secureTextEntry={true}
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.ENTER_PASSWORD}
+                                value={this.state.passwordConfirm} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
+                            {this.state.passwordConfirm.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.passwordConfirm.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger style={styles.button}
                             onPress={() => { this._setupAdmin() }}>

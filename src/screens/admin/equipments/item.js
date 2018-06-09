@@ -151,7 +151,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                             {this.state.source && <View style={{ flex: 1, }}>
                                 <View style={{ flex: 0.75, zIndex: 0}}>
                                     <Image
-                                        resizeMode={'contain'}
+                                        resizeMode={'cover'}
                                         style={{ flex: 1 }}
                                         source={{ uri: FilePicturePath() + this.state.source }}
                                     />
@@ -168,14 +168,14 @@ export class AdminEquipmentsItemScreen extends React.Component {
                         </View>
 
 
-                        <View style={this.state.name.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                        <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
                                 value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                            {this.state.name.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.name.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
                         <Button danger onPress={() => { this._saveItem() }} style={styles.button}>

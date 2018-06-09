@@ -151,7 +151,7 @@ export class AdminFournisseurIndexScreen extends React.Component {
 
                     {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                         <Icon name='briefcase' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                        <Text style={{ color: 'lightgray', fontSize: 25, }} >{Strings.THERE_IS_NO_EQUIPMENTS_YET}</Text>
+                        <Text style={{ color: 'lightgray', fontSize: 25, }} >{Strings.THERE_IS_NO_FOURNISSEUR_YET}</Text>
                     </View>}
 
                     <List

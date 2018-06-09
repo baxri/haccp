@@ -123,7 +123,7 @@ export class ArchiveListScreen extends React.Component {
 
                                     {this.state.pictures.map((row, index) => {
                                         return <Button
-                                            style={{ width: this.state.imageSize.width, height: this.state.imageSize.height }}
+                                            style={{ width: this.state.imageSize.width-0.5, height: this.state.imageSize.height }}
                                             onPress={() => this.props.navigation.navigate('ArchiveGallery', {
                                                 index: index,
                                                 pictures: this.state.pictures,

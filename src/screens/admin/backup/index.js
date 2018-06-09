@@ -158,9 +158,9 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
-        setTimeout(() => {
+        this._showLoader();
 
-            console.log(PATH);
+        setTimeout(() => {
 
             RNFetchBlob.fs.ls(PATH)
                 .then((files) => {
@@ -182,9 +182,9 @@ export class AdminBackupIndexScreen extends React.Component {
                         this._hideLoader();
                         this.props.navigation.navigate("AdminHome");
 
-                        if (resp.data.length > 0) {
-                            alert(resp.data);
-                        }
+                        // if (resp.data.length > 0) {
+                            // alert(resp.data);
+                        // }
 
                         ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
                     }).catch((err) => {
@@ -203,14 +203,18 @@ export class AdminBackupIndexScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
 
-                        <H3 style={{ marginBottom: 10, textAlign: 'center'}}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
-                        <H3 style={{ marginBottom: 30, textAlign: 'center'}}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
+                        <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
 
-                        <TextInput style={styles.input}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.BACKUP_NAME}
-                            value={this.state.name}
-                            onChangeText={(value) => { this.setState({ name: value }) }} />
+                        <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.BACKUP_NAME}
+                                value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
                             <Left >
@@ -234,13 +238,17 @@ export class AdminBackupIndexScreen extends React.Component {
                         <View style={{ height: 100, }}></View>
 
                         <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
-                        <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25}}>{Strings.RESTORE_WARNING}</H3>
+                        <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
 
-                        <TextInput style={styles.input}
-                            underlineColorAndroid="transparent"
-                            placeholder={Strings.BACKUP_ID}
-                            value={this.state.name}
-                            onChangeText={(value) => { this.setState({ backup_id: value }) }} />
+                        <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.BACKUP_ID}
+                                value={this.state.backup_id} onChangeText={(value) => { this.setState({ backup_id: value }) }} />
+                            {this.state.backup_id.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                            {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                        </View>
 
                         <Button danger style={styles.button} onPress={() => { this._restore() }}>
                             <Left >
