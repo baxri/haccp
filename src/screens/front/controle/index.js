@@ -15,20 +15,17 @@ import {
 import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu } from '../../../components/header';
 import { addControle, Controles, Pictures, User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
-import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import Upload from 'react-native-background-upload'
-import RNFetchBlob from 'react-native-fetch-blob';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, renderRadios } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+// import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 export class ControleIndexScreen extends React.Component {
 
@@ -268,10 +265,7 @@ export class ControleIndexScreen extends React.Component {
     render() {
         let { image } = this.state;
 
-        var aspect_props = [
-            { label: Strings.BON, value: 0 },
-            { label: Strings.MAUVAIS, value: 1 }
-        ];
+
 
         var yesno_props = [
             { label: Strings.NO, value: 0 },
@@ -339,8 +333,14 @@ export class ControleIndexScreen extends React.Component {
                         placeholder={Strings.DUBL}
                         value={this.state.dubl} onChangeText={(value) => { this.setState({ dubl: value }) }} />
 
+                    {renderRadios(Strings.ASPECT, [
+                        { text: Strings.BON, value: 0 },
+                        { text: Strings.MAUVAIS, value: 1 }
+                    ],
+                        ((value) => { this.setState({ aspect: value }) }),
+                        this.state.aspect)}
 
-                    <Text style={styles.label}>{Strings.ASPECT}</Text>
+                    {/* <Text style={styles.label}>{Strings.ASPECT}</Text>
                     <RadioForm
                         radio_props={aspect_props}
                         initial={0}
@@ -350,7 +350,7 @@ export class ControleIndexScreen extends React.Component {
                         buttonColor={'gray'}
                         selectedButtonColor={'gray'}
                         onPress={(value) => { this.setState({ aspect: value }) }}
-                    />
+                    /> */}
 
                     <TextInput
                         keyboardType="numeric"
@@ -359,7 +359,21 @@ export class ControleIndexScreen extends React.Component {
                         placeholder={Strings.DUPRODUIT}
                         value={this.state.ddu_produitubl} onChangeText={(value) => { this.setState({ du_produit: value }) }} />
 
-                    <Text style={styles.label}>{Strings.EMBALAGE_INTATC}</Text>
+                    {renderRadios(Strings.EMBALAGE_INTATC, [
+                        { text: Strings.NO, value: 0 },
+                        { text: Strings.YES, value: 1 }
+                    ],
+                        ((value) => { this.setState({ intact: value }) }),
+                        this.state.intact)}
+
+                    {renderRadios(Strings.ETIQUTAGE_CONF, [
+                        { text: Strings.NO, value: 0 },
+                        { text: Strings.YES, value: 1 }
+                    ],
+                        ((value) => { this.setState({ conforme: value }) }),
+                        this.state.conforme)}
+
+                    {/* <Text style={styles.label}>{Strings.EMBALAGE_INTATC}</Text>
                     <RadioForm
                         radio_props={yesno_props}
                         initial={1}
@@ -382,7 +396,7 @@ export class ControleIndexScreen extends React.Component {
                         selectedButtonColor={'gray'}
                         radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
                         onPress={(value) => { this.setState({ conforme: value }) }}
-                    />
+                    /> */}
 
                     <Textarea style={[styles.textarea, { marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
 

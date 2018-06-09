@@ -143,7 +143,7 @@ export const renderFieldDanger = (settings) => {
                     </Text>
                 </View>}
                 {selectedItem && (
-                    <View style={styles.innerContainer }>
+                    <View style={styles.innerContainer}>
                         <Text style={{ fontSize: inputAndButtonFontSize }}>
                             {getLabel(selectedItem)}
                         </Text>
@@ -171,7 +171,7 @@ export const renderFieldSuccess = (settings) => {
                     </Text>
                 </View>}
                 {selectedItem && (
-                    <View style={styles.innerContainer }>
+                    <View style={styles.innerContainer}>
                         <Text style={{ fontSize: inputAndButtonFontSize }}>
                             {getLabel(selectedItem)}
                         </Text>
@@ -180,6 +180,22 @@ export const renderFieldSuccess = (settings) => {
                         </Text>
                     </View>
                 )}
+            </View>
+        </View>
+    )
+}
+
+export const renderRadios = (label, items, click, value = 0) => {
+    return (
+        <View style={styles.RadioContainer}>
+            <View>
+                <Text style={styles.label}>{label}</Text>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+                {items.map(item => {
+                    return <Button onPress={()=>{click(item.value)}} style={value == item.value ? styles.radioButtonSelected : styles.radioButton}><Text style={styles.text}>{item.text}</Text></Button>;
+                })}
+                
             </View>
         </View>
     )

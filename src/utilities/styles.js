@@ -190,7 +190,39 @@ export const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 10
-    }
+    },
     // @END DropDown selector
+
+
+    //Radio button styles
+
+    RadioContainer: {
+        borderWidth: 0,
+        height: 70,
+        marginBottom: 20,
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
+    radioButton: {
+        height: 70,
+        width: 150,
+        backgroundColor: 'lightgray',
+        // marginLeft: 5,
+        justifyContent: 'center'
+    },
+
+    radioButtonSelected: {
+        width: 150,
+        height: 70,
+        backgroundColor: 'green',
+        // marginLeft: 5,
+        justifyContent: 'center'
+
+    },
+
+    //@END radio button styles
 
 });

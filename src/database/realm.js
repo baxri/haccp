@@ -254,7 +254,7 @@ export const Equipments = async () => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
            
-            alert("opened");
+            // alert("opened");
 
             try{
                 const items = realm.objects('Equipment').sorted('name', true);
