@@ -14,7 +14,7 @@ import {
 
 
 } from 'react-native';
-import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -355,7 +355,7 @@ export class FroidIndexScreen extends React.Component {
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
                     <CustomPicker
-                        optionTemplate={ renderOption }
+                        optionTemplate={renderOption}
                         fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
                         placeholder={Strings.SELECT_FOURNISSEUR}
                         getLabel={item => item.name}
@@ -433,6 +433,20 @@ export class FroidIndexScreen extends React.Component {
                         </View>
                     </Modal>
                 </Content>
+                <Fab
+                    active={true}
+                    direction="up"
+                    containerStyle={{}}
+                    style={{ backgroundColor: '#494949', position: 'absolute', left: 10, bottom: 60, }}
+                    position="bottomLeft"
+
+                    onPress={() => this.props.navigation.navigate('FroidHelp', {
+                        title: Strings.CONTROLE_FROID,
+                        source: 'froid',
+                    })}>
+
+                    <Icon name="help" />
+                </Fab>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
                         <Button danger onPress={_ => this._save(0)} >

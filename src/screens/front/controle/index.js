@@ -12,7 +12,7 @@ import {
     TextInput,
 
 } from 'react-native';
-import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { LogoTitle, Menu } from '../../../components/header';
@@ -426,7 +426,25 @@ export class ControleIndexScreen extends React.Component {
                             </View>
                         </View>
                     </Modal>
+
+
+
+
                 </Content>
+                <Fab
+                    active={true}
+                    direction="up"
+                    containerStyle={{}}
+                    style={{ backgroundColor: '#494949', position: 'absolute', left: 10, bottom: 60, }}
+                    position="bottomLeft"
+
+                    onPress={() => this.props.navigation.navigate('ControleHelp', {
+                        title: Strings.RECEPTION_CHECK,
+                        source: 'controle',
+                    })}>
+
+                    <Icon name="help" />
+                </Fab>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
                         <Button danger onPress={_ => this._save(0)} >

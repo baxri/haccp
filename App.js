@@ -1,6 +1,8 @@
 // Luncher icon generator
 // https://romannurik.github.io/AndroidAssetStudio/
 
+console.disableYellowBox = true;
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, DrawerNavigator, SwitchNavigator } from 'react-navigation';
@@ -12,13 +14,8 @@ import { SignInAdminScreen } from './src/screens/auth/signinadmin';
 import { SetupAdminScreen } from './src/screens/auth/setupadmin';
 
 
-import { HelloAppScreen } from './src/screens/app/hello-app';
-
 // Admin Screens
-
-
 import { AdminHomeIndexScreen } from './src/screens/admin/home/index';
-// import { AdminHomeDetailsScreen } from './src/screens/admin/home/details';
 
 import { AdminEquipmentsIndexScreen } from './src/screens/admin/equipments/index';
 import { AdminEquipmentsItemScreen } from './src/screens/admin/equipments/item';
@@ -34,7 +31,6 @@ import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
-
 // End Admin Screens
 
 
@@ -54,19 +50,17 @@ import { ArchiveDetailsScreen } from './src/screens/front/archive/details';
 import { NonconflistIndexScreen } from './src/screens/front/nonconflist/index';
 import { NonConformeDetailsScreen } from './src/screens/front//nonconflist/details';
 
+import { HelpScreen } from './src/screens/front/help';
 
 // End Front Screens
 
-
 import { LogOutScreen } from './src/screens/auth/logout';
 
-console.disableYellowBox = true;
 
 
 // const headerBackground = '#1E2EB4';
 const headerBackground = '#BB0000';
 const headerTextColor = 'white';
-
 
 const AuthStack = StackNavigator(
   {
@@ -125,6 +119,7 @@ const TraceStack = StackNavigator(
 const ControleStack = StackNavigator(
   {
     ControleIndex: ControleIndexScreen,
+    ControleHelp: HelpScreen,
   },
   {
     initialRouteName: 'ControleIndex',
@@ -140,6 +135,7 @@ const ControleStack = StackNavigator(
 const FroidStack = StackNavigator(
   {
     FroidIndex: FroidIndexScreen,
+    FroidHelp: HelpScreen,
   },
   {
     initialRouteName: 'FroidIndex',
@@ -155,6 +151,7 @@ const FroidStack = StackNavigator(
 const NonConformeStack = StackNavigator(
   {
     NonConformeIndex: NonConformeIndexScreen,
+    NonconformeHelp: HelpScreen,
   },
   {
     initialRouteName: 'NonConformeIndex',
