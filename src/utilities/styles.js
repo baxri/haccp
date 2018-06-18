@@ -69,6 +69,20 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
+    inputSuccessNoPadding: {
+        marginBottom: 20,
+        borderLeftColor: 'green',
+        borderRightColor: 'gray',
+        borderTopColor: 'gray',
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+        borderLeftWidth: 4,
+        height: 70,
+        fontSize: inputAndButtonFontSize,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
     inputInline: {
         flex: 1,
         height: 70,
