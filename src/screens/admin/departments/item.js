@@ -11,9 +11,9 @@ import {
     Image,
 
 } from 'react-native';
-import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addDepartment, editDepartment, Equipments } from '../../../database/realm';
+import { addDepartment, editDepartment, Equipments, addEquipment, Fourniseurs, addFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -43,16 +43,24 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
         this.state = {
             loading: 0,
+
             equipments_select: [],
+            equipments_selected: [],
+
+            fourniseur_select: [],
+            fourniseur_selected: [],
 
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
             equipments: this.props.navigation.state.params.equipments,
+            fourniseurs: this.props.navigation.state.params.fourniseurs,
 
             dimesions: { width, height } = Dimensions.get('window'),
 
             equipment_name: '',
             equipment_image: '',
+
+            fourniseur_name: '',
         };
 
         this._bootstrapAsync();
@@ -63,14 +71,32 @@ export class AdminDepartmentsItemScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
+        this._loadEquipments();
+        this._loadFourniseurs();
+    };
+
+    _loadEquipments = async () => {
 
         let equipments = await Equipments();
 
         this.setState({
             loading: 0,
             equipments_select: equipments,
+            equipments_selected: this.state.equipments.map(r => r.id),
         });
     };
+
+    _loadFourniseurs = async () => {
+
+        let fourniseurs = await Fourniseurs();
+
+        this.setState({
+            loading: 0,
+            fourniseur_select: fourniseurs,
+            fourniseur_selected: this.state.fourniseurs.map(r => r.id),
+        });
+    };
+
 
     _showLoader() {
         this.setState({ loading: 1 });
@@ -78,6 +104,36 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
     _hideLoader() {
         this.setState({ loading: 0 });
+    }
+
+    _toggleCheckboxEquipments(data) {
+
+        let equipments_selected = this.state.equipments_selected;
+
+        let index = equipments_selected.indexOf(data.id);
+
+        if (index < 0) {
+            equipments_selected.push(data.id)
+        } else {
+            equipments_selected.splice(index, 1);
+        }
+
+        this.setState({ equipments_selected: equipments_selected });
+    }
+
+    _toggleCheckboxFourniseur(data) {
+
+        let fourniseur_selected = this.state.fourniseur_selected;
+
+        let index = fourniseur_selected.indexOf(data.id);
+
+        if (index < 0) {
+            fourniseur_selected.push(data.id)
+        } else {
+            fourniseur_selected.splice(index, 1);
+        }
+
+        this.setState({ fourniseur_selected: fourniseur_selected });
     }
 
     _pickImage = () => {
@@ -96,16 +152,65 @@ export class AdminDepartmentsItemScreen extends React.Component {
         });
     };
 
+    _saveEquipment() {
+
+        this._showLoader();
+
+        setTimeout(() => {
+            addEquipment({
+                name: this.state.equipment_name,
+                source: this.state.equipment_image,
+            }).then(res => {
+
+                this._loadEquipments();
+
+                this.setState({
+                    equipment_name: '',
+                    equipment_image: '',
+                });
+
+                Keyboard.dismiss();
+                this._hideLoader();
+            }).catch(error => {
+                alert(error);
+            });
+        }, 500);
+    }
+
+    _saveFourniseur() {
+        this._showLoader();
+
+        setTimeout(() => {
+            addFourniseur({
+                name: this.state.fourniseur_name,
+            }).then(res => {
+                this._loadFourniseurs();
+
+                this.setState({
+                    fourniseur_name: '',
+                });
+
+                Keyboard.dismiss();
+                this._hideLoader();
+            }).catch(error => {
+                alert(error);
+            });
+        }, 500);
+    }
 
     _saveItem() {
 
         this._showLoader();
+        let equipments = this.state.equipments_select.filter(row => this.state.equipments_selected.includes(row.id));
+        let fourniseurs = this.state.fourniseur_select.filter(row => this.state.fourniseur_selected.includes(row.id));
 
         setTimeout(() => {
             if (!this.state.id) {
                 addDepartment({
                     name: this.state.name,
-                    equipments: this.state.equipments
+                    // equipments: this.state.equipments
+                    equipments: equipments,
+                    fourniseurs: fourniseurs,
                 }).then(res => {
                     this.props.navigation.navigate('AdminDepartmentsIndex');
                     Keyboard.dismiss();
@@ -118,7 +223,8 @@ export class AdminDepartmentsItemScreen extends React.Component {
                 editDepartment({
                     id: this.state.id,
                     name: this.state.name,
-                    equipments: this.state.equipments
+                    equipments: equipments,
+                    fourniseurs: fourniseurs,
                 }).then(res => {
                     this.props.navigation.navigate('AdminDepartmentsIndex');
                     Keyboard.dismiss();
@@ -160,28 +266,30 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
-                        <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}>
-                            <List>
-                                {this.state.equipments_select.map(data => {
-                                    return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckbox(rowId) }}>
-                                        <Left>
-                                            <Text>{data.name}</Text>
-                                        </Left>
-                                        <Right>
-                                            <CheckBox checked={data.checked} onPress={() => { this._toggleCheckbox(rowId) }} />
-                                        </Right>
-                                    </ListItem>;
-                                })}
-                            </List>
-                        </View>
+                        {this.state.equipments_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
+                            {this.state.equipments_select.map((data) => {
+                                return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxEquipments(data) }}>
+                                    <Left>
+                                        <Text>{data.name}</Text>
+                                    </Left>
+                                    <Right>
+                                        <CheckBox checked={this.state.equipments_selected.includes(data.id)} onPress={() => { this._toggleCheckboxEquipments(data) }} />
+                                    </Right>
+                                </ListItem>;
+                            })}
+                        </List></View>}
 
-                        <View style={[{ marginTop: 20, }, styles.inputSuccessNoPadding]}>
+                        {this.state.equipments_select.length == 0 && <View style={{ height: 70, alignItems: 'center', justifyContent: 'center' }}>
+                            <H2 style={{ color: 'gray' }}>{Strings.THERE_IS_NO_EQUIPMENTS_YET}</H2>
+                        </View>}
+
+                        <View style={[{ marginTop: 20, }, styles.inputNoPadding]}>
                             {!this.state.equipment_image && <Button transparent style={{ height: 70, width: 70, marginRight: 15, }} full onPress={this._pickImage} >
-                                <Icon name='checkmark' />
+                                <Icon style={{ color: 'gray' }} name='camera' />
                             </Button>}
                             {this.state.equipment_image.length > 0 && <Image
                                 resizeMode={'contain'}
-                                style={{ borderWidth: 2,  width: 70, height: 70,  }}
+                                style={{ borderWidth: 2, width: 70, height: 70, }}
                                 source={{ uri: FilePicturePath() + this.state.equipment_image }}
                             />}
                             <TextInput
@@ -189,10 +297,44 @@ export class AdminDepartmentsItemScreen extends React.Component {
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
                                 value={this.state.equipment_name} onChangeText={(value) => { this.setState({ equipment_name: value }) }} />
-                            <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => alert('etert')} >
+                            {this.state.equipment_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveEquipment()} >
                                 <Icon name='add' />
-                            </Button>
+                            </Button>}
                         </View>
+
+
+
+
+
+                        {this.state.fourniseur_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
+                            {this.state.fourniseur_select.map((data) => {
+                                return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxFourniseur(data) }}>
+                                    <Left>
+                                        <Text>{data.name}</Text>
+                                    </Left>
+                                    <Right>
+                                        <CheckBox checked={this.state.fourniseur_selected.includes(data.id)} onPress={() => { this._toggleCheckboxFourniseur(data) }} />
+                                    </Right>
+                                </ListItem>;
+                            })}
+                        </List></View>}
+
+                        {this.state.fourniseur_select.length == 0 && <View style={{ height: 70, alignItems: 'center', justifyContent: 'center' }}>
+                            <H2 style={{ color: 'gray' }}>{Strings.THERE_IS_NO_FOURNISSEUR_YET}</H2>
+                        </View>}
+
+                        <View style={[{ marginTop: 20, }, styles.input]}>
+                            <TextInput
+                                style={styles.inputInline}
+                                underlineColorAndroid="transparent"
+                                placeholder={Strings.FOURNISSEUR_NAME}
+                                value={this.state.fourniseur_name} onChangeText={(value) => { this.setState({ fourniseur_name: value }) }} />
+                            {this.state.fourniseur_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveFourniseur()} >
+                                <Icon name='add' />
+                            </Button>}
+                        </View>
+
+
 
 
                         <Button transparent

@@ -13,7 +13,8 @@ const FourniseurSchema = {
     properties: {
         id: 'string',    // primary key
         name: 'string',
-        controles: { type: 'linkingObjects', objectType: 'Controle', property: 'fourniseur' }
+        controles: { type: 'linkingObjects', objectType: 'Controle', property: 'fourniseur' },
+        departments: { type: 'linkingObjects', objectType: 'Department', property: 'fourniseurs' },
     }
 };
 
@@ -25,8 +26,11 @@ const EquipmentSchema = {
         id: 'string',
         source: 'string?',    // primary key
         name: 'string',
+        departments: { type: 'linkingObjects', objectType: 'Department', property: 'equipments' },
     }
 };
+
+
 
 const ControleSchema = {
     primaryKey: 'id',
@@ -98,7 +102,6 @@ const UserSchema = {
     }
 };
 
-
 const DepartmentSchema = {
     primaryKey: 'id',
     name: 'Department',
@@ -106,7 +109,8 @@ const DepartmentSchema = {
     properties: {
         id: 'string',    // primary key
         name: 'string',
-        equipments: 'string[]',
+        equipments: 'Equipment[]',
+        fourniseurs: 'Fourniseur[]',
         users: { type: 'linkingObjects', objectType: 'User', property: 'department' }
     }
 };
@@ -121,7 +125,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 22;
+const schemaVersion = 27;
 const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema];
 const realmPath = realmFilePath();
 
@@ -284,8 +288,6 @@ export const DeleteEquipment = (id) => new Promise((resolve, reject) => {
 
 // END Equipments ==============================================================================
 
-
-
 export const addDepartment = (item) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -295,6 +297,7 @@ export const addDepartment = (item) => new Promise((resolve, reject) => {
                     id: _guid(),
                     name: item.name,
                     equipments: item.equipments,
+                    fourniseurs: item.fourniseurs,
                 });
 
                 resolve(department);

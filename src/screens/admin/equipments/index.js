@@ -102,7 +102,13 @@ export class AdminEquipmentsIndexScreen extends React.Component {
         )
     }
 
-    _allowDelete(id) {
+    _allowDelete(data) {
+
+        if (data.departments.length > 0) {
+            return false;
+        }
+
+        return true;
 
         let choosed = [];
 
@@ -160,7 +166,7 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                             <ListItem style={{ height: 100, paddingLeft: 15, }}>
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
-                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize,}}>{data.name} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
                                     </View>
                                 </Left>
                                 <Right>
@@ -169,14 +175,14 @@ export class AdminEquipmentsIndexScreen extends React.Component {
                                             onPress={() => this.props.navigation.navigate('AdminEquipmentsItem', data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        {this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        {this._allowDelete(data) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>}
-                                        {!this._allowDelete(data.id) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full disabled>
+                                        {!this._allowDelete(data) && <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full disabled>
                                             <Icon active name="trash" />
                                         </Button>}
                                     </View>
-                                </Right>                        
+                                </Right>
                             </ListItem>}
                         renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
                             <Button full
