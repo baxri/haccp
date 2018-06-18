@@ -115,7 +115,7 @@ export class AdminFournisseurIndexScreen extends React.Component {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
 
-        DeleteEquipment(id).then(item => {
+        DeleteFourniseur(id).then(item => {
             rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
         }).catch(error => {

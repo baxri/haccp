@@ -61,6 +61,10 @@ export class AdminDepartmentsItemScreen extends React.Component {
             equipment_image: '',
 
             fourniseur_name: '',
+
+            show_add_equipment: false,
+            show_add_fourniseur: false,
+            active: 0,
         };
 
         this._bootstrapAsync();
@@ -82,19 +86,27 @@ export class AdminDepartmentsItemScreen extends React.Component {
         this.setState({
             loading: 0,
             equipments_select: equipments,
-            equipments_selected: this.state.equipments.map(r => r.id),
         });
+
+        if (this.state.equipments.length > 0) {
+            this.setState({ equipments_selected: this.state.equipments.map(r => r.id) });
+        }
     };
 
     _loadFourniseurs = async () => {
 
         let fourniseurs = await Fourniseurs();
 
+
         this.setState({
             loading: 0,
             fourniseur_select: fourniseurs,
-            fourniseur_selected: this.state.fourniseurs.map(r => r.id),
         });
+
+        if (this.state.fourniseurs.length > 0) {
+            this.setState({ fourniseur_selected: this.state.fourniseurs.map(r => r.id) });
+        }
+
     };
 
 
@@ -167,6 +179,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                 this.setState({
                     equipment_name: '',
                     equipment_image: '',
+                    show_add_equipment: false,
                 });
 
                 Keyboard.dismiss();
@@ -208,7 +221,6 @@ export class AdminDepartmentsItemScreen extends React.Component {
             if (!this.state.id) {
                 addDepartment({
                     name: this.state.name,
-                    // equipments: this.state.equipments
                     equipments: equipments,
                     fourniseurs: fourniseurs,
                 }).then(res => {
@@ -266,24 +278,33 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                         </View>
 
-                        {this.state.equipments_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
-                            {this.state.equipments_select.map((data) => {
-                                return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxEquipments(data) }}>
-                                    <Left>
-                                        <Text>{data.name}</Text>
-                                    </Left>
-                                    <Right>
-                                        <CheckBox checked={this.state.equipments_selected.includes(data.id)} onPress={() => { this._toggleCheckboxEquipments(data) }} />
-                                    </Right>
-                                </ListItem>;
-                            })}
-                        </List></View>}
+                        <Text style={styles.label}>{Strings.EQUIPMENTS}:</Text>
 
-                        {this.state.equipments_select.length == 0 && <View style={{ height: 70, alignItems: 'center', justifyContent: 'center' }}>
-                            <H2 style={{ color: 'gray' }}>{Strings.THERE_IS_NO_EQUIPMENTS_YET}</H2>
-                        </View>}
+                        <View style={{ borderWidth: 1, borderColor: 'lightgray', borderStyle: 'dashed' }}>
+                            {this.state.equipments_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
+                                {this.state.equipments_select.map((data) => {
+                                    return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxEquipments(data) }}>
+                                        <Left>
+                                            <Text>{data.name}</Text>
+                                        </Left>
+                                        <Right>
+                                            <CheckBox style={{ marginRight: 15, }} checked={this.state.equipments_selected.includes(data.id)} onPress={() => { this._toggleCheckboxEquipments(data) }} />
+                                        </Right>
+                                    </ListItem>;
+                                })}
+                            </List></View>}
 
-                        <View style={[{ marginTop: 20, }, styles.inputNoPadding]}>
+                            {this.state.equipments_select.length == 0 && <View style={{ margin: 20, height: 70, alignItems: 'center', justifyContent: 'center' }}>
+                                <H2 style={{ color: 'lightgray' }}>{Strings.THERE_IS_NO_EQUIPMENTS_YET}</H2>
+                            </View>}
+                        </View>
+
+                        {this.state.active != 1 && <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 20, }}
+                            onPress={() => this.setState({ active: 1 })}>
+                            <Text> + {Strings.ADD_MORE_EQUIPMENTS}</Text>
+                        </Button>}
+
+                        {this.state.active == 1 && <View style={[{ marginTop: 20, }, styles.inputNoPadding]}>
                             {!this.state.equipment_image && <Button transparent style={{ height: 70, width: 70, marginRight: 15, }} full onPress={this._pickImage} >
                                 <Icon style={{ color: 'gray' }} name='camera' />
                             </Button>}
@@ -300,68 +321,83 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             {this.state.equipment_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveEquipment()} >
                                 <Icon name='add' />
                             </Button>}
-                        </View>
-
-
-
-
-
-                        {this.state.fourniseur_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
-                            {this.state.fourniseur_select.map((data) => {
-                                return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxFourniseur(data) }}>
-                                    <Left>
-                                        <Text>{data.name}</Text>
-                                    </Left>
-                                    <Right>
-                                        <CheckBox checked={this.state.fourniseur_selected.includes(data.id)} onPress={() => { this._toggleCheckboxFourniseur(data) }} />
-                                    </Right>
-                                </ListItem>;
-                            })}
-                        </List></View>}
-
-                        {this.state.fourniseur_select.length == 0 && <View style={{ height: 70, alignItems: 'center', justifyContent: 'center' }}>
-                            <H2 style={{ color: 'gray' }}>{Strings.THERE_IS_NO_FOURNISSEUR_YET}</H2>
+                            {this.state.equipment_name.length == 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this.setState({ active: 0 })} >
+                                <Icon name='close' />
+                            </Button>}
                         </View>}
 
-                        <View style={[{ marginTop: 20, }, styles.input]}>
-                            <TextInput
-                                style={styles.inputInline}
-                                underlineColorAndroid="transparent"
-                                placeholder={Strings.FOURNISSEUR_NAME}
-                                value={this.state.fourniseur_name} onChangeText={(value) => { this.setState({ fourniseur_name: value }) }} />
-                            {this.state.fourniseur_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveFourniseur()} >
-                                <Icon name='add' />
-                            </Button>}
+
+
+                        <Text style={[styles.label, { marginTop: 20 }]}>{Strings.SELECT_FOURNISSEUR}:</Text>
+
+                        <View style={{ borderWidth: 1, borderColor: 'lightgray', borderStyle: 'dashed' }}>
+                            {this.state.fourniseur_select.length > 0 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray', }}><List>
+                                {this.state.fourniseur_select.map((data) => {
+                                    return <ListItem style={{ height: 70, }} onPress={() => { this._toggleCheckboxFourniseur(data) }}>
+                                        <Left>
+                                            <Text>{data.name}</Text>
+                                        </Left>
+                                        <Right >
+                                            <CheckBox style={{ marginRight: 15, }} checked={this.state.fourniseur_selected.includes(data.id)} onPress={() => { this._toggleCheckboxFourniseur(data) }} />
+                                        </Right>
+                                    </ListItem>;
+                                })}
+                            </List></View>}
+
+                            {this.state.fourniseur_select.length == 0 && <View style={{ margin: 20, height: 70, alignItems: 'center', justifyContent: 'center' }}>
+                                <H2 style={{ color: 'gray' }}>{Strings.THERE_IS_NO_FOURNISSEUR_YET}</H2>
+                            </View>}
+
                         </View>
 
+                        <View style={{ marginBottom: 30, }}>
+                            {this.state.active != 2 && <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 20, }}
+                                onPress={() => this.setState({ active: 2 })}>
+                                <Text> + {Strings.ADD_MORE_FOURNISSEUR}</Text>
+                            </Button>}
 
+                            {this.state.active == 2 && <View style={[{ marginTop: 20, }, styles.input]}>
+                                <TextInput
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.FOURNISSEUR_NAME}
+                                    value={this.state.fourniseur_name} onChangeText={(value) => { this.setState({ fourniseur_name: value }) }} />
+                                {this.state.fourniseur_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveFourniseur()} >
+                                    <Icon name='add' />
+                                </Button>}
+                                {!this.state.fourniseur_name.length && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this.setState({ active: 0 })} >
+                                    <Icon name='close' />
+                                </Button>}
+                            </View>}
 
-
-                        <Button transparent
-                            onPress={() => {
-                                this._showLoader();
-                                setTimeout(() => {
-                                    this.props.navigation.navigate('AdminDepartmentsEquipmentsModal', {
-                                        equipments_select: this.state.equipments_select,
-                                        value: this.state.equipments,
-                                        equipmentsChoosed: this._equipmentsChoosed
-                                    })
-                                    this._hideLoader();
-                                }, 100);
-
-                            }}>
-                            <Text style={[{}, styles.text]}>{Strings.EQUIPMENTS} ({this.state.equipments.length})</Text>
-                        </Button>
+                        </View>
                     </View>
                 </Content>
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
-                        <Button full success onPress={_ => this._saveItem()} >
+
+                        {this.state.active === 1 && <Button full success onPress={_ => this._saveEquipment()} >
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_EQUIPMENT}</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
+                        </Button>}
+
+                        {this.state.active == 2 && <Button full success onPress={_ => this._saveFourniseur()} >
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_FOURNISSEUR}</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
+                        </Button>}
+
+                        {this.state.active == 0 && <Button full success onPress={_ => this._saveItem()} >
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
-                        </Button>
+                        </Button>}
+
+
                     </FooterTab>
                 </Footer>
             </Container>

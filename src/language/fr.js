@@ -69,6 +69,8 @@ const strings = {
     SAVE_DEPARTMENT: 'Sauvegarder Rayon',
     CHOOSE_EQUIPMENTS: 'Choisir les équipements',
     THERE_IS_NO_DEPARTMENTS_YET: 'Aucun rayon',
+    ADD_MORE_EQUIPMENTS: 'ADD_MORE_EQUIPMENTS',
+    ADD_MORE_FOURNISSEUR: 'ADD_MORE_FOURNISSEUR',
 
     // USERS
     THERE_IS_NO_USERS_YET: 'Aucun utilisateur',
