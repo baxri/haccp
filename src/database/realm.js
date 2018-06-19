@@ -189,7 +189,7 @@ export const Fourniseurs = async (item) => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-            const items = realm.objects('Fourniseur').sorted('name', true);
+            const items = realm.objects('Fourniseur');//.sorted('name', true);
             resolve(items);
         })
         .catch(error => {
@@ -258,7 +258,7 @@ export const Equipments = async () => new Promise((resolve, reject) => {
             // alert("opened");
 
             try {
-                const items = realm.objects('Equipment').sorted('name', true);
+                const items = realm.objects('Equipment');//.sorted('name', true);
 
                 resolve(items);
             } catch (error) {

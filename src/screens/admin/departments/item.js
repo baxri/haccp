@@ -158,9 +158,11 @@ export class AdminDepartmentsItemScreen extends React.Component {
         };
 
         ImagePicker.launchCamera(options, (response) => {
-            writePicture(response.data).then(filename => {
-                this.setState({ equipment_image: filename });
-            });
+            if (response.data) {
+                writePicture(response.data).then(filename => {
+                    this.setState({ equipment_image: filename });
+                });
+            }
         });
     };
 
@@ -310,10 +312,11 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             </Button>}
                             {this.state.equipment_image.length > 0 && <Image
                                 resizeMode={'contain'}
-                                style={{ borderWidth: 2, width: 70, height: 70, }}
+                                style={{ borderWidth: 2, width: 70, height: 70, marginRight: 15, }}
                                 source={{ uri: FilePicturePath() + this.state.equipment_image }}
                             />}
                             <TextInput
+                                autoFocus={true}
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.EQUIPMENT_NAME}
@@ -321,7 +324,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                             {this.state.equipment_name.length > 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this._saveEquipment()} >
                                 <Icon name='add' />
                             </Button>}
-                            {this.state.equipment_name.length == 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this.setState({ active: 0 })} >
+                            {this.state.equipment_name.length == 0 && <Button transparent style={{ height: 70, width: 70, marginLeft: 15, }} full onPress={() => this.setState({ active: 0, equipment_image: '' })} >
                                 <Icon name='close' />
                             </Button>}
                         </View>}
@@ -358,6 +361,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                             {this.state.active == 2 && <View style={[{ marginTop: 20, }, styles.input]}>
                                 <TextInput
+                                    autoFocus={true}
                                     style={styles.inputInline}
                                     underlineColorAndroid="transparent"
                                     placeholder={Strings.FOURNISSEUR_NAME}
@@ -376,21 +380,48 @@ export class AdminDepartmentsItemScreen extends React.Component {
                 <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}>
 
-                        {this.state.active === 1 && <Button full success onPress={_ => this._saveEquipment()} >
+                        {(this.state.active == 1 && this.state.equipment_name.length > 0) && <Button full success onPress={_ => this._saveEquipment()} >
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_EQUIPMENT}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>}
 
-                        {this.state.active == 2 && <Button full success onPress={_ => this._saveFourniseur()} >
+                        {(this.state.active == 1 && this.state.equipment_name.length == 0) && <Button full disabled>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_EQUIPMENT}</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
+                        </Button>}
+
+
+
+
+                        {(this.state.active == 2 && this.state.fourniseur_name.length > 0) && <Button full success onPress={_ => this._saveFourniseur()} >
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_FOURNISSEUR}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
                             </View>
                         </Button>}
 
-                        {this.state.active == 0 && <Button full success onPress={_ => this._saveItem()} >
+                        {(this.state.active == 2 && this.state.fourniseur_name.length == 0) && <Button full disabled>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_FOURNISSEUR}</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
+                        </Button>}
+
+
+
+
+                        {(this.state.active == 0 && this.state.name.length > 0) && <Button full success onPress={_ => this._saveItem()} >
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
+                                <Icon name='checkmark' style={{ color: 'white', }} />
+                            </View>
+                        </Button>}
+
+                        {(this.state.active == 0 && this.state.name.length == 0) && <Button full disabled>
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE_DEPARTMENT}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />
