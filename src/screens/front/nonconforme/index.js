@@ -225,7 +225,8 @@ export class NonConformeIndexScreen extends React.Component {
                 // confirmed: this.state.confirmed,
                 confirmed: 1,
 
-                equipments: [],
+                // equipments: [],
+                temperatures: [],
                 type: 2,
 
                 quantity: this.state.quantity,

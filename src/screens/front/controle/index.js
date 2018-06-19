@@ -234,7 +234,8 @@ export class ControleIndexScreen extends React.Component {
                 actions: this.state.actions,
                 confirmed: this.state.confirmed,
 
-                equipments: [],
+                temperatures: [],
+                // equipments: [],
                 type: 0,
 
                 quantity: 0,

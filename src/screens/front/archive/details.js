@@ -42,22 +42,22 @@ export class ArchiveDetailsScreen extends React.Component {
 
     _parseEquipments(equipments) {
 
-        let ret = [];
+        // let ret = [];
 
-        this.state.item.equipments.map(equipment => {
+        // this.state.item.equipments.map(equipment => {
 
-            let slice = equipment.split(":");
+        //     let slice = equipment.split(":");
 
-            let obj = {
-                id: slice[0],
-                name: slice[1],
-                value: slice[2],
-            };
+        //     let obj = {
+        //         id: slice[0],
+        //         name: slice[1],
+        //         value: slice[2],
+        //     };
 
-            ret.push(obj);
-        });
+        //     ret.push(obj);
+        // });
 
-        this.setState({ equipments: ret });
+        // this.setState({ equipments: ret });
 
     }
 
@@ -185,10 +185,10 @@ export class ArchiveDetailsScreen extends React.Component {
                         {this.state.item.type == 1 && <CardItem bordered>
                             <Body>
                                 <View style={{ marginTop: 20, marginBottom: 20, }}>
-                                    {this.state.equipments.map((row) => {
+                                    {this.state.item.temperatures.map((row) => {
                                         return <View style={{ marginBottom: 20, }}>
-                                            <H3 style={{ marginBottom: 10, }}>{row.name}</H3>
-                                            {row.value.split(",").map(val => {
+                                            <H3 style={{ marginBottom: 10, }}>{row.equipment.name}</H3>
+                                            {row.values.map(val => {
                                                 return <Text>{Strings.TEMPERATURE}: {val}°</Text>
                                             })}
                                         </View>;

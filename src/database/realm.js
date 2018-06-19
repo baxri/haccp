@@ -31,6 +31,17 @@ const EquipmentSchema = {
 };
 
 
+const TemperatureSchema = {
+    primaryKey: 'id',
+    name: 'Temperature',
+
+    properties: {
+        id: 'string', // primary key
+        values: 'string[]',
+        equipment: 'Equipment',
+    }
+};
+
 
 const ControleSchema = {
     primaryKey: 'id',
@@ -56,7 +67,9 @@ const ControleSchema = {
 
         confirmed: 'int',
 
-        equipments: 'string[]',
+        // equipments: 'string[]',
+        temperatures: 'Temperature[]',
+        // temperatures: { type: 'Temperature[]', optional: true },
 
         quantity: 'int',
         valorisation: 'double',
@@ -116,6 +129,7 @@ const DepartmentSchema = {
 };
 
 
+
 const _guid = () => {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -125,8 +139,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 27;
-const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema];
+const schemaVersion = 37;
+const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
 const realmPath = realmFilePath();
 
 export const RealmFile = () => {
@@ -525,7 +539,9 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     autres: item.autres,
                     actions: item.actions,
 
-                    equipments: item.equipments,
+                    // equipments: item.equipments,
+                    temperatures: item.temperatures,
+
                     type: item.type,
 
                     quantity: item.quantity * 1,

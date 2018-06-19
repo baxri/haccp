@@ -26,7 +26,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, renderFieldDanger, renderOption, renderFieldSuccess } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
 import { CustomPicker } from 'react-native-custom-picker';
 import { styles } from '../../../utilities/styles';
 
@@ -87,7 +87,7 @@ export class FroidIndexScreen extends React.Component {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
         const controles = await Controles(userID);
-        const fourniseurs = await Fourniseurs();
+        const fourniseurs = user.department.fourniseurs;
 
         this._parseEquipments(user.department.equipments);
 
@@ -108,19 +108,14 @@ export class FroidIndexScreen extends React.Component {
         let ret = [];
 
         equipments.map(equipment => {
-
-            let slice = equipment.split(":");
-
             let obj = {
-                id: slice[0],
-                name: slice[1],
-                value: [0],
+                id: guid(),
+                equipment: equipment,
+                values: [''],
             };
 
             ret.push(obj);
         });
-
-
 
         this.setState({ equipments: ret });
     }
@@ -131,8 +126,8 @@ export class FroidIndexScreen extends React.Component {
 
         this.state.equipments.map(equipment => {
 
-            if (equipment.id == row.id) {
-                equipment.value[index] = value;
+            if (equipment.equipment.id == row.equipment.id) {
+                equipment.values[index] = value;
             }
 
             ret.push(equipment);
@@ -146,8 +141,8 @@ export class FroidIndexScreen extends React.Component {
 
         this.state.equipments.map(equipment => {
 
-            if (equipment.id == row.id) {
-                equipment.value.push(0);
+            if (equipment.equipment.id == row.id) {
+                equipment.values.push('');
             }
 
             ret.push(equipment);
@@ -161,12 +156,7 @@ export class FroidIndexScreen extends React.Component {
         let ret = [];
 
         this.state.equipments.map(equipment => {
-
-
-            let str = equipment.id + ":" + equipment.name + ":" + equipment.value.join(",");
-
-            console.log(str);
-
+            let str = equipment.equipment.id + ":" + equipment.equipment.name + ":" + equipment.equipment.values.join(",");
             ret.push(str);
         });
 
@@ -232,10 +222,6 @@ export class FroidIndexScreen extends React.Component {
 
     _save(confirmed = 0) {
 
-        let equipments = this._encodeEquipment();
-
-        console.log(equipments);
-
         this.setState({ confirmed: confirmed });
 
         if (confirmed == 0 && !this.state.signature) {
@@ -247,20 +233,29 @@ export class FroidIndexScreen extends React.Component {
         }
 
         let equipmentError = false;
+        let alertMessage = Strings.ARE_YOU_SURE;
+
+
 
         this.state.equipments.map(equipment => {
-            equipment.value.map(value => {
-                if (!value) equipmentError = true;
+            equipment.values.map(value => {
+                if (!value) {
+                    equipmentError = true;
+                    alertMessage = Strings.EQUIPMENTS_REQUIRED;
+                }
             });
         });
 
-        if (equipmentError) {
-            ToastAndroid.show(Strings.EQUIPMENTS_REQUIRED, ToastAndroid.LONG); return;
-        }
+        // alert(equipmentError);
+        // return;
+
+        // if (equipmentError) {
+        //     ToastAndroid.show(Strings.EQUIPMENTS_REQUIRED, ToastAndroid.LONG); return;
+        // }
 
         Alert.alert(
             Strings.CONTROLE_FROID,
-            Strings.ARE_YOU_SURE,
+            alertMessage,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
                 { text: Strings.OK, onPress: () => this._store(confirmed) },
@@ -273,11 +268,6 @@ export class FroidIndexScreen extends React.Component {
         this._showLoader();
 
         setTimeout(() => {
-
-            let equipments = this._encodeEquipment();
-
-
-
 
             addControle(this.state.userId, {
                 source: '',
@@ -297,8 +287,7 @@ export class FroidIndexScreen extends React.Component {
                 confirmed: this.state.confirmed,
 
                 fourniseur: this.state.fourniseur,
-
-                equipments: equipments,
+                temperatures: this.state.equipments,
                 type: 1,
 
                 quantity: 0,
@@ -372,8 +361,8 @@ export class FroidIndexScreen extends React.Component {
 
                     {this.state.equipments.map((row) => {
                         return <View style={{ marginBottom: 20, }}>
-                            <Text style={[{ marginBottom: 10, }, styles.text]}>{row.name}</Text>
-                            {row.value.map((val, index) => {
+                            <Text style={[{ marginBottom: 10, }, styles.text]}>{row.equipment.name}</Text>
+                            {row.values.map((val, index) => {
                                 return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
                                         autoFocus={this.state.clickedAdd && true}
