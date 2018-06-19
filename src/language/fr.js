@@ -124,6 +124,7 @@ const strings = {
     CONTROLE_FROID_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
     AUTRES_CORECTIVES: 'Actions correctives',
     EQUIPMENTS_REQUIRED: 'Certains équipements nont pas été controlés, valider?',
+    ADD_MORE_TEMPERATURES: 'ADD_MORE_TEMPERATURES',
 
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',

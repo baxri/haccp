@@ -141,7 +141,7 @@ export class FroidIndexScreen extends React.Component {
 
         this.state.equipments.map(equipment => {
 
-            if (equipment.equipment.id == row.id) {
+            if (equipment.equipment.id == row.equipment.id) {
                 equipment.values.push('');
             }
 
@@ -375,9 +375,12 @@ export class FroidIndexScreen extends React.Component {
                                 </View>
                             })}
                             <View style={{ flex: 1 }}>
-                                <Button danger onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
-                                    <Icon active name='add-circle' />
+                                <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 10, }} onPress={() => this._addRow(row)}>
+                                    <Text> + {Strings.ADD_MORE_TEMPERATURES}</Text>
                                 </Button>
+                                {/* <Button danger onPress={() => this._addRow(row)} style={{ alignSelf: 'flex-end' }}>
+                                    <Icon active name='add-circle' />
+                                </Button> */}
                             </View>
                         </View>
                     })}
