@@ -33,7 +33,7 @@ export class TraceIndexScreen extends React.Component {
                 <Icon name='camera' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={Strings.TRACEABILITY + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.TRACEABILITY} />,
             // headerRight: <Menu navigation={navigation} />,
         };
     };
@@ -55,14 +55,9 @@ export class TraceIndexScreen extends React.Component {
 
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
-        const pics = await Pictures(userID);
 
         this.setState({
             userId: userID,
-        });
-
-        this.props.navigation.setParams({
-            test: pics.length
         });
     };
 

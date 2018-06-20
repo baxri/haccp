@@ -187,10 +187,26 @@ export class ArchiveDetailsScreen extends React.Component {
                                 <View style={{ marginTop: 20, marginBottom: 20, }}>
                                     {this.state.item.temperatures.map((row) => {
                                         return <View style={{ marginBottom: 20, }}>
-                                            <H3 style={{ marginBottom: 10, }}>{row.equipment.name}</H3>
-                                            {row.values.map(val => {
-                                                return <Text>{Strings.TEMPERATURE}: {val}°</Text>
-                                            })}
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ marginRight: 10, }}>
+                                                    <Button transparent style={{ height: 50, }} onPress={() => this.props.navigation.navigate('ArchiveGallery', {
+                                                        index: 0,
+                                                        pictures: [{ source: row.equipment.source }],
+                                                    })}>
+                                                        <Image
+                                                            resizeMode={'cover'}
+                                                            style={{ width: 50, height: 50, borderRadius: 100, }}
+                                                            source={{ uri: FilePicturePath() + row.equipment.source }}
+                                                        />
+                                                    </Button>
+                                                </View>
+                                                <View>
+                                                    <H3 style={{ marginBottom: 10, }}>{row.equipment.name}</H3>
+                                                    {row.values.map(val => {
+                                                        return <Text>{Strings.TEMPERATURE}: {val}°</Text>
+                                                    })}
+                                                </View>
+                                            </View>
                                         </View>;
                                     })}
                                 </View>

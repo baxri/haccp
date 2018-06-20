@@ -88,7 +88,7 @@ export class NonConformeIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
-        const controles = await Controles(userID);
+        // const controles = await Controles(userID);
 
         this.setState({
             userId: userID,
@@ -96,9 +96,9 @@ export class NonConformeIndexScreen extends React.Component {
             loading: 0,
         });
 
-        this.props.navigation.setParams({
-            test: controles.length
-        });
+        // this.props.navigation.setParams({
+        //     test: controles.length
+        // });
     };
 
     _showLoader() {

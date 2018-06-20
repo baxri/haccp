@@ -38,7 +38,7 @@ export class ControleIndexScreen extends React.Component {
                 <Icon name='eye' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK} />,
         };
     };
 
@@ -90,7 +90,7 @@ export class ControleIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
-        const controles = await Controles(userID);
+        // const controles = await Controles(userID);
 
         this.setState({
             userId: userID,
@@ -99,9 +99,9 @@ export class ControleIndexScreen extends React.Component {
 
         this._hideLoader();
 
-        this.props.navigation.setParams({
-            test: controles.length
-        });
+        // this.props.navigation.setParams({
+        //     test: controles.length
+        // });
     };
 
     _showLoader() {

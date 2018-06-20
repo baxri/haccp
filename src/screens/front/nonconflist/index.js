@@ -19,6 +19,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
 import DatePicker from 'react-native-datepicker';
+import { styles, AppColorSecond } from '../../../utilities/styles';
 
 export class NonconflistIndexScreen extends React.Component {
 
@@ -44,6 +45,7 @@ export class NonconflistIndexScreen extends React.Component {
             start_date: new Date().toISOString().substring(0, 10),
             end_date: new Date().toISOString().substring(0, 10),
             controles: [],
+            total: 0,
         };
 
         this._bootstrapAsync();
@@ -57,8 +59,14 @@ export class NonconflistIndexScreen extends React.Component {
         let userID = await AsyncStorage.getItem('userSessionId');
         let controles = await ControlesRange(userID, this.state.start_date, this.state.end_date);
 
+        let sum = controles.reduce((total, row) => {
+            return total + (row.valorisation * row.quantity);
+        }, 0);
+
+
         this.setState({
             controles: controles,
+            total: sum,
         });
     }
 
@@ -130,19 +138,23 @@ export class NonconflistIndexScreen extends React.Component {
 
                                 </Left>
                                 <Body >
-                                    {row.type == 0 && <H3>{Strings.RECEPTION_CHECK} - {row.user.name}</H3>}
-                                    {row.type == 1 && <H3>{Strings.CONTROLE_FROID} - {row.user.name}</H3>}
-                                    {row.type == 2 && <H3>{Strings.NONCONFORME} - {row.user.name}</H3>}
-                                    {/* {row.type == 0 && <Thumbnail source={{ uri: row.source }} />} */}
-                                    {/* {row.type == 1 && <Thumbnail source={{ uri: row.signature }} />} */}
+                                    <H3>{row.produit}</H3>
+                                    <Text>{Strings.QUANTITY}: {row.quantity}</Text>
                                 </Body>
                                 <Right>
-                                    <H3 note> {reverseFormat(row.date)}</H3>
+                                    <H3>{(row.valorisation * row.quantity).toFixed(2)}€</H3>
+                                    <Text>{Strings.VALORISATION}: {row.valorisation.toFixed(2)}€</Text>
                                 </Right>
                             </ListItem>;
                         })}
                     </List>
                 </View>
+
+                <Footer>
+                    <View style={{ flex: 1, backgroundColor: AppColorSecond, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={[styles.Text, { color: 'white', fontSize: 20, }]}>{this.state.total.toFixed(2)} €</Text>
+                    </View>
+                </Footer>
             </Container>
         );
     }

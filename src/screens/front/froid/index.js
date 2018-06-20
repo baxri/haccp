@@ -42,7 +42,7 @@ export class FroidIndexScreen extends React.Component {
                 <Icon name='snow' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={Strings.CONTROLE_FROID + "(" + (typeof params.test == "undefined" ? 0 : params.test) + ")"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.CONTROLE_FROID} />,
         };
     };
 
@@ -86,7 +86,7 @@ export class FroidIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
-        const controles = await Controles(userID);
+        // const controles = await Controles(userID);
         const fourniseurs = user.department.fourniseurs;
 
         this._parseEquipments(user.department.equipments);
@@ -98,9 +98,9 @@ export class FroidIndexScreen extends React.Component {
             fourniseurs: fourniseurs,
         });
 
-        this.props.navigation.setParams({
-            test: controles.length
-        });
+        // this.props.navigation.setParams({
+        //     test: controles.length
+        // });
     };
 
     _parseEquipments(equipments) {
@@ -359,9 +359,20 @@ export class FroidIndexScreen extends React.Component {
                         onFocus={() => Keyboard.dismiss()}
                     />
 
-                    {this.state.equipments.map((row) => {
+                    {this.state.equipments.map((row, index) => {
                         return <View style={{ marginBottom: 20, }}>
-                            <Text style={[{ marginBottom: 10, }, styles.text]}>{row.equipment.name}</Text>
+                            <View style={{ flexDirection: 'row', marginBottom: 10, borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingBottom: 10, marginBottom: 10, }}>
+                                <Button transparent full style={{ height: 50 }} onPress={() => this.props.navigation.navigate('FroidGallery', {
+                                    index: index,
+                                    pictures: [{ source: row.equipment.source }],
+                                })}>
+                                    <Image
+                                        resizeMode={'cover'}
+                                        style={{ width: 50, height: 50, borderRadius: 100, }}
+                                        source={{ uri: FilePicturePath() + row.equipment.source }}
+                                    />
+                                    <Text style={[styles.text]}>{row.equipment.name}</Text></Button>
+                            </View>
                             {row.values.map((val, index) => {
                                 return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput

@@ -151,7 +151,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
     _pickImage = () => {
 
         var options = {
-            quality: 0.5,
+            quality: 1,
             storageOptions: {
                 cameraRoll: false,
             }

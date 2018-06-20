@@ -135,6 +135,7 @@ const ControleStack = StackNavigator(
 const FroidStack = StackNavigator(
   {
     FroidIndex: FroidIndexScreen,
+    FroidGallery: ArchiveGalleryScreen,
     FroidHelp: HelpScreen,
   },
   {
