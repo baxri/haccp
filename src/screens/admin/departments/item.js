@@ -181,7 +181,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                 this.setState({
                     equipment_name: '',
                     equipment_image: '',
-                    show_add_equipment: false,
+                    active: 0,
                 });
 
                 Keyboard.dismiss();
@@ -203,6 +203,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                 this.setState({
                     fourniseur_name: '',
+                    active: 0,
                 });
 
                 Keyboard.dismiss();
