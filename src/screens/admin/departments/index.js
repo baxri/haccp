@@ -197,6 +197,7 @@ export class AdminDepartmentsIndexScreen extends React.Component {
                         id: "",
                         name: "",
                         equipments: [],
+                        fourniseurs: [],
                     })}>
 
                     <Icon name="add" />

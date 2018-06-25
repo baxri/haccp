@@ -97,7 +97,6 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
         let fourniseurs = await Fourniseurs();
 
-
         this.setState({
             loading: 0,
             fourniseur_select: fourniseurs,
@@ -174,14 +173,17 @@ export class AdminDepartmentsItemScreen extends React.Component {
             addEquipment({
                 name: this.state.equipment_name,
                 source: this.state.equipment_image,
-            }).then(res => {
-
-                this._loadEquipments();
+            }).then(async (res) => {
+                await this._loadEquipments();
+                let equipments_selected = this.state.equipments_selected;
+                equipments_selected.push(res.id);
 
                 this.setState({
                     equipment_name: '',
                     equipment_image: '',
                     active: 0,
+                    show_add_equipment: false,
+                    equipments_selected: equipments_selected,
                 });
 
                 Keyboard.dismiss();
@@ -198,12 +200,16 @@ export class AdminDepartmentsItemScreen extends React.Component {
         setTimeout(() => {
             addFourniseur({
                 name: this.state.fourniseur_name,
-            }).then(res => {
-                this._loadFourniseurs();
+            }).then(async (res) => {
+                await this._loadFourniseurs();
+
+                let fourniseur_selected = this.state.fourniseur_selected;
+                fourniseur_selected.push(res.id);
 
                 this.setState({
                     fourniseur_name: '',
                     active: 0,
+                    fourniseur_selected: fourniseur_selected,
                 });
 
                 Keyboard.dismiss();

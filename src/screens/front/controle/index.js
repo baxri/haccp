@@ -10,6 +10,7 @@ import {
     Alert,
     Dimensions,
     TextInput,
+    Keyboard,
 
 } from 'react-native';
 import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
@@ -23,8 +24,9 @@ var ImagePicker = require('react-native-image-picker');
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, renderRadios } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, renderRadios, renderFieldDanger, renderOption, renderFieldSuccess, } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
+import { CustomPicker } from 'react-native-custom-picker';
 // import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 export class ControleIndexScreen extends React.Component {
@@ -46,6 +48,7 @@ export class ControleIndexScreen extends React.Component {
         super(props);
 
         this.state = {
+            fourniseurs: [],
             loader: 1,
             isModalVisible: false,
             dimesions: { width, height } = Dimensions.get('window'),
@@ -58,6 +61,8 @@ export class ControleIndexScreen extends React.Component {
 
             source: '',
             signature: '',
+            
+            fourniseur: null,
 
             produit: '',
             fourniser: '',
@@ -90,12 +95,15 @@ export class ControleIndexScreen extends React.Component {
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
         const user = await User(userID);
+        const fourniseurs = user.department.fourniseurs;
         // const controles = await Controles(userID);
 
         this.setState({
             userId: userID,
             userObj: user,
+            fourniseurs: fourniseurs,
         });
+
 
         this._hideLoader();
 
@@ -185,8 +193,12 @@ export class ControleIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PRODUCT, ToastAndroid.LONG); return;
         }
 
+        if (!this.state.fourniseur) {
+            ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
+        }
+
         if (!this.state.fourniser) {
-            ToastAndroid.show(Strings.FOURNISER, ToastAndroid.LONG); return;
+            //ToastAndroid.show(Strings.FOURNISER, ToastAndroid.LONG); return;
         }
 
         if (!this.state.source) {
@@ -220,6 +232,9 @@ export class ControleIndexScreen extends React.Component {
             addControle(this.state.userId, {
                 source: this.state.source,
                 signature: this.state.signature,
+
+                //new
+                fourniseur: this.state.fourniseur,
 
                 produit: this.state.produit,
                 fourniser: this.state.fourniser,
@@ -308,6 +323,22 @@ export class ControleIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
+                    <CustomPicker
+                        optionTemplate={renderOption}
+                        fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
+                        placeholder={Strings.SELECT_FOURNISSEUR}
+                        getLabel={item => item.name}
+
+                        options={this.state.fourniseurs}
+                        value={this.state.fourniseur}
+
+                        onValueChange={value => {
+                            this.setState({ fourniseur: value });
+                        }}
+
+                        onFocus={() => Keyboard.dismiss()}
+                    />
+
                     <View style={this.state.produit.length > 3 ? styles.inputSuccess : styles.inputDanger}>
                         <TextInput
                             style={styles.inputInline}
@@ -318,7 +349,7 @@ export class ControleIndexScreen extends React.Component {
                         {this.state.produit.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                     </View>
 
-                    <View style={this.state.fourniser.length > 3 ? styles.inputSuccess : styles.inputDanger}>
+                    {/* <View style={this.state.fourniser.length > 3 ? styles.inputSuccess : styles.inputDanger}>
                         <TextInput
                             style={styles.inputInline}
                             underlineColorAndroid="transparent"
@@ -326,7 +357,7 @@ export class ControleIndexScreen extends React.Component {
                             value={this.state.fourniser} onChangeText={(value) => { this.setState({ fourniser: value }) }} />
                         {this.state.fourniser.length > 3 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                         {this.state.fourniser.length <= 3 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
-                    </View>
+                    </View> */}
 
                     <TextInput
                         style={styles.input}

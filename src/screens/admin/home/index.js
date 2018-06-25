@@ -4,8 +4,8 @@ import {
     AsyncStorage,
     StatusBar,
     StyleSheet,
-    View
-
+    View,
+    AppState
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -55,6 +55,10 @@ export class AdminHomeIndexScreen extends React.Component {
     componentDidFocus() {
         this._loadItems();
     };
+
+    componentWillUnmount(){
+        alert(AppState.currentState);
+    }
 
     _loadItems = async () => {
         let departments = await Departments();
