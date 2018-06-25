@@ -126,11 +126,11 @@ export class ArchiveDetailsScreen extends React.Component {
                             </Body>
                         </CardItem>
 
-                        {this.state.item.type == 0 && <CardItem bordered>
+                        {/* {this.state.item.type == 0 && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.FOURNISER}: {this.state.item.fourniser}</Text>
                             </Body>
-                        </CardItem>}
+                        </CardItem>} */}
 
                         {this.state.item.type == 0 && <CardItem bordered>
                             <Body>
@@ -173,6 +173,12 @@ export class ArchiveDetailsScreen extends React.Component {
                         {this.state.item.type == 0 && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.ACTION_CORECTIVES}: {this.state.item.actions}</Text>
+                            </Body>
+                        </CardItem>}
+
+                         {this.state.item.type == 0 && <CardItem bordered>
+                            <Body>
+                                <Text>{Strings.FOURNISSEUR}: {this.state.item.fourniseur.name}</Text>
                             </Body>
                         </CardItem>}
 
