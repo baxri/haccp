@@ -13,11 +13,11 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, Controles, ControlesGrouped } from '../../../database/realm';
+import { addPicture, Pictures, Controles, ControlesGrouped, ArchivesList } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
-import { reverseFormat, toDate } from '../../../utilities/index';
+import { reverseFormat, toDate, toYM } from '../../../utilities/index';
 
 export class ArchiveIndexScreen extends React.Component {
 
@@ -43,11 +43,10 @@ export class ArchiveIndexScreen extends React.Component {
             customDatesStyles: [],
             // selectedStartDate: new Date().toISOString().substring(0, 10),
             selectedStartDate: toDate(new Date()),
+            YM: toYM((new Date())),
         };
         this.onDateChange = this.onDateChange.bind(this);
         this.onMonthChange = this.onMonthChange.bind(this);
-
-        console.log("constructor");
 
         this._bootstrapAsync();
     }
@@ -88,7 +87,9 @@ export class ArchiveIndexScreen extends React.Component {
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
 
-        // console.log(controles);
+        let active = await ArchivesList(this.state.YM);
+
+        alert(year + "-" + (month < 9 ? "0" + month : month));
 
         setTimeout(() => {
 

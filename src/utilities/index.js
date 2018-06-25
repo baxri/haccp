@@ -103,6 +103,12 @@ export const toDate = (date) => {
     ].join('-');
 }
 
+export const toYM = (date) => {
+    var mm = date.getMonth() + 1;
+    return [date.getFullYear(),
+    (mm > 9 ? '' : '0') + mm,
+    ].join('-');
+}
 
 export const renderOption = (settings) => {
     const { item, getLabel } = settings

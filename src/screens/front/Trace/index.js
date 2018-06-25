@@ -13,12 +13,12 @@ import { Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures } from '../../../database/realm';
+import { addPicture, addArchive, ArchivesList } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
 import RNFetchBlob from 'react-native-fetch-blob';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, toYM } from '../../../utilities/index';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -47,6 +47,7 @@ export class TraceIndexScreen extends React.Component {
             userId: null,
             source: '',
             date: toDate((new Date())),
+            YM: toYM((new Date())),
             created_at: new Date(),
         };
 
@@ -55,6 +56,10 @@ export class TraceIndexScreen extends React.Component {
 
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
+        const Archives = await ArchivesList();
+
+        // alert(JSON.stringify(Archives));
+        // alert(this.state.YM);
 
         this.setState({
             userId: userID,
@@ -121,6 +126,9 @@ export class TraceIndexScreen extends React.Component {
                 date: this.state.date,
                 created_at: this.state.created_at,
             }).then(res => {
+
+                addArchive(this.state.date, this.state.YM, false);
+
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
                 ToastAndroid.show(Strings.PICTURE_SUCCESSFULL_SAVED, ToastAndroid.LONG);

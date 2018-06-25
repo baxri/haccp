@@ -3,8 +3,18 @@ import { NetInfo } from 'react-native';
 import { Form } from 'native-base';
 import { realmFilePath } from '../../src/utilities/index';
 
-
 const Realm = require('realm');
+
+const ArchiveSchema = {
+    primaryKey: 'id',
+    name: 'ArchiveV4',
+
+    properties: {
+        id: 'string',    // primary key (dates)
+        color: 'bool?',
+        YM: 'string',
+    }
+};
 
 const FourniseurSchema = {
     primaryKey: 'id',
@@ -139,8 +149,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 37;
-const schemas = [UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
+const schemaVersion = 45;
+const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
 const realmPath = realmFilePath();
 
 export const RealmFile = () => {
@@ -161,7 +171,41 @@ export const User = (userId) => new Promise((resolve, reject) => {
         });
 });
 
+export const addArchive = (date, YM, color) => new Promise((resolve, reject) => {
 
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let archive = realm.create('ArchiveV4', { id: date, YM: YM }, true);
+                let archiveFetched = archive;
+
+                if (archive.color === null || archive.color) {
+                    archiveFetched = realm.create('ArchiveV4', {
+                        id: date,
+                        color: color,
+                    }, true);
+                }
+
+                resolve(archiveFetched);
+            });
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const ArchivesList = async () => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('ArchiveV4');
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 
 // Fourniseur ==============================================================================
 
