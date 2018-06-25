@@ -91,6 +91,9 @@ export class AdminDepartmentsItemScreen extends React.Component {
         if (this.state.equipments.length > 0) {
             this.setState({ equipments_selected: this.state.equipments.map(r => r.id) });
         }
+
+        alert(JSON.stringify(this.state.equipments_selected));
+
     };
 
     _loadFourniseurs = async () => {
@@ -178,10 +181,14 @@ export class AdminDepartmentsItemScreen extends React.Component {
 
                 this._loadEquipments();
 
+                let equipments_selected = this.state.equipments_selected;
+                equipments_selected.push(res.id);
+
                 this.setState({
                     equipment_name: '',
                     equipment_image: '',
                     show_add_equipment: false,
+                    equipments_selected: equipments_selected,
                 });
 
                 Keyboard.dismiss();
@@ -201,8 +208,14 @@ export class AdminDepartmentsItemScreen extends React.Component {
             }).then(res => {
                 this._loadFourniseurs();
 
+                let fourniseur_selected = this.state.fourniseur_selected;
+                fourniseur_selected.push(res.id);
+
+               
+
                 this.setState({
                     fourniseur_name: '',
+                    fourniseur_selected: fourniseur_selected,
                 });
 
                 Keyboard.dismiss();
