@@ -105,7 +105,6 @@ export class AdminDepartmentsItemScreen extends React.Component {
         if (this.state.fourniseurs.length > 0) {
             this.setState({ fourniseur_selected: this.state.fourniseurs.map(r => r.id) });
         }
-
     };
 
 

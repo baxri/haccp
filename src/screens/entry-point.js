@@ -34,7 +34,8 @@ export class EntryPointScreen extends React.Component {
             stack = 'StackFront';
 
             if (userSessionType == 'admin') {
-                stack = 'StackAdmin';
+                // stack = 'StackAdmin';
+                stack = 'Auth';
             }
         }
 

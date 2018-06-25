@@ -64,7 +64,7 @@ export class HomeIndexScreen extends React.Component {
                 <Grid>
                     <Row >
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('TraceIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Trace')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='camera' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.TRACEABILITY}</Text>
@@ -72,7 +72,7 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('ControleIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Controle')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='eye' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.RECEPTION_CHECK}</Text>
@@ -80,7 +80,7 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('FroidIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Froid')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.CONTROLE_FROID}</Text>
@@ -90,7 +90,7 @@ export class HomeIndexScreen extends React.Component {
                     </Row>
                     <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('NonConformeIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('NonConforme')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='alert' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.NONCONFORME}</Text>
@@ -98,7 +98,7 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('NonconflistIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Nonconflist')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='list-box' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.NONCONFORMELIST}</Text>
@@ -106,7 +106,7 @@ export class HomeIndexScreen extends React.Component {
                             </Button>
                         </Col>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('ArchiveIndex')}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Archive')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='calendar' fontSize={50} size={50} style={{ color: '#494949', fontSize: 80, }} />
                                     <Text style={{ color: '#494949', fontSize: 20, marginTop: 20, textAlign: 'center' }} >{Strings.ARCHIVE}</Text>

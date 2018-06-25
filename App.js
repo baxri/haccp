@@ -208,6 +208,7 @@ const DrawerStackFront = DrawerNavigator({
   Controle: ControleStack,
   Froid: FroidStack,
   NonConforme: NonConformeStack,
+  Nonconflist: NonconlistfStack,
   Archive: ArchiveStack,
   Nonconlistf: NonconlistfStack,
   AdminLogout: LogOutScreen,
