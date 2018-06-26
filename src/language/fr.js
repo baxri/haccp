@@ -53,10 +53,10 @@ const strings = {
     FOURNISSEUR: 'FOURNISSEUR',
 
     // FOURNISSEUR
-    THERE_IS_NO_FOURNISSEUR_YET: 'THERE_IS_NO_FOURNISSEUR_YET',
-    SAVE_FOURNISSEUR: 'SAVE_FOURNISSEUR',
-    FOURNISSEUR_NAME: 'FOURNISSEUR_NAME',
-    SELECT_FOURNISSEUR: 'SELECT_FOURNISSEUR',
+    THERE_IS_NO_FOURNISSEUR_YET: 'Aucun fournisseur',
+    SAVE_FOURNISSEUR: 'Sauvegarder fournisseur',
+    FOURNISSEUR_NAME: 'Nom du fournisseur',
+    SELECT_FOURNISSEUR: 'Sélectionner un fournisseur',
 
     // EQUIPMENTS
     THERE_IS_NO_EQUIPMENTS_YET: 'Aucun équipement',
@@ -69,8 +69,8 @@ const strings = {
     SAVE_DEPARTMENT: 'Sauvegarder Rayon',
     CHOOSE_EQUIPMENTS: 'Choisir les équipements',
     THERE_IS_NO_DEPARTMENTS_YET: 'Aucun rayon',
-    ADD_MORE_EQUIPMENTS: 'ADD_MORE_EQUIPMENTS',
-    ADD_MORE_FOURNISSEUR: 'ADD_MORE_FOURNISSEUR',
+    ADD_MORE_EQUIPMENTS: 'Ajouter un équipement',
+    ADD_MORE_FOURNISSEUR: 'Ajouter un fournisseur',
 
     // USERS
     THERE_IS_NO_USERS_YET: 'Aucun utilisateur',
@@ -124,7 +124,7 @@ const strings = {
     CONTROLE_FROID_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
     AUTRES_CORECTIVES: 'Actions correctives',
     EQUIPMENTS_REQUIRED: 'Certains équipements nont pas été controlés, valider?',
-    ADD_MORE_TEMPERATURES: 'ADD_MORE_TEMPERATURES',
+    ADD_MORE_TEMPERATURES: 'Ajouter un contrôle de température',
 
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',
@@ -137,7 +137,7 @@ const strings = {
     CAUSES: 'Causes',
     DEVENIR: 'Devenir',
     TRAITMENT_DATE: 'Date de traitement',
-    THERE_IS_NO_NONCONFORMELIST: 'Aucun Contrôle froid sauvegardé',
+    THERE_IS_NO_NONCONFORMELIST: 'Aucun contrôle froid sauvegardé',
 
     NEXT: 'Suivant',
     PREVIOUS: 'Précédent',
@@ -165,19 +165,19 @@ const strings = {
     NOVEMBER: 'Novembre',
     DECEMBER: 'Décembre',
 
-    BACKUP_NAME: 'BACKUP_NAME',
-    BACKUP_ID: 'BACKUP_ID',
-    PLEASE_ENTER_BACKUP_NAME: 'PLEASE_ENTER_BACKUP_NAME',
-    PLEASE_ENTER_BACKUP_ID: 'PLEASE_ENTER_BACKUP_ID',
-    RESTORE: 'RESTORE',
-    RESTORE_WARNING: 'This action will arise all local data, and restarts the application, so be carefully',
-    PROBLEM_DOWNLOADING_BACKUP: 'PROBLEM_DOWNLOADING_BACKUP',
-    CANNOT_DElETE_DATABASE_FILE: 'CANNOT_DElETE_DATABASE_FILE',
-    CANNOT_COPY_DATABASE_FILE: 'CANNOT_COPY_DATABASE_FILE',
-    DANGER_ZONE: 'DANGER_ZONE',
-    SELECT_USER: 'SELECT_USER',
-    EDIT: 'EDIT',
-    TIME: 'TIME',
+    BACKUP_NAME: 'Nom de la sauvegarde',
+    BACKUP_ID: 'ID de la sauvegarde',
+    PLEASE_ENTER_BACKUP_NAME: 'Veuillez entrer un nom',
+    PLEASE_ENTER_BACKUP_ID: 'Veuillez entrer un identifiant',
+    RESTORE: 'Restaurer',
+    RESTORE_WARNING: 'Attention ! Cette action effacera toutes les données locales et redémarrera l\'application.',
+    PROBLEM_DOWNLOADING_BACKUP: 'Problème pendant le téléchargement de la sauvegarde',
+    CANNOT_DElETE_DATABASE_FILE: 'Impossible de supprimer le fichier de base de données',
+    CANNOT_COPY_DATABASE_FILE: 'Impossible de copier le fichier de base de données',
+    DANGER_ZONE: 'Zone de Danger',
+    SELECT_USER: 'Sélectionner utilisateur',
+    EDIT: 'Editer',
+    TIME: 'Heure',
 };
 
 export default strings;
