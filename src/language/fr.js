@@ -27,7 +27,7 @@ const strings = {
     // SETUP ADMINISTRATOR
     SETUP_ADMINISTRATOR: 'Configuration Administrateur',
     PASSWORD_REQUIRED: 'Mot de passe requis',
-    PASSWORD_NOT_MUTCHED: 'Les mots de passe de correspondent pas',
+    PASSWORD_NOT_MUTCHED: 'Les mots de passe ne correspondent pas',
     ADMINISTRATOR_SUCCESSFULLY_CREATED: 'Administrateur créé avec succès',
     ENTER_PASSWORD: 'Mot de passe',
     CONFIRM_PASSWORD: 'Confirmation du mot de passe',
@@ -40,8 +40,8 @@ const strings = {
     BACK_TO_SIGNIN: 'Retour (Connexion)',
 
     // LOGIN FONT
-    THERE_IS_NO_DEPARTMENTS: 'Il n\'y a pas de rayon',
-    THERE_IS_NO_USERS: 'Il n\'y a pas d\'utilisateur',
+    THERE_IS_NO_DEPARTMENTS: 'Il n\'y a pas de rayons',
+    THERE_IS_NO_USERS: 'Il n\'y a pas d\'utilisateurs',
     SIGN_IN_AS_ADMIN: 'Connexion administrateur',
 
     // ADMIN DASHBOARD
@@ -49,8 +49,8 @@ const strings = {
     USERS: 'Utilisateurs',
     BACKUP: 'Sauvegarde',
     CLEANING_SCHEDULE: 'Planning de nettoyage',
-    EQUIPMENTS: 'Equipements',
-    FOURNISSEUR: 'FOURNISSEUR',
+    EQUIPMENTS: 'Équipements',
+    FOURNISSEUR: 'Fournisseur',
 
     // FOURNISSEUR
     THERE_IS_NO_FOURNISSEUR_YET: 'Aucun fournisseur',
@@ -66,7 +66,7 @@ const strings = {
     // DEPARTMENTS
     DEPARTMENT: 'Rayons',
     DEPARTMENT_NAME: 'Nom du rayon',
-    SAVE_DEPARTMENT: 'Sauvegarder Rayon',
+    SAVE_DEPARTMENT: 'Sauvegarder rayon',
     CHOOSE_EQUIPMENTS: 'Choisir les équipements',
     THERE_IS_NO_DEPARTMENTS_YET: 'Aucun rayon',
     ADD_MORE_EQUIPMENTS: 'Ajouter un équipement',
@@ -75,7 +75,7 @@ const strings = {
     // USERS
     THERE_IS_NO_USERS_YET: 'Aucun utilisateur',
     USER: 'Utilisateur',
-    SELECT_DEPARTMENT: 'Séléctionner rayon',
+    SELECT_DEPARTMENT: 'Sélectionner rayon',
     FIRST_NAME: 'Prénom',
     LAST_NAME: 'Nom',
     SAVE_USER: 'Sauvegarder',
@@ -86,7 +86,7 @@ const strings = {
     DATA_SUCCESSFULLY_UPLOADED: 'Données sauvegardées',
     DATA_UPLOADED_CANCELED: 'Sauvegarde annulée',
     DATA_UPLOADED_ERROR: 'Erreur lors de la sauvegarde',
-    UPLOAD: 'Upload',
+    UPLOAD: 'Importer',
 
     //FRONT DASHBOARD
     DASHBOARD: 'Tableau de bord',
@@ -114,7 +114,7 @@ const strings = {
     MAUVAIS: 'Mauvais',
     DUPRODUIT: 'Température du produit',
     EMBALAGE_INTATC: 'Emballage intact',
-    ETIQUTAGE_CONF: 'Etiquetage conforme',
+    ETIQUTAGE_CONF: 'Étiquetage conforme',
     AUTRES: 'Autres',
     ACTION_CORECTIVES: 'Actions correctives',
     CONFORM: 'Conforme',
@@ -123,12 +123,12 @@ const strings = {
     //CONTROLE_FROID
     CONTROLE_FROID_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
     AUTRES_CORECTIVES: 'Actions correctives',
-    EQUIPMENTS_REQUIRED: 'Certains équipements nont pas été controlés, valider?',
+    EQUIPMENTS_REQUIRED: 'Certains équipements n\'ont pas été controlés, valider ?',
     ADD_MORE_TEMPERATURES: 'Ajouter un contrôle de température',
 
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',
-    THERE_IS_NO_PICTURES: 'Aucunne image',    
+    THERE_IS_NO_PICTURES: 'Aucune image',
 
     //NON CONFORME
     CONTROLE_SUCCESSFULL_SAVED: 'Contrôle froid sauvegardé',
@@ -172,11 +172,11 @@ const strings = {
     RESTORE: 'Restaurer',
     RESTORE_WARNING: 'Attention ! Cette action effacera toutes les données locales et redémarrera l\'application.',
     PROBLEM_DOWNLOADING_BACKUP: 'Problème pendant le téléchargement de la sauvegarde',
-    CANNOT_DElETE_DATABASE_FILE: 'Impossible de supprimer le fichier de base de données',
+    CANNOT_DELETE_DATABASE_FILE: 'Impossible de supprimer le fichier de base de données',
     CANNOT_COPY_DATABASE_FILE: 'Impossible de copier le fichier de base de données',
-    DANGER_ZONE: 'Zone de Danger',
+    DANGER_ZONE: 'Zone de danger',
     SELECT_USER: 'Sélectionner utilisateur',
-    EDIT: 'Editer',
+    EDIT: 'Éditer',
     TIME: 'Heure',
 };
 
