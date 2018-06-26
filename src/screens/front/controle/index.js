@@ -17,14 +17,14 @@ import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Ic
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { LogoTitle, Menu } from '../../../components/header';
-import { addControle, Controles, Pictures, User } from '../../../database/realm';
+import { addControle, User, addArchive } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, renderRadios, renderFieldDanger, renderOption, renderFieldSuccess, } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, toYM, renderRadios, renderFieldDanger, renderOption, renderFieldSuccess, } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
 import { CustomPicker } from 'react-native-custom-picker';
 // import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
@@ -61,7 +61,7 @@ export class ControleIndexScreen extends React.Component {
 
             source: '',
             signature: '',
-            
+
             fourniseur: null,
 
             produit: '',
@@ -81,6 +81,7 @@ export class ControleIndexScreen extends React.Component {
 
             date: toDate(new Date()),
             created_at: new Date(),
+            YM: toYM((new Date())),
 
             dimesions: { width, height } = Dimensions.get('window'),
         };
@@ -263,6 +264,9 @@ export class ControleIndexScreen extends React.Component {
                 date: this.state.date,
                 created_at: this.state.created_at,
             }).then(res => {
+
+                addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false));
+
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
                 ToastAndroid.show(Strings.RECEPTION_CHECK_SUCCESSFULL_SAVED, ToastAndroid.LONG);

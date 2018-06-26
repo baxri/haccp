@@ -87,9 +87,9 @@ export class ArchiveIndexScreen extends React.Component {
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
 
-        let active = await ArchivesList(this.state.YM);
+        let archive = await ArchivesList(this.state.YM);
 
-        alert(year + "-" + (month < 9 ? "0" + month : month));
+        // alert(JSON.stringify(active));
 
         setTimeout(() => {
 
@@ -98,21 +98,17 @@ export class ArchiveIndexScreen extends React.Component {
 
             while (date.getMonth() === month) {
 
-                // let str = new Date(date).toISOString().substring(0, 10);
                 let str = toDate(date);
                 let add = 1;
-                let changeColor = true;
                 let dateStyle = null;
 
-                // console.log(str);
-
-                controles.map(row => {
-                    if (row.date == str) {
+                archive.map(archiveDate => {
+                    if (archiveDate.id == str) {
                         add = 0;
 
-                        if (row.confirmed == 1 && changeColor) {
+                        if (archiveDate.color) {
                             dateStyle = {
-                                date: row.date,
+                                date: archiveDate.id,
                                 textStyle: {
                                     color: 'white',
                                 },
@@ -123,7 +119,7 @@ export class ArchiveIndexScreen extends React.Component {
                             };
                         } else {
                             dateStyle = {
-                                date: row.date,
+                                date: archiveDate.id,
                                 textStyle: {
                                     color: 'white',
                                 },
@@ -132,11 +128,7 @@ export class ArchiveIndexScreen extends React.Component {
                                     color: 'white',
                                 },
                             };
-
-                            changeColor = false;
-
                         }
-
                     }
                 });
 
@@ -144,15 +136,6 @@ export class ArchiveIndexScreen extends React.Component {
                     let customDatesStyles = this.state.customDatesStyles;
                     customDatesStyles.push(dateStyle);
                     this.setState({ customDatesStyles: customDatesStyles });
-
-                }
-
-                if (add == 1) {
-                    pictures.map(row => {
-                        if (row.date == str) {
-                            add = 0;
-                        }
-                    });
                 }
 
                 if (add) {
@@ -161,8 +144,6 @@ export class ArchiveIndexScreen extends React.Component {
 
                 date.setDate(date.getDate() + 1);
             }
-
-            // console.log(days);
 
             this.setState({ disabledDays: days });
             this._hideLoader();
@@ -179,7 +160,7 @@ export class ArchiveIndexScreen extends React.Component {
                 <Content>
                     <CalendarPicker
                         weekdays={[Strings.MON, Strings.TUE, Strings.WED, Strings.THU, Strings.FRI, Strings.SAT, Strings.SUN]}
-                        months={[Strings.JANUARY, Strings.FEBRUARY, Strings.MARCH, Strings.APRIL, Strings.MAY, Strings.JUNE, Strings.JULE, Strings.AUGUST, Strings.SEPTEMBER, Strings.OCTOBER, Strings.NOVEMBER, Strings.DECEMBER]}
+                        months={[Strings.JANUARY, Strings.FEBRUARY, Strings.MARCH, Strings.APRIL, Strings.MAY, Strings.JUNE, Strings.JULY, Strings.AUGUST, Strings.SEPTEMBER, Strings.OCTOBER, Strings.NOVEMBER, Strings.DECEMBER]}
                         previousTitle={Strings.PREVIOUS}
                         nextTitle={Strings.NEXT}
                         onDateChange={this.onDateChange}

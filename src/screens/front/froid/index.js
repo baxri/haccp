@@ -18,7 +18,7 @@ import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Ic
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addControle, Controles, Pictures, User, Fourniseurs } from '../../../database/realm';
+import { addControle, User, addArchive } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -26,7 +26,7 @@ import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
 import { CustomPicker } from 'react-native-custom-picker';
 import { styles } from '../../../utilities/styles';
 
@@ -69,6 +69,7 @@ export class FroidIndexScreen extends React.Component {
             confirmed: 0,
             fourniseur: null,
             date: toDate(new Date()),
+            YM: toYM((new Date())),
             created_at: new Date(),
 
             dimesions: { width, height } = Dimensions.get('window'),
@@ -302,6 +303,9 @@ export class FroidIndexScreen extends React.Component {
 
                 clickedAdd: false,
             }).then(res => {
+
+                addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false));
+
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
                 ToastAndroid.show(Strings.CONTROLE_FROID_SUCCESSFULL_SAVED, ToastAndroid.LONG);

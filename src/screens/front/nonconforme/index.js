@@ -17,7 +17,7 @@ import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Ic
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addControle, Controles, Pictures, User } from '../../../database/realm';
+import { addControle, addArchive, User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
@@ -28,7 +28,7 @@ import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
 import { reverseFormat } from '../../../utilities/index';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture, toDate, toYM } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
 
 
@@ -74,6 +74,7 @@ export class NonConformeIndexScreen extends React.Component {
 
             date: toDate((new Date())),
             created_at: new Date(),
+            YM: toYM((new Date())),
 
             dimesions: { width, height } = Dimensions.get('window'),
         };
@@ -239,6 +240,9 @@ export class NonConformeIndexScreen extends React.Component {
                 date: this.state.date,
                 created_at: this.state.created_at,
             }).then(res => {
+
+                addArchive(this.state.date, this.state.YM, true);
+
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
                 ToastAndroid.show(Strings.RECEPTION_CHECK_SUCCESSFULL_SAVED, ToastAndroid.LONG);
@@ -288,7 +292,7 @@ export class NonConformeIndexScreen extends React.Component {
                     </View>
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
-                    
+
 
                     <View style={this.state.produit.length > 3 ? styles.inputSuccess : styles.inputDanger}>
                         <TextInput

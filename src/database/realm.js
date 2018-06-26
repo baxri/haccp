@@ -195,10 +195,10 @@ export const addArchive = (date, YM, color) => new Promise((resolve, reject) => 
         });
 });
 
-export const ArchivesList = async () => new Promise((resolve, reject) => {
+export const ArchivesList = async (YM) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-            const items = realm.objects('ArchiveV4');
+            const items = realm.objects('ArchiveV4').filtered('YM = $0', YM);
             resolve(items);
         })
         .catch(error => {

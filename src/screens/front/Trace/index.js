@@ -56,11 +56,7 @@ export class TraceIndexScreen extends React.Component {
 
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
-        const Archives = await ArchivesList();
-
-        // alert(JSON.stringify(Archives));
-        // alert(this.state.YM);
-
+       
         this.setState({
             userId: userID,
         });
