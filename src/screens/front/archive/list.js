@@ -61,6 +61,7 @@ export class ArchiveListScreen extends React.Component {
 
     _bootstrapAsync = async () => {
 
+
         let userID = await AsyncStorage.getItem('userSessionId');
         let pictures = await Pictures(userID, this.state.selectedStartDate);
         let controles = await Controles(userID, this.state.selectedStartDate);

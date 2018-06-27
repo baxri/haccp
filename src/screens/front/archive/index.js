@@ -38,6 +38,7 @@ export class ArchiveIndexScreen extends React.Component {
         super(props);
 
         this.state = {
+            userId: null,
             loading: 1,
             disabledDays: [],
             customDatesStyles: [],
@@ -52,6 +53,12 @@ export class ArchiveIndexScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
+        const userID = await AsyncStorage.getItem('userSessionId');
+
+        this.setState({
+            userId: userID,
+        });
+
         this._setDisabledDays((new Date()).getMonth(), (new Date()).getFullYear());
     };
 
@@ -89,6 +96,8 @@ export class ArchiveIndexScreen extends React.Component {
 
         let archive = await ArchivesList(this.state.YM);
 
+        // alert(JSON.stringify(archive[0]));
+
         setTimeout(() => {
 
             var date = new Date(year, month);
@@ -101,12 +110,12 @@ export class ArchiveIndexScreen extends React.Component {
                 let dateStyle = null;
 
                 archive.map(archiveDate => {
-                    if (archiveDate.id == str) {
+                    if (archiveDate.id == str + this.state.userId) {
                         add = 0;
 
                         if (archiveDate.color) {
                             dateStyle = {
-                                date: archiveDate.id,
+                                date: str,
                                 textStyle: {
                                     color: 'white',
                                 },
@@ -117,7 +126,7 @@ export class ArchiveIndexScreen extends React.Component {
                             };
                         } else {
                             dateStyle = {
-                                date: archiveDate.id,
+                                date: str,
                                 textStyle: {
                                     color: 'white',
                                 },

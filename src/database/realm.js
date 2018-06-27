@@ -7,10 +7,11 @@ const Realm = require('realm');
 
 const ArchiveSchema = {
     primaryKey: 'id',
-    name: 'ArchiveV4',
+    name: 'ArchiveV5',
 
     properties: {
         id: 'string',    // primary key (dates)
+        date: 'string?',    // primary key (dates)
         color: 'bool?',
         YM: 'string',
     }
@@ -149,7 +150,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 45;
+const schemaVersion = 46;
 const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
 const realmPath = realmFilePath();
 
@@ -171,17 +172,17 @@ export const User = (userId) => new Promise((resolve, reject) => {
         });
 });
 
-export const addArchive = (date, YM, color) => new Promise((resolve, reject) => {
+export const addArchive = (date, YM, color, userId = '') => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
-                let archive = realm.create('ArchiveV4', { id: date, YM: YM }, true);
+                let archive = realm.create('ArchiveV5', { id: date + userId, date: date, YM: YM }, true);
                 let archiveFetched = archive;
 
                 if (archive.color === null || archive.color) {
-                    archiveFetched = realm.create('ArchiveV4', {
-                        id: date,
+                    archiveFetched = realm.create('ArchiveV5', {
+                        id: date + userId,
                         color: color,
                     }, true);
                 }
@@ -198,7 +199,7 @@ export const addArchive = (date, YM, color) => new Promise((resolve, reject) => 
 export const ArchivesList = async (YM) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-            const items = realm.objects('ArchiveV4').filtered('YM = $0', YM);
+            const items = realm.objects('ArchiveV5').filtered('YM = $0', YM);
             resolve(items);
         })
         .catch(error => {

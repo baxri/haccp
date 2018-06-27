@@ -241,7 +241,7 @@ export class NonConformeIndexScreen extends React.Component {
                 created_at: this.state.created_at,
             }).then(res => {
 
-                addArchive(this.state.date, this.state.YM, true);
+                addArchive(this.state.date, this.state.YM, true, this.state.userId);
 
                 this.props.navigation.navigate('Home');
                 this._hideLoader();

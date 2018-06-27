@@ -304,7 +304,7 @@ export class FroidIndexScreen extends React.Component {
                 clickedAdd: false,
             }).then(res => {
 
-                addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false));
+                addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false), this.state.userId);
 
                 this.props.navigation.navigate('Home');
                 this._hideLoader();

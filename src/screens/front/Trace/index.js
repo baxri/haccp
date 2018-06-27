@@ -56,7 +56,7 @@ export class TraceIndexScreen extends React.Component {
 
     _bootstrapAsync = async () => {
         const userID = await AsyncStorage.getItem('userSessionId');
-       
+
         this.setState({
             userId: userID,
         });
@@ -123,7 +123,7 @@ export class TraceIndexScreen extends React.Component {
                 created_at: this.state.created_at,
             }).then(res => {
 
-                addArchive(this.state.date, this.state.YM, false);
+                addArchive(this.state.date, this.state.YM, true, this.state.userId);
 
                 this.props.navigation.navigate('Home');
                 this._hideLoader();
