@@ -86,7 +86,7 @@ const strings = {
     DATA_SUCCESSFULLY_UPLOADED: 'Données sauvegardées',
     DATA_UPLOADED_CANCELED: 'Sauvegarde annulée',
     DATA_UPLOADED_ERROR: 'Erreur lors de la sauvegarde',
-    UPLOAD: 'Importer',
+    UPLOAD: 'Envoyer',
 
     //FRONT DASHBOARD
     DASHBOARD: 'Tableau de bord',
