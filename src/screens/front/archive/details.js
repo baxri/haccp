@@ -182,11 +182,11 @@ export class ArchiveDetailsScreen extends React.Component {
                             </Body>
                         </CardItem>}
 
-                        {this.state.item.type == 1 && <CardItem bordered>
+                        {/* {this.state.item.type == 1 && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.FOURNISSEUR}: {this.state.item.fourniseur.name}</Text>
                             </Body>
-                        </CardItem>}
+                        </CardItem>} */}
 
                         {this.state.item.type == 1 && <CardItem bordered>
                             <Body>

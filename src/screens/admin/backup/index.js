@@ -19,13 +19,13 @@ import { RealmFile } from '../../../database/realm';
 import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
-import RNFetchBlob from 'react-native-fetch-blob';
+import RNFetchBlob from 'rn-fetch-blob';
+import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles } from '../../../utilities/styles';
-
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -91,51 +91,76 @@ export class AdminBackupIndexScreen extends React.Component {
         // aetTimeout(async () => {
         try {
 
-            let res = await RNFetchBlob.fetch('GET', download, {});
+            // RNFetchBlob.config({
+            //     // add this option that makes response data to be stored as a file,
+            //     // this is much more performant.
+            //     fileCache: true,
+            // })
+            //     .fetch('GET', download, {}).then((res) => {
+
+            //         alert("OK");
+
+            //     });
+
+            var filename = Math.floor(Date.now() / 1000) + '.zip';
+            var filepath = PATH_ZIP + "/" + filename;
+
+            let res = await RNFetchBlob.config({
+                // add this option that makes response data to be stored as a file,
+                // this is much more performant.
+                fileCache: true,
+                path: filepath
+            }).fetch('GET', download, {});
+
             let status = res.info().status;
 
             if (status == 200) {
-                let base64Str = res.base64();
+                // let base64Str = res.base64();
 
                 let IMAGES = PATH;
                 let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
-                let filename = await writeZip(base64Str);
+                let filename = res.path();
+                // let filename = await writeZip(base64Str);
 
-                // Delete all images
-                let files = await RNFetchBlob.fs.ls(PATH);
+                RNFetchBlobOld.fs.ls(PATH).then(async files => {
+                    // Delete all images
+                    // let files = RNFetchBlobOld.fs.ls(PATH);
 
-                if (files.length > 0) {
-                    files.map(file => {
-                        RNFetchBlob.fs.unlink(IMAGES + '/' + file).then(() => { })
-                    });
-                }
+                    if (files.length > 0) {
+                        files.map(file => {
+                            RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
+                        });
+                    }
 
-                //Remove realm file
-                RNFetchBlob.fs.unlink(DB);
+                    //Remove realm file
+                    RNFetchBlob.fs.unlink(DB);
 
-                if (!RNFetchBlob.fs.exists(DB)) {
-                    throw Strings.CANNOT_DElETE_DATABASE_FILE;
-                }
+                    if (!RNFetchBlob.fs.exists(DB)) {
+                        throw Strings.CANNOT_DElETE_DATABASE_FILE;
+                    }
 
-                const sourcePath = PATH_ZIP + "/" + filename;
-                const targetPath = IMAGES;
+                    // const sourcePath = PATH_ZIP + "/" + filename;
+                    const sourcePath = res.path();
+                    const targetPath = IMAGES;
 
-                await unzip(sourcePath, targetPath);
+                    await unzip(sourcePath, targetPath);
 
-                // Move realm file to db destination
-                let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
+                    // Move realm file to db destination
+                    let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
-                // Check if db file is copied
-                if (!(await RNFetchBlob.fs.exists(DB))) {
-                    throw Strings.CANNOT_COPY_DATABASE_FILE;
-                }
+                    // Check if db file is copied
+                    if (!(await RNFetchBlob.fs.exists(DB))) {
+                        throw Strings.CANNOT_COPY_DATABASE_FILE;
+                    }
 
-                // Remove db file from zip
-                RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
+                    // Remove db file from zip
+                    RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
 
-                this._hideLoader();
-                RestartAndroid.restart();
+                    this._hideLoader();
+                    RestartAndroid.restart();
+
+                });
 
             } else {
                 throw Strings.PROBLEM_DOWNLOADING_BACKUP;
@@ -162,7 +187,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
         setTimeout(() => {
 
-            RNFetchBlob.fs.ls(PATH)
+            RNFetchBlobOld.fs.ls(PATH)
                 .then((files) => {
 
                     let formFiles = [];
@@ -183,7 +208,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         this.props.navigation.navigate("AdminHome");
 
                         // if (resp.data.length > 0) {
-                            // alert(resp.data);
+                        // alert(resp.data);
                         // }
 
                         ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);

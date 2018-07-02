@@ -229,9 +229,9 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
-        if (!this.state.fourniseur) {
-            ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
-        }
+        // if (!this.state.fourniseur) {
+        //     ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
+        // }
 
         let equipmentError = false;
         let alertMessage = Strings.ARE_YOU_SURE;
@@ -287,7 +287,7 @@ export class FroidIndexScreen extends React.Component {
                 actions: this.state.actions,
                 confirmed: this.state.confirmed,
 
-                fourniseur: this.state.fourniseur,
+                // fourniseur: this.state.fourniseur,
                 temperatures: this.state.equipments,
                 type: 1,
 
@@ -347,7 +347,7 @@ export class FroidIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
-                    <CustomPicker
+                    {/* <CustomPicker
                         optionTemplate={renderOption}
                         fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
                         placeholder={Strings.SELECT_FOURNISSEUR}
@@ -361,7 +361,7 @@ export class FroidIndexScreen extends React.Component {
                         }}
 
                         onFocus={() => Keyboard.dismiss()}
-                    />
+                    /> */}
 
                     {this.state.equipments.map((row, index) => {
                         return <View style={{ marginBottom: 20, }}>
