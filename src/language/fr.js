@@ -13,6 +13,7 @@ const strings = {
     CONFIRMED: 'Confirmé',
     NOT_CONFIRM: 'Annuler',
     NOT_CONFIRMED: 'Non confirmé',
+    NOT_CONFORM: 'Non conforme',
     BACK: 'Retour',
     NO_CONNECTION: 'Pas de connexion',
     YES: 'Oui',

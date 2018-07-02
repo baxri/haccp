@@ -485,7 +485,7 @@ export class ControleIndexScreen extends React.Component {
                     <FooterTab styles={{ height: 100 }}>
                         <Button danger onPress={_ => this._save(0)} >
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.NOT_CONFIRM}</Text>
+                                <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.NOT_CONFORM}</Text>
                                 <Icon name='close' style={{ color: 'white', }} />
                             </View>
                         </Button>
