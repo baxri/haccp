@@ -12,7 +12,6 @@ import {
     TextInput,
     Keyboard,
 
-
 } from 'react-native';
 import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -381,7 +380,7 @@ export class FroidIndexScreen extends React.Component {
                                 return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
                                         autoFocus={this.state.clickedAdd && true}
-                                        keyboardType="number-pad"
+                                        keyboardType="numeric"
                                         style={styles.inputInline}
                                         underlineColorAndroid="transparent"
                                         placeholder={Strings.TEMPERATURE}
