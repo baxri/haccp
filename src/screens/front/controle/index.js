@@ -409,31 +409,6 @@ export class ControleIndexScreen extends React.Component {
                         ((value) => { this.setState({ conforme: value }) }),
                         this.state.conforme)}
 
-                    {/* <Text style={styles.label}>{Strings.EMBALAGE_INTATC}</Text>
-                    <RadioForm
-                        radio_props={yesno_props}
-                        initial={1}
-                        formHorizontal={true}
-                        labelHorizontal={true}
-                        buttonColor={'gray'}
-                        selectedButtonColor={'gray'}
-                        radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
-                        onPress={(value) => { this.setState({ intact: value }) }}
-                    />
-
-
-                    <Text style={styles.label}>{Strings.ETIQUTAGE_CONF}</Text>
-                    <RadioForm
-                        radio_props={yesno_props}
-                        initial={1}
-                        formHorizontal={true}
-                        labelHorizontal={true}
-                        buttonColor={'gray'}
-                        selectedButtonColor={'gray'}
-                        radioStyle={{ paddingRight: 20, paddingBottom: 20 }}
-                        onPress={(value) => { this.setState({ conforme: value }) }}
-                    /> */}
-
                     <Textarea style={[styles.textarea, { marginBottom: 85, }]} rowSpan={5} bordered placeholder={Strings.AUTRES} onChangeText={(value) => { this.setState({ autres: value }) }} />
 
                     <SignatureView

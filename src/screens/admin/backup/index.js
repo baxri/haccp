@@ -267,6 +267,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
                         <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
+                                keyboardType="numeric"
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
                                 placeholder={Strings.BACKUP_ID}

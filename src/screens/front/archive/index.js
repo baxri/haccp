@@ -98,8 +98,6 @@ export class ArchiveIndexScreen extends React.Component {
 
         let archive = await ArchivesList(this.state.YM);
 
-        // alert(JSON.stringify(archive[0]));
-
         setTimeout(() => {
 
             var date = new Date(year, month);

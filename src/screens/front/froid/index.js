@@ -235,11 +235,9 @@ export class FroidIndexScreen extends React.Component {
         let equipmentError = false;
         let alertMessage = Strings.ARE_YOU_SURE;
 
-
-
         this.state.equipments.map(equipment => {
             equipment.values.map(value => {
-                if (!value) {
+                if (value == '' ) {
                     equipmentError = true;
                     alertMessage = Strings.EQUIPMENTS_REQUIRED;
                 }
@@ -346,22 +344,6 @@ export class FroidIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
-                    {/* <CustomPicker
-                        optionTemplate={renderOption}
-                        fieldTemplate={(this.state.fourniseur ? renderFieldSuccess : renderFieldDanger)}
-                        placeholder={Strings.SELECT_FOURNISSEUR}
-                        getLabel={item => item.name}
-
-                        options={this.state.fourniseurs}
-                        value={this.state.fourniseur}
-
-                        onValueChange={value => {
-                            this.setState({ fourniseur: value });
-                        }}
-
-                        onFocus={() => Keyboard.dismiss()}
-                    /> */}
-
                     {this.state.equipments.map((row, index) => {
                         return <View style={{ marginBottom: 20, }}>
                             <View style={{ flexDirection: 'row', marginBottom: 10, borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingBottom: 10, marginBottom: 10, }}>
@@ -377,14 +359,15 @@ export class FroidIndexScreen extends React.Component {
                                     <Text style={[styles.text]}>{row.equipment.name}</Text></Button>
                             </View>
                             {row.values.map((val, index) => {
-                                return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
+                                return <View style={((val > 0 || val < 0 || val === 0) ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
                                         autoFocus={this.state.clickedAdd && true}
                                         keyboardType="numeric"
                                         style={styles.inputInline}
                                         underlineColorAndroid="transparent"
                                         placeholder={Strings.TEMPERATURE}
-                                        value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }} />
+                                        value={val} onChangeText={(value) => { this._changeEquipment(row, index, value) }}
+                                    />
                                     <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
                                 </View>
                             })}

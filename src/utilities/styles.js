@@ -100,8 +100,13 @@ export const styles = StyleSheet.create({
 
     inputInline: {
         flex: 1,
+        marginBottom: 20,
+        borderWidth: 0,
         height: 70,
+        paddingLeft: 0,
         fontSize: inputAndButtonFontSize,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 
     inputInlineIcon: {
@@ -229,8 +234,8 @@ export const styles = StyleSheet.create({
         borderWidth: 0,
         height: 70,
         marginBottom: 20,
-        flex: 1, 
-        flexDirection: 'row', 
+        flex: 1,
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
