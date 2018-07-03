@@ -381,7 +381,7 @@ export class FroidIndexScreen extends React.Component {
                                 return <View style={(val > 0 ? styles.inputSuccess : styles.inputDanger)}>
                                     <TextInput
                                         autoFocus={this.state.clickedAdd && true}
-                                        keyboardType="numeric"
+                                        keyboardType="number-pad"
                                         style={styles.inputInline}
                                         underlineColorAndroid="transparent"
                                         placeholder={Strings.TEMPERATURE}
