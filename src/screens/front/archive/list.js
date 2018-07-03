@@ -66,7 +66,7 @@ export class ArchiveListScreen extends React.Component {
         let pictures = await Pictures(userID, this.state.selectedStartDate);
         let controles = await Controles(userID, this.state.selectedStartDate);
 
-        alert(this.state.selectedStartDate);
+        // alert(this.state.selectedStartDate);
 
         this.props.navigation.setParams({
             title: this.props.navigation.state.params.selectedStartDate,
