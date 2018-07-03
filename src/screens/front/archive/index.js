@@ -13,7 +13,7 @@ import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, 
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, Controles, ControlesGrouped, ArchivesList } from '../../../database/realm';
+import { addPicture, Pictures, Controles, ControlesGrouped, ArchivesList, User } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
@@ -91,8 +91,10 @@ export class ArchiveIndexScreen extends React.Component {
         this._showLoader();
 
         let userID = await AsyncStorage.getItem('userSessionId');
+
         let pictures = await Pictures(userID, null, month, year);
         let controles = await Controles(userID, null, month, year);
+        let user = await User(userID);
 
         let archive = await ArchivesList(this.state.YM);
 
@@ -110,7 +112,7 @@ export class ArchiveIndexScreen extends React.Component {
                 let dateStyle = null;
 
                 archive.map(archiveDate => {
-                    if (archiveDate.id == str + this.state.userId) {
+                    if (archiveDate.id == str + user.department.id) {
                         add = 0;
 
                         if (archiveDate.color) {

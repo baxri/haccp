@@ -95,6 +95,7 @@ const ControleSchema = {
         date: 'string',
         created_at: 'date',
         user: 'User',
+        department: 'Department',
     }
 };
 
@@ -109,6 +110,7 @@ const PictureSchema = {
         date: 'string',
         created_at: 'date',
         user: 'User',
+        department: 'Department',
     }
 };
 
@@ -135,7 +137,9 @@ const DepartmentSchema = {
         name: 'string',
         equipments: 'Equipment[]',
         fourniseurs: 'Fourniseur[]',
-        users: { type: 'linkingObjects', objectType: 'User', property: 'department' }
+        users: { type: 'linkingObjects', objectType: 'User', property: 'department' },
+        controles: { type: 'linkingObjects', objectType: 'Controle', property: 'department' },
+        pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'department' },
     }
 };
 
@@ -150,7 +154,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 46;
+const schemaVersion = 50;
 const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
 const realmPath = realmFilePath();
 
@@ -160,14 +164,13 @@ export const RealmFile = () => {
 }
 
 export const User = (userId) => new Promise((resolve, reject) => {
-    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
-            realm.write(() => {
-                let userObject = realm.objectForPrimaryKey('User', userId);
-                resolve(userObject);
-            });
+            let userObject = realm.objectForPrimaryKey('User', userId);
+            resolve(userObject);
         })
         .catch(error => {
+            alert(error);
             reject(error);
         });
 });
@@ -177,12 +180,15 @@ export const addArchive = (date, YM, color, userId = '') => new Promise((resolve
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
-                let archive = realm.create('ArchiveV5', { id: date + userId, date: date, YM: YM }, true);
+
+                let userObject = realm.objectForPrimaryKey('User', userId);
+
+                let archive = realm.create('ArchiveV5', { id: date + userObject.department.id, date: date, YM: YM }, true);
                 let archiveFetched = archive;
 
                 if (archive.color === null || archive.color) {
                     archiveFetched = realm.create('ArchiveV5', {
-                        id: date + userId,
+                        id: date + userObject.department.id,
                         color: color,
                     }, true);
                 }
@@ -512,6 +518,7 @@ export const addPicture = (userId, item) => new Promise((resolve, reject) => {
                     date: item.date,
                     created_at: item.created_at,
                     user: userObject,
+                    department: userObject.department,
                 });
 
                 resolve(picture);
@@ -538,12 +545,12 @@ export const Pictures = (userId, date = null, month = null, year = null) => new 
                 var from = new Date(year, month - 1, 1);
                 var to = new Date(year, month + 1, 32);
 
-                resolve(userObject.pictures.filtered('created_at >= $0 && created_at <= $1', from, to));
+                resolve(userObject.department.pictures.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
                 if (date == null)
-                    resolve(userObject.pictures);
+                    resolve(userObject.department.pictures);
                 else
-                    resolve(userObject.pictures.filtered('date = $0', date));
+                    resolve(userObject.department.pictures.filtered('date = $0', date));
             }
         })
         .catch(error => {
@@ -567,6 +574,7 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                 const controle = realm.create('Controle', {
                     id: _guid(),
                     user: userObject,
+                    department: userObject.department,
 
                     source: item.source,
                     signature: item.signature,
@@ -624,13 +632,13 @@ export const Controles = (userId, date = null, month = null, year = null) => new
                 var from = new Date(year, month - 1, 28);
                 var to = new Date(year, month + 1, 1);
 
-                resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
+                resolve(userObject.department.controles.filtered('created_at >= $0 && created_at <= $1', from, to));
             } else {
                 if (date == null) {
-                    let controles = userObject.controles;
+                    let controles = userObject.department.controles;
                     resolve(controles);
                 } else
-                    resolve(userObject.controles.filtered('date = $0', date));
+                    resolve(userObject.department.controles.filtered('date = $0', date));
             }
         })
         .catch(error => {
@@ -660,7 +668,7 @@ export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Pr
             var from = new Date(dateFrom);
             var to = new Date(DateTo);
             to.setDate(to.getDate() + 1);
-            resolve(userObject.controles.filtered('created_at >= $0 && created_at <= $1 and type=2', from, to));
+            resolve(userObject.department.controles.filtered('created_at >= $0 && created_at <= $1 and type=2', from, to));
         })
         .catch(error => {
             reject(error);
