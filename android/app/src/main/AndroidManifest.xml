@@ -16,6 +16,7 @@ tools:node="replace">
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
+      
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -28,6 +29,8 @@ tools:node="replace">
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <meta-data android:name="com.bugsnag.android.API_KEY" android:value="607bc9cd4b53c023325e7336e6593ec3"/>
+    
       <meta-data 
   tools:node="replace"
   android:name="android.support.VERSION"

@@ -23,6 +23,7 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnziparchive.RNZipArchivePackage;
 import com.rnrestartandroid.RNRestartAndroidPackage;
+import com.bugsnag.BugsnagReactNative;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -44,7 +45,8 @@ public class MainApplication extends Application implements ReactApplication {
           new UploaderReactPackage(),
           new RNFetchBlobPackage(),
           new RNZipArchivePackage(),
-          new RNRestartAndroidPackage()
+          new RNRestartAndroidPackage(),
+          BugsnagReactNative.getPackage()
       );
     }
 
@@ -62,6 +64,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    BugsnagReactNative.start(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

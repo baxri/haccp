@@ -23,6 +23,7 @@ export class EntryPointScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
+
         initFolders();
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');

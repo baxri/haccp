@@ -11,13 +11,13 @@
                     "endOffset": 208
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 245,
+                        "startOffset": 283,
                         "endColumn": 103,
-                        "endOffset": 348
+                        "endOffset": 386
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 403
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 0,
-                        "startOffset": 349,
+                        "startOffset": 387,
                         "endColumn": 194,
-                        "endOffset": 543
+                        "endOffset": 581
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 534
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 0,
-                        "startOffset": 544,
+                        "startOffset": 582,
                         "endColumn": 126,
-                        "endOffset": 670
+                        "endOffset": 708
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 644
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 0,
-                        "startOffset": 671,
+                        "startOffset": 709,
                         "endColumn": 105,
-                        "endOffset": 776
+                        "endOffset": 814
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 862
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 0,
-                        "startOffset": 777,
+                        "startOffset": 815,
                         "endColumn": 217,
-                        "endOffset": 994
+                        "endOffset": 1032
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 996
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 0,
-                        "startOffset": 995,
+                        "startOffset": 1033,
                         "endColumn": 129,
-                        "endOffset": 1124
+                        "endOffset": 1162
                     }
                 }
             },
@@ -121,17 +121,17 @@
                     "startLine": 8,
                     "startColumn": 4,
                     "startOffset": 1001,
-                    "endColumn": 148,
-                    "endOffset": 1145
+                    "endColumn": 137,
+                    "endOffset": 1134
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 0,
-                        "startOffset": 1125,
-                        "endColumn": 144,
-                        "endOffset": 1269
+                        "startOffset": 1163,
+                        "endColumn": 133,
+                        "endOffset": 1296
                     }
                 }
             },
@@ -139,18 +139,18 @@
                 "to": {
                     "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 1150,
-                    "endColumn": 137,
-                    "endOffset": 1283
+                    "startOffset": 1139,
+                    "endColumn": 192,
+                    "endOffset": 1327
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
-                        "startLine": 11,
+                        "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 1270,
-                        "endColumn": 133,
-                        "endOffset": 1403
+                        "startOffset": 285,
+                        "endColumn": 192,
+                        "endOffset": 477
                     }
                 }
             },
@@ -158,18 +158,18 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 1288,
-                    "endColumn": 192,
-                    "endOffset": 1476
+                    "startOffset": 1332,
+                    "endColumn": 229,
+                    "endOffset": 1557
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
-                        "startLine": 4,
+                        "startLine": 11,
                         "startColumn": 0,
-                        "startOffset": 247,
-                        "endColumn": 192,
-                        "endOffset": 439
+                        "startOffset": 1297,
+                        "endColumn": 229,
+                        "endOffset": 1526
                     }
                 }
             },
@@ -177,17 +177,17 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 1481,
-                    "endColumn": 229,
-                    "endOffset": 1706
+                    "startOffset": 1562,
+                    "endColumn": 110,
+                    "endOffset": 1668
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 0,
-                        "startOffset": 1404,
-                        "endColumn": 229,
+                        "startOffset": 1527,
+                        "endColumn": 106,
                         "endOffset": 1633
                     }
                 }
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1711,
-                    "endColumn": 110,
-                    "endOffset": 1817
+                    "startOffset": 1673,
+                    "endColumn": 199,
+                    "endOffset": 1868
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 0,
                         "startOffset": 1634,
-                        "endColumn": 106,
-                        "endOffset": 1740
+                        "endColumn": 199,
+                        "endOffset": 1833
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1822,
-                    "endColumn": 199,
-                    "endOffset": 2017
+                    "startOffset": 1873,
+                    "endColumn": 136,
+                    "endOffset": 2005
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 0,
-                        "startOffset": 1741,
-                        "endColumn": 199,
-                        "endOffset": 1940
+                        "startOffset": 1834,
+                        "endColumn": 132,
+                        "endOffset": 1966
                     }
                 }
             },
@@ -234,18 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 2022,
-                    "endColumn": 136,
-                    "endOffset": 2154
+                    "startOffset": 2010,
+                    "endColumn": 223,
+                    "endOffset": 2229
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 0,
-                        "startOffset": 1941,
-                        "endColumn": 132,
-                        "endOffset": 2073
+                        "startOffset": 1967,
+                        "endColumn": 223,
+                        "endOffset": 2190
                     }
                 }
             },
@@ -253,18 +253,18 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 2159,
-                    "endColumn": 223,
-                    "endOffset": 2378
+                    "startOffset": 2234,
+                    "endColumn": 181,
+                    "endOffset": 2411
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 0,
-                        "startOffset": 2074,
-                        "endColumn": 223,
-                        "endOffset": 2297
+                        "startOffset": 2191,
+                        "endColumn": 177,
+                        "endOffset": 2368
                     }
                 }
             },
@@ -272,18 +272,18 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 2383,
-                    "endColumn": 181,
-                    "endOffset": 2560
+                    "startOffset": 2416,
+                    "endColumn": 96,
+                    "endOffset": 2508
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 0,
-                        "startOffset": 2298,
-                        "endColumn": 177,
-                        "endOffset": 2475
+                        "startOffset": 2369,
+                        "endColumn": 92,
+                        "endOffset": 2461
                     }
                 }
             },
@@ -291,18 +291,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 2565,
-                    "endColumn": 96,
-                    "endOffset": 2657
+                    "startOffset": 2513,
+                    "endColumn": 98,
+                    "endOffset": 2607
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 0,
-                        "startOffset": 2476,
-                        "endColumn": 92,
-                        "endOffset": 2568
+                        "startOffset": 2462,
+                        "endColumn": 94,
+                        "endOffset": 2556
                     }
                 }
             },
@@ -310,75 +310,18 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 2662,
-                    "endColumn": 98,
-                    "endOffset": 2756
+                    "startOffset": 2612,
+                    "endColumn": 113,
+                    "endOffset": 2721
                 },
                 "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
+                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\11.0.4\\res\\values-gl\\values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 0,
-                        "startOffset": 2569,
-                        "endColumn": 94,
-                        "endOffset": 2663
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 19,
-                    "startColumn": 4,
-                    "startOffset": 2761,
-                    "endColumn": 113,
-                    "endOffset": 2870
-                },
-                "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\15.0.1\\res\\values-gl\\values.xml",
-                    "position": {
-                        "startLine": 20,
-                        "startColumn": 0,
-                        "startOffset": 2664,
+                        "startOffset": 2557,
                         "endColumn": 109,
-                        "endOffset": 2773
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 2875,
-                    "endColumn": 101,
-                    "endOffset": 2972
-                },
-                "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-gcm\\15.0.1\\res\\values-gl\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 0,
-                        "startOffset": 190,
-                        "endColumn": 97,
-                        "endOffset": 287
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 21,
-                    "startColumn": 4,
-                    "startOffset": 2977,
-                    "endColumn": 100,
-                    "endOffset": 3073
-                },
-                "from": {
-                    "file": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\support-compat\\26.1.0\\res\\values-gl\\values-gl.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 100,
-                        "endOffset": 151
+                        "endOffset": 2666
                     }
                 }
             }
