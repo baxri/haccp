@@ -7,12 +7,14 @@ import {
     View,
     Dimensions,
     TextInput,
-    ToastAndroid
+    ToastAndroid,
+    Alert,
 } from 'react-native';
 
 import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import Strings from '../../language/fr'
 import { styles } from '../../utilities/styles';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export class SignInAdminScreen extends React.Component {
     constructor(props) {
@@ -61,9 +63,58 @@ export class SignInAdminScreen extends React.Component {
         }
     }
 
+    _resetPassword() {
+        try {
+
+            Alert.alert(
+                Strings.RESET_PASSWORD,
+                Strings.ARE_YOU_SURE_YOU_WANT_RESET_PASSWORD,
+                [
+                    { text: Strings.CANCEL, style: 'cancel' },
+                    { text: Strings.OK, onPress: () => this._reset() },
+                ],
+                { cancelable: false }
+            )
+
+        } catch (error) {
+            ToastAndroid.show(error.message, ToastAndroid.LONG);
+        }
+    }
+
+    _showLoader() {
+        this.setState({ loader: 1 });
+    }
+
+    _hideLoader() {
+        this.setState({ loader: 0 });
+    }
+
+    async _reset() {
+        try {
+
+            this._showLoader();
+
+            let password = Math.floor(1000 + Math.random() * 9000);
+            await AsyncStorage.setItem('adminPasswordV8', password + "");
+
+            fetch('http://upload.bibi.ge/api/password/send?password=' + password)
+                .then((response) => {
+
+                })
+                .then((responseJson) => {
+                    this._hideLoader();
+                    ToastAndroid.show(Strings.PASSWORD_RESETED_CONTACT_TO_ADMINISTRATOR, ToastAndroid.LONG);
+                }).catch(error => { this._hideLoader(); throw Exception(error) });
+
+        } catch (error) {
+            ToastAndroid.show(error.message, ToastAndroid.LONG);
+        }
+    }
+
     render() {
         return (
             <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+                <Spinner visible={this.state.loader} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>{Strings.ADMINISTRATOR_LOGIN}</H1>
@@ -73,6 +124,7 @@ export class SignInAdminScreen extends React.Component {
 
                         <View style={this.state.password.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                             <TextInput
+                                autoFocus={true}
                                 secureTextEntry={true}
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
@@ -97,6 +149,16 @@ export class SignInAdminScreen extends React.Component {
                             </Left>
                             <Right>
                                 <Icon name='arrow-back' />
+                            </Right>
+                        </Button>
+
+                        <Button light style={[styles.buttonOriginal]}
+                            onPress={() => { this._resetPassword() }}>
+                            <Left >
+                                <Text style={[styles.text]}>{Strings.RESET_PASSWORD}</Text>
+                            </Left>
+                            <Right>
+                                <Icon name='lock' />
                             </Right>
                         </Button>
                     </View>

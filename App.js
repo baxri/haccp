@@ -31,8 +31,8 @@ import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
+import { AdminPasswordIndexScreen } from './src/screens/admin/password/index';
 // End Admin Screens
-
 
 // Front Screens
 import { HomeIndexScreen } from './src/screens/front/home/index';
@@ -335,6 +335,21 @@ const AdminBackupStack = StackNavigator(
   }
 );
 
+const AdminPasswordStack = StackNavigator(
+  {
+    AdminPasswordIndex: AdminPasswordIndexScreen,
+  },
+  {
+    initialRouteName: 'AdminPasswordIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
   AdminFournisseur: AdminFournisseurStack,
@@ -342,6 +357,7 @@ const DrawerStackAdmin = DrawerNavigator({
   AdminDepartments: AdminDepartmentsStack,
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
+  AdminPassword: AdminPasswordStack,
   AdminLogout: LogOutScreen,
 },
   {
