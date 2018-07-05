@@ -1,9 +1,7 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
-import { Client } from 'bugsnag-react-native';
-
+// import { Client } from 'bugsnag-react-native';
 // const bugsnag = new Client();
-
 // bugsnag.leaveBreadcrumb('dsfsdf');
 // bugsnag.leaveBreadcrumb('sdfsdf');
 // bugsnag.leaveBreadcrumb('sdfsdf');

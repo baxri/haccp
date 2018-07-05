@@ -84,7 +84,8 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
-        let download = 'http://upload.bibi.ge/admin/download/' + backup_id;
+        // let download = 'http://upload.bibi.ge/admin/download/' + backup_id;
+        let download = 'http://haccp.milady.io/admin/download/' + backup_id;
 
         this._showLoader();
 
@@ -199,7 +200,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         }));
                     }
 
-                    RNFetchBlob.fetch('POST', 'http://upload.bibi.ge/api/upload', {
+                    RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
                         'haccp-device': ID,
                         'name': name,
                         'Content-Type': 'multipart/form-data',

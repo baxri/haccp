@@ -97,7 +97,8 @@ export class SignInAdminScreen extends React.Component {
             let password = Math.floor(1000 + Math.random() * 9000);
             await AsyncStorage.setItem('adminPasswordV8', password + "");
 
-            fetch('http://upload.bibi.ge/api/password/send?password=' + password)
+            // fetch('http://upload.bibi.ge/api/password/send?password=' + password)
+            fetch('http://haccp.milady.io/api/password/send?password=' + password)
                 .then((response) => {
 
                 })
