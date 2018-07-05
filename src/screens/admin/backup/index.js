@@ -26,6 +26,10 @@ import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles } from '../../../utilities/styles';
+import { Client } from 'bugsnag-react-native';
+
+const bugsnag = new Client();
+
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -78,100 +82,98 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _restore = async () => {
 
+
         let backup_id = this.state.backup_id;
 
         if (backup_id.length == 0) {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
-        // let download = 'http://upload.bibi.ge/admin/download/' + backup_id;
         let download = 'http://haccp.milady.io/admin/download/' + backup_id;
-
         this._showLoader();
 
-        // aetTimeout(async () => {
+
         try {
 
-            // RNFetchBlob.config({
-            //     // add this option that makes response data to be stored as a file,
-            //     // this is much more performant.
-            //     fileCache: true,
-            // })
-            //     .fetch('GET', download, {}).then((res) => {
-
-            //         alert("OK");
-
-            //     });
+            bugsnag.leaveBreadcrumb('Start _restore function try block.');
 
             var filename = Math.floor(Date.now() / 1000) + '.zip';
+            bugsnag.leaveBreadcrumb('Generate random .zip filename with Math.');
+
             var filepath = PATH_ZIP + "/" + filename;
 
+            bugsnag.leaveBreadcrumb('Starting RNFetchBlob download method');
             let res = await RNFetchBlob.config({
-                // add this option that makes response data to be stored as a file,
-                // this is much more performant.
                 fileCache: true,
                 path: filepath
             }).fetch('GET', download, {});
+            bugsnag.leaveBreadcrumb('Received download response');
 
             let status = res.info().status;
+            bugsnag.leaveBreadcrumb('Download status = ' + status);
 
             if (status == 200) {
-                // let base64Str = res.base64();
 
                 let IMAGES = PATH;
                 let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
                 let filename = res.path();
-                // let filename = await writeZip(base64Str);
+                bugsnag.leaveBreadcrumb('Retrive file path from download response.');
 
                 RNFetchBlobOld.fs.ls(PATH).then(async files => {
-                    // Delete all images
-                    // let files = RNFetchBlobOld.fs.ls(PATH);
+
+                    bugsnag.leaveBreadcrumb('Loaded exsiting images.');
 
                     if (files.length > 0) {
+                        bugsnag.leaveBreadcrumb('Delete all images');
                         files.map(file => {
                             RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
                         });
                     }
 
-                    //Remove realm file
+                    bugsnag.leaveBreadcrumb('Delete realm file');
                     RNFetchBlob.fs.unlink(DB);
 
                     if (!RNFetchBlob.fs.exists(DB)) {
-                        throw Strings.CANNOT_DElETE_DATABASE_FILE;
+                        throw new Error(Strings.CANNOT_DElETE_DATABASE_FILE);
                     }
 
-                    // const sourcePath = PATH_ZIP + "/" + filename;
                     const sourcePath = res.path();
                     const targetPath = IMAGES;
 
+                    bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle');
                     await unzip(sourcePath, targetPath);
+                    bugsnag.leaveBreadcrumb('Unziping finished');
 
-                    // Move realm file to db destination
+
+                    bugsnag.leaveBreadcrumb('Move realm file to destination');
                     let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
-                    // Check if db file is copied
                     if (!(await RNFetchBlob.fs.exists(DB))) {
-                        throw Strings.CANNOT_COPY_DATABASE_FILE;
+                        throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
                     }
 
-                    // Remove db file from zip
+                    bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied');
                     RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
 
                     this._hideLoader();
                     RestartAndroid.restart();
-
+                }).catch(error => {
+                    this._hideLoader();
+                    bugsnag.notify(new Error("CATCH " + error));
+                    alert(error);
                 });
 
             } else {
-                throw Strings.PROBLEM_DOWNLOADING_BACKUP;
+                throw new Error(Strings.PROBLEM_DOWNLOADING_BACKUP);
             }
 
         } catch (error) {
             this._hideLoader();
+            bugsnag.notify(new Error(error));
             alert(error);
         }
-        // }, 1000);
+
     }
 
     _sync = async () => {
