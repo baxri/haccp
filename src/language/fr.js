@@ -51,7 +51,7 @@ const strings = {
     BACKUP: 'Sauvegarde',
     CLEANING_SCHEDULE: 'Planning de nettoyage',
     EQUIPMENTS: 'Équipements',
-    FOURNISSEUR: 'Fournisseur',
+    FOURNISSEUR: 'Fournisseurs',
 
     // FOURNISSEUR
     THERE_IS_NO_FOURNISSEUR_YET: 'Aucun fournisseur',
@@ -76,11 +76,11 @@ const strings = {
     // USERS
     THERE_IS_NO_USERS_YET: 'Aucun utilisateur',
     USER: 'Utilisateur',
-    SELECT_DEPARTMENT: 'Sélectionner rayon',
+    SELECT_DEPARTMENT: 'Sélectionner un rayon',
     FIRST_NAME: 'Prénom',
     LAST_NAME: 'Nom',
     SAVE_USER: 'Sauvegarder',
-    CHOOSE_EQUIPMENTS: 'Choisir équipements',
+    CHOOSE_EQUIPMENTS: 'Choisir des équipements',
 
     // BACKUP
     BACKUP: 'Sauvegarder',
@@ -90,11 +90,11 @@ const strings = {
     UPLOAD: 'Envoyer',
 
     // CHANGE PASSWORD
-    CHANGE_PASSWORD: 'CHANGE_PASSWORD',
-    PASSWORD_CHANGED: 'PASSWORD_CHANGED',
-    RESET_PASSWORD: 'RESET_PASSWORD',
-    ARE_YOU_SURE_YOU_WANT_RESET_PASSWORD: 'ARE_YOU_SURE_YOU_WANT_RESET_PASSWORD',
-    PASSWORD_RESETED_CONTACT_TO_ADMINISTRATOR: "PASSWORD_RESETED_CONTACT_TO_ADMINISTRATOR",
+    CHANGE_PASSWORD: 'Modifier le mot de passe',
+    PASSWORD_CHANGED: 'Mot de passe modifié',
+    RESET_PASSWORD: 'Réinitialiser le mot de passe',
+    ARE_YOU_SURE_YOU_WANT_RESET_PASSWORD: 'Êtes-vous sûr de vouloir réinitialiser le mot de passe ?',
+    PASSWORD_RESETED_CONTACT_TO_ADMINISTRATOR: "Le mot de passe a été réinitialisé, veuillez contacter un administrateur",
 
     //FRONT DASHBOARD
     DASHBOARD: 'Tableau de bord',
@@ -183,7 +183,7 @@ const strings = {
     CANNOT_DELETE_DATABASE_FILE: 'Impossible de supprimer le fichier de base de données',
     CANNOT_COPY_DATABASE_FILE: 'Impossible de copier le fichier de base de données',
     DANGER_ZONE: 'Zone de danger',
-    SELECT_USER: 'Sélectionner utilisateur',
+    SELECT_USER: 'Sélectionner un utilisateur',
     EDIT: 'Éditer',
     TIME: 'Heure',
 };
