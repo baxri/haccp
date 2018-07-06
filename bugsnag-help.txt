@@ -1,0 +1,15 @@
+react-native bundle \
+    --platform android \
+    --dev false \
+    --entry-file index.js \
+    --bundle-output android.bundle \
+    --sourcemap-output android.bundle.map
+
+
+bugsnag-sourcemaps upload \
+    --api-key 607bc9cd4b53c023325e7336e6593ec3 \
+    --app-version 1.0.0 \
+    --minified-file android.bundle \
+    --source-map android.bundle.map \
+    --minified-url android.bundle \
+    --upload-sources

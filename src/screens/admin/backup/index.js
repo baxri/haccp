@@ -30,6 +30,7 @@ import { Client } from 'bugsnag-react-native';
 
 const bugsnag = new Client();
 
+// bugsnag.notify(new Error("Test source map errors"));
 
 export class AdminBackupIndexScreen extends React.Component {
 
@@ -126,7 +127,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         files.map(file => {
                             RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
                         });
-                        bugsnag.leaveBreadcrumb('FInish deleting all images...');
+                        bugsnag.leaveBreadcrumb('Finish deleting all images...');
                     }
 
                     bugsnag.leaveBreadcrumb('Delete realm file...');
@@ -145,7 +146,6 @@ export class AdminBackupIndexScreen extends React.Component {
                     bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle...');
                     await unzip(sourcePath, targetPath);
                     bugsnag.leaveBreadcrumb('Unziping finished...');
-
 
                     bugsnag.leaveBreadcrumb('Move downloaded realm file to destination...');
                     let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
