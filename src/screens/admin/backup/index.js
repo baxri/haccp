@@ -82,7 +82,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _restore = async () => {
 
-
         let backup_id = this.state.backup_id;
 
         if (backup_id.length == 0) {
@@ -92,46 +91,45 @@ export class AdminBackupIndexScreen extends React.Component {
         let download = 'http://haccp.milady.io/admin/download/' + backup_id;
         this._showLoader();
 
-
         try {
 
             bugsnag.leaveBreadcrumb('Start _restore function try block.');
 
             var filename = Math.floor(Date.now() / 1000) + '.zip';
-            bugsnag.leaveBreadcrumb('Generate random .zip filename with Math.');
+            bugsnag.leaveBreadcrumb('Generate random .zip filename with Math filename: ' + filename);
 
             var filepath = PATH_ZIP + "/" + filename;
 
-            bugsnag.leaveBreadcrumb('Starting RNFetchBlob download method');
+            bugsnag.leaveBreadcrumb('Starting RNFetchBlob download method...');
             let res = await RNFetchBlob.config({
                 fileCache: true,
                 path: filepath
             }).fetch('GET', download, {});
-            bugsnag.leaveBreadcrumb('Received download response');
+            bugsnag.leaveBreadcrumb('Received download response...');
 
             let status = res.info().status;
-            bugsnag.leaveBreadcrumb('Download status = ' + status);
+            bugsnag.leaveBreadcrumb('Download response http status = ' + status);
 
             if (status == 200) {
-
                 let IMAGES = PATH;
                 let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
                 let filename = res.path();
-                bugsnag.leaveBreadcrumb('Retrive file path from download response.');
+                bugsnag.leaveBreadcrumb('Retrive file path from download response ' + filename);
 
+                bugsnag.leaveBreadcrumb('Start Listing all local images with: RNFetchBlobOld.fs.ls');
                 RNFetchBlobOld.fs.ls(PATH).then(async files => {
 
-                    bugsnag.leaveBreadcrumb('Loaded exsiting images.');
-
+                    bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
                     if (files.length > 0) {
-                        bugsnag.leaveBreadcrumb('Delete all images');
+                        bugsnag.leaveBreadcrumb('Start deleting all images...');
                         files.map(file => {
                             RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
                         });
+                        bugsnag.leaveBreadcrumb('FInish deleting all images...');
                     }
 
-                    bugsnag.leaveBreadcrumb('Delete realm file');
+                    bugsnag.leaveBreadcrumb('Delete realm file...');
                     RNFetchBlob.fs.unlink(DB);
 
                     if (!RNFetchBlob.fs.exists(DB)) {
@@ -141,19 +139,22 @@ export class AdminBackupIndexScreen extends React.Component {
                     const sourcePath = res.path();
                     const targetPath = IMAGES;
 
-                    bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle');
+                    bugsnag.leaveBreadcrumb('Downloaded path: ' + sourcePath);
+                    bugsnag.leaveBreadcrumb('Target path: ' + targetPath);
+
+                    bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle...');
                     await unzip(sourcePath, targetPath);
-                    bugsnag.leaveBreadcrumb('Unziping finished');
+                    bugsnag.leaveBreadcrumb('Unziping finished...');
 
 
-                    bugsnag.leaveBreadcrumb('Move realm file to destination');
+                    bugsnag.leaveBreadcrumb('Move downloaded realm file to destination...');
                     let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
                     if (!(await RNFetchBlob.fs.exists(DB))) {
                         throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
                     }
 
-                    bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied');
+                    bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied :)');
                     RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
 
                     this._hideLoader();
@@ -178,9 +179,14 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _sync = async () => {
 
+        bugsnag.leaveBreadcrumb('Start _sync function');
+
         let ID = DeviceInfo.getUniqueID();
         let file = RealmFile();
         let name = this.state.name;
+
+        bugsnag.leaveBreadcrumb('Prepare device ID for upload deviceID' + ID);
+        bugsnag.leaveBreadcrumb('Get Realm file' + file);
 
         if (name.length == 0) {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
@@ -190,23 +196,36 @@ export class AdminBackupIndexScreen extends React.Component {
 
         setTimeout(() => {
 
+            bugsnag.leaveBreadcrumb('Retrive all files with: RNFetchBlobOld.fs.ls');
+
             RNFetchBlobOld.fs.ls(PATH)
                 .then((files) => {
+
+                    bugsnag.leaveBreadcrumb(files.length + " files retrived");
 
                     let formFiles = [];
                     formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(RealmFile()) });
 
                     if (files.length > 0) {
+
+                        bugsnag.leaveBreadcrumb("Start files to add in form");
+
                         files.map((file => {
                             formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
                         }));
+
+                        bugsnag.leaveBreadcrumb("End Start files to add in form");
                     }
+
+                    bugsnag.leaveBreadcrumb("Form is ready and now make a request to the upload server...");
 
                     RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
                         'haccp-device': ID,
                         'name': name,
                         'Content-Type': 'multipart/form-data',
                     }, formFiles).then((resp) => {
+
+                        bugsnag.leaveBreadcrumb("File upload response sucessfully received!...");
                         this._hideLoader();
                         this.props.navigation.navigate("AdminHome");
 
@@ -217,8 +236,13 @@ export class AdminBackupIndexScreen extends React.Component {
                         ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
                     }).catch((err) => {
                         this._hideLoader();
+                        bugsnag.notify(new Error(error));
                         alert(err);
                     });
+                }).catch(error => {
+                    this._hideLoader();
+                    bugsnag.notify(new Error(error));
+                    alert(err);
                 });
         }, 500);
     };
