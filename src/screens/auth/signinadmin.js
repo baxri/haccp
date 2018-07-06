@@ -11,10 +11,11 @@ import {
     Alert,
 } from 'react-native';
 
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
+import { Container, Header, Content, Button, Text, Picker, H1, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import Strings from '../../language/fr'
 import { styles } from '../../utilities/styles';
 import Spinner from 'react-native-loading-spinner-overlay';
+import DeviceInfo from 'react-native-device-info';
 
 export class SignInAdminScreen extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export class SignInAdminScreen extends React.Component {
         this.state = {
             loading: 0,
             password: '',
+            device_id: DeviceInfo.getUniqueID(),
 
             dimesions: { width, height } = Dimensions.get('window'),
         };
@@ -98,7 +100,7 @@ export class SignInAdminScreen extends React.Component {
             await AsyncStorage.setItem('adminPasswordV8', password + "");
 
             // fetch('http://upload.bibi.ge/api/password/send?password=' + password)
-            fetch('http://haccp.milady.io/api/password/send?password=' + password)
+            fetch('http://haccp.milady.io/api/password/send?password=' + password + "&device=" + this.state.device_id)
                 .then((response) => {
 
                 })
@@ -119,6 +121,7 @@ export class SignInAdminScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={{ padding: 30, alignItems: 'center', justifyContent: 'center', }}>
                         <H1>{Strings.ADMINISTRATOR_LOGIN}</H1>
+                        <H3 style={{ marginTop: 20, }}>{Strings.DEVICE_ID}: {this.state.device_id}</H3>
                     </View>
 
                     <View style={styles.container}>

@@ -186,6 +186,8 @@ const strings = {
     SELECT_USER: 'Sélectionner un utilisateur',
     EDIT: 'Éditer',
     TIME: 'Heure',
+
+    DEVICE_ID: 'DEVICE_ID',
 };
 
 export default strings;
