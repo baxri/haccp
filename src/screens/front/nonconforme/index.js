@@ -132,9 +132,11 @@ export class NonConformeIndexScreen extends React.Component {
         };
 
         ImagePicker.launchCamera(options, (response) => {
-            writePicture(response.data).then(filename => {
-                this.setState({ source: filename });
-            });
+            if (response.data) {
+                writePicture(response.data).then(filename => {
+                    this.setState({ source: filename });
+                });
+            }
         });
     };
 

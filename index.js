@@ -1,15 +1,7 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
-// import { Client } from 'bugsnag-react-native';
-// const bugsnag = new Client();
-// bugsnag.leaveBreadcrumb('dsfsdf');
-// bugsnag.leaveBreadcrumb('sdfsdf');
-// bugsnag.leaveBreadcrumb('sdfsdf');
-// bugsnag.leaveBreadcrumb('sdfsdfsfsdfw');
-// bugsnag.leaveBreadcrumb('sdfsdfsdfsdfsdf');
 
-// bugsnag.notify(new Error("Test error another"));
-
-
+import { Sentry } from 'react-native-sentry';
+Sentry.config('https://65085d84c4984fafa1700fa8b2d22e51@sentry.io/1222245').install();
 
 AppRegistry.registerComponent('haccp', () => App);

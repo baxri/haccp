@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@sentry/wizard": "^0.10.2",
     "bugsnag-react-native": "^2.10.0",
     "moment": "^2.22.1",
     "native-base": "^2.4.3",
@@ -30,6 +31,7 @@
     "react-native-popup-dialog": "^0.11.46",
     "react-native-restart-android": "0.0.7",
     "react-native-scalable-image": "^0.4.0",
+    "react-native-sentry": "^0.38.1",
     "react-native-signature-capture": "^0.4.9",
     "react-native-simple-radio-button": "^2.7.1",
     "react-native-upload-file": "^0.1.1",

@@ -187,7 +187,7 @@ const strings = {
     EDIT: 'Éditer',
     TIME: 'Heure',
 
-    DEVICE_ID: 'DEVICE_ID',
+    DEVICE_ID: 'DISPOSITIF',
 };
 
 export default strings;

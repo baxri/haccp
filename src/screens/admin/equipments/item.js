@@ -90,9 +90,11 @@ export class AdminEquipmentsItemScreen extends React.Component {
         };
 
         ImagePicker.launchCamera(options, (response) => {
-            writePicture(response.data).then(filename => {
-                this.setState({ source: filename });
-            });
+            if (response.data) {
+                writePicture(response.data).then(filename => {
+                    this.setState({ source: filename });
+                });
+            }
         });
     };
 
@@ -149,7 +151,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                                 <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                             </Button>}
                             {this.state.source && <View style={{ flex: 1, }}>
-                                <View style={{ flex: 0.75, zIndex: 0}}>
+                                <View style={{ flex: 0.75, zIndex: 0 }}>
                                     <Image
                                         resizeMode={'cover'}
                                         style={{ flex: 1 }}

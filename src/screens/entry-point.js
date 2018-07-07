@@ -12,6 +12,9 @@ import Strings from '../../src/language/fr';
 import { Login } from '../../src/database/realm';
 import { initFolders } from '../../src/utilities/index';
 
+
+
+
 export class EntryPointScreen extends React.Component {
     constructor(props) {
         super(props);

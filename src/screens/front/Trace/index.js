@@ -92,13 +92,11 @@ export class TraceIndexScreen extends React.Component {
         };
 
         ImagePicker.launchCamera(options, (response) => {
-
-            // let source = { uri: response.uri };
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-            writePicture(response.data).then(filename => {
-                this.setState({ source: filename });
-            });
+            if (response.data) {
+                writePicture(response.data).then(filename => {
+                    this.setState({ source: filename });
+                });
+            }
         });
     };
 

@@ -14,16 +14,17 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-import io.realm.react.RealmReactPackage; // add this import
-import com.imagepicker.ImagePickerPackage; // <-- add this import
+import io.realm.react.RealmReactPackage; 
+import com.imagepicker.ImagePickerPackage; 
 import com.rssignaturecapture.RSSignatureCapturePackage;
-import com.rnfs.RNFSPackage; // <------- add package
+import com.rnfs.RNFSPackage; 
 import com.vydia.RNUploader.UploaderReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnziparchive.RNZipArchivePackage;
 import com.rnrestartandroid.RNRestartAndroidPackage;
 import com.bugsnag.BugsnagReactNative;
+
 
 public class MainApplication extends Application implements ReactApplication {
 

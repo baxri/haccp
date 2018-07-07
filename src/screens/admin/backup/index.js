@@ -30,7 +30,7 @@ import { Client } from 'bugsnag-react-native';
 
 const bugsnag = new Client();
 
-// bugsnag.notify(new Error("Test source map errors"));
+bugsnag.notify(new Error("Test source map errors 2"));
 
 export class AdminBackupIndexScreen extends React.Component {
 
