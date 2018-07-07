@@ -9,6 +9,7 @@
   "dependencies": {
     "@sentry/wizard": "^0.10.2",
     "bugsnag-react-native": "^2.10.0",
+    "instabug-reactnative": "^2.13.3",
     "moment": "^2.22.1",
     "native-base": "^2.4.3",
     "react": "16.3.1",

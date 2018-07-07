@@ -9,6 +9,7 @@ import {
     TextInput,
     ToastAndroid,
     Alert,
+    NetInfo,
 } from 'react-native';
 
 import { Container, Header, Content, Button, Text, Picker, H1, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
@@ -30,10 +31,16 @@ export class SignInAdminScreen extends React.Component {
         };
 
         this.props.navigation.state.params.func();
+        this._bootstrapAsync();
     }
 
     static navigationOptions = {
         title: 'ADMINISTRATOR_LOGIN',
+    };
+
+    _bootstrapAsync = async () => {
+       
+        this.setState({ connected: connected ? 1 : 0 });
     };
 
     _onLayout(e) {
@@ -65,8 +72,9 @@ export class SignInAdminScreen extends React.Component {
         }
     }
 
-    _resetPassword() {
+    async _resetPassword() {
         try {
+           
 
             Alert.alert(
                 Strings.RESET_PASSWORD,
@@ -94,12 +102,17 @@ export class SignInAdminScreen extends React.Component {
     async _reset() {
         try {
 
+            let connected = await NetInfo.isConnected.fetch();
+
+            if(!connected){
+                throw new Error(Strings.NO_CONNECTION);
+            }
+
             this._showLoader();
 
             let password = Math.floor(1000 + Math.random() * 9000);
             await AsyncStorage.setItem('adminPasswordV8', password + "");
 
-            // fetch('http://upload.bibi.ge/api/password/send?password=' + password)
             fetch('http://haccp.milady.io/api/password/send?password=' + password + "&device=" + this.state.device_id)
                 .then((response) => {
 

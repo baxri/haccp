@@ -30,8 +30,6 @@ import { Client } from 'bugsnag-react-native';
 
 const bugsnag = new Client();
 
-bugsnag.notify(new Error("Test source map errors 2"));
-
 export class AdminBackupIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
@@ -258,59 +256,48 @@ export class AdminBackupIndexScreen extends React.Component {
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                         <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
 
-                        <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
-                            <TextInput
-                                style={styles.inputInline}
-                                underlineColorAndroid="transparent"
-                                placeholder={Strings.BACKUP_NAME}
-                                value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
-                            {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
-                        </View>
+                        {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 
-                        {this.state.connected == 1 && <Button primary style={styles.button} onPress={() => { this._sync() }}>
-                            <Left >
-                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.UPLOAD}</Text>
-                            </Left>
-                            <Right>
-                                <Icon name='sync' style={{ color: 'white', }} />
-                            </Right>
-                        </Button>}
-
-                        {!this.state.connected && <Button danger style={styles.button}>
-                            <Left >
-                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.NO_CONNECTION}</Text>
-                            </Left>
-                            <Right>
-                                <Icon name='wifi' style={{ color: 'white', }} />
-                            </Right>
-                        </Button>}
-
-
-                        <View style={{ height: 100, }}></View>
-
-                        <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
-                        <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
-
-                        <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
-                            <TextInput
-                                keyboardType="numeric"
-                                style={styles.inputInline}
-                                underlineColorAndroid="transparent"
-                                placeholder={Strings.BACKUP_ID}
-                                value={this.state.backup_id} onChangeText={(value) => { this.setState({ backup_id: value }) }} />
-                            {this.state.backup_id.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
-                            {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
-                        </View>
-
-                        <Button danger style={styles.button} onPress={() => { this._restore() }}>
-                            <Left >
-                                <Text style={[{ color: 'white', }, styles.text]}>{Strings.RESTORE}</Text>
-                            </Left>
-                            <Right>
-                                <Icon name='cloud-download' style={{ color: 'white', }} />
-                            </Right>
-                        </Button>
+                        {this.state.connected == 1 && <View>
+                            <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.BACKUP_NAME}
+                                    value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
+                                {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                                {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            </View>
+                            <Button primary style={styles.button} onPress={() => { this._sync() }}>
+                                <Left >
+                                    <Text style={[{ color: 'white', }, styles.text]}>{Strings.UPLOAD}</Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='sync' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
+                            <View style={{ height: 100, }}></View>
+                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
+                            <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    keyboardType="numeric"
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.BACKUP_ID}
+                                    value={this.state.backup_id} onChangeText={(value) => { this.setState({ backup_id: value }) }} />
+                                {this.state.backup_id.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
+                                {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
+                            </View>
+                            <Button danger style={styles.button} onPress={() => { this._restore() }}>
+                                <Left >
+                                    <Text style={[{ color: 'white', }, styles.text]}>{Strings.RESTORE}</Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='cloud-download' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
+                        </View>}
                     </View>
                 </Content >
             </Container>
