@@ -223,6 +223,8 @@ export class AdminBackupIndexScreen extends React.Component {
                         'Content-Type': 'multipart/form-data',
                     }, formFiles).then((resp) => {
 
+                        alert(resp.text());
+
                         bugsnag.leaveBreadcrumb("File upload response sucessfully received!...");
                         this._hideLoader();
                         this.props.navigation.navigate("AdminHome");

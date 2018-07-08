@@ -39,8 +39,7 @@ export class SignInAdminScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
-       
-        this.setState({ connected: connected ? 1 : 0 });
+        // this.setState({ connected: connected ? 1 : 0 });
     };
 
     _onLayout(e) {
