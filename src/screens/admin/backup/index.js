@@ -21,12 +21,13 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
+import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip, initImages } from '../../../utilities/index';
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles } from '../../../utilities/styles';
 import { Client } from 'bugsnag-react-native';
+var RNFS = require('react-native-fs');
 
 const bugsnag = new Client();
 
@@ -81,6 +82,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _restore = async () => {
 
+
         let backup_id = this.state.backup_id;
 
         if (backup_id.length == 0) {
@@ -89,6 +91,9 @@ export class AdminBackupIndexScreen extends React.Component {
 
         let download = 'http://haccp.milady.io/admin/download/' + backup_id;
         this._showLoader();
+
+        bugsnag.leaveBreadcrumb('Init images folder...');
+        await initImages();
 
         try {
 
@@ -117,51 +122,70 @@ export class AdminBackupIndexScreen extends React.Component {
                 bugsnag.leaveBreadcrumb('Retrive file path from download response ' + filename);
 
                 bugsnag.leaveBreadcrumb('Start Listing all local images with: RNFetchBlobOld.fs.ls');
-                RNFetchBlobOld.fs.ls(PATH).then(async files => {
 
-                    bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
-                    if (files.length > 0) {
-                        bugsnag.leaveBreadcrumb('Start deleting all images...');
-                        files.map(file => {
-                            RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
-                        });
-                        bugsnag.leaveBreadcrumb('Finish deleting all images...');
-                    }
+                // get a list of files and directories in the main bundle
+                RNFS.readDir(PATH) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+                    .then(async (files) => {
 
-                    bugsnag.leaveBreadcrumb('Delete realm file...');
-                    RNFetchBlob.fs.unlink(DB);
+                        bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
+                        if (files.length > 0) {
+                            bugsnag.leaveBreadcrumb('Start deleting all images...');
+                            files.map(file => {
+                                RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
+                            });
+                            bugsnag.leaveBreadcrumb('Finish deleting all images...');
+                        }
 
-                    if (!RNFetchBlob.fs.exists(DB)) {
-                        throw new Error(Strings.CANNOT_DElETE_DATABASE_FILE);
-                    }
+                        bugsnag.leaveBreadcrumb('Delete realm file...');
+                        RNFetchBlob.fs.unlink(DB);
 
-                    const sourcePath = res.path();
-                    const targetPath = IMAGES;
+                        if (!RNFetchBlob.fs.exists(DB)) {
+                            throw new Error(Strings.CANNOT_DElETE_DATABASE_FILE);
+                        }
 
-                    bugsnag.leaveBreadcrumb('Downloaded path: ' + sourcePath);
-                    bugsnag.leaveBreadcrumb('Target path: ' + targetPath);
+                        const sourcePath = res.path();
+                        const targetPath = IMAGES;
 
-                    bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle...');
-                    await unzip(sourcePath, targetPath);
-                    bugsnag.leaveBreadcrumb('Unziping finished...');
+                        bugsnag.leaveBreadcrumb('Downloaded path: ' + sourcePath);
+                        bugsnag.leaveBreadcrumb('Target path: ' + targetPath);
 
-                    bugsnag.leaveBreadcrumb('Move downloaded realm file to destination...');
-                    let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
+                        bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle...');
+                        await unzip(sourcePath, targetPath);
+                        bugsnag.leaveBreadcrumb('Unziping finished...');
 
-                    if (!(await RNFetchBlob.fs.exists(DB))) {
-                        throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
-                    }
+                        bugsnag.leaveBreadcrumb('Move downloaded realm file to destination...');
+                        let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
-                    bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied :)');
-                    RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
+                        if (!(await RNFetchBlob.fs.exists(DB))) {
+                            throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
+                        }
 
-                    this._hideLoader();
-                    RestartAndroid.restart();
-                }).catch(error => {
-                    this._hideLoader();
-                    bugsnag.notify(new Error("CATCH " + error));
-                    alert(error);
-                });
+                        bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied :)');
+                        RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
+
+                        this._hideLoader();
+                        RestartAndroid.restart();
+
+                    })
+                    .catch((error) => {
+                        this._hideLoader();
+                        bugsnag.notify(new Error("NEW CATCH " + error.message));
+                        // alert(error);
+                        alert(err.message);
+                    });
+
+
+                // this._hideLoader();
+                // return;
+
+                // RNFetchBlobOld.fs.ls(PATH).then(async files => {
+
+
+                // }).catch(error => {
+                //     this._hideLoader();
+                //     bugsnag.notify(new Error("CATCH " + error));
+                //     alert(error);
+                // });
 
             } else {
                 throw new Error(Strings.PROBLEM_DOWNLOADING_BACKUP);
@@ -191,6 +215,8 @@ export class AdminBackupIndexScreen extends React.Component {
         }
 
         this._showLoader();
+
+        await initImages();
 
         setTimeout(() => {
 
@@ -257,6 +283,8 @@ export class AdminBackupIndexScreen extends React.Component {
 
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                         <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
+
+                        <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{PATH}</H3>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 

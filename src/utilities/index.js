@@ -11,21 +11,25 @@ import {
     TextInput,
     Picker,
     TouchableOpacity,
+    PermissionsAndroid,
 
 } from 'react-native';
 import { Container, Header, Content, Button, Text, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
 import Strings from '../language/fr'
 import { styles, inputAndButtonFontSize } from '../utilities/styles';
 import { CustomPicker } from 'react-native-custom-picker';
+import { Client } from 'bugsnag-react-native';
+var RNFS = require('react-native-fs');
 
+const bugsnag = new Client();
 
 export const FILE_VERSION = '8';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
 export const APP_REALM_FOLDER = 'HACCPDATA';
 
-export const PATH = RNFetchBlob.fs.dirs.SDCardDir + '/' + APP_PICTURE_FOLDER;
+export const PATH = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
-export const PATH_ZIP = RNFetchBlob.fs.dirs.SDCardDir + '/ZIPS';
+export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/ZIPS';
 
 export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';
 
@@ -43,23 +47,39 @@ export const guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-export const initFolders = async () => {
+export const initImages = async () => {
 
     try {
-        let a = await RNFetchBlob.fs.mkdir(PATH + '/');
+
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            {
+                'title': 'TITLE',
+                'message': 'MESSAGE'
+            }
+        )
+
+        let a = await RNFS.mkdir(PATH + "/");
+        // let a = await RNFetchBlob.fs.mkdir(PATH);
+
     } catch (error) {
-        // alert(error)
+        alert(error);
+        // bugsnag.notify(new Error(error));
     }
+};
+
+export const initFolders = async () => {
+
+    initImages();
 
     try {
         let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
 
-
     } catch (error) {
         // alert(error)
     }
-
 };
+
 
 export const realmFilePath = () => {
     return PATH_REALM + '/' + PATH_REALM_FILE;
