@@ -1,9 +1,6 @@
-import React from 'react';
-import { NetInfo } from 'react-native';
-import { Form } from 'native-base';
-import { realmFilePath } from '../../src/utilities/index';
-
-const Realm = require('realm');
+import { realmFilePath, realmFilePathTemp } from '../../src/utilities/index';
+import Realm from 'realm';
+// const Realm = require('realm');
 
 const ArchiveSchema = {
     primaryKey: 'id',
@@ -157,6 +154,7 @@ const _guid = () => {
 const schemaVersion = 50;
 const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
 const realmPath = realmFilePath();
+const realmPathTemp = realmFilePathTemp();
 
 export const RealmFile = () => {
     // return Realm.defaultPath;
@@ -677,3 +675,46 @@ export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Pr
 
 
 // END CONTROLE RECEPS ============================================================================
+
+
+
+// WORK FOR TEMPORARY DATABASE FOR BACKUP =========================================
+
+export const ControlesUntilDate = (date = null) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPathTemp, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const d = new Date(date);
+            const result = realm.objects('Controle').filtered('created_at <= $0', d);
+            resolve(result);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const ControlesAfterDate = (date = null) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPathTemp, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const d = new Date(date);
+            const result = realm.objects('Controle').filtered('created_at >= $0', d);
+            resolve(result);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const DeleteControle = (id) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPathTemp, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let item = realm.create('Controle', { id: id }, true);
+                realm.delete(item);
+                resolve();
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});

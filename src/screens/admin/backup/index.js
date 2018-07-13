@@ -15,13 +15,13 @@ import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Ite
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { RealmFile } from '../../../database/realm';
+import { RealmFile, ControlesAfterDate, DeleteControle } from '../../../database/realm';
 import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip, initImages } from '../../../utilities/index';
+import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages } from '../../../utilities/index';
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
@@ -199,6 +199,93 @@ export class AdminBackupIndexScreen extends React.Component {
 
     }
 
+    _deleteOldData = async () => {
+
+        // this._showLoader();
+
+        setTimeout(async () => {
+            try {
+
+                let ID = DeviceInfo.getUniqueID();
+                let name = 'TEMP BACKUP';
+                let TEMP_DB_PATH = realmFilePathTemp();
+                let DB = realmFilePath();
+
+                // Check if temporary database file is exsists
+                let exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
+
+                // Delete temporary database file if it exists
+                if (exists) {
+                    console.log('delete temp file');
+                    await RNFetchBlob.fs.unlink(TEMP_DB_PATH);
+                }
+
+                // Copy real database file to temporary file
+                await RNFetchBlob.fs.cp(DB, TEMP_DB_PATH);
+
+                exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
+
+                // Check if file is copied
+                if (!exists) {
+                    throw new Error('CANNOT_COPY_DB_FILE_TO_TEMPORARY_DB_FILE');
+                }
+
+                //Copy images in new folder
+                await RNFetchBlob.fs.cp(PATH, PATH_TEMP);
+
+
+
+                // let date = new Date().toISOString().substring(0, 10);
+                // let controles = await ControlesAfterDate(date);
+
+                console.log(PATH_TEMP);
+                return;
+
+                controles.map(async controle => {
+                    await DeleteControle(controle.id);
+                });
+
+                RNFetchBlobOld.fs.ls(PATH)
+                    .then((files) => {
+
+                        let formFiles = [];
+                        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(TEMP_DB_PATH) });
+
+                        // if (files.length > 0) {
+                        //     files.map((file => {
+                        //         formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
+                        //     }));
+                        // }
+
+                        RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+                            'haccp-device': ID,
+                            'name': name,
+                            'Content-Type': 'multipart/form-data',
+                        }, formFiles).then((resp) => {
+                            this._hideLoader();
+                            this.props.navigation.navigate("AdminHome");
+                            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                        }).catch((err) => {
+                            this._hideLoader();
+                            alert(err);
+                        });
+                    }).catch(error => {
+                        this._hideLoader();
+                        alert(err);
+                    });
+
+
+
+
+                return;
+                alert(exists);
+            } catch (error) {
+                this._hideLoader();
+                alert(error);
+            }
+        }, 500);
+    }
+
     _sync = async () => {
 
         bugsnag.leaveBreadcrumb('Start _sync function');
@@ -273,6 +360,8 @@ export class AdminBackupIndexScreen extends React.Component {
         }, 500);
     };
 
+
+
     render() {
         return (
             <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
@@ -289,6 +378,23 @@ export class AdminBackupIndexScreen extends React.Component {
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 
                         {this.state.connected == 1 && <View>
+
+
+
+                            <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
+                                <Left >
+                                    <Text style={[{ color: 'white', }, styles.text]}>
+                                        DELETE OLD DATA
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='sync' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
+
+
+
+
                             <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
                                     style={styles.inputInline}

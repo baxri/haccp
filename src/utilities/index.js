@@ -25,13 +25,16 @@ const bugsnag = new Client();
 
 export const FILE_VERSION = '8';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
+export const APP_PICTURE_FOLDER_TEMP = 'TEMP-HACCPIMAGES-' + FILE_VERSION;
 export const APP_REALM_FOLDER = 'HACCPDATA';
 
 export const PATH = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER;
+export const PATH_TEMP = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER_TEMP;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
 export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/ZIPS';
 
 export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';
+export const PATH_REALM_FILE_TEMP = 'temp-haccp-db-' + FILE_VERSION + '.realm';
 
 export const reverseFormat = (date) => {
     let ar = date.split("-");
@@ -83,6 +86,10 @@ export const initFolders = async () => {
 
 export const realmFilePath = () => {
     return PATH_REALM + '/' + PATH_REALM_FILE;
+};
+
+export const realmFilePathTemp = () => {
+    return PATH_REALM + '/' + PATH_REALM_FILE_TEMP;
 };
 
 export const FilePicturePath = () => {
