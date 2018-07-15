@@ -25,7 +25,7 @@ import com.rnziparchive.RNZipArchivePackage;
 import com.rnrestartandroid.RNRestartAndroidPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
-
+import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -49,7 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNZipArchivePackage(),
           new RNRestartAndroidPackage(),
           BugsnagReactNative.getPackage(),
-          new BackgroundJobPackage()
+          new BackgroundJobPackage(),
+          new RNBackgroundFetchPackage()
       );
     }
 

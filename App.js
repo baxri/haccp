@@ -61,9 +61,6 @@ import { LogOutScreen } from './src/screens/auth/logout';
 // Sentry.config('https://65085d84c4984fafa1700fa8b2d22e51:0faf6ebe99da4922b9f9f0c6d8988907@sentry.io/1222245').install();
 
 
-
-
-
 // const headerBackground = '#1E2EB4';
 const headerBackground = '#BB0000';
 const headerTextColor = 'white';
