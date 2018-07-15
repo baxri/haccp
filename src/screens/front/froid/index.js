@@ -59,6 +59,10 @@ export class FroidIndexScreen extends React.Component {
                 lastname: '',
             },
 
+            products: [
+                // { name: 'Test Product', temperature: '0', }
+            ],
+
             signature: '',
             equipments: [],
 
@@ -118,6 +122,27 @@ export class FroidIndexScreen extends React.Component {
         });
 
         this.setState({ equipments: ret });
+    }
+
+    _addProduct() {
+
+        let product = {
+            id: guid(),
+            name: '',
+            temperature: '',
+        }
+
+        this.setState({ products: [...this.state.products, product] });
+    }
+
+    _changeProductName(index, value) {
+        this.state.products[index].name = value;
+        this.setState({ products: this.state.products });
+    }
+
+    _changeProductTemperature(index, value) {
+        this.state.products[index].temperature = value;
+        this.setState({ products: this.state.products });
     }
 
     _changeEquipment(row, index, value) {
@@ -237,7 +262,7 @@ export class FroidIndexScreen extends React.Component {
 
         this.state.equipments.map(equipment => {
             equipment.values.map(value => {
-                if (value == '' ) {
+                if (value == '') {
                     equipmentError = true;
                     alertMessage = Strings.EQUIPMENTS_REQUIRED;
                 }
@@ -263,6 +288,11 @@ export class FroidIndexScreen extends React.Component {
     }
 
     _store(confirmed) {
+
+
+        // console.log(this.state.products);
+        // return;
+
         this._showLoader();
 
         setTimeout(() => {
@@ -270,6 +300,7 @@ export class FroidIndexScreen extends React.Component {
             addControle(this.state.userId, {
                 source: '',
                 signature: this.state.signature,
+                products: this.state.products,
 
                 produit: '',
                 fourniser: '',
@@ -343,6 +374,40 @@ export class FroidIndexScreen extends React.Component {
                     </View>
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
+
+
+                    {this.state.products.map((row, index) => {
+                        return <View>
+                            <View style={row.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    // autoFocus={true}
+                                    // keyboardType="numeric"
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.PRODUCT}
+                                    value={row.name} onChangeText={(value) => { this._changeProductName(index, value) }}
+                                />
+                                {/* <Icon name='thermometer' style={styles.inputInlineIconDisabled} /> */}
+                            </View>
+                            <View style={row.temperature != '' ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    // autoFocus={true}
+                                    keyboardType="numeric"
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.TEMPERATURE}
+                                    value={row.temperature} onChangeText={(value) => { this._changeProductTemperature(index, value) }}
+                                />
+                                <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
+                            </View>
+                        </View>
+                    })}
+
+                    <View style={{ flex: 1 }}>
+                        <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 10, }} onPress={() => this._addProduct()}>
+                            <Text> + {Strings.ADD_MORE_PRODUCTS}</Text>
+                        </Button>
+                    </View>
 
                     {this.state.equipments.map((row, index) => {
                         return <View style={{ marginBottom: 20, }}>

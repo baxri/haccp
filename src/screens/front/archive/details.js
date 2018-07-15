@@ -176,17 +176,22 @@ export class ArchiveDetailsScreen extends React.Component {
                             </Body>
                         </CardItem>}
 
-                         {this.state.item.type == 0 && <CardItem bordered>
+                        {this.state.item.type == 0 && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.FOURNISSEUR}: {this.state.item.fourniseur.name}</Text>
                             </Body>
                         </CardItem>}
 
-                        {/* {this.state.item.type == 1 && <CardItem bordered>
+                        {this.state.item.type == 1 && <CardItem bordered>
                             <Body>
-                                <Text>{Strings.FOURNISSEUR}: {this.state.item.fourniseur.name}</Text>
+                                {this.state.item.products.map(product => {
+                                    return <View style={{ marginBottom: 10, }}>
+                                        <Text>{Strings.PRODUCT}: {product.name}</Text>
+                                        <Text>{Strings.TEMPERATURE}: {product.temperature}°</Text>
+                                    </View>
+                                })}
                             </Body>
-                        </CardItem>} */}
+                        </CardItem>}
 
                         {this.state.item.type == 1 && <CardItem bordered>
                             <Body>

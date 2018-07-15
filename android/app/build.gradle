@@ -166,6 +166,7 @@ dependencies {
     compile project(':react-native-zip-archive')
     compile project(':react-native-restart-android')
     compile project(':bugsnag-react-native')
+    compile project(':react-native-background-job')
 }
 
 // Run this once to be able to run the application with BUCK

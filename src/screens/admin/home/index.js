@@ -107,7 +107,7 @@ export class AdminHomeIndexScreen extends React.Component {
                     </Row>
                     <Row>
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
-                            <Button full light style={{ flex: 1 }} onPress={() => alert(Strings.COMMING_SOON)}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminClean')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='snow' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
                                     <Text style={{ color: '#494949', fontSize: inputAndButtonFontSize, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>

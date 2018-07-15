@@ -31,6 +31,7 @@ import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
+import { AdminCleanIndexScreen } from './src/screens/admin/clean/index';
 import { AdminPasswordIndexScreen } from './src/screens/admin/password/index';
 // End Admin Screens
 
@@ -56,9 +57,9 @@ import { HelpScreen } from './src/screens/front/help';
 
 import { LogOutScreen } from './src/screens/auth/logout';
 
-import { Sentry } from 'react-native-sentry';
+// import { Sentry } from 'react-native-sentry';
+// Sentry.config('https://65085d84c4984fafa1700fa8b2d22e51:0faf6ebe99da4922b9f9f0c6d8988907@sentry.io/1222245').install();
 
-Sentry.config('https://65085d84c4984fafa1700fa8b2d22e51:0faf6ebe99da4922b9f9f0c6d8988907@sentry.io/1222245').install();
 
 
 
@@ -355,6 +356,21 @@ const AdminPasswordStack = StackNavigator(
   }
 );
 
+const AdminCleanStack = StackNavigator(
+  {
+    AdminCleanIndex: AdminCleanIndexScreen,
+  },
+  {
+    initialRouteName: 'AdminCleanIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const DrawerStackAdmin = DrawerNavigator({
   AdminHome: AdminHomeStack,
   AdminFournisseur: AdminFournisseurStack,
@@ -363,6 +379,7 @@ const DrawerStackAdmin = DrawerNavigator({
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
   AdminPassword: AdminPasswordStack,
+  AdminClean: AdminCleanStack,
   AdminLogout: LogOutScreen,
 },
   {

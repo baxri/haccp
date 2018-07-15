@@ -133,6 +133,7 @@ const strings = {
     AUTRES_CORECTIVES: 'Actions correctives',
     EQUIPMENTS_REQUIRED: 'Certains équipements n\'ont pas été controlés, valider ?',
     ADD_MORE_TEMPERATURES: 'Ajouter un contrôle de température',
+    ADD_MORE_PRODUCTS: 'ADD_PRODUCT',
 
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',

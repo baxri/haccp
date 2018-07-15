@@ -381,7 +381,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
 
 
-                            <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
+                            {/* <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
                                 <Left >
                                     <Text style={[{ color: 'white', }, styles.text]}>
                                         DELETE OLD DATA
@@ -390,7 +390,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Right>
                                     <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
-                            </Button>
+                            </Button> */}
 
 
 

@@ -38,7 +38,6 @@ const EquipmentSchema = {
     }
 };
 
-
 const TemperatureSchema = {
     primaryKey: 'id',
     name: 'Temperature',
@@ -47,6 +46,18 @@ const TemperatureSchema = {
         id: 'string', // primary key
         values: 'string[]',
         equipment: 'Equipment',
+    }
+};
+
+const ProductSchema = {
+    primaryKey: 'id',
+    name: 'Product',
+
+    properties: {
+        id: 'string', // primary key
+        name: 'string',
+        temperature: 'string',
+        controle: { type: 'linkingObjects', objectType: 'Controle', property: 'products' },
     }
 };
 
@@ -77,7 +88,9 @@ const ControleSchema = {
 
         // equipments: 'string[]',
         temperatures: 'Temperature[]',
-        // temperatures: { type: 'Temperature[]', optional: true },
+        // products: { type: 'Product[]', optional: true },
+        products: 'Product[]',
+
 
         quantity: 'int',
         valorisation: 'double',
@@ -140,8 +153,6 @@ const DepartmentSchema = {
     }
 };
 
-
-
 const _guid = () => {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -151,8 +162,8 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 50;
-const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema];
+const schemaVersion = 56;
+const schemas = [ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
 
@@ -573,6 +584,8 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     id: _guid(),
                     user: userObject,
                     department: userObject.department,
+
+                    products: (item.products ? item.products : []),
 
                     source: item.source,
                     signature: item.signature,
