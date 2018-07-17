@@ -31,6 +31,7 @@ import { AdminDepartmentsItemScreen } from './src/screens/admin/departments/item
 import { AdminDepartmentsEquipmentsModal } from './src/screens/admin/departments/equipments';
 
 import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
+import { AdminCleanItemScreen } from './src/screens/admin/clean/item';
 import { AdminCleanIndexScreen } from './src/screens/admin/clean/index';
 import { AdminPasswordIndexScreen } from './src/screens/admin/password/index';
 // End Admin Screens
@@ -355,6 +356,7 @@ const AdminPasswordStack = StackNavigator(
 
 const AdminCleanStack = StackNavigator(
   {
+    AdminCleanItem: AdminCleanItemScreen,
     AdminCleanIndex: AdminCleanIndexScreen,
   },
   {

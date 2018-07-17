@@ -35,7 +35,7 @@ const EquipmentSchema = {
         source: 'string?',    // primary key
         name: 'string',
         departments: { type: 'linkingObjects', objectType: 'Department', property: 'equipments' },
-        cleanschedule: { type: 'linkingObjects', objectType: 'CleanSchedule', property: 'equipment' },
+        cleanschedules: { type: 'linkingObjects', objectType: 'CleanSchedule', property: 'equipment' },
     }
 };
 
@@ -69,6 +69,7 @@ const CleanScheduleSchema = {
     properties: {
         id: 'string', // primary key
         equipment: 'Equipment',
+        department: 'Department',
         type: 'int',
 
         monday: 'int?',
@@ -200,6 +201,7 @@ const DepartmentSchema = {
         users: { type: 'linkingObjects', objectType: 'User', property: 'department' },
         controles: { type: 'linkingObjects', objectType: 'Controle', property: 'department' },
         pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'department' },
+        cleanschedules: { type: 'linkingObjects', objectType: 'CleanSchedule', property: 'department' },
     }
 };
 
@@ -212,7 +214,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 58;
+const schemaVersion = 59;
 const schemas = [CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
@@ -230,6 +232,60 @@ export const User = (userId) => new Promise((resolve, reject) => {
         })
         .catch(error => {
             alert(error);
+            reject(error);
+        });
+});
+
+export const addCleanSchedule = (item) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            realm.write(() => {
+                item.id = _guid();
+                const department = realm.create('CleanSchedule', item);
+                resolve(department);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const editCleanSchedule = (item) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let department = realm.create('CleanSchedule', item, true);
+                resolve(department);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const CleanSchedules = async () => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('CleanSchedule');
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const DeleteCleanSchedule = (id) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                let department = realm.create('CleanSchedule', { id: id }, true);
+                realm.delete(department);
+                resolve();
+            });
+        })
+        .catch(error => {
             reject(error);
         });
 });

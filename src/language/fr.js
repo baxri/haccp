@@ -89,6 +89,10 @@ const strings = {
     DATA_UPLOADED_ERROR: 'Erreur lors de la sauvegarde',
     UPLOAD: 'Envoyer',
 
+    // SCHEDULES ADMIN
+    THERE_IS_NO_SCHEDULES_YET: 'THERE_IS_NO_SCHEDULES_YET',
+    SCHEDULE_SUCCESSFULL_SAVED : 'SCHEDULE_SUCCESSFULL_SAVED',
+
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
     PASSWORD_CHANGED: 'Mot de passe modifié',

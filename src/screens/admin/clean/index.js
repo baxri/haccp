@@ -5,21 +5,22 @@ import {
     StatusBar,
     StyleSheet,
     View,
+    ListView,
+    FlatList,
+    RefreshControl,
     ToastAndroid,
-    NetInfo,
-    TextInput,
-    Dimensions,
+    Text,
     Alert,
 
 } from 'react-native';
-import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
+import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
+import { CleanSchedules, DeleteCleanSchedule } from '../../../database/realm';
+
 import Spinner from 'react-native-loading-spinner-overlay';
+import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
-import { Departments } from '../../../database/realm';
-import { styles } from '../../../utilities/styles';
-import { CustomPicker } from 'react-native-custom-picker';
-import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
+import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
 export class AdminCleanIndexScreen extends React.Component {
 
@@ -33,67 +34,23 @@ export class AdminCleanIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.CLEANING_SCHEDULE} />,
+            // headerRight: <Equipments navigation={navigation} />,
         };
     };
 
     constructor(props) {
         super(props);
 
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            department: null,
-            equipment: null,
-            type: null,
-            days: [],
+            active: true,
+            loading: 1,
+            userSession: '',
+            userSessionType: '',
 
-            departments: [],
-            types: [
-                { name: 'monthly', value: 1 },
-                { name: 'Weekly', value: 2 }
-            ],
-            weekly: [
-                { name: 'Monday', value: 1 },
-                { name: 'Thuesday', value: 2 },
-                { name: 'Wednesday', value: 3 },
-                { name: 'Thirsday', value: 4 },
-                { name: 'Friday', value: 5 },
-                { name: 'Saturday', value: 6 },
-                { name: 'Sunday', value: 7 },
-            ],
-            monthly: [
-                { name: '1', value: 1 },
-                { name: '2', value: 2 },
-                { name: '3', value: 3 },
-                { name: '4', value: 4 },
-                { name: '5', value: 5 },
-                { name: '6', value: 6 },
-                { name: '7', value: 7 },
-                { name: '8', value: 8 },
-                { name: '9', value: 9 },
-                { name: '10', value: 10 },
-                { name: '11', value: 11 },
-                { name: '12', value: 12 },
-                { name: '13', value: 13 },
-                { name: '14', value: 14 },
-                { name: '15', value: 15 },
-                { name: '16', value: 16 },
-                { name: '17', value: 17 },
-                { name: '18', value: 18 },
-                { name: '19', value: 19 },
-                { name: '20', value: 20 },
-                { name: '21', value: 21 },
-                { name: '22', value: 22 },
-                { name: '23', value: 23 },
-                { name: '24', value: 24 },
-                { name: '25', value: 25 },
-                { name: '26', value: 26 },
-                { name: '27', value: 27 },
-                { name: '28', value: 28 },
-                { name: '29', value: 29 },
-                { name: '30', value: 30 },
-                { name: '31', value: 31 },
-
-            ],
-            dimesions: { width, height } = Dimensions.get('window'),
+            refreshig: false,
+            basic: true,
+            listViewData: [],
         };
 
         this._bootstrapAsync();
@@ -107,172 +64,133 @@ export class AdminCleanIndexScreen extends React.Component {
         this.setState({ loading: 0 });
     }
 
-    _onLayout(e) {
-        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
-    }
-
-    _bootstrapAsync = async () => {
-        this.setState({ departments: await Departments() });
+    componentDidMount() {
+        this._loadItems();
     };
 
-    _changeDepartment = async (itemValue) => {
-        this.setState({ department: itemValue, equipment: null, type: null, days: [] });
+    componentDidFocus() {
+        this._loadItems();
+    };
+
+    _bootstrapAsync = async () => {
+        const userSession = await AsyncStorage.getItem('userSession');
+        const userSessionType = await AsyncStorage.getItem('userSessionType');
+
+        this.setState({
+            loading: 0,
+            userSession: userSession,
+            userSessionType: userSessionType,
+        });
+    };
+
+    _loadItems = async () => {
+        let items = await CleanSchedules();
+        this.setState({ listViewData: items, refreshing: false });
     }
 
-    _changeEquipment = async (itemValue) => {
-        this.setState({ equipment: itemValue });
+    _deleteRowAsk(id, secId, rowId, rowMap) {
+        Alert.alert(
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._deleteRow(id, secId, rowId, rowMap) },
+            ],
+            { cancelable: false }
+        )
     }
 
-    _changeType = async (itemValue) => {
-        this.setState({ type: itemValue, days: [] });
+
+    _deleteRow(id, secId, rowId, rowMap) {
+
+        rowMap[`${secId}${rowId}`].props.closeRow();
+
+        DeleteCleanSchedule(id).then(item => {
+            rowMap[`${secId}${rowId}`].props.closeRow();
+            this._loadItems();
+        }).catch(error => {
+            alert(error);
+        });;
     }
 
-    _toggleDay = (value) => {
-
-        let days = this.state.days;
-        let index = days.indexOf(value);
-
-        if (index < 0) {
-            days.push(value)
-        } else {
-            days.splice(index, 1);
-        }
-
-        this.setState({ days: days });
-    }
-
-    _clickSave = () => {
-
-        // Alert.alert(
-        //     Strings.RECEPTION_CHECK,
-        //     Strings.ARE_YOU_SURE,
-        //     [
-        //         { text: Strings.CANCEL, style: 'cancel' },
-        //         { text: Strings.OK, onPress: () => this._save() },
-        //     ],
-        //     { cancelable: false }
-        // )
-
-        this._save();
-
-    }
-
-    _save = () => {
-
-        let form = {
-            equipment: this.state.equipment,
-            type: this.state.type.value,
-        };
-
-        if (this.state.type.value == 1) {
-
-            let monthlyObject = {};
-
-            this.state.days.map(day => {
-                monthlyObject['day_' + day] = 1;
-            })
-
-            let newform = { ...form, monthlyObject };
-
-            alert(newform['day_5']);
-
-        } else {
-
-        }
-
-
+    _onRefresh() {
+        this._loadItems();
     }
 
     render() {
         return (
-            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+            <Container>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <Content refreshControl={<RefreshControl
+                    refreshing={this.state.refreshing}
+                    onRefresh={() => { this._onRefresh() }} />
+                }>
 
-                <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
-                    <View style={styles.container}>
+                    {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                        <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
+                        <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >{Strings.THERE_IS_NO_SCHEDULES_YET}</Text>
+                    </View>}
 
-                        {this.state.departments.length == 0 && <H3 style={{ marginTop: 30, textAlign: 'center' }}>THERE_IS_NO_DEPARTMENTS</H3>}
+                    <List
+                        dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+                        renderRow={(data, secId, rowId, rowMap) =>
+                            <ListItem style={{ height: 100, paddingLeft: 15, }}>
+                                <Left>
+                                    <View style={{ textAlign: 'left', }}>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.equipment.name} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type} </Text>
+                                    </View>
 
-                        {this.state.departments.length > 0 && <View>
-                            <CustomPicker
-                                optionTemplate={renderOption}
-                                fieldTemplate={this.state.department !== null ? renderFieldSuccess : renderFieldDanger}
-                                placeholder={Strings.SELECT_DEPARTMENT}
-                                getLabel={item => item.name}
+                                </Left>
+                                <Right>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full light
+                                            onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
+                                            <Icon active name="build" />
+                                        </Button>
+                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                            <Icon active name="trash" />
+                                        </Button>
+                                    </View>
+                                </Right>
+                            </ListItem>}
+                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                            <Button full
+                                onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
+                                <Icon active name="build" />
+                            </Button>}
+                        renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+                            <View style={{ flex: 1, }}>
+                                <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                    <Icon active name="trash" />
+                                </Button>
+                            </View>
+                        }
+                        // leftOpenValue={75}
+                        // rightOpenValue={-75}
 
-                                options={this.state.departments}
-                                value={this.state.department}
+                        leftOpenValue={0}
+                        rightOpenValue={0}
+                    />
+                </Content>
+                <Fab
+                    active={true}
+                    direction="up"
+                    containerStyle={{}}
+                    style={{ backgroundColor: '#494949' }}
+                    position="bottomRight"
 
-                                onValueChange={(value) => this._changeDepartment(value)}
-                            />
+                    onPress={() => this.props.navigation.navigate('AdminCleanItem', {
+                        id: "",
+                        department: null,
+                        equipment: null,
+                        type: null,
+                        days: [],
+                    })}>
 
-                            {this.state.department === null && <H3 style={{ marginTop: 30, textAlign: 'center' }}>NO_DEPARTMENTS_CHOOSEN</H3>}
-
-                            {this.state.department !== null && <CustomPicker
-                                optionTemplate={renderOption}
-                                fieldTemplate={this.state.equipment !== null ? renderFieldSuccess : renderFieldDanger}
-                                placeholder="SELECT_EQUIPMENTS"
-                                getLabel={item => item.name}
-                                options={this.state.department.equipments}
-                                value={this.state.equipment}
-                                onValueChange={(value) => this._changeEquipment(value)}
-                            />}
-
-                            {this.state.equipment !== null && <CustomPicker
-                                optionTemplate={renderOption}
-                                fieldTemplate={this.state.type !== null ? renderFieldSuccess : renderFieldDanger}
-                                placeholder="SELECT_TYPE"
-                                getLabel={item => item.name}
-                                options={this.state.types}
-                                value={this.state.type}
-                                onValueChange={(value) => this._changeType(value)}
-                            />}
-
-                            {this.state.type !== null && this.state.type.value == 1 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
-                                {this.state.monthly.map((data) => {
-                                    return <ListItem style={{ height: 70, }} onPress={() => { this._toggleDay(data.value) }}>
-                                        <Left>
-                                            <Text>{data.name}</Text>
-                                        </Left>
-                                        <Right>
-                                            <CheckBox style={{ marginRight: 15, }} checked={this.state.days.includes(data.value)} onPress={() => { this._toggleDay(data.value) }} />
-                                        </Right>
-                                    </ListItem>;
-                                })}
-                            </List></View>}
-
-                            {this.state.type !== null && this.state.type.value == 2 && <View style={{ borderLeftWidth: 5, borderLeftColor: 'lightgray' }}><List>
-                                {this.state.weekly.map((data) => {
-                                    return <ListItem style={{ height: 70, }} onPress={() => { this._toggleDay(data.value) }}>
-                                        <Left>
-                                            <Text>{data.name}</Text>
-                                        </Left>
-                                        <Right>
-                                            <CheckBox style={{ marginRight: 15, }} checked={this.state.days.includes(data.value)} onPress={() => { this._toggleDay(data.value) }} />
-                                        </Right>
-                                    </ListItem>;
-                                })}
-                            </List></View>}
-
-                        </View>}
-
-
-
-
-                    </View>
-                </Content >
-
-                {this.state.department !== null && this.state.equipment !== null && this.state.type !== null && this.state.days.length > 0 && <Footer styles={{ height: 100 }}>
-                    <FooterTab styles={{ height: 100 }}><Button full success onPress={_ => this._clickSave()} >
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE}</Text>
-                            <Icon name='checkmark' style={{ color: 'white', }} />
-                        </View>
-                    </Button></FooterTab>
-                </Footer>}
-
+                    <Icon name="add" />
+                </Fab>
             </Container>
         );
     }
 }
-
