@@ -138,7 +138,7 @@ export class AdminCleanIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.equipment.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type == 1 ? Strings.MONTHLY : Strings.WEEKLY}</Text>
                                     </View>
 
                                 </Left>

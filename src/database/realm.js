@@ -1,4 +1,4 @@
-import { realmFilePath, realmFilePathTemp } from '../../src/utilities/index';
+import { realmFilePath, realmFilePathTemp, toDate } from '../../src/utilities/index';
 import Realm from 'realm';
 // const Realm = require('realm');
 
@@ -36,6 +36,7 @@ const EquipmentSchema = {
         name: 'string',
         departments: { type: 'linkingObjects', objectType: 'Department', property: 'equipments' },
         cleanschedules: { type: 'linkingObjects', objectType: 'CleanSchedule', property: 'equipment' },
+        cleansdone: { type: 'linkingObjects', objectType: 'CleanDone', property: 'equipment' },
     }
 };
 
@@ -59,6 +60,18 @@ const ProductSchema = {
         name: 'string',
         temperature: 'string',
         controle: { type: 'linkingObjects', objectType: 'Controle', property: 'products' },
+    }
+};
+
+const CleanDoneSchema = {
+    primaryKey: 'id',
+    name: 'CleanDone',
+
+    properties: {
+        id: 'string', // primary key
+        equipment: 'Equipment',
+        date: 'string',
+        created_at: 'date',
     }
 };
 
@@ -215,15 +228,49 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 61;
-const schemas = [CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
+const schemaVersion = 63;
+const schemas = [CleanDoneSchema, CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
 
 export const RealmFile = () => {
-    // return Realm.defaultPath;
     return realmPath;
 }
+
+export const cleanDone = (equipment) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            realm.write(() => {
+
+                let date = toDate(new Date());
+                let created_at = new Date();
+
+                const item = realm.create('CleanDone', {
+                    id: _guid(),
+                    equipment: equipment,
+                    date: date,
+                    created_at: created_at,
+                });
+                resolve(item);
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const checkCleanDone = async (equipment) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            let date = toDate(new Date());
+            const items = equipment.cleansdone.filtered('date = $0', date);
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 
 export const User = (userId) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })

@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
-import { CleanSchedulesFront as CleanSchedules, addControle, addArchive } from '../../../database/realm';
+import { CleanSchedulesFront as CleanSchedules, addControle, addArchive, cleanDone, checkCleanDone } from '../../../database/realm';
 import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -92,7 +92,18 @@ export class FrontCleanIndexScreen extends React.Component {
 
     _loadItems = async () => {
         let items = await CleanSchedules();
-        this.setState({ listViewData: items, refreshing: false });
+        let newItems = [];
+
+        items.map(async (schedule, index) => {
+            let done = await checkCleanDone(schedule.equipment);
+            if (done.length > 0) {
+                newItems.push({ ...{ done: 1 }, ...schedule });
+            } else {
+                newItems.push({ ...{ done: 0 }, ...schedule });
+            }
+        });
+
+        this.setState({ listViewData: newItems, refreshing: false });
     }
 
     _deleteRowAsk(id, secId, rowId, rowMap) {
@@ -157,9 +168,12 @@ export class FrontCleanIndexScreen extends React.Component {
                 created_at: this.state.created_at,
             }).then(res => {
 
+                cleanDone(schedule.equipment);
+
                 addArchive(this.state.date, this.state.YM, true, this.state.userId);
 
-                this.props.navigation.navigate('Home');
+                // this.props.navigation.navigate('Home');
+                this._loadItems();
                 this._hideLoader();
                 ToastAndroid.show(Strings.SCHEDULE_SUCCESSFULL_SAVED, ToastAndroid.LONG);
             }).catch(error => {
@@ -194,15 +208,19 @@ export class FrontCleanIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.equipment.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type == 1 ? Strings.MONTHLY : Strings.WEEKLY} </Text>
                                     </View>
 
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 150, }}>
-                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
+                                        {data.done == 0 && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.CLEAN}</Text>
-                                        </Button>
+                                        </Button>}
+
+                                        {data.done == 1 && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
+                                            <Text style={[{ color: 'white' }, styles.text]}>{Strings.DONE}</Text>
+                                        </Button>}
                                     </View>
                                 </Right>
                             </ListItem>}
@@ -225,23 +243,6 @@ export class FrontCleanIndexScreen extends React.Component {
                         rightOpenValue={0}
                     />
                 </Content>
-                <Fab
-                    active={true}
-                    direction="up"
-                    containerStyle={{}}
-                    style={{ backgroundColor: '#494949' }}
-                    position="bottomRight"
-
-                    onPress={() => this.props.navigation.navigate('AdminCleanItem', {
-                        id: "",
-                        department: null,
-                        equipment: null,
-                        type: null,
-                        days: [],
-                    })}>
-
-                    <Icon name="add" />
-                </Fab>
             </Container>
         );
     }

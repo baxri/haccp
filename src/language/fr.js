@@ -95,6 +95,9 @@ const strings = {
 
     // SCHEDULES FRONT
     CLEAN: 'CLEAN',
+    DONE: 'DONE',
+    WEEKLY: 'WEEKLY',
+    MONTHLY: 'MONTHLY',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
