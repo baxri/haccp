@@ -175,17 +175,17 @@ export class AdminCleanItemScreen extends React.Component {
 
     _clickSave = () => {
 
-        // Alert.alert(
-        //     Strings.RECEPTION_CHECK,
-        //     Strings.ARE_YOU_SURE,
-        //     [
-        //         { text: Strings.CANCEL, style: 'cancel' },
-        //         { text: Strings.OK, onPress: () => this._save() },
-        //     ],
-        //     { cancelable: false }
-        // )
+        Alert.alert(
+            Strings.RECEPTION_CHECK,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._save() },
+            ],
+            { cancelable: false }
+        )
 
-        this._save();
+        // this._save();
     }
 
     _save = async () => {
@@ -201,39 +201,33 @@ export class AdminCleanItemScreen extends React.Component {
         setTimeout(async () => {
 
             realmObject = {};
+            let monthlyObject = {};
+            let weeklyObject = {};
+            let weekDays = ['none', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+            this.state.monthly.map(object => {
+                monthlyObject['day_' + object.value] = 0;
+            })
+
+            weekDays.map(value => {
+                weeklyObject[value] = 0;
+            })
 
             if (this.state.type.value == 1) {
-                let monthlyObject = {};
-
-                this.state.monthly.map(object => {
-                    monthlyObject['day_' + object.value] = 0;
-                })
-
                 this.state.days.map(day => {
                     monthlyObject['day_' + day] = 1;
                 })
 
-                realmObject = { ...form, ...monthlyObject };
             } else {
-                let weeklyObject = {};
-                let weekDays = ['none', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
-                weekDays.map(value => {
-                    weeklyObject[value] = 0;
-                })
-
                 this.state.days.map(day => {
                     weeklyObject[weekDays[day]] = 1;
                 })
-
-                realmObject = { ...form, ...weeklyObject };
             }
 
+            realmObject = { ...form, ...monthlyObject, ...weeklyObject };
+
             if (this.state.id.length > 0) {
-
-                realmObject.id = this.state.id;
-
-                editCleanSchedule(realmObject).then(res => {
+                editCleanSchedule({ ...{ id: this.state.id }, ...realmObject }).then(res => {
                     this.props.navigation.navigate('AdminCleanIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
