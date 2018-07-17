@@ -42,6 +42,7 @@ import { TraceIndexScreen } from './src/screens/front/Trace/index';
 import { ControleIndexScreen } from './src/screens/front/controle/index';
 import { NonConformeIndexScreen } from './src/screens/front/nonconforme/index';
 import { FroidIndexScreen } from './src/screens/front/froid/index';
+import { FrontCleanIndexScreen } from './src/screens/front/clean/index';
 
 import { ArchiveIndexScreen } from './src/screens/front/archive/index';
 import { ArchiveListScreen } from './src/screens/front/archive/list';
@@ -205,6 +206,20 @@ const NonconlistfStack = StackNavigator(
   }
 );
 
+const FrontCleanStack = StackNavigator(
+  {
+    FrontCleanIndex: FrontCleanIndexScreen,
+  },
+  {
+    initialRouteName: 'FrontCleanIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
 
 const DrawerStackFront = DrawerNavigator({
   Home: HomeStack,
@@ -215,6 +230,7 @@ const DrawerStackFront = DrawerNavigator({
   Nonconflist: NonconlistfStack,
   Archive: ArchiveStack,
   Nonconlistf: NonconlistfStack,
+  FrontClean: FrontCleanStack,
   AdminLogout: LogOutScreen,
 },
   {

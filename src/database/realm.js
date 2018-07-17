@@ -139,7 +139,6 @@ const ControleSchema = {
 
         // equipments: 'string[]',
         temperatures: 'Temperature[]',
-        // products: { type: 'Product[]', optional: true },
         products: 'Product[]',
 
 
@@ -157,6 +156,8 @@ const ControleSchema = {
         created_at: 'date',
         user: 'User',
         department: 'Department',
+
+        equipment: 'Equipment?',
     }
 };
 
@@ -214,7 +215,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 59;
+const schemaVersion = 61;
 const schemas = [CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
@@ -267,6 +268,28 @@ export const CleanSchedules = async () => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             const items = realm.objects('CleanSchedule');
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const CleanSchedulesFront = async () => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+
+            let date = new Date();
+
+            let day = date.getDate();
+            let weekDay = date.getDay();
+            let weekDays = ['none', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+            let monthField = 'day_' + day;
+            let weekField = weekDays[weekDay];
+
+            const items = realm.objects('CleanSchedule').filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);;
             resolve(items);
         })
         .catch(error => {
@@ -726,6 +749,8 @@ export const addControle = (userId, item) => new Promise((resolve, reject) => {
                     confirmed: item.confirmed,
                     date: item.date,
                     created_at: item.created_at,
+
+                    equipment: (item.equipment ? item.equipment : null),
                 });
                 resolve(controle);
             });

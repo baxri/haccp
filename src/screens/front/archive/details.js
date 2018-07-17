@@ -42,23 +42,6 @@ export class ArchiveDetailsScreen extends React.Component {
 
     _parseEquipments(equipments) {
 
-        // let ret = [];
-
-        // this.state.item.equipments.map(equipment => {
-
-        //     let slice = equipment.split(":");
-
-        //     let obj = {
-        //         id: slice[0],
-        //         name: slice[1],
-        //         value: slice[2],
-        //     };
-
-        //     ret.push(obj);
-        // });
-
-        // this.setState({ equipments: ret });
-
     }
 
     componentDidMount() {
@@ -75,9 +58,10 @@ export class ArchiveDetailsScreen extends React.Component {
                             {this.state.item.type == 0 && <Text>{Strings.PRODUCT}: {this.state.item.produit}</Text>}
                             {this.state.item.type == 1 && <Text>{Strings.CONTROLE_FROID}</Text>}
                             {this.state.item.type == 2 && <Text>{Strings.PRODUCT}: {this.state.item.produit}</Text>}
+                            {this.state.item.type == 3 && <Text>{Strings.CLEANING_SCHEDULE}: {this.state.item.equipment ? this.state.item.equipment.name : 'equipment'}</Text>}
                         </CardItem>
 
-                        {(this.state.item.type == 0 || this.state.item.type == 1) && <CardItem header bordered>
+                        {(this.state.item.type == 0 || this.state.item.type == 1 || this.state.item.type == 3) && <CardItem header bordered>
                             <View>
 
                                 {this.state.item.confirmed == 1 && <View style={{ flexDirection: 'row', marginBottom: 20, }}>
@@ -90,7 +74,6 @@ export class ArchiveDetailsScreen extends React.Component {
                                     <Icon name='close' />
                                     <Text>{Strings.NOT_CONFIRMED}</Text>
                                 </Button></View>}
-
 
                             </View>
                         </CardItem>}
@@ -125,12 +108,6 @@ export class ArchiveDetailsScreen extends React.Component {
                                 </View>
                             </Body>
                         </CardItem>
-
-                        {/* {this.state.item.type == 0 && <CardItem bordered>
-                            <Body>
-                                <Text>{Strings.FOURNISER}: {this.state.item.fourniser}</Text>
-                            </Body>
-                        </CardItem>} */}
 
                         {this.state.item.type == 0 && <CardItem bordered>
                             <Body>

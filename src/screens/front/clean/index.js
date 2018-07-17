@@ -15,7 +15,8 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
-import { CleanSchedules, DeleteCleanSchedule } from '../../../database/realm';
+import { CleanSchedulesFront as CleanSchedules, addControle, addArchive } from '../../../database/realm';
+import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
@@ -45,12 +46,16 @@ export class FrontCleanIndexScreen extends React.Component {
         this.state = {
             active: true,
             loading: 1,
+            userId: null,
             userSession: '',
             userSessionType: '',
 
             refreshig: false,
             basic: true,
             listViewData: [],
+            date: toDate(new Date()),
+            YM: toYM((new Date())),
+            created_at: new Date(),
         };
 
         this._bootstrapAsync();
@@ -73,10 +78,12 @@ export class FrontCleanIndexScreen extends React.Component {
     };
 
     _bootstrapAsync = async () => {
+        const userID = await AsyncStorage.getItem('userSessionId');
         const userSession = await AsyncStorage.getItem('userSession');
         const userSessionType = await AsyncStorage.getItem('userSessionType');
 
         this.setState({
+            userId: userID,
             loading: 0,
             userSession: userSession,
             userSessionType: userSessionType,
@@ -100,17 +107,66 @@ export class FrontCleanIndexScreen extends React.Component {
         )
     }
 
+    _askCleanDone(schedule) {
+        Alert.alert(
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._cleanDone(schedule) },
+            ],
+            { cancelable: false }
+        )
+    }
 
-    _deleteRow(id, secId, rowId, rowMap) {
+    _cleanDone(schedule) {
 
-        rowMap[`${secId}${rowId}`].props.closeRow();
+        this._showLoader();
 
-        DeleteCleanSchedule(id).then(item => {
-            rowMap[`${secId}${rowId}`].props.closeRow();
-            this._loadItems();
-        }).catch(error => {
-            alert(error);
-        });;
+        setTimeout(() => {
+
+            addControle(this.state.userId, {
+                equipment: schedule.equipment,
+
+                source: '',
+                signature: '',
+
+                produit: '',
+                fourniser: '',
+                dubl: '',
+
+                aspect: 0,
+                du_produit: '',
+
+                intact: 0,
+                conforme: 0,
+                autres: '',
+                actions: '',
+                confirmed: 1,
+
+                temperatures: [],
+                type: 3,
+
+                quantity: 0,
+                valorisation: '',
+                causes: '',
+                devenir: '',
+                traitment: '',
+
+                date: this.state.date,
+                created_at: this.state.created_at,
+            }).then(res => {
+
+                addArchive(this.state.date, this.state.YM, true, this.state.userId);
+
+                this.props.navigation.navigate('Home');
+                this._hideLoader();
+                ToastAndroid.show(Strings.SCHEDULE_SUCCESSFULL_SAVED, ToastAndroid.LONG);
+            }).catch(error => {
+                alert(error);
+            });
+
+        }, 500);
     }
 
     _onRefresh() {
@@ -143,13 +199,9 @@ export class FrontCleanIndexScreen extends React.Component {
 
                                 </Left>
                                 <Right>
-                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 250, }}>
-                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full light
-                                            onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
-                                            <Icon active name="build" />
-                                        </Button>
-                                        <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
-                                            <Icon active name="trash" />
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 150, }}>
+                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
+                                            <Text style={[{ color: 'white' }, styles.text]}>{Strings.CLEAN}</Text>
                                         </Button>
                                     </View>
                                 </Right>
