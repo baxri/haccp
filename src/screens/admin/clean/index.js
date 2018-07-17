@@ -143,28 +143,43 @@ export class AdminCleanIndexScreen extends React.Component {
 
     _clickSave = () => {
 
-        Alert.alert(
-            Strings.RECEPTION_CHECK,
-            Strings.ARE_YOU_SURE,
-            [
-                { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._save() },
-            ],
-            { cancelable: false }
-        )
+        // Alert.alert(
+        //     Strings.RECEPTION_CHECK,
+        //     Strings.ARE_YOU_SURE,
+        //     [
+        //         { text: Strings.CANCEL, style: 'cancel' },
+        //         { text: Strings.OK, onPress: () => this._save() },
+        //     ],
+        //     { cancelable: false }
+        // )
+
+        this._save();
 
     }
 
     _save = () => {
 
         let form = {
-            department: this.state.department,
             equipment: this.state.equipment,
             type: this.state.type.value,
-            days: this.state.days,
         };
 
-        
+        if (this.state.type.value == 1) {
+
+            let monthlyObject = {};
+
+            this.state.days.map(day => {
+                monthlyObject['day_' + day] = 1;
+            })
+
+            let newform = { ...form, monthlyObject };
+
+            alert(newform['day_5']);
+
+        } else {
+
+        }
+
 
     }
 
