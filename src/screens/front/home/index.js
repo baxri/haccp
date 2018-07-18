@@ -68,17 +68,17 @@ export class HomeIndexScreen extends React.Component {
         return (
             <Container>
                 <Grid>
-                    <Row style={{ margin: 30, height: 100, borderStyle: 'dotted', }}>
+                    {(this.state.tasks.length - this.state.done.length) > 0 && <Row style={{ margin: 30, height: 100, borderStyle: 'dotted', }}>
                         <Col style={{ borderWidth: 3, borderColor: 'red' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('FrontCleanIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Text style={{ color: '#494949', fontSize: 20, textAlign: 'center' }} >
-                                        You have {this.state.tasks.length}/{this.state.done.length} clean service today
+                                        You have {(this.state.tasks.length - this.state.done.length)}/{this.state.tasks.length} clean service today
                                     </Text>
                                 </View>
                             </Button>
                         </Col>
-                    </Row >
+                    </Row >}
                     <Row >
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Trace')}>

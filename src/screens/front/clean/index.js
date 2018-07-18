@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
-import { CleanSchedulesFront as CleanSchedules, addControle, addArchive, cleanDone, checkCleanDone } from '../../../database/realm';
+import { CleanSchedulesFront as CleanSchedules, addControle, addArchive, cleanDone, allDoneCleans } from '../../../database/realm';
 import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -44,6 +44,7 @@ export class FrontCleanIndexScreen extends React.Component {
 
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
+            done: [],
             active: true,
             loading: 1,
             userId: null,
@@ -90,21 +91,27 @@ export class FrontCleanIndexScreen extends React.Component {
         });
     };
 
+    _done = (equipment) => {
+        if (this.state.done.includes(equipment.id)) {
+            return true;
+        }
+        return false;
+    }
+
     _loadItems = async () => {
-        let items = await CleanSchedules();
-        let newItems = [];
+        try {
+            let items = await CleanSchedules();
+            let cleans = await allDoneCleans();
+            let done = [];
 
-        items.map(async (schedule, index) => {
-            let done = await checkCleanDone(schedule.equipment);
-            if (done.length > 0) {
-                newItems.push({ ...{ done: 1 }, ...schedule });
-            } else {
-                newItems.push({ ...{ done: 0 }, ...schedule });
-            }
-        });
+            cleans.map(row => {
+                done.push(row.equipment.id);
+            });
 
-
-        this.setState({ listViewData: items, refreshing: false });
+            this.setState({ listViewData: items, refreshing: false, done: done });
+        } catch (error) {
+            alert(error);
+        }
     }
 
     _deleteRowAsk(id, secId, rowId, rowMap) {
@@ -215,11 +222,11 @@ export class FrontCleanIndexScreen extends React.Component {
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 150, }}>
-                                        {data.done == 0 && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
+                                        {!this._done(data.equipment) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.CLEAN}</Text>
                                         </Button>}
 
-                                        {data.done == 1 && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
+                                        {this._done(data.equipment) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.DONE}</Text>
                                         </Button>}
                                     </View>
