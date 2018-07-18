@@ -1,5 +1,19 @@
 import { realmFilePath, realmFilePathTemp, toDate } from '../../src/utilities/index';
 import Realm from 'realm';
+import {
+    ActivityIndicator,
+    AsyncStorage,
+    StatusBar,
+    StyleSheet,
+    View,
+    ListView,
+    FlatList,
+    RefreshControl,
+    ToastAndroid,
+    Text,
+    Alert,
+
+} from 'react-native';
 // const Realm = require('realm');
 
 const ArchiveSchema = {
@@ -69,6 +83,9 @@ const CleanDoneSchema = {
 
     properties: {
         id: 'string', // primary key
+        user: 'User?',
+        schedule: 'CleanSchedule?',
+        department: 'Department?',
         equipment: 'Equipment',
         date: 'string',
         created_at: 'date',
@@ -80,6 +97,7 @@ const CleanScheduleSchema = {
     name: 'CleanSchedule',
 
     properties: {
+
         id: 'string', // primary key
         equipment: 'Equipment',
         department: 'Department',
@@ -123,6 +141,9 @@ const CleanScheduleSchema = {
         day_29: 'int?',
         day_30: 'int?',
         day_31: 'int?',
+
+        cleans: { type: 'linkingObjects', objectType: 'CleanDone', property: 'schedule' },
+
     }
 };
 
@@ -200,6 +221,7 @@ const UserSchema = {
         department: 'Department',
         pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'user' },
         controles: { type: 'linkingObjects', objectType: 'Controle', property: 'user' },
+        cleansdone: { type: 'linkingObjects', objectType: 'CleanDone', property: 'user' },
     }
 };
 
@@ -216,6 +238,7 @@ const DepartmentSchema = {
         controles: { type: 'linkingObjects', objectType: 'Controle', property: 'department' },
         pictures: { type: 'linkingObjects', objectType: 'Picture', property: 'department' },
         cleanschedules: { type: 'linkingObjects', objectType: 'CleanSchedule', property: 'department' },
+        cleansdone: { type: 'linkingObjects', objectType: 'CleanDone', property: 'department' },
     }
 };
 
@@ -228,7 +251,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 63;
+const schemaVersion = 71;
 const schemas = [CleanDoneSchema, CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
@@ -237,24 +260,31 @@ export const RealmFile = () => {
     return realmPath;
 }
 
-export const cleanDone = (equipment = null) => new Promise((resolve, reject) => {
+export const cleanDone = (equipment = null, department = null, schedule = null, userID) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             realm.write(() => {
 
                 let date = toDate(new Date());
                 let created_at = new Date();
+                let userObject = realm.objectForPrimaryKey('User', userID);
 
-                const item = realm.create('CleanDone', {
+                let obj = {
                     id: _guid(),
+                    user: userObject,
+                    schedule: schedule,
                     equipment: equipment,
+                    department: department,
                     date: date,
                     created_at: created_at,
-                });
+                };
+
+                const item = realm.create('CleanDone', obj);
                 resolve(item);
             });
         })
         .catch(error => {
+            alert(error);
             reject(error);
         });
 });
@@ -274,9 +304,13 @@ export const checkCleanDone = async (equipment) => new Promise((resolve, reject)
 
 export const allDoneCleans = async () => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
-        .then(realm => {
+        .then(async realm => {
             let date = toDate(new Date());
-            const items = realm.objects('CleanDone').filtered('date = $0', date);
+            const userID = await AsyncStorage.getItem('userSessionId');
+            let userObject = realm.objectForPrimaryKey('User', userID);
+
+            // const items = realm.objects('CleanDone').filtered('date = $0', date);
+            const items = userObject.department.cleansdone.filtered('date = $0', date);
             resolve(items);
         })
         .catch(error => {
@@ -336,11 +370,14 @@ export const CleanSchedules = async () => new Promise((resolve, reject) => {
         });
 });
 
-export const CleanSchedulesFront = async () => new Promise((resolve, reject) => {
+export const CleanSchedulesFront = async (userId) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
-        .then(realm => {
+        .then(async realm => {
+
+            const userID = await AsyncStorage.getItem('userSessionId');
 
             let date = new Date();
+            let userObject = realm.objectForPrimaryKey('User', userID);
 
             let day = date.getDate();
             let weekDay = date.getDay();
@@ -349,7 +386,9 @@ export const CleanSchedulesFront = async () => new Promise((resolve, reject) => 
             let monthField = 'day_' + day;
             let weekField = weekDays[weekDay];
 
-            const items = realm.objects('CleanSchedule').filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);;
+
+            const items = userObject.department.cleanschedules.filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);
+            // const items = realm.objects('CleanSchedule').filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);;
             resolve(items);
         })
         .catch(error => {

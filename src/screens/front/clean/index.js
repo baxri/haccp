@@ -91,8 +91,12 @@ export class FrontCleanIndexScreen extends React.Component {
         });
     };
 
-    _done = (equipment) => {
-        if (this.state.done.includes(equipment.id)) {
+    _done = (schedule) => {
+        let done = this.state.done;
+        let index = done.indexOf(schedule.id + "-" + schedule.equipment.id);
+        if (index > -1) {
+            // done.splice(index, 1);
+            // this.setState({ done: done });
             return true;
         }
         return false;
@@ -105,7 +109,11 @@ export class FrontCleanIndexScreen extends React.Component {
             let done = [];
 
             cleans.map(row => {
-                done.push(row.equipment.id);
+                if (row.schedule) {
+                    done.push(row.schedule.id + "-" + row.equipment.id);
+                } else {
+                    done.push(row.equipment.id);
+                }
             });
 
             this.setState({ listViewData: items, refreshing: false, done: done });
@@ -176,10 +184,12 @@ export class FrontCleanIndexScreen extends React.Component {
                 created_at: this.state.created_at,
             }).then(res => {
 
-                cleanDone(schedule.equipment);
+                cleanDone(schedule.equipment, schedule.department, schedule, this.state.userId).then(item => {
+                }).catch(error => {
+                    alert(error);
+                });
 
                 addArchive(this.state.date, this.state.YM, true, this.state.userId);
-
                 // this.props.navigation.navigate('Home');
                 this._loadItems();
                 this._hideLoader();
@@ -222,11 +232,11 @@ export class FrontCleanIndexScreen extends React.Component {
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 150, }}>
-                                        {!this._done(data.equipment) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
+                                        {!this._done(data) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.CLEAN}</Text>
                                         </Button>}
 
-                                        {this._done(data.equipment) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
+                                        {this._done(data) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.DONE}</Text>
                                         </Button>}
                                     </View>

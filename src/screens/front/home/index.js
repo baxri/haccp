@@ -13,6 +13,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, Users } from '../../../database/realm';
 import Strings from '../../../language/fr';
 import { CleanSchedulesFront as CleanSchedules, allDoneCleans } from '../../../database/realm';
+import { sprintf } from 'sprintf-js';
 
 export class HomeIndexScreen extends React.Component {
 
@@ -68,12 +69,13 @@ export class HomeIndexScreen extends React.Component {
         return (
             <Container>
                 <Grid>
-                    {(this.state.tasks.length - this.state.done.length) > 0 && <Row style={{ margin: 30, height: 100, borderStyle: 'dotted', }}>
+                    {(this.state.tasks.length - this.state.done.length) > 0 && <Row style={{ margin: 30, height: 150, borderStyle: 'dotted', }}>
                         <Col style={{ borderWidth: 3, borderColor: 'red' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('FrontCleanIndex')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: '#494949', fontSize: 20, textAlign: 'center' }} >
-                                        You have {(this.state.tasks.length - this.state.done.length)}/{this.state.tasks.length} clean service today
+                                    <Icon name='alert' fontSize={50} size={50} style={{ color: 'red', fontSize: 50, marginBottom: 20, }} />
+                                    <Text style={{ color: 'red', fontSize: 20, textAlign: 'center' }} >
+                                        {sprintf(Strings.YOU_HAVEN_TASKS_TO_DONE_TODAY, (this.state.tasks.length - this.state.done.length), this.state.tasks.length)}
                                     </Text>
                                 </View>
                             </Button>

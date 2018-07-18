@@ -98,6 +98,7 @@ const strings = {
     DONE: 'DONE',
     WEEKLY: 'WEEKLY',
     MONTHLY: 'MONTHLY',
+    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'YOU_HAVE_%s/%s_TASKS_TO_DONE_TODAY',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',

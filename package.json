@@ -42,7 +42,8 @@
     "react-native-zip-archive": "^2.2.4",
     "react-navigation": "^1.5.11",
     "realm": "^2.4.0",
-    "rn-fetch-blob": "^0.10.11"
+    "rn-fetch-blob": "^0.10.11",
+    "sprintf-js": "^1.1.1"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
