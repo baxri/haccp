@@ -12,6 +12,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Departments, Users } from '../../../database/realm';
 import Strings from '../../../language/fr';
+import { CleanSchedulesFront as CleanSchedules, allDoneCleans } from '../../../database/realm';
 
 export class HomeIndexScreen extends React.Component {
 
@@ -35,13 +36,18 @@ export class HomeIndexScreen extends React.Component {
             loading: 0,
             departments: [],
             users: [],
+            tasks: [],
+            done: [],
         };
 
         this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
+        let tasks = await CleanSchedules();
+        let done = await allDoneCleans();
 
+        this.setState({ tasks: tasks, done: done });
     };
 
     componentDidMount() {
@@ -62,6 +68,17 @@ export class HomeIndexScreen extends React.Component {
         return (
             <Container>
                 <Grid>
+                    <Row style={{ margin: 30, height: 100, borderStyle: 'dotted', }}>
+                        <Col style={{ borderWidth: 3, borderColor: 'red' }}>
+                            <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('FrontCleanIndex')}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <Text style={{ color: '#494949', fontSize: 20, textAlign: 'center' }} >
+                                        You have {this.state.tasks.length}/{this.state.done.length} clean service today
+                                    </Text>
+                                </View>
+                            </Button>
+                        </Col>
+                    </Row >
                     <Row >
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('Trace')}>

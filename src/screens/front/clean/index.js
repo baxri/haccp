@@ -103,7 +103,8 @@ export class FrontCleanIndexScreen extends React.Component {
             }
         });
 
-        this.setState({ listViewData: newItems, refreshing: false });
+
+        this.setState({ listViewData: items, refreshing: false });
     }
 
     _deleteRowAsk(id, secId, rowId, rowMap) {

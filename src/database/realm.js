@@ -237,7 +237,7 @@ export const RealmFile = () => {
     return realmPath;
 }
 
-export const cleanDone = (equipment) => new Promise((resolve, reject) => {
+export const cleanDone = (equipment = null) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
             realm.write(() => {
@@ -264,6 +264,19 @@ export const checkCleanDone = async (equipment) => new Promise((resolve, reject)
         .then(realm => {
             let date = toDate(new Date());
             const items = equipment.cleansdone.filtered('date = $0', date);
+            resolve(items);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const allDoneCleans = async () => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            let date = toDate(new Date());
+            const items = realm.objects('CleanDone').filtered('date = $0', date);
             resolve(items);
         })
         .catch(error => {
