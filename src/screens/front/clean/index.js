@@ -95,8 +95,6 @@ export class FrontCleanIndexScreen extends React.Component {
         let done = this.state.done;
         let index = done.indexOf(schedule.id + "-" + schedule.equipment.id);
         if (index > -1) {
-            // done.splice(index, 1);
-            // this.setState({ done: done });
             return true;
         }
         return false;

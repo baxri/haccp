@@ -25,6 +25,7 @@ const ArchiveSchema = {
         date: 'string?',    // primary key (dates)
         color: 'bool?',
         YM: 'string',
+        created_at: 'date?',
     }
 };
 
@@ -251,7 +252,7 @@ const _guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-const schemaVersion = 71;
+const schemaVersion = 72;
 const schemas = [CleanDoneSchema, CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
 const realmPathTemp = realmFilePathTemp();
@@ -419,8 +420,9 @@ export const addArchive = (date, YM, color, userId = '') => new Promise((resolve
             realm.write(() => {
 
                 let userObject = realm.objectForPrimaryKey('User', userId);
+                let created_at = new Date();
 
-                let archive = realm.create('ArchiveV5', { id: date + userObject.department.id, date: date, YM: YM }, true);
+                let archive = realm.create('ArchiveV5', { id: date + userObject.department.id, date: date, YM: YM, created_at: created_at }, true);
                 let archiveFetched = archive;
 
                 if (archive.color === null || archive.color) {
