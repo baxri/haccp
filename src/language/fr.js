@@ -90,15 +90,15 @@ const strings = {
     UPLOAD: 'Envoyer',
 
     // SCHEDULES ADMIN
-    THERE_IS_NO_SCHEDULES_YET: 'THERE_IS_NO_SCHEDULES_YET',
-    SCHEDULE_SUCCESSFULL_SAVED: 'SCHEDULE_SUCCESSFULL_SAVED',
+    THERE_IS_NO_SCHEDULES_YET: 'Il n\'y a aucun nettoyage plannifié',
+    SCHEDULE_SUCCESSFULL_SAVED: 'Planning enregistré',
 
     // SCHEDULES FRONT
-    CLEAN: 'CLEAN',
-    DONE: 'DONE',
-    WEEKLY: 'WEEKLY',
-    MONTHLY: 'MONTHLY',
-    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'YOU_HAVE_%s/%s_TASKS_TO_DONE_TODAY',
+    CLEAN: 'Propre',
+    DONE: 'Terminé',
+    WEEKLY: 'Hebdomadaire',
+    MONTHLY: 'Mensuel',
+    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
@@ -194,7 +194,7 @@ const strings = {
     PROBLEM_DOWNLOADING_BACKUP: 'Problème pendant le téléchargement de la sauvegarde',
     CANNOT_DELETE_DATABASE_FILE: 'Impossible de supprimer le fichier de base de données',
     CANNOT_COPY_DATABASE_FILE: 'Impossible de copier le fichier de base de données',
-    DANGER_ZONE: 'Zone de danger',
+    DANGER_ZONE: 'Zone dangereuse',
     SELECT_USER: 'Sélectionner un utilisateur',
     EDIT: 'Éditer',
     TIME: 'Heure',
