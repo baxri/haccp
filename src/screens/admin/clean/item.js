@@ -48,17 +48,17 @@ export class AdminCleanItemScreen extends React.Component {
 
             departments: [],
             types: [
-                { name: 'monthly', value: 1 },
-                { name: 'Weekly', value: 2 }
+                { name: Strings.MONTHLY, value: 1 },
+                { name: Strings.WEEKLY, value: 2 }
             ],
             weekly: [
-                { name: 'Monday', value: 1 },
-                { name: 'Thuesday', value: 2 },
-                { name: 'Wednesday', value: 3 },
-                { name: 'Thirsday', value: 4 },
-                { name: 'Friday', value: 5 },
-                { name: 'Saturday', value: 6 },
-                { name: 'Sunday', value: 7 },
+                { name: Strings.MON, value: 1 },
+                { name: Strings.TUE, value: 2 },
+                { name: Strings.WED, value: 3 },
+                { name: Strings.THU, value: 4 },
+                { name: Strings.FRI, value: 5 },
+                { name: Strings.SAT, value: 6 },
+                { name: Strings.SUN, value: 7 },
             ],
             monthly: [
                 { name: '1', value: 1 },

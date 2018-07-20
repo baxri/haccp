@@ -98,7 +98,7 @@ const strings = {
     DONE: 'Terminé',
     WEEKLY: 'Hebdomadaire',
     MONTHLY: 'Mensuel',
-    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui',
+    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui - (%s/%s)',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
