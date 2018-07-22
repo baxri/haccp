@@ -13,7 +13,7 @@ make sure that you configured you local enviroment to run this project, if not y
 
 ## Generating Signed APK
 
-There is a complete guide get apk from this source
+There is a complete guide get apk from the github source
 
 [Generating Signed APK](https://facebook.github.io/react-native/docs/signed-apk-android.html)
 
