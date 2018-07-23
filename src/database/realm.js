@@ -382,11 +382,10 @@ export const CleanSchedulesFront = async (userId) => new Promise((resolve, rejec
 
             let day = date.getDate();
             let weekDay = date.getDay();
-            let weekDays = ['none', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            let weekDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
             let monthField = 'day_' + day;
             let weekField = weekDays[weekDay];
-
 
             const items = userObject.department.cleanschedules.filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);
             // const items = realm.objects('CleanSchedule').filtered(monthField + ' = $0 OR ' + weekField + ' = $1', 1, 1);;
