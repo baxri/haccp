@@ -15,7 +15,19 @@ import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Ite
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { RealmFile, ControlesAfterDate, PicturesAfterDate, ArchivesAfterDate, DeleteFromTemp } from '../../../database/realm';
+import {
+    RealmFile,
+    ControlesAfterDate,
+    PicturesAfterDate,
+    ArchivesAfterDate,
+
+    ControlesBeforeDate,
+    PicturesBeforeDate,
+    ArchivesBeforeDate,
+
+    Delete,
+    DeleteFromTemp
+} from '../../../database/realm';
 import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
@@ -277,19 +289,24 @@ export class AdminBackupIndexScreen extends React.Component {
                 let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
                 let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
 
+                let controlesBefore = await ControlesBeforeDate(date);
+                let picturesBefore = await PicturesBeforeDate(date);
+                let archiveBefore = await ArchivesBeforeDate(date);
+
                 console.log(controles.length);
                 console.log(pictures.length);
                 console.log(archive.length);
 
+                console.log('--------------------------------');
+
+                console.log(controlesBefore.length);
+                console.log(picturesBefore.length);
+                console.log(archiveBefore.length);
+                return;
+
                 // Delete data after this date from temp db file
                 for (let i = 0; i < controles.length; i++) {
                     let item = controles[i];
-                    try {
-                        // await DeleteFromTemp("Controle", item.id, TEMP_DB_PATH);
-                        console.log(item.id);
-                    } catch (error) {
-
-                    }
 
                     if (item.source.length > 0) {
                         let file = PATH_TEMP + "/" + item.source;
@@ -306,13 +323,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
                 for (let i = 0; i < pictures.length; i++) {
                     let item = pictures[i];
-                    try {
-                        // await DeleteFromTemp("Picture", item.id, TEMP_DB_PATH);
-                    } catch (error) {
-
-                    }
-
-
                     if (item.source.length > 0) {
                         let file = PATH_TEMP + "/" + item.source;
                         await RNFetchBlob.fs.unlink(file);
@@ -320,19 +330,52 @@ export class AdminBackupIndexScreen extends React.Component {
                     }
                 }
 
-                for (let i = 0; i < archive.length; i++) {
-                    let item = archive[i];
-                    try {
-                        // await DeleteFromTemp("ArchiveV5", item.id, TEMP_DB_PATH);
-                    } catch (error) {
-
-                    }
-
+                try {
+                    await DeleteFromTemp(controles, TEMP_DB_PATH);
+                    await DeleteFromTemp(pictures, TEMP_DB_PATH);
+                    await DeleteFromTemp(archive, TEMP_DB_PATH);
+                } catch (error) {
+                    console.log(error);
                 }
 
+                RNFetchBlobOld.fs.ls(PATH_TEMP)
+                    .then((files) => {
+                        let formFiles = [];
+                        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(TEMP_DB_PATH) });
 
-                ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                this._hideLoader();
+                        if (files.length > 0) {
+                            files.map((file => {
+                                formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH_TEMP + "/" + file) });
+                            }));
+                        }
+                        RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+                            'haccp-device': ID,
+                            'name': name,
+                            'Content-Type': 'multipart/form-data',
+                        }, formFiles).then((resp) => {
+
+                            // Retrive data before this date from original db file
+                            // let controles = await ControlesBeforeDate(date);
+                            // let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
+                            // let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
+
+
+
+                            alert(resp.text());
+                            this._hideLoader();
+                            // this.props.navigation.navigate("AdminHome");
+                            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                        }).catch((err) => {
+                            this._hideLoader();
+                            alert(err);
+                        });
+                    }).catch(error => {
+                        this._hideLoader();
+                        alert(err);
+                    });
+
+                // ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                // this._hideLoader();
 
             } catch (error) {
                 this._hideLoader();

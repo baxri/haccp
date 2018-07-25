@@ -923,6 +923,19 @@ export const ControlesRange = (userId, dateFrom = null, DateTo = null) => new Pr
 
 
 // WORK FOR TEMPORARY DATABASE FOR BACKUP =========================================
+
+export const ControlesBeforeDate = (date = null) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const d = new Date(date);
+            const result = realm.objects('Controle').filtered('created_at <= $0', d);
+            resolve(result);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
 export const ControlesAfterDate = (date = null, path) => new Promise((resolve, reject) => {
     Realm.open({ path: path, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
@@ -935,12 +948,26 @@ export const ControlesAfterDate = (date = null, path) => new Promise((resolve, r
         });
 });
 
+
 export const PicturesAfterDate = (date = null, path) => new Promise((resolve, reject) => {
     Realm.open({ path: path, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             const d = new Date(date);
             console.log(d.toString());
             const result = realm.objects('Picture').filtered('created_at >= $0', d);
+            resolve(result);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const PicturesBeforeDate = (date = null) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const d = new Date(date);
+            console.log(d.toString());
+            const result = realm.objects('Picture').filtered('created_at <= $0', d);
             resolve(result);
         })
         .catch(error => {
@@ -961,13 +988,40 @@ export const ArchivesAfterDate = (date = null, path) => new Promise((resolve, re
         });
 });
 
-export const DeleteFromTemp = (entity, id, path) => new Promise((resolve, reject) => {
+export const ArchivesBeforeDate = (date = null) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            const d = new Date(date);
+            console.log(d.toString());
+            const result = realm.objects('ArchiveV5').filtered('created_at <= $0', d);
+            resolve(result);
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const DeleteFromTemp = (deleteItems, path) => new Promise((resolve, reject) => {
     Realm.open({ path: path, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             realm.write(() => {
-                let item = realm.create(entity, { id: id }, true);
-                realm.delete(item);
-                resolve();
+                // let item1 = realm.create(entity, { id: id }, true);
+                realm.delete(deleteItems);
+                resolve("OK");
+            });
+        })
+        .catch(error => {
+            reject(error);
+        });
+});
+
+export const Delete = (deleteItems) => new Promise((resolve, reject) => {
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
+        .then(realm => {
+            realm.write(() => {
+                // let item1 = realm.create(entity, { id: id }, true);
+                realm.delete(deleteItems);
+                resolve("OK");
             });
         })
         .catch(error => {
