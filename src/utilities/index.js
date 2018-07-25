@@ -27,10 +27,12 @@ export const FILE_VERSION = '8';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
 export const APP_PICTURE_FOLDER_TEMP = 'TEMP-HACCPIMAGES-' + FILE_VERSION;
 export const APP_REALM_FOLDER = 'HACCPDATA';
+export const APP_TEMP_REALM_FOLDER = 'TEMP-HACCPDATA';
 
 export const PATH = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER;
 export const PATH_TEMP = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER_TEMP;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
+export const PATH_REALM_TEMP = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_TEMP_REALM_FOLDER;
 export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/ZIPS';
 
 export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';
@@ -76,10 +78,13 @@ export const initFolders = async () => {
     initImages();
 
     try {
-        let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
+        let a = await RNFS.mkdir(PATH_REALM + "/");
+        let b = await RNFS.mkdir(PATH_REALM_TEMP + "/");
+        // let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
+        // let c = await RNFetchBlob.fs.mkdir(PATH_REALM_TEMP + '/');
 
     } catch (error) {
-        // alert(error)
+        alert(error)
     }
 };
 
@@ -89,7 +94,8 @@ export const realmFilePath = () => {
 };
 
 export const realmFilePathTemp = () => {
-    return PATH_REALM + '/' + PATH_REALM_FILE_TEMP;
+    let temprealmFile = Math.floor(1000 + Math.random() * 9000) + '.realm';
+    return PATH_REALM_TEMP + '/' + temprealmFile;
 };
 
 export const FilePicturePath = () => {

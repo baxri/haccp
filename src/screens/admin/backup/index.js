@@ -15,7 +15,7 @@ import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Ite
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { RealmFile, ControlesAfterDate, DeleteControle } from '../../../database/realm';
+import { RealmFile, ControlesAfterDate, PicturesAfterDate, ArchivesAfterDate, DeleteFromTemp } from '../../../database/realm';
 import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
@@ -214,6 +214,8 @@ export class AdminBackupIndexScreen extends React.Component {
                 // Check if temporary database file is exsists
                 let exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
 
+
+
                 // Delete temporary database file if it exists
                 if (exists) {
                     await RNFetchBlob.fs.unlink(TEMP_DB_PATH);
@@ -235,61 +237,107 @@ export class AdminBackupIndexScreen extends React.Component {
                 //retrive temp images
                 let imagesTemp = await RNFetchBlobOld.fs.ls(PATH_TEMP);
 
+                console.log("original: " + images.length);
+                console.log("temp: " + imagesTemp.length);
+
                 //Delete all temp images
                 if (imagesTemp.length > 0) {
-                    imagesTemp.map(async filename => {
-                        try {
-                            let dest = PATH_TEMP + "/" + filename;
-                            await RNFetchBlob.fs.unlink(dest);
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    });
+                    for (let i = 0; i < imagesTemp.length; i++) {
+                        let filename = images[i];
+                        let dest = PATH_TEMP + "/" + filename;
+                        await RNFetchBlob.fs.unlink(dest);
+                    }
                 }
+
+                let imagesTempAfterDelete = await RNFetchBlobOld.fs.ls(PATH_TEMP);
+                console.log("temp after delete: " + imagesTempAfterDelete.length);
 
                 //Copy all images in temp folders
                 if (images.length > 0) {
-                    images.map(async filename => {
+                    for (let i = 0; i < images.length; i++) {
+                        let filename = images[i];
                         let source = PATH + "/" + filename;
                         let dest = PATH_TEMP + "/" + filename;
-
-                        try {
-                            await RNFetchBlob.fs.cp(source, dest);
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    });
+                        await RNFetchBlob.fs.cp(source, dest);
+                    }
                 }
 
-                if (images.length != imagesTemp.length) {
+                let imagesTempRefreshed = await RNFetchBlobOld.fs.ls(PATH_TEMP);
+                console.log("temp after copy: " + imagesTempRefreshed.length);
+
+                if (images.length != imagesTempRefreshed.length) {
                     throw new Error("problem in copping file");
                 }
 
                 //select archivage date
                 let date = new Date().toISOString().substring(0, 10);
 
-                // Retrive and delete data after this date from temp db file
-                let controles = await ControlesAfterDate(date);
+                // Retrive data after this date from temp db file
+                let controles = await ControlesAfterDate(date, TEMP_DB_PATH);
+                let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
+                let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
 
-                console.log(date);
-                return;
+                console.log(controles.length);
+                console.log(pictures.length);
+                console.log(archive.length);
+
+                // Delete data after this date from temp db file
+                for (let i = 0; i < controles.length; i++) {
+                    let item = controles[i];
+                    try {
+                        // await DeleteFromTemp("Controle", item.id, TEMP_DB_PATH);
+                        console.log(item.id);
+                    } catch (error) {
+
+                    }
+
+                    if (item.source.length > 0) {
+                        let file = PATH_TEMP + "/" + item.source;
+                        await RNFetchBlob.fs.unlink(file);
+                        console.log(file);
+                    }
+
+                    if (item.signature.length > 0) {
+                        let signature = PATH_TEMP + "/" + item.signature;
+                        await RNFetchBlob.fs.unlink(signature);
+                        console.log(signature);
+                    }
+                }
+
+                for (let i = 0; i < pictures.length; i++) {
+                    let item = pictures[i];
+                    try {
+                        // await DeleteFromTemp("Picture", item.id, TEMP_DB_PATH);
+                    } catch (error) {
+
+                    }
 
 
-                
+                    if (item.source.length > 0) {
+                        let file = PATH_TEMP + "/" + item.source;
+                        await RNFetchBlob.fs.unlink(file);
+                        console.log(file);
+                    }
+                }
 
-                controles.map(async controle => {
-                    await DeleteControle(controle.id);
-                });
+                for (let i = 0; i < archive.length; i++) {
+                    let item = archive[i];
+                    try {
+                        // await DeleteFromTemp("ArchiveV5", item.id, TEMP_DB_PATH);
+                    } catch (error) {
+
+                    }
+
+                }
 
 
+                ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+                this._hideLoader();
 
-
-
-                return;
-                alert(exists);
             } catch (error) {
                 this._hideLoader();
                 alert(error);
+                console.log(error);
             }
         }, 500);
     }
