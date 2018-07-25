@@ -63,7 +63,7 @@ export const initImages = async () => {
         )
 
         let a = await RNFS.mkdir(PATH + "/");
-        // let a = await RNFetchBlob.fs.mkdir(PATH);
+        let temp = await RNFS.mkdir(PATH_TEMP + "/");
 
     } catch (error) {
         alert(error);

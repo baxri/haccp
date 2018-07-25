@@ -216,7 +216,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
                 // Delete temporary database file if it exists
                 if (exists) {
-                    console.log('delete temp file');
                     await RNFetchBlob.fs.unlink(TEMP_DB_PATH);
                 }
 
@@ -230,49 +229,58 @@ export class AdminBackupIndexScreen extends React.Component {
                     throw new Error('CANNOT_COPY_DB_FILE_TO_TEMPORARY_DB_FILE');
                 }
 
-                //Copy images in new folder
-                await RNFetchBlob.fs.cp(PATH, PATH_TEMP);
+                //retrive all images
+                let images = await RNFetchBlobOld.fs.ls(PATH);
 
+                //retrive temp images
+                let imagesTemp = await RNFetchBlobOld.fs.ls(PATH_TEMP);
 
+                //Delete all temp images
+                if (imagesTemp.length > 0) {
+                    imagesTemp.map(async filename => {
+                        try {
+                            let dest = PATH_TEMP + "/" + filename;
+                            await RNFetchBlob.fs.unlink(dest);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+                }
 
-                // let date = new Date().toISOString().substring(0, 10);
-                // let controles = await ControlesAfterDate(date);
+                //Copy all images in temp folders
+                if (images.length > 0) {
+                    images.map(async filename => {
+                        let source = PATH + "/" + filename;
+                        let dest = PATH_TEMP + "/" + filename;
 
-                console.log(PATH_TEMP);
+                        try {
+                            await RNFetchBlob.fs.cp(source, dest);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+
+                if (images.length != imagesTemp.length) {
+                    throw new Error("problem in copping file");
+                }
+
+                //select archivage date
+                let date = new Date().toISOString().substring(0, 10);
+
+                // Retrive and delete data after this date from temp db file
+                let controles = await ControlesAfterDate(date);
+
+                console.log(date);
                 return;
+
+
+                
 
                 controles.map(async controle => {
                     await DeleteControle(controle.id);
                 });
 
-                RNFetchBlobOld.fs.ls(PATH)
-                    .then((files) => {
-
-                        let formFiles = [];
-                        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(TEMP_DB_PATH) });
-
-                        // if (files.length > 0) {
-                        //     files.map((file => {
-                        //         formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
-                        //     }));
-                        // }
-
-                        RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
-                            'haccp-device': ID,
-                            'name': name,
-                            'Content-Type': 'multipart/form-data',
-                        }, formFiles).then((resp) => {
-                            this._hideLoader();
-                            this.props.navigation.navigate("AdminHome");
-                            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                        }).catch((err) => {
-                            this._hideLoader();
-                            alert(err);
-                        });
-                    }).catch(error => {
-                        this._hideLoader();
-                        alert(err);
-                    });
 
 
 
@@ -381,7 +389,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
 
 
-                            {/* <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
+                            <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
                                 <Left >
                                     <Text style={[{ color: 'white', }, styles.text]}>
                                         DELETE OLD DATA
@@ -390,7 +398,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Right>
                                     <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
-                            </Button> */}
+                            </Button>
 
 
 
