@@ -34,6 +34,8 @@ var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages } from '../../../utilities/index';
+import { upload } from '../../../utilities/backup';
+
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
@@ -386,80 +388,24 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _sync = async () => {
+        await initImages();
 
-        bugsnag.leaveBreadcrumb('Start _sync function');
-
-        let ID = DeviceInfo.getUniqueID();
-        let file = RealmFile();
-        let name = this.state.name;
-
-        bugsnag.leaveBreadcrumb('Prepare device ID for upload deviceID' + ID);
-        bugsnag.leaveBreadcrumb('Get Realm file' + file);
-
-        if (name.length == 0) {
+        if (this.state.name.length == 0) {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
         this._showLoader();
 
-        await initImages();
-
-        setTimeout(() => {
-
-            bugsnag.leaveBreadcrumb('Retrive all files with: RNFetchBlobOld.fs.ls');
-
-            RNFetchBlobOld.fs.ls(PATH)
-                .then((files) => {
-
-                    bugsnag.leaveBreadcrumb(files.length + " files retrived");
-
-                    let formFiles = [];
-                    formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(RealmFile()) });
-
-                    if (files.length > 0) {
-
-                        bugsnag.leaveBreadcrumb("Start files to add in form");
-
-                        files.map((file => {
-                            formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
-                        }));
-
-                        bugsnag.leaveBreadcrumb("End Start files to add in form");
-                    }
-
-                    bugsnag.leaveBreadcrumb("Form is ready and now make a request to the upload server...");
-
-                    RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
-                        'haccp-device': ID,
-                        'name': name,
-                        'Content-Type': 'multipart/form-data',
-                    }, formFiles).then((resp) => {
-
-                        alert(resp.text());
-
-                        bugsnag.leaveBreadcrumb("File upload response sucessfully received!...");
-                        this._hideLoader();
-                        this.props.navigation.navigate("AdminHome");
-
-                        // if (resp.data.length > 0) {
-                        // alert(resp.data);
-                        // }
-
-                        ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                    }).catch((err) => {
-                        this._hideLoader();
-                        bugsnag.notify(new Error(error));
-                        alert(err);
-                    });
-                }).catch(error => {
-                    this._hideLoader();
-                    bugsnag.notify(new Error(error));
-                    alert(err);
-                });
-        }, 500);
+        try {
+            await upload(PATH, RealmFile(), this.state.name);
+            this.props.navigation.navigate("AdminHome");
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+        } catch (error) {
+            alert(error);
+        } finally {
+            this._hideLoader();
+        }
     };
-
-
 
     render() {
         return (
