@@ -95,8 +95,6 @@ export class AdminBackupIndexScreen extends React.Component {
     };
 
     _restore = async () => {
-
-
         let backup_id = this.state.backup_id;
 
         if (backup_id.length == 0) {
@@ -188,19 +186,6 @@ export class AdminBackupIndexScreen extends React.Component {
                         alert(err.message);
                     });
 
-
-                // this._hideLoader();
-                // return;
-
-                // RNFetchBlobOld.fs.ls(PATH).then(async files => {
-
-
-                // }).catch(error => {
-                //     this._hideLoader();
-                //     bugsnag.notify(new Error("CATCH " + error));
-                //     alert(error);
-                // });
-
             } else {
                 throw new Error(Strings.PROBLEM_DOWNLOADING_BACKUP);
             }
@@ -215,176 +200,136 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _deleteOldData = async () => {
 
-        // this._showLoader();
+        await initImages();
+        this._showLoader();
 
-        setTimeout(async () => {
-            try {
+        try {
+            let name = 'TEMP BACKUP';
+            let TEMP_DB_PATH = realmFilePathTemp();
+            let DB = realmFilePath();
 
-                let ID = DeviceInfo.getUniqueID();
-                let name = 'TEMP BACKUP';
-                let TEMP_DB_PATH = realmFilePathTemp();
-                let DB = realmFilePath();
+            // Check if temporary database file is exsists
+            let exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
 
-                // Check if temporary database file is exsists
-                let exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
-
-
-
-                // Delete temporary database file if it exists
-                if (exists) {
-                    await RNFetchBlob.fs.unlink(TEMP_DB_PATH);
-                }
-
-                // Copy real database file to temporary file
-                await RNFetchBlob.fs.cp(DB, TEMP_DB_PATH);
-
-                exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
-
-                // Check if file is copied
-                if (!exists) {
-                    throw new Error('CANNOT_COPY_DB_FILE_TO_TEMPORARY_DB_FILE');
-                }
-
-                //retrive all images
-                let images = await RNFetchBlobOld.fs.ls(PATH);
-
-                //retrive temp images
-                let imagesTemp = await RNFetchBlobOld.fs.ls(PATH_TEMP);
-
-                console.log("original: " + images.length);
-                console.log("temp: " + imagesTemp.length);
-
-                //Delete all temp images
-                if (imagesTemp.length > 0) {
-                    for (let i = 0; i < imagesTemp.length; i++) {
-                        let filename = images[i];
-                        let dest = PATH_TEMP + "/" + filename;
-                        await RNFetchBlob.fs.unlink(dest);
-                    }
-                }
-
-                let imagesTempAfterDelete = await RNFetchBlobOld.fs.ls(PATH_TEMP);
-                console.log("temp after delete: " + imagesTempAfterDelete.length);
-
-                //Copy all images in temp folders
-                if (images.length > 0) {
-                    for (let i = 0; i < images.length; i++) {
-                        let filename = images[i];
-                        let source = PATH + "/" + filename;
-                        let dest = PATH_TEMP + "/" + filename;
-                        await RNFetchBlob.fs.cp(source, dest);
-                    }
-                }
-
-                let imagesTempRefreshed = await RNFetchBlobOld.fs.ls(PATH_TEMP);
-                console.log("temp after copy: " + imagesTempRefreshed.length);
-
-                if (images.length != imagesTempRefreshed.length) {
-                    throw new Error("problem in copping file");
-                }
-
-                //select archivage date
-                let date = new Date().toISOString().substring(0, 10);
-
-                // Retrive data after this date from temp db file
-                let controles = await ControlesAfterDate(date, TEMP_DB_PATH);
-                let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
-                let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
-
-                let controlesBefore = await ControlesBeforeDate(date);
-                let picturesBefore = await PicturesBeforeDate(date);
-                let archiveBefore = await ArchivesBeforeDate(date);
-
-                console.log(controles.length);
-                console.log(pictures.length);
-                console.log(archive.length);
-
-                console.log('--------------------------------');
-
-                console.log(controlesBefore.length);
-                console.log(picturesBefore.length);
-                console.log(archiveBefore.length);
-                return;
-
-                // Delete data after this date from temp db file
-                for (let i = 0; i < controles.length; i++) {
-                    let item = controles[i];
-
-                    if (item.source.length > 0) {
-                        let file = PATH_TEMP + "/" + item.source;
-                        await RNFetchBlob.fs.unlink(file);
-                        console.log(file);
-                    }
-
-                    if (item.signature.length > 0) {
-                        let signature = PATH_TEMP + "/" + item.signature;
-                        await RNFetchBlob.fs.unlink(signature);
-                        console.log(signature);
-                    }
-                }
-
-                for (let i = 0; i < pictures.length; i++) {
-                    let item = pictures[i];
-                    if (item.source.length > 0) {
-                        let file = PATH_TEMP + "/" + item.source;
-                        await RNFetchBlob.fs.unlink(file);
-                        console.log(file);
-                    }
-                }
-
-                try {
-                    await DeleteFromTemp(controles, TEMP_DB_PATH);
-                    await DeleteFromTemp(pictures, TEMP_DB_PATH);
-                    await DeleteFromTemp(archive, TEMP_DB_PATH);
-                } catch (error) {
-                    console.log(error);
-                }
-
-                RNFetchBlobOld.fs.ls(PATH_TEMP)
-                    .then((files) => {
-                        let formFiles = [];
-                        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(TEMP_DB_PATH) });
-
-                        if (files.length > 0) {
-                            files.map((file => {
-                                formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH_TEMP + "/" + file) });
-                            }));
-                        }
-                        RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
-                            'haccp-device': ID,
-                            'name': name,
-                            'Content-Type': 'multipart/form-data',
-                        }, formFiles).then((resp) => {
-
-                            // Retrive data before this date from original db file
-                            // let controles = await ControlesBeforeDate(date);
-                            // let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
-                            // let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
-
-
-
-                            alert(resp.text());
-                            this._hideLoader();
-                            // this.props.navigation.navigate("AdminHome");
-                            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                        }).catch((err) => {
-                            this._hideLoader();
-                            alert(err);
-                        });
-                    }).catch(error => {
-                        this._hideLoader();
-                        alert(err);
-                    });
-
-                // ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-                // this._hideLoader();
-
-            } catch (error) {
-                this._hideLoader();
-                alert(error);
-                console.log(error);
+            // Delete temporary database file if it exists
+            if (exists) {
+                await RNFetchBlob.fs.unlink(TEMP_DB_PATH);
             }
-        }, 500);
+
+            // Copy real database file to temporary file
+            await RNFetchBlob.fs.cp(DB, TEMP_DB_PATH);
+
+            exists = await RNFetchBlob.fs.exists(TEMP_DB_PATH)
+
+            // Check if file is copied
+            if (!exists) {
+                throw new Error('CANNOT_COPY_DB_FILE_TO_TEMPORARY_DB_FILE');
+            }
+
+            //retrive all images
+            let images = await RNFetchBlobOld.fs.ls(PATH);
+
+            //retrive temp images
+            let imagesTemp = await RNFetchBlobOld.fs.ls(PATH_TEMP);
+
+            console.log("original: " + images.length);
+            console.log("temp: " + imagesTemp.length);
+
+            //Delete all temp images
+            if (imagesTemp.length > 0) {
+                for (let i = 0; i < imagesTemp.length; i++) {
+                    let filename = images[i];
+                    let dest = PATH_TEMP + "/" + filename;
+                    await RNFetchBlob.fs.unlink(dest);
+                }
+            }
+
+            let imagesTempAfterDelete = await RNFetchBlobOld.fs.ls(PATH_TEMP);
+            console.log("temp after delete: " + imagesTempAfterDelete.length);
+
+            //Copy all images in temp folders
+            if (images.length > 0) {
+                for (let i = 0; i < images.length; i++) {
+                    let filename = images[i];
+                    let source = PATH + "/" + filename;
+                    let dest = PATH_TEMP + "/" + filename;
+                    await RNFetchBlob.fs.cp(source, dest);
+                }
+            }
+
+            let imagesTempRefreshed = await RNFetchBlobOld.fs.ls(PATH_TEMP);
+            console.log("temp after copy: " + imagesTempRefreshed.length);
+
+            if (images.length != imagesTempRefreshed.length) {
+                throw new Error("problem in copping file");
+            }
+
+            //select archivage date
+            let date = new Date().toISOString().substring(0, 10);
+
+            // Retrive data after this date from temp db file
+            let controles = await ControlesAfterDate(date, TEMP_DB_PATH);
+            let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
+            let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
+
+            let controlesBefore = await ControlesBeforeDate(date);
+            let picturesBefore = await PicturesBeforeDate(date);
+            let archiveBefore = await ArchivesBeforeDate(date);
+
+            console.log(controles.length);
+            console.log(pictures.length);
+            console.log(archive.length);
+
+            console.log('--------------------------------');
+
+            console.log(controlesBefore.length);
+            console.log(picturesBefore.length);
+            console.log(archiveBefore.length);
+
+            // Delete data after this date from temp db file
+            for (let i = 0; i < controles.length; i++) {
+                let item = controles[i];
+
+                if (item.source.length > 0) {
+                    let file = PATH_TEMP + "/" + item.source;
+                    await RNFetchBlob.fs.unlink(file);
+                    console.log(file);
+                }
+
+                if (item.signature.length > 0) {
+                    let signature = PATH_TEMP + "/" + item.signature;
+                    await RNFetchBlob.fs.unlink(signature);
+                    console.log(signature);
+                }
+            }
+
+            for (let i = 0; i < pictures.length; i++) {
+                let item = pictures[i];
+                if (item.source.length > 0) {
+                    let file = PATH_TEMP + "/" + item.source;
+                    await RNFetchBlob.fs.unlink(file);
+                    console.log(file);
+                }
+            }
+
+            await DeleteFromTemp(controles, TEMP_DB_PATH);
+            await DeleteFromTemp(pictures, TEMP_DB_PATH);
+            await DeleteFromTemp(archive, TEMP_DB_PATH);
+
+            await upload(PATH_TEMP, TEMP_DB_PATH, name);
+
+            // Retrive data before this date from original db file
+            // let controles = await ControlesBeforeDate(date);
+            // let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
+            // let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
+
+            this.props.navigation.navigate("AdminHome");
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+        } catch (error) {
+            alert(error);
+        } finally {
+            this._hideLoader();
+        }
     }
 
     _sync = async () => {
