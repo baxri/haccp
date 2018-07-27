@@ -253,10 +253,6 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
-        // if (!this.state.fourniseur) {
-        //     ToastAndroid.show(Strings.SELECT_FOURNISSEUR, ToastAndroid.LONG); return;
-        // }
-
         let equipmentError = false;
         let alertMessage = Strings.ARE_YOU_SURE;
 
@@ -268,13 +264,6 @@ export class FroidIndexScreen extends React.Component {
                 }
             });
         });
-
-        // alert(equipmentError);
-        // return;
-
-        // if (equipmentError) {
-        //     ToastAndroid.show(Strings.EQUIPMENTS_REQUIRED, ToastAndroid.LONG); return;
-        // }
 
         Alert.alert(
             Strings.CONTROLE_FROID,
@@ -288,10 +277,6 @@ export class FroidIndexScreen extends React.Component {
     }
 
     _store(confirmed) {
-
-
-        // console.log(this.state.products);
-        // return;
 
         this._showLoader();
 
@@ -375,40 +360,6 @@ export class FroidIndexScreen extends React.Component {
 
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.USER}: {this.state.userObj.name} {this.state.userObj.lastname}</Text>
 
-
-                    {this.state.products.map((row, index) => {
-                        return <View>
-                            <View style={row.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
-                                <TextInput
-                                    // autoFocus={true}
-                                    // keyboardType="numeric"
-                                    style={styles.inputInline}
-                                    underlineColorAndroid="transparent"
-                                    placeholder={Strings.PRODUCT}
-                                    value={row.name} onChangeText={(value) => { this._changeProductName(index, value) }}
-                                />
-                                {/* <Icon name='thermometer' style={styles.inputInlineIconDisabled} /> */}
-                            </View>
-                            <View style={row.temperature != '' ? styles.inputSuccess : styles.inputDanger}>
-                                <TextInput
-                                    // autoFocus={true}
-                                    keyboardType="numeric"
-                                    style={styles.inputInline}
-                                    underlineColorAndroid="transparent"
-                                    placeholder={Strings.TEMPERATURE}
-                                    value={row.temperature} onChangeText={(value) => { this._changeProductTemperature(index, value) }}
-                                />
-                                <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
-                            </View>
-                        </View>
-                    })}
-
-                    <View style={{ flex: 1 }}>
-                        <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 10, }} onPress={() => this._addProduct()}>
-                            <Text> + {Strings.ADD_MORE_PRODUCTS}</Text>
-                        </Button>
-                    </View>
-
                     {this.state.equipments.map((row, index) => {
                         return <View style={{ marginBottom: 20, }}>
                             <View style={{ flexDirection: 'row', marginBottom: 10, borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingBottom: 10, marginBottom: 10, }}>
@@ -446,6 +397,43 @@ export class FroidIndexScreen extends React.Component {
                             </View>
                         </View>
                     })}
+
+
+                    {this.state.products.map((row, index) => {
+                        return <View>
+                            <Text style={[styles.text, { marginBottom: 10, marginTop: 30, }]}>{Strings.PRODUCT}</Text>
+                            <View style={row.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    // autoFocus={true}
+                                    // keyboardType="numeric"
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.PRODUCT}
+                                    value={row.name} onChangeText={(value) => { this._changeProductName(index, value) }}
+                                />
+                                {/* <Icon name='thermometer' style={styles.inputInlineIconDisabled} /> */}
+                            </View>
+                            <View style={row.temperature != '' ? styles.inputSuccess : styles.inputDanger}>
+                                <TextInput
+                                    // autoFocus={true}
+                                    keyboardType="numeric"
+                                    style={styles.inputInline}
+                                    underlineColorAndroid="transparent"
+                                    placeholder={Strings.TEMPERATURE}
+                                    value={row.temperature} onChangeText={(value) => { this._changeProductTemperature(index, value) }}
+                                />
+                                <Icon name='thermometer' style={styles.inputInlineIconDisabled} />
+                            </View>
+                        </View>
+                    })}
+
+                    <View style={{ flex: 1 }}>
+                        <Button transparent full style={{ borderWidth: 1, height: 70, marginTop: 10, marginBottom: 30, }} onPress={() => this._addProduct()}>
+                            <Text> + {Strings.ADD_MORE_PRODUCTS}</Text>
+                        </Button>
+                    </View>
+
+
 
                     <View style={styles.input}>
                         <TextInput
