@@ -9,7 +9,7 @@ import {
     NetInfo,
     TextInput,
     Dimensions,
-
+    Alert,
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -33,7 +33,7 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages } from '../../../utilities/index';
+import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
 import { upload } from '../../../utilities/backup';
 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
@@ -69,9 +69,8 @@ export class AdminBackupIndexScreen extends React.Component {
             loading: 0,
             connected: 0,
             date: new Date().toISOString().substring(0, 10),
-
             dimesions: { width, height } = Dimensions.get('window'),
-
+            past_year: null,
         };
 
         this._bootstrapAsync();
@@ -90,8 +89,9 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
+        let date = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
         let connected = await NetInfo.isConnected.fetch();
-        this.setState({ connected: connected ? 1 : 0 });
+        this.setState({ connected: connected ? 1 : 0, past_year: date });
     };
 
     _restore = async () => {
@@ -198,13 +198,30 @@ export class AdminBackupIndexScreen extends React.Component {
 
     }
 
+    _askDeleteOldData = async () => {
+        try {
+            Alert.alert(
+                Strings.RESET_PASSWORD,
+                Strings.ARE_YOU_SURE_YOU_WANT_RESET_PASSWORD,
+                [
+                    { text: Strings.CANCEL, style: 'cancel' },
+                    { text: Strings.OK, onPress: () => this._deleteOldData() },
+                ],
+                { cancelable: false }
+            )
+
+        } catch (error) {
+            ToastAndroid.show(error.message, ToastAndroid.LONG);
+        }
+    }
+
     _deleteOldData = async () => {
 
         await initImages();
         this._showLoader();
 
         try {
-            let name = 'TEMP BACKUP';
+            let name = 'BACKUP BEFORE: ' + reverseFormat(toDate(this.state.past_year));
             let TEMP_DB_PATH = realmFilePathTemp();
             let DB = realmFilePath();
 
@@ -265,7 +282,10 @@ export class AdminBackupIndexScreen extends React.Component {
             }
 
             //select archivage date
-            let date = new Date().toISOString().substring(0, 10);
+            // let date = new Date().toISOString().substring(0, 10);
+            let date = toDate(this.state.past_year);
+
+            console.log(date);
 
             // Retrive data after this date from temp db file
             let controles = await ControlesAfterDate(date, TEMP_DB_PATH);
@@ -319,9 +339,18 @@ export class AdminBackupIndexScreen extends React.Component {
             await upload(PATH_TEMP, TEMP_DB_PATH, name);
 
             // Retrive data before this date from original db file
-            // let controles = await ControlesBeforeDate(date);
-            // let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
-            // let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
+            let controlesBeforeFromRealDB = await ControlesBeforeDate(date);
+            let picturesBeforeFromRealDB = await PicturesBeforeDate(date);
+            let archiveBeforeFromRealDB = await ArchivesBeforeDate(date);
+
+            console.log('Data before ' + date + ':');
+            console.log(controlesBeforeFromRealDB.length);
+            console.log(picturesBeforeFromRealDB.length);
+            console.log(archiveBeforeFromRealDB.length);
+
+            await Delete(controlesBeforeFromRealDB);
+            await Delete(picturesBeforeFromRealDB);
+            await Delete(archiveBeforeFromRealDB);
 
             this.props.navigation.navigate("AdminHome");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
@@ -370,21 +399,6 @@ export class AdminBackupIndexScreen extends React.Component {
                         {this.state.connected == 1 && <View>
 
 
-
-                            <Button primary style={styles.button} onPress={() => { this._deleteOldData() }}>
-                                <Left >
-                                    <Text style={[{ color: 'white', }, styles.text]}>
-                                        DELETE OLD DATA
-                                    </Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='sync' style={{ color: 'white', }} />
-                                </Right>
-                            </Button>
-
-
-
-
                             <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
                                     style={styles.inputInline}
@@ -423,6 +437,23 @@ export class AdminBackupIndexScreen extends React.Component {
                                     <Icon name='cloud-download' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
+
+
+                            <View style={{ height: 50, }}></View>
+                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.DELETE_OLD_DATA_WARNING}</H3>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.BACKUP_DATA_BEFORE}: {reverseFormat(toDate(this.state.past_year))}</H3>
+                            <Button primary style={[styles.button, { marginBottom: 30 }]} onPress={() => { this._askDeleteOldData() }}>
+                                <Left >
+                                    <Text style={[{ color: 'white', }, styles.text]}>
+                                        {Strings.DELETE_OLD_DATA}
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='sync' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
+
                         </View>}
                     </View>
                 </Content >

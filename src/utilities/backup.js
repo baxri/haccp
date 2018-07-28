@@ -32,7 +32,17 @@ export const upload = async (PATH, DB, name) => new Promise(async (resolve, reje
             'Content-Type': 'multipart/form-data',
         }, formFiles);
 
-        console.log(resp.text());
+        let parsedResponse = resp.text();
+
+        if (parsedResponse != 200) {
+            if (parsedResponse.length > 0) {
+                throw new Error(parsedResponse);
+            } else {
+                throw new Error('CANNOT_UPLOAD_FILE');
+            }
+        }
+
+        console.log(parsedResponse);
         resolve(resp.text());
     } catch (error) {
         reject(error);
