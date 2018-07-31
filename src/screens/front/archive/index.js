@@ -166,7 +166,7 @@ export class ArchiveIndexScreen extends React.Component {
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
                 <Content>
                     <CalendarPicker
-                        weekdays={[Strings.MON, Strings.TUE, Strings.WED, Strings.THU, Strings.FRI, Strings.SAT, Strings.SUN]}
+                        weekdays={[Strings.SUN, Strings.MON, Strings.TUE, Strings.WED, Strings.THU, Strings.FRI, Strings.SAT]}
                         months={[Strings.JANUARY, Strings.FEBRUARY, Strings.MARCH, Strings.APRIL, Strings.MAY, Strings.JUNE, Strings.JULY, Strings.AUGUST, Strings.SEPTEMBER, Strings.OCTOBER, Strings.NOVEMBER, Strings.DECEMBER]}
                         previousTitle={Strings.PREVIOUS}
                         nextTitle={Strings.NEXT}
