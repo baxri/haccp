@@ -126,6 +126,8 @@ export class AdminBackupIndexScreen extends React.Component {
             let status = res.info().status;
             bugsnag.leaveBreadcrumb('Download response http status = ' + status);
 
+            
+
             if (status == 200) {
                 let IMAGES = PATH;
                 let DB = PATH_REALM + "/" + PATH_REALM_FILE;
@@ -138,6 +140,9 @@ export class AdminBackupIndexScreen extends React.Component {
                 // get a list of files and directories in the main bundle
                 RNFS.readDir(PATH) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
                     .then(async (files) => {
+
+
+                        alert(files.length);
 
                         bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
                         if (files.length > 0) {
@@ -183,7 +188,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         this._hideLoader();
                         bugsnag.notify(new Error("NEW CATCH " + error.message));
                         // alert(error);
-                        alert(err.message);
+                        alert(error.message);
                     });
 
             } else {
