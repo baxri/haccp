@@ -55,22 +55,21 @@ export class AdminEquipmentsItemScreen extends React.Component {
             name: this.props.navigation.state.params.name,
             source: this.props.navigation.state.params.source,
 
+            sourcePath: null,
+
             dimesions: { width, height } = Dimensions.get('window'),
         };
+    }
 
-        this._bootstrapAsync();
+    componentDidMount() {
+        if (this.state.source) {
+            this.setState({ sourcePath: FilePicturePath() + this.state.source });
+        }
     }
 
     _onLayout(e) {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
-
-    _bootstrapAsync = async () => {
-
-        this.setState({
-            loading: 0,
-        });
-    };
 
     _showLoader() {
         this.setState({ loading: 1 });
