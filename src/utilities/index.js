@@ -102,9 +102,25 @@ export const FilePicturePath = () => {
     return 'file://' + PATH + '/';
 };
 
+export const FilePicturePathTemp = () => {
+    return 'file://' + PATH_TEMP + '/';
+};
+
 export const writePicture = async (result) => {
     var filename = Math.floor(Date.now() / 1000) + '.png';
     var filepath = PATH + "/" + filename;
+
+    try {
+        let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
+        return filename;
+    } catch (error) {
+        alert(error);
+    }
+};
+
+export const writePictureTemp = async (result) => {
+    var filename = Math.floor(Date.now() / 1000) + '.png';
+    var filepath = PATH_TEMP + "/" + filename;
 
     try {
         let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
