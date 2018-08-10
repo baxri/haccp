@@ -126,7 +126,7 @@ export class AdminBackupIndexScreen extends React.Component {
             let status = res.info().status;
             bugsnag.leaveBreadcrumb('Download response http status = ' + status);
 
-            
+
 
             if (status == 200) {
                 let IMAGES = PATH;
@@ -140,10 +140,6 @@ export class AdminBackupIndexScreen extends React.Component {
                 // get a list of files and directories in the main bundle
                 RNFS.readDir(PATH) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
                     .then(async (files) => {
-
-
-                        alert(files.length);
-
                         bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
                         if (files.length > 0) {
                             bugsnag.leaveBreadcrumb('Start deleting all images...');
@@ -367,6 +363,8 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _sync = async () => {
+
+        let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
         await initImages();
 
         if (this.state.name.length == 0) {

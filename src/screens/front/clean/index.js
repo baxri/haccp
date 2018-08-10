@@ -22,6 +22,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { launchCamera } from 'react-native-image-picker';
+
 
 export class FrontCleanIndexScreen extends React.Component {
 
@@ -50,6 +52,7 @@ export class FrontCleanIndexScreen extends React.Component {
             userId: null,
             userSession: '',
             userSessionType: '',
+            source: null,
 
             refreshig: false,
             basic: true,
@@ -138,13 +141,36 @@ export class FrontCleanIndexScreen extends React.Component {
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._cleanDone(schedule) },
+                { text: Strings.OK, onPress: () => this._pickImage(schedule) },
             ],
             { cancelable: false }
         )
     }
 
-    _cleanDone(schedule) {
+    _pickImage = (schedule) => {
+
+        var options = {
+            quality: 1,
+            storageOptions: {
+                cameraRoll: false,
+            }
+        };
+
+        launchCamera(options, (response) => {
+            if (response.data) {
+                writePicture(response.data).then(filename => {
+                    // this.setState({
+                    //     source: filename,
+                    // });
+                    this._cleanDone(schedule, filename);
+                });
+            }
+        });
+    };
+
+    _cleanDone(schedule, source = "") {
+
+        console.log(source);
 
         this._showLoader();
 
@@ -153,7 +179,7 @@ export class FrontCleanIndexScreen extends React.Component {
             addControle(this.state.userId, {
                 equipment: schedule.equipment,
 
-                source: '',
+                source: source,
                 signature: '',
 
                 produit: '',
