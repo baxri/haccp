@@ -114,20 +114,54 @@ export class AdminEquipmentsItemScreen extends React.Component {
         });
     }
 
-    async _saveItem() {
+    _saveItem() {
 
-        try {
-            this._showLoader();
+        this._showLoader();
 
-            // let exists = await RNFetchBlob.fs.exists(this.state.sourcePath);
-            // console.log(exists);
+        // try {
 
-            // await RNFetchBlob.fs.mv(this.state.sourcePath, FilePicturePath() + this.state.source);
+        //     this._showLoader();
 
+        //     // let exists = await RNFetchBlob.fs.exists(this.state.sourcePath);
+        //     // console.log(exists);
+
+        //     // await RNFetchBlob.fs.mv(this.state.sourcePath, FilePicturePath() + this.state.source);
+
+        //     if (!this.state.id) {
+        //         await addEquipment({
+        //             name: this.state.name,
+        //             source: this.state.source,
+        //         });
+        //     } else {
+        //         async editEquipment({
+        //             id: this.state.id,
+        //             name: this.state.name,
+        //             source: this.state.source,
+
+        //         });
+        //     }
+
+        //     this.props.navigation.navigate('AdminEquipmentsIndex');
+        // } catch (error) {
+        //     console.log(error);
+        // } finally {
+        //     Keyboard.dismiss();
+        //     this._hideLoader();
+        // }
+
+        // return;
+
+        setTimeout(() => {
             if (!this.state.id) {
-                await addEquipment({
+                addEquipment({
                     name: this.state.name,
                     source: this.state.source,
+                }).then(res => {
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+                }).catch(error => {
+                    alert(error);
                 });
             } else {
                 editEquipment({
@@ -135,49 +169,15 @@ export class AdminEquipmentsItemScreen extends React.Component {
                     name: this.state.name,
                     source: this.state.source,
 
+                }).then(res => {
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+                }).catch(error => {
+                    alert(error);
                 });
             }
-
-            this.props.navigation.navigate('AdminEquipmentsIndex');
-        } catch (error) {
-            console.log(error);
-        } finally {
-            Keyboard.dismiss();
-            this._hideLoader();
-        }
-
-        return;
-
-
-
-        // setTimeout(() => {
-        //     if (!this.state.id) {
-        //         addEquipment({
-        //             name: this.state.name,
-        //             source: this.state.source,
-        //         }).then(res => {
-        //             this.props.navigation.navigate('AdminEquipmentsIndex');
-        //             Keyboard.dismiss();
-        //             this._hideLoader();
-
-        //         }).catch(error => {
-        //             alert(error);
-        //         });
-        //     } else {
-        //         editEquipment({
-        //             id: this.state.id,
-        //             name: this.state.name,
-        //             source: this.state.source,
-
-        //         }).then(res => {
-        //             this.props.navigation.navigate('AdminEquipmentsIndex');
-        //             Keyboard.dismiss();
-        //             this._hideLoader();
-        //         }).catch(error => {
-        //             alert(error);
-        //         });
-        //     }
-        // }, 500);
+        }, 500);
     }
 
     render() {

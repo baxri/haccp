@@ -56,13 +56,24 @@ export const initImages = async () => {
 
     try {
 
-        const granted = await PermissionsAndroid.request(
+        const granted_write = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
             {
-                'title': 'TITLE',
+                'title': 'WRITE_EXTERNAL_STORAGE',
                 'message': 'MESSAGE'
             }
         )
+
+        const granted_read = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
+                'title': 'READ_EXTERNAL_STORAGE',
+                'message': 'MESSAGE'
+            }
+        )
+
+        console.log(granted_read);
+        console.log(granted_write);
 
         let a = await RNFS.mkdir(PATH + "/");
         let temp = await RNFS.mkdir(PATH_TEMP + "/");
