@@ -90,17 +90,10 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
         ImagePicker.launchCamera(options, (response) => {
             if (response.data) {
-                // writePictureTemp(response.data).then(filename => {
-                //     this.setState({
-                //         source: filename,
-                //         sourcePath: FilePicturePathTemp() + filename,
-                //     });
-                // });
-
-                writePicture(response.data).then(filename => {
+                writePictureTemp(response.data).then(filename => {
                     this.setState({
                         source: filename,
-                        sourcePath: FilePicturePath() + filename,
+                        sourcePath: FilePicturePathTemp() + filename,
                     });
                 });
             }
@@ -116,67 +109,41 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
     _saveItem() {
 
-        this._showLoader();
-
-        // try {
-
-        //     this._showLoader();
-
-        //     // let exists = await RNFetchBlob.fs.exists(this.state.sourcePath);
-        //     // console.log(exists);
-
-        //     // await RNFetchBlob.fs.mv(this.state.sourcePath, FilePicturePath() + this.state.source);
-
-        //     if (!this.state.id) {
-        //         await addEquipment({
-        //             name: this.state.name,
-        //             source: this.state.source,
-        //         });
-        //     } else {
-        //         async editEquipment({
-        //             id: this.state.id,
-        //             name: this.state.name,
-        //             source: this.state.source,
-
-        //         });
-        //     }
-
-        //     this.props.navigation.navigate('AdminEquipmentsIndex');
-        // } catch (error) {
-        //     console.log(error);
-        // } finally {
-        //     Keyboard.dismiss();
-        //     this._hideLoader();
-        // }
-
-        // return;
-
         setTimeout(() => {
-            if (!this.state.id) {
-                addEquipment({
-                    name: this.state.name,
-                    source: this.state.source,
-                }).then(res => {
-                    this.props.navigation.navigate('AdminEquipmentsIndex');
-                    Keyboard.dismiss();
-                    this._hideLoader();
-                }).catch(error => {
-                    alert(error);
-                });
-            } else {
-                editEquipment({
-                    id: this.state.id,
-                    name: this.state.name,
-                    source: this.state.source,
 
-                }).then(res => {
-                    this.props.navigation.navigate('AdminEquipmentsIndex');
-                    Keyboard.dismiss();
-                    this._hideLoader();
-                }).catch(error => {
-                    alert(error);
-                });
-            }
+            let sourcePath = this.state.sourcePath.replace('file://', '');
+            let destinationPath = (FilePicturePath() + this.state.source).replace('file://', '');
+
+            RNFetchBlob.fs.mv(sourcePath, destinationPath).then(data => {
+                if (!this.state.id) {
+                    addEquipment({
+                        name: this.state.name,
+                        source: this.state.source,
+                    }).then(res => {
+                        this.props.navigation.navigate('AdminEquipmentsIndex');
+                        Keyboard.dismiss();
+                        this._hideLoader();
+                    }).catch(error => {
+                        alert(error);
+                    });
+                } else {
+                    editEquipment({
+                        id: this.state.id,
+                        name: this.state.name,
+                        source: this.state.source,
+
+                    }).then(res => {
+                        this.props.navigation.navigate('AdminEquipmentsIndex');
+                        Keyboard.dismiss();
+                        this._hideLoader();
+                    }).catch(error => {
+                        alert(error);
+                    });
+                }
+            }).catch(error => {
+                alert(error);
+            });
+
         }, 500);
     }
 
