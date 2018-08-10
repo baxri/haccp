@@ -337,7 +337,9 @@ export class AdminBackupIndexScreen extends React.Component {
             await DeleteFromTemp(pictures, TEMP_DB_PATH);
             await DeleteFromTemp(archive, TEMP_DB_PATH);
 
-            await upload(PATH_TEMP, TEMP_DB_PATH, name);
+            let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
+
+            await upload(PATH_TEMP, TEMP_DB_PATH, name, adminPassword);
 
             // Retrive data before this date from original db file
             let controlesBeforeFromRealDB = await ControlesBeforeDate(date);
@@ -374,7 +376,7 @@ export class AdminBackupIndexScreen extends React.Component {
         this._showLoader();
 
         try {
-            await upload(PATH, RealmFile(), this.state.name);
+            await upload(PATH, RealmFile(), this.state.name, adminPassword);
             this.props.navigation.navigate("AdminHome");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {

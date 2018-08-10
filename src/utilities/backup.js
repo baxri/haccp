@@ -9,6 +9,8 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
     console.log(PATH_REALM_FILE);
     console.log(name);
 
+   
+
     try {
 
         let ID = DeviceInfo.getUniqueID();
@@ -25,6 +27,9 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
                 formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
             }
         }
+
+        // alert(adminPassword);
+        // return;
 
         let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
             'haccp-device': ID,
