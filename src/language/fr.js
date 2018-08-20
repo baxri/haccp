@@ -203,6 +203,8 @@ const strings = {
     TIME: 'Heure',
 
     DEVICE_ID: 'DISPOSITIF',
+    UPDATE: 'UPDATE',
+    DOWNLOAD_LAST_APK: 'DOWNLOAD_LAST_APK',
 };
 
 export default strings;

@@ -10,6 +10,7 @@ import {
     TextInput,
     Dimensions,
     Alert,
+    Linking
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -125,8 +126,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
             let status = res.info().status;
             bugsnag.leaveBreadcrumb('Download response http status = ' + status);
-
-
 
             if (status == 200) {
                 let IMAGES = PATH;
@@ -386,6 +385,10 @@ export class AdminBackupIndexScreen extends React.Component {
         }
     };
 
+    _update = () => {
+        Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
+    };
+
     render() {
         return (
             <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
@@ -402,7 +405,6 @@ export class AdminBackupIndexScreen extends React.Component {
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 
                         {this.state.connected == 1 && <View>
-
 
                             <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
@@ -459,6 +461,18 @@ export class AdminBackupIndexScreen extends React.Component {
                                 </Right>
                             </Button>
 
+                            <View style={{ height: 50, }}></View>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.DOWNLOAD_LAST_APK}</H3>
+                            <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._update() }}>
+                                <Left>
+                                    <Text style={[{ color: 'white', }, styles.text]}>
+                                        {Strings.UPDATE}
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='cloud-download' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
                         </View>}
                     </View>
                 </Content >
