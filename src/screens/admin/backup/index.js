@@ -386,6 +386,8 @@ export class AdminBackupIndexScreen extends React.Component {
     };
 
     _update = () => {
+
+        // Open url and download apk file
         Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
     };
 
