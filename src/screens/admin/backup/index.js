@@ -462,7 +462,8 @@ export class AdminBackupIndexScreen extends React.Component {
                             </Button>
 
                             <View style={{ height: 50, }}></View>
-                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.DOWNLOAD_LAST_APK}</H3>
+                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DOWNLOAD_LAST_APK}</H2>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.BEFORE_UPDATE_PLEASE_MAKE_A_BACKUP}</H3>
                             <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._update() }}>
                                 <Left>
                                     <Text style={[{ color: 'white', }, styles.text]}>
