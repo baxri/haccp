@@ -33,6 +33,7 @@ export const PATH = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER;
 export const PATH_TEMP = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER_TEMP;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
 export const PATH_REALM_TEMP = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_TEMP_REALM_FOLDER;
+
 export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/ZIPS';
 
 export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';

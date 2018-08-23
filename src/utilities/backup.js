@@ -1,15 +1,15 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH_REALM_FILE } from './index';
+import { PATH_REALM_FILE, PATH_ZIP } from './index';
 import DeviceInfo from 'react-native-device-info';
+import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
     console.log(DB);
     console.log(PATH_REALM_FILE);
+    console.log(PATH_ZIP);
     console.log(name);
-
-   
 
     try {
 
@@ -17,7 +17,37 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let files = await RNFetchBlobOld.fs.ls(PATH);
         let formFiles = [];
 
-        console.log(ID);
+        let copyFrom = DB;
+        let copyTo = PATH + '/' + PATH_REALM_FILE;
+
+        console.log(copyFrom);
+        console.log(copyTo);
+
+        // Copy realm file to main images folder
+        await RNFetchBlob.fs.cp(copyFrom, copyTo);
+
+        if (!(await RNFetchBlob.fs.exists(copyTo))) {
+            throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
+        }
+
+
+
+        let targetPath = PATH_ZIP + '/upload.zip';
+        let sourcePath = PATH;
+
+        console.log(targetPath);
+        console.log(sourcePath);
+
+        zip(sourcePath, targetPath)
+            .then((path) => {
+                console.log(`zip completed at ${path}`)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+        return;
+
 
         formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
 

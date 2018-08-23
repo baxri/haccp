@@ -372,7 +372,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
-        this._showLoader();
+        // this._showLoader();
 
         try {
             await upload(PATH, RealmFile(), this.state.name, adminPassword);
