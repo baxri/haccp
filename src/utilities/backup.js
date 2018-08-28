@@ -1,6 +1,6 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH_REALM_FILE, PATH_ZIP } from './index';
+import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 
@@ -17,7 +17,8 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let files = await RNFetchBlobOld.fs.ls(PATH);
         let formFiles = [];
 
-        var zipName = 'backup.zip';
+        // var zipName = 'last-backup.zip';
+        let zipName = name + '.zip';
 
         let copyFrom = DB;
         let copyTo = PATH + '/' + PATH_REALM_FILE;
@@ -32,13 +33,16 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
             throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
         }
 
-        let targetPath = PATH_ZIP + '/' + zipName;
+        let targetPath = PATH_BACKUP + '/' + zipName;
         let sourcePath = PATH;
 
         console.log(targetPath);
         console.log(sourcePath);
 
         let path = await zip(sourcePath, targetPath);
+
+        // resolve(path);
+        // return;
 
         formFiles.push({ name: 'zip', filename: zipName, data: RNFetchBlob.wrap(path) });
 
