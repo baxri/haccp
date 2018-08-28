@@ -372,7 +372,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
-        // this._showLoader();
+        this._showLoader();
 
         try {
             await upload(PATH, RealmFile(), this.state.name, adminPassword);
@@ -446,7 +446,7 @@ export class AdminBackupIndexScreen extends React.Component {
                             </Button>
 
 
-                            <View style={{ height: 50, }}></View>
+                            {/* <View style={{ height: 50, }}></View>
                             <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.DELETE_OLD_DATA_WARNING}</H3>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.BACKUP_DATA_BEFORE}: {reverseFormat(toDate(this.state.past_year))}</H3>
@@ -459,7 +459,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Right>
                                     <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
-                            </Button>
+                            </Button> */}
 
                             <View style={{ height: 50, }}></View>
                             <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DOWNLOAD_LATEST_APK}</H2>

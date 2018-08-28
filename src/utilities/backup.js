@@ -38,14 +38,29 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         console.log(targetPath);
         console.log(sourcePath);
 
-        zip(sourcePath, targetPath)
-            .then((path) => {
-                console.log(`zip completed at ${path}`)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        let path = await zip(sourcePath, targetPath);
 
+        formFiles.push({ name: 'zip', filename: zipName, data: RNFetchBlob.wrap(path) });
+
+        console.log(formFiles);
+
+        alert(path);
+
+        // .then((path) => {
+
+
+
+        //     // console.log(`zip completed at ${path}`)
+        // })
+        // .catch((error) => {
+
+        //     // console.log(error)
+        // })
+
+
+
+        // resolve(resp.text());
+        resolve("OK");
         return;
 
 
