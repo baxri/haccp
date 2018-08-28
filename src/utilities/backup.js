@@ -44,39 +44,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         console.log(formFiles);
 
-        alert(path);
-
-        // .then((path) => {
-
-
-
-        //     // console.log(`zip completed at ${path}`)
-        // })
-        // .catch((error) => {
-
-        //     // console.log(error)
-        // })
-
-
-
-        // resolve(resp.text());
-        resolve("OK");
-        return;
-
-
-        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
-
-        if (files.length > 0) {
-            for (let i = 0; i < files.length; i++) {
-                let file = files[i];
-                formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
-            }
-        }
-
-        // alert(adminPassword);
-        // return;
-
-        let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+        let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload-zip', {
             'haccp-device': ID,
             'admin-password': adminPassword,
             'name': name,
@@ -85,16 +53,40 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         let parsedResponse = resp.text();
 
-        if (parsedResponse != 200) {
-            if (parsedResponse.length > 0) {
-                throw new Error(parsedResponse);
-            } else {
-                throw new Error('CANNOT_UPLOAD_FILE');
-            }
-        }
-
-        console.log(parsedResponse);
         resolve(resp.text());
+        return;
+
+        // formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
+
+        // if (files.length > 0) {
+        //     for (let i = 0; i < files.length; i++) {
+        //         let file = files[i];
+        //         formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
+        //     }
+        // }
+
+        // alert(adminPassword);
+        // return;
+
+        // let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+        //     'haccp-device': ID,
+        //     'admin-password': adminPassword,
+        //     'name': name,
+        //     'Content-Type': 'multipart/form-data',
+        // }, formFiles);
+
+        // let parsedResponse = resp.text();
+
+        // if (parsedResponse != 200) {
+        //     if (parsedResponse.length > 0) {
+        //         throw new Error(parsedResponse);
+        //     } else {
+        //         throw new Error('CANNOT_UPLOAD_FILE');
+        //     }
+        // }
+
+        // console.log(parsedResponse);
+        // resolve(resp.text());
     } catch (error) {
         reject(error);
     }
