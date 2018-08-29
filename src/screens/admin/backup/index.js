@@ -34,7 +34,7 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
+import { LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
 import { upload } from '../../../utilities/backup';
 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
@@ -94,6 +94,24 @@ export class AdminBackupIndexScreen extends React.Component {
         let connected = await NetInfo.isConnected.fetch();
         this.setState({ connected: connected ? 1 : 0, past_year: date });
     };
+
+    _recoverImages = async () => {
+        RNFS.readDir(LOOSE_IMAGES).then(files => {
+
+            if (files.length > 0) {
+
+                files.map(file => {
+                    console.log(file);
+                });
+
+            } else {
+                alert('There is no images in LOOSEIMAGES folder!');
+            }
+
+        }).catch(error => {
+            alert(error);
+        });
+    }
 
     _restore = async () => {
         let backup_id = this.state.backup_id;
@@ -397,6 +415,19 @@ export class AdminBackupIndexScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
 
+                        <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._recoverImages() }}>
+                            <Left>
+                                <Text style={[{ color: 'white', }, styles.text]}>
+                                    RECOVER LOOSE IMAGES
+                                    </Text>
+                            </Left>
+                            <Right>
+                                <Icon name='cloud-download' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
+
+
+
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                         <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
 
@@ -475,6 +506,10 @@ export class AdminBackupIndexScreen extends React.Component {
                                 </Right>
                             </Button>
                         </View>}
+
+
+
+
                     </View>
                 </Content >
             </Container>
