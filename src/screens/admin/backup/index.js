@@ -415,7 +415,7 @@ export class AdminBackupIndexScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
 
-                        <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._recoverImages() }}>
+                        {/* <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._recoverImages() }}>
                             <Left>
                                 <Text style={[{ color: 'white', }, styles.text]}>
                                     RECOVER LOOSE IMAGES
@@ -425,7 +425,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Icon name='cloud-download' style={{ color: 'white', }} />
                             </Right>
                         </Button>
-
+ */}
 
 
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
