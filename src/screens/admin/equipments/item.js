@@ -25,9 +25,8 @@ import RNFS from 'react-native-fs';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
-import RNFetchBlob from 'rn-fetch-blob';
-import RNFetchBlobOld from 'react-native-fetch-blob';
-import { FilePicturePath, FilePictureTempPath, writePicture, writeTempPicture, toDate } from '../../../utilities/index';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { FilePicturePath, FilePicturePathTemp, writePictureTemp, writePicture, toDate } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
@@ -55,24 +54,21 @@ export class AdminEquipmentsItemScreen extends React.Component {
             id: this.props.navigation.state.params.id,
             name: this.props.navigation.state.params.name,
             source: this.props.navigation.state.params.source,
+
             sourcePath: null,
-            sourceEdited: false,
-            sourceContent: null,
 
             dimesions: { width, height } = Dimensions.get('window'),
         };
     }
 
-    _onLayout(e) {
-        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
-    }
-
     componentDidMount() {
         if (this.state.source) {
-            this.setState({
-                sourcePath: FilePicturePath() + this.state.source,
-            });
+            this.setState({ sourcePath: FilePicturePath() + this.state.source });
         }
+    }
+
+    _onLayout(e) {
+        this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     _showLoader() {
@@ -94,99 +90,64 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
         ImagePicker.launchCamera(options, (response) => {
             if (response.data) {
-                writeTempPicture(response.data).then(filename => {
+                writePictureTemp(response.data).then(filename => {
                     this.setState({
-                        sourceEdited: true,
                         source: filename,
-                        sourcePath: FilePictureTempPath() + filename,
-                        sourceContent: response.data,
+                        sourcePath: FilePicturePathTemp() + filename,
                     });
                 });
             }
         });
     };
 
-    async _saveItem() {
+    _onSave = async (result) => {
+        writePicture(result.encoded).then(filename => {
+            this.setState({ signature: filename });
+            this._signatureView.show(false);
+        });
+    }
 
-        this._showLoader();
-
-        try {
-
-            if (this.state.sourceEdited) {
-                writePicture(this.state.sourceContent, this.state.source).then(filename => {
-                    if (!this.state.id) {
-                        addEquipment({
-                            name: this.state.name,
-                            source: this.state.source,
-                        }).then(res => {
-                            this.props.navigation.navigate('AdminEquipmentsIndex');
-                            Keyboard.dismiss();
-                            this._hideLoader();
-
-                        }).catch(error => {
-                            alert(error);
-                        });
-                    } else {
-                        editEquipment({
-                            id: this.state.id,
-                            name: this.state.name,
-                            source: this.state.source,
-
-                        }).then(res => {
-                            this.props.navigation.navigate('AdminEquipmentsIndex');
-                            Keyboard.dismiss();
-                            this._hideLoader();
-                        }).catch(error => {
-                            alert(error);
-                        });
-                    }
-
-                });
-            }
-
-        } catch (error) {
-            Keyboard.dismiss();
-            this._hideLoader();
-            console.log(error);
-            return;
-        }
-
-        return;
+    _saveItem() {
 
         setTimeout(() => {
-            if (!this.state.id) {
-                addEquipment({
-                    name: this.state.name,
-                    source: this.state.source,
-                }).then(res => {
-                    this.props.navigation.navigate('AdminEquipmentsIndex');
-                    Keyboard.dismiss();
-                    this._hideLoader();
 
-                }).catch(error => {
-                    alert(error);
-                });
-            } else {
-                editEquipment({
-                    id: this.state.id,
-                    name: this.state.name,
-                    source: this.state.source,
+            let sourcePath = this.state.sourcePath.replace('file://', '');
+            let destinationPath = (FilePicturePath() + this.state.source).replace('file://', '');
 
-                }).then(res => {
-                    this.props.navigation.navigate('AdminEquipmentsIndex');
-                    Keyboard.dismiss();
-                    this._hideLoader();
-                }).catch(error => {
-                    alert(error);
-                });
-            }
+            RNFetchBlob.fs.mv(sourcePath, destinationPath).then(data => {
+                if (!this.state.id) {
+                    addEquipment({
+                        name: this.state.name,
+                        source: this.state.source,
+                    }).then(res => {
+                        this.props.navigation.navigate('AdminEquipmentsIndex');
+                        Keyboard.dismiss();
+                        this._hideLoader();
+                    }).catch(error => {
+                        alert(error);
+                    });
+                } else {
+                    editEquipment({
+                        id: this.state.id,
+                        name: this.state.name,
+                        source: this.state.source,
+
+                    }).then(res => {
+                        this.props.navigation.navigate('AdminEquipmentsIndex');
+                        Keyboard.dismiss();
+                        this._hideLoader();
+                    }).catch(error => {
+                        alert(error);
+                    });
+                }
+            }).catch(error => {
+                alert(error);
+            });
+
         }, 500);
     }
 
     render() {
-
-        console.log(this.state.sourcePath);
-
         return (
             <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
@@ -194,19 +155,14 @@ export class AdminEquipmentsItemScreen extends React.Component {
                     <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
 
                         <View style={{ width: 300, height: 300, marginBottom: 50, }}>
-
-
                             {!this.state.sourcePath && <Button style={{ flex: 1 }} full light onPress={this._pickImage} >
                                 <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                             </Button>}
-
-
                             {this.state.sourcePath && <View style={{ flex: 1, }}>
                                 <View style={{ flex: 0.75, zIndex: 0 }}>
                                     <Image
                                         resizeMode={'cover'}
                                         style={{ flex: 1 }}
-                                        // source={{ uri: FilePicturePath() + this.state.source }}
                                         source={{ uri: this.state.sourcePath }}
                                     />
                                 </View>
@@ -219,9 +175,6 @@ export class AdminEquipmentsItemScreen extends React.Component {
                                     </Right>
                                 </Button>
                             </View>}
-
-
-
                         </View>
 
 

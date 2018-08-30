@@ -49,7 +49,7 @@ export class HelpScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width }}>
                     {source == 'controle' && <Image
                         width={this.state.dimesions.width}
-                        source={require('../../../images/controle.png')}
+                        source={require('../../../images/chaud.png')}
                     />}
 
                     {source == 'chaud' && <Image

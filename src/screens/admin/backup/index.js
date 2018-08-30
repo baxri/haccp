@@ -10,6 +10,7 @@ import {
     TextInput,
     Dimensions,
     Alert,
+    Linking
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
@@ -33,7 +34,7 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
+import { LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
 import { upload } from '../../../utilities/backup';
 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
@@ -94,6 +95,24 @@ export class AdminBackupIndexScreen extends React.Component {
         this.setState({ connected: connected ? 1 : 0, past_year: date });
     };
 
+    _recoverImages = async () => {
+        RNFS.readDir(LOOSE_IMAGES).then(files => {
+
+            if (files.length > 0) {
+
+                files.map(file => {
+                    console.log(file);
+                });
+
+            } else {
+                alert('There is no images in LOOSEIMAGES folder!');
+            }
+
+        }).catch(error => {
+            alert(error);
+        });
+    }
+
     _restore = async () => {
         let backup_id = this.state.backup_id;
 
@@ -126,8 +145,6 @@ export class AdminBackupIndexScreen extends React.Component {
             let status = res.info().status;
             bugsnag.leaveBreadcrumb('Download response http status = ' + status);
 
-            
-
             if (status == 200) {
                 let IMAGES = PATH;
                 let DB = PATH_REALM + "/" + PATH_REALM_FILE;
@@ -140,10 +157,6 @@ export class AdminBackupIndexScreen extends React.Component {
                 // get a list of files and directories in the main bundle
                 RNFS.readDir(PATH) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
                     .then(async (files) => {
-
-
-                        alert(files.length);
-
                         bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
                         if (files.length > 0) {
                             bugsnag.leaveBreadcrumb('Start deleting all images...');
@@ -341,7 +354,9 @@ export class AdminBackupIndexScreen extends React.Component {
             await DeleteFromTemp(pictures, TEMP_DB_PATH);
             await DeleteFromTemp(archive, TEMP_DB_PATH);
 
-            await upload(PATH_TEMP, TEMP_DB_PATH, name);
+            let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
+
+            await upload(PATH_TEMP, TEMP_DB_PATH, name, adminPassword);
 
             // Retrive data before this date from original db file
             let controlesBeforeFromRealDB = await ControlesBeforeDate(date);
@@ -367,6 +382,8 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _sync = async () => {
+
+        let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
         await initImages();
 
         if (this.state.name.length == 0) {
@@ -376,7 +393,7 @@ export class AdminBackupIndexScreen extends React.Component {
         this._showLoader();
 
         try {
-            await upload(PATH, RealmFile(), this.state.name);
+            await upload(PATH, RealmFile(), this.state.name, adminPassword);
             this.props.navigation.navigate("AdminHome");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
@@ -384,6 +401,10 @@ export class AdminBackupIndexScreen extends React.Component {
         } finally {
             this._hideLoader();
         }
+    };
+
+    _update = () => {
+        Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
     };
 
     render() {
@@ -394,6 +415,19 @@ export class AdminBackupIndexScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
 
+                        {/* <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._recoverImages() }}>
+                            <Left>
+                                <Text style={[{ color: 'white', }, styles.text]}>
+                                    RECOVER LOOSE IMAGES
+                                    </Text>
+                            </Left>
+                            <Right>
+                                <Icon name='cloud-download' style={{ color: 'white', }} />
+                            </Right>
+                        </Button>
+ */}
+
+
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
                         <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
 
@@ -402,7 +436,6 @@ export class AdminBackupIndexScreen extends React.Component {
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 
                         {this.state.connected == 1 && <View>
-
 
                             <View style={this.state.name.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
@@ -444,7 +477,7 @@ export class AdminBackupIndexScreen extends React.Component {
                             </Button>
 
 
-                            <View style={{ height: 50, }}></View>
+                            {/* <View style={{ height: 50, }}></View>
                             <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.DELETE_OLD_DATA_WARNING}</H3>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.BACKUP_DATA_BEFORE}: {reverseFormat(toDate(this.state.past_year))}</H3>
@@ -457,9 +490,26 @@ export class AdminBackupIndexScreen extends React.Component {
                                 <Right>
                                     <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
-                            </Button>
+                            </Button> */}
 
+                            <View style={{ height: 50, }}></View>
+                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DOWNLOAD_LATEST_APK}</H2>
+                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.BEFORE_UPDATE_PLEASE_MAKE_A_BACKUP}</H3>
+                            <Button primary style={[styles.button, { marginBottom: 50 }]} onPress={() => { this._update() }}>
+                                <Left>
+                                    <Text style={[{ color: 'white', }, styles.text]}>
+                                        {Strings.DOWNLOAD}
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='cloud-download' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
                         </View>}
+
+
+
+
                     </View>
                 </Content >
             </Container>

@@ -39,7 +39,7 @@ export class ArchiveIndexScreen extends React.Component {
 
         this.state = {
             userId: null,
-            loading: 1,
+            loading: 0,
             disabledDays: [],
             customDatesStyles: [],
             // selectedStartDate: new Date().toISOString().substring(0, 10),
@@ -73,6 +73,9 @@ export class ArchiveIndexScreen extends React.Component {
     }
 
     onMonthChange(date) {
+
+
+
         this._setDisabledDays(date.format('M') - 1, date.format('YYYY'));
     }
 
@@ -92,11 +95,17 @@ export class ArchiveIndexScreen extends React.Component {
 
         let userID = await AsyncStorage.getItem('userSessionId');
 
-        let pictures = await Pictures(userID, null, month, year);
-        let controles = await Controles(userID, null, month, year);
+        // let pictures = await Pictures(userID, null, month, year);
+        // let controles = await Controles(userID, null, month, year);
         let user = await User(userID);
 
-        let archive = await ArchivesList(this.state.YM);
+        let YM = year + "-" + ((month + 1) < 10 ? "0" + (month + 1) : (month + 1));
+        let archive = await ArchivesList(YM);
+
+        // console.log(this.state.YM);
+
+        // console.log(archive);
+        // return;
 
         setTimeout(() => {
 

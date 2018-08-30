@@ -1,12 +1,14 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH_REALM_FILE } from './index';
+import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
+import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 
-export const upload = async (PATH, DB, name) => new Promise(async (resolve, reject) => {
+export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
     console.log(DB);
     console.log(PATH_REALM_FILE);
+    console.log(PATH_ZIP);
     console.log(name);
 
     try {
@@ -15,35 +17,80 @@ export const upload = async (PATH, DB, name) => new Promise(async (resolve, reje
         let files = await RNFetchBlobOld.fs.ls(PATH);
         let formFiles = [];
 
-        console.log(ID);
+        // var zipName = 'last-backup.zip';
+        let zipName = name + '.zip';
 
-        formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
+        let copyFrom = DB;
+        let copyTo = PATH + '/' + PATH_REALM_FILE;
 
-        if (files.length > 0) {
-            for (let i = 0; i < files.length; i++) {
-                let file = files[i];
-                formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
-            }
+        console.log(copyFrom);
+        console.log(copyTo);
+
+        // Copy realm file to main images folder
+        await RNFetchBlob.fs.cp(copyFrom, copyTo);
+
+        if (!(await RNFetchBlob.fs.exists(copyTo))) {
+            throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
         }
 
-        let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+        let targetPath = PATH_BACKUP + '/' + zipName;
+        let sourcePath = PATH;
+
+        console.log(targetPath);
+        console.log(sourcePath);
+
+        let path = await zip(sourcePath, targetPath);
+
+        // resolve(path);
+        // return;
+
+        formFiles.push({ name: 'zip', filename: zipName, data: RNFetchBlob.wrap(path) });
+
+        console.log(formFiles);
+
+        let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload-zip', {
             'haccp-device': ID,
+            'admin-password': adminPassword,
             'name': name,
             'Content-Type': 'multipart/form-data',
         }, formFiles);
 
         let parsedResponse = resp.text();
 
-        if (parsedResponse != 200) {
-            if (parsedResponse.length > 0) {
-                throw new Error(parsedResponse);
-            } else {
-                throw new Error('CANNOT_UPLOAD_FILE');
-            }
-        }
-
-        console.log(parsedResponse);
         resolve(resp.text());
+        return;
+
+        // formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
+
+        // if (files.length > 0) {
+        //     for (let i = 0; i < files.length; i++) {
+        //         let file = files[i];
+        //         formFiles.push({ name: 'images[]', filename: file, data: RNFetchBlob.wrap(PATH + "/" + file) });
+        //     }
+        // }
+
+        // alert(adminPassword);
+        // return;
+
+        // let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload', {
+        //     'haccp-device': ID,
+        //     'admin-password': adminPassword,
+        //     'name': name,
+        //     'Content-Type': 'multipart/form-data',
+        // }, formFiles);
+
+        // let parsedResponse = resp.text();
+
+        // if (parsedResponse != 200) {
+        //     if (parsedResponse.length > 0) {
+        //         throw new Error(parsedResponse);
+        //     } else {
+        //         throw new Error('CANNOT_UPLOAD_FILE');
+        //     }
+        // }
+
+        // console.log(parsedResponse);
+        // resolve(resp.text());
     } catch (error) {
         reject(error);
     }

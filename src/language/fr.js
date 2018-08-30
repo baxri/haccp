@@ -202,7 +202,11 @@ const strings = {
     EDIT: 'Éditer',
     TIME: 'Heure',
 
-    DEVICE_ID: 'DISPOSITIF',
+    DEVICE_ID: 'ID dispositif',
+    UPDATE: 'Mise à jour',
+    DOWNLOAD_LATEST_APK: 'Télécharger la dernière version',
+    BEFORE_UPDATE_PLEASE_MAKE_A_BACKUP: 'Veuillez faire une sauvegarde avant de mettre à jour',
+    DOWNLOAD: 'Télécharger',
 };
 
 export default strings;

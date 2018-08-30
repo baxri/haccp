@@ -33,7 +33,10 @@ export const PATH = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER;
 export const PATH_TEMP = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLDER_TEMP;
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
 export const PATH_REALM_TEMP = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_TEMP_REALM_FOLDER;
-export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/ZIPS';
+
+export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/RESTORES';
+export const PATH_BACKUP = RNFetchBlob.fs.dirs.DownloadDir + '/BACKUPS';
+export const LOOSE_IMAGES = RNFetchBlob.fs.dirs.DownloadDir + '/LOOSEIMAGES';
 
 export const PATH_REALM_FILE = 'haccp-db-' + FILE_VERSION + '.realm';
 export const PATH_REALM_FILE_TEMP = 'temp-haccp-db-' + FILE_VERSION + '.realm';
@@ -56,13 +59,24 @@ export const initImages = async () => {
 
     try {
 
-        const granted = await PermissionsAndroid.request(
+        const granted_write = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
             {
-                'title': 'TITLE',
+                'title': 'WRITE_EXTERNAL_STORAGE',
                 'message': 'MESSAGE'
             }
         )
+
+        const granted_read = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
+                'title': 'READ_EXTERNAL_STORAGE',
+                'message': 'MESSAGE'
+            }
+        )
+
+        console.log(granted_read);
+        console.log(granted_write);
 
         let a = await RNFS.mkdir(PATH + "/");
         let temp = await RNFS.mkdir(PATH_TEMP + "/");
@@ -102,16 +116,12 @@ export const FilePicturePath = () => {
     return 'file://' + PATH + '/';
 };
 
-export const FilePictureTempPath = () => {
+export const FilePicturePathTemp = () => {
     return 'file://' + PATH_TEMP + '/';
 };
 
-export const writePicture = async (result, filename = null) => {
-
-    if (!filename) {
-        var filename = Math.floor(Date.now() / 1000) + '.png';
-    }
-
+export const writePicture = async (result) => {
+    var filename = Math.floor(Date.now() / 1000) + '.png';
     var filepath = PATH + "/" + filename;
 
     try {
@@ -122,7 +132,7 @@ export const writePicture = async (result, filename = null) => {
     }
 };
 
-export const writeTempPicture = async (result) => {
+export const writePictureTemp = async (result) => {
     var filename = Math.floor(Date.now() / 1000) + '.png';
     var filepath = PATH_TEMP + "/" + filename;
 
