@@ -1,0 +1,142 @@
+[
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_shake.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_shake.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_swipe.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_swipe.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_floating_btn.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_floating_btn.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_erase.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_erase.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_check.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_check.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_remove.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_remove.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_pause.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_pause.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_screenshot.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_screenshot.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_stay_updated.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_stay_updated.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_next.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_next.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_play.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_play.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_stay_updated_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_stay_updated_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_swipe_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_swipe_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_report_bug.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_report_bug.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_screenshot_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_screenshot_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_attach.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_attach.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_video_received.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_video_received.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_mic.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_mic.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_welcome_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_welcome_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_back.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_back.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_floating_btn_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_floating_btn_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_send.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_send.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_survey_thankyou.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\drawable-ldpi-v4\\ic_survey_thankyou.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_plus.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_plus.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_shake_dark.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_shake_dark.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_record_video.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_record_video.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_capture_screenshot.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_capture_screenshot.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ib_ic_core_onboarding_welcome.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\ib_ic_core_onboarding_welcome.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_avatar.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_avatar.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_video.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_video.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_stop.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_stop.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_record_audio.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_record_audio.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_floating_btn.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_floating_btn.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_close.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_close.png"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\instabug_ic_attach_gallery_image.png",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\drawable-ldpi-v4\\instabug_ic_attach_gallery_image.png"
+    }
+]

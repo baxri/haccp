@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/instabug_background_color"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/separator"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/ib_fr_feature_request_details_header" />
+
+            <include layout="@layout/ib_fr_layout_comment_count" />
+
+            <include layout="@layout/ib_fr_layout_no_comments" />
+
+            <ListView
+                android:id="@+id/instabug_feature_details_comments_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/ib_fr_space_16"
+                android:divider="@null"
+                tools:itemCount="5"
+                android:listSelector="@android:color/transparent"
+                tools:listitem="@layout/ib_fr_item_comment" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/addCommentLayoutContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginBottom="-15dp"
+            android:background="@drawable/ib_fr_gradient_shadow" />
+
+        <TextView
+            android:id="@+id/tv_add_comment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ib_fr_add_comment_height"
+            android:background="?attr/instabug_background_color"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/ib_fr_details_title_padding_left_right"
+            android:paddingRight="@dimen/ib_fr_details_title_padding_left_right"
+            android:text="@string/add_feature"
+            android:textColor="?attr/ib_fr_details_add_feature_tv_color" />
+    </LinearLayout>
+
+</LinearLayout>

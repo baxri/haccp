@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.haccp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="25" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create GCM registration tokens -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application
+        android:name="com.haccp.MainApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.haccp.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+        <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="607bc9cd4b53c023325e7336e6593ec3" />
+        <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0" />
+
+        <activity
+            android:name="com.instabug.survey.ui.SurveyActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/InstabugTranslucentSdkTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name="com.instabug.survey.network.service.InstabugSurveysSubmitterService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.crash.network.InstabugCrashesUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.instabug.chat.ui.ChatActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/InstabugSdkTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name="com.instabug.chat.network.InstabugMessageUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.chat.network.InstabugPushNotificationTokenService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.instabug.bug.view.BugReportingActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/InstabugSdkTheme"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <data
+                    android:host="instabug-disclaimer.com"
+                    android:scheme="instabug-bug" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.instabug.bug.network.InstabugBugsUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.bug.view.actionList.service.ReportCategoriesService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.instabug.featuresrequest.ui.FeaturesRequestActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name="com.instabug.featuresrequest.network.service.FeaturesRequestVoteService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.featuresrequest.network.service.AddNewFeatureUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.library.network.worker.uploader.InstabugSessionUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.library.internal.video.VideoProcessingService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.library.analytics.network.InstabugAnalyticsUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.instabug.library.internal.video.RequestPermissionActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.instabug.library.invocation.invocationdialog.InstabugDialogActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/InstabugTranslucentSdkTheme" />
+        <activity
+            android:name="com.instabug.library.ui.onboarding.OnboardingActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/InstabugTranslucentSdkTheme" />
+
+        <service android:name="com.instabug.library.internal.video.AutoScreenRecordingService" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.haccp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service
+            android:name="net.gotev.uploadservice.UploadService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <receiver
+            android:name="com.learnium.RNDeviceInfo.RNDeviceReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name="com.pilloxa.backgroundjob.BackgroundJob"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.pilloxa.backgroundjob.ExactJob"
+            android:enabled="true" />
+        <service
+            android:name="com.pilloxa.backgroundjob.ReactNativeEventStarter$MyHeadlessJsTaskService"
+            android:enabled="true" />
+        <!--
+             Receives GooglePlay execution requests and forwards them to the
+             appropriate internal service.
+        -->
+        <service
+            android:name="com.firebase.jobdispatcher.GooglePlayReceiver"
+            android:exported="true"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+            </intent-filter>
+        </service> <!-- HeadlessJS For android sdk 21+ uses new JobScheduler API -->
+        <service
+            android:name="com.transistorsoft.rnbackgroundfetch.HeadlessJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- HeadlessJS For Android sdk <21 uses old AlarmManager API -->
+        <receiver android:name="com.transistorsoft.rnbackgroundfetch.HeadlessBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="com.haccp.event.BACKGROUND_FETCH" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.transistorsoft.tsbackgroundfetch.FetchAlarmReceiver" />
+
+        <service
+            android:name="com.transistorsoft.tsbackgroundfetch.FetchJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver android:name="com.transistorsoft.tsbackgroundfetch.BootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

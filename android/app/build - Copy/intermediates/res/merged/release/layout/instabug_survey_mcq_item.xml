@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/mcq_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/survey_mcq_item_background"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingLeft="@dimen/instabug_container_padding"
+        android:paddingRight="@dimen/instabug_container_padding">
+
+        <ImageView
+            android:id="@+id/selector_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/survey_optional_answer_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/instabug_container_padding"
+            android:layout_marginRight="@dimen/instabug_container_padding"
+            android:gravity="start|center_vertical"
+            android:lineSpacingExtra="4dp"
+            android:minHeight="48dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="?attr/instabug_survey_mcq_text_color"
+            android:textSize="@dimen/instabug_question_text_size" />
+    </LinearLayout>
+</LinearLayout>

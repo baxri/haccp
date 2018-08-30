@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ib_empty_state_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ib_fr_ic_features_empty_state"/>
+
+    <TextView
+        android:id="@+id/ib_empty_state_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="Roboto"
+        android:text="@string/ib_feature_rq_str_no_ideas_are_added_yet"
+        android:textColor="@color/ib_fr_color_ptr_loading_txt"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/ib_empty_state_action"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ib_fr_shape_add_feat_button"
+        android:foreground="?android:selectableItemBackground"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:text="@string/ib_feature_rq_str_add_your_idea"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

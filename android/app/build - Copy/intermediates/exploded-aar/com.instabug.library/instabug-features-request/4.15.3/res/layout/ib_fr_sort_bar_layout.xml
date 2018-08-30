@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lytSortActions"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="right">
+        <Button
+            android:id="@+id/btnSortActions"
+            style="@style/InstabugTopDialogButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="0dp"
+            android:background="@color/instabug_transparent_color"
+            android:clickable="false"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:gravity="end|center_vertical"
+            android:maxLines="1"
+            android:paddingRight="8dp"
+            android:text="@string/sort_by_top_rated"
+            android:textAlignment="gravity"
+            android:textAllCaps="false"
+            android:textColor="@color/instabug_theme_tinting_color_dark"
+            android:textSize="11sp"
+            android:textStyle="normal"
+            android:tint="@color/instabug_theme_tinting_color_dark"
+            />
+
+        <ImageView
+            android:id="@+id/imgSortActions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:clickable="false"
+            android:padding="0dp"
+            android:src="@drawable/ib_fr_ic_sort"
+            android:textColor="@color/instabug_theme_tinting_color_dark"
+            android:tint="@color/instabug_theme_tinting_color_dark"
+            />
+
+    </LinearLayout>
+

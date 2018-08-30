@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/instabug_bugreporting_next"
+        android:icon="@drawable/instabug_ic_next"
+        android:title="@string/instabug_str_next"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/instabug_bugreporting_send"
+        android:icon="@drawable/instabug_ic_send"
+        android:title="@string/instabug_str_send"
+        app:showAsAction="always" />
+
+</menu>

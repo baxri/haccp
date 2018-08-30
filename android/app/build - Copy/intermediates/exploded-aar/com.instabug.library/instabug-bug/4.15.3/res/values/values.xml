@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="color|reference" name="add_attachment_icon_color"/>
+    <attr format="color|reference" name="attachment_background_color"/>
+    <attr format="color|reference" name="attachment_border_color"/>
+    <attr format="color|reference" name="attachment_item_text_color"/>
+    <attr format="color|reference" name="bugreporting_thanks_bg_color"/>
+    <attr format="color|reference" name="bugreporting_thanks_subtitle_color"/>
+    <attr format="color|reference" name="ib_bug_alert_dialog_msg_color"/>
+    <attr format="color|reference" name="ib_bug_color_bg_pbi"/>
+    <attr format="color|reference" name="instabug_seperator_color"/>
+    <color name="instabug_attachment_bar_color_dark">#212121</color>
+    <color name="instabug_extrafield_error">#C5291C</color>
+    <declare-styleable name="CorneredImageView"><attr format="dimension" name="cornerRadius"/><attr name="roundedCorners">
+            <flag name="topLeft" value="1"/>
+            <flag name="topRight" value="2"/>
+            <flag name="bottomRight" value="4"/>
+            <flag name="bottomLeft" value="8"/>
+            <flag name="all" value="15"/>
+        </attr></declare-styleable>
+    <dimen name="attachemnt_icon_size">24dp</dimen>
+    <style name="AttachmentIcon">
+        <item name="android:layout_width">@dimen/attachemnt_icon_size</item>
+        <item name="android:layout_height">@dimen/attachemnt_icon_size</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="InstabugBugReportingDark" parent="InstabugSdkTheme.Dark">
+        <item name="add_attachment_icon_color">#666666</item>
+        <item name="attachment_item_text_color">#FFFFFF</item>
+        <item name="attachment_border_color">#8E8E93</item>
+        <item name="attachment_background_color">#212121</item>
+        <item name="bugreporting_thanks_subtitle_color">#9E9E9E</item>
+        <item name="bugreporting_thanks_bg_color">@drawable/ib_bug_shape_thanks_bg_dark</item>
+        <item name="instabug_seperator_color">#757575</item>
+        <item name="ib_bug_color_bg_pbi">#616161</item>
+        <item name="ib_bug_alert_dialog_msg_color">#9E9E9E</item>
+    </style>
+    <style name="InstabugBugReportingLight" parent="InstabugSdkTheme.Light">
+        <item name="add_attachment_icon_color">#e0e0e0</item>
+        <item name="attachment_item_text_color">#212121</item>
+        <item name="attachment_border_color">#d1d1d1</item>
+        <item name="attachment_background_color">#ffffff</item>
+        <item name="bugreporting_thanks_subtitle_color">#757575</item>
+        <item name="bugreporting_thanks_bg_color">@drawable/ib_bug_shape_thanks_bg_light</item>
+        <item name="instabug_seperator_color">#BCBCC2</item>
+        <item name="ib_bug_color_bg_pbi">#E0E0E0</item>
+        <item name="ib_bug_alert_dialog_msg_color">#757575</item>
+    </style>
+    <style name="InstabugDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">?attr/attachment_item_text_color</item>
+        <item name="android:textColorPrimary">?attr/ib_bug_alert_dialog_msg_color</item>
+        <item name="android:background">?attr/instabug_background_color</item>
+    </style>
+</resources>

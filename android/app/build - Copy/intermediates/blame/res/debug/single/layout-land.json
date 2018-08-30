@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\ib_core_lyt_onboarding_activity.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\layout-land\\ib_core_lyt_onboarding_activity.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\ib_lyt_activity_dialog.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\layout-land\\ib_lyt_activity_dialog.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\instabug_survey_fragment_welcome_dialog.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-land\\instabug_survey_fragment_welcome_dialog.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\instabug_lyt_notification.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-chat\\4.15.3\\res\\layout-land\\instabug_lyt_notification.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\instabug_dialog_nps_survey.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-land\\instabug_dialog_nps_survey.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\instabug_dialog_survey.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-land\\instabug_dialog_survey.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\ib_core_lyt_onboarding_pager_fragment.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\layout-land\\ib_core_lyt_onboarding_pager_fragment.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\instabug_survey_fragment_thanks_dialog.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-land\\instabug_survey_fragment_thanks_dialog.xml"
+    }
+]

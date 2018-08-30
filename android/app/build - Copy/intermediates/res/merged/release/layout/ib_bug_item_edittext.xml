@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/instabug_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp" />
+
+    <View
+        android:id="@+id/instabug_edittext_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/instabug_seperator_color" />
+
+    <TextView
+        android:id="@+id/instabug_edittext_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="2dp"
+        android:textColor="@color/instabug_extrafield_error"
+        android:textSize="12sp" />
+</LinearLayout>

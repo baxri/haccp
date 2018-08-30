@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="InstabugSdkTheme.Base.Dark" parent="@android:style/Theme.Material">
+        <item name="android:editTextStyle">@android:style/Widget.Material.EditText</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">#FFdfe1e2</item>
+    </style>
+    <style name="InstabugSdkTheme.Base.Light" parent="@android:style/Theme.Material.Light">
+        <item name="android:editTextStyle">@android:style/Widget.Material.Light.EditText</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">#FF273646</item>
+    </style>
+</resources>

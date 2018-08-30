@@ -1,4 +1,0 @@
-#Tue Jul 03 16:42:26 GET 2018
-base.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\release\\folders\\1000\\1f\\main
-renamed.0=classes.dex
-file.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\release\\folders\\1000\\1f\\main\\classes.dex

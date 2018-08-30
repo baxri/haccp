@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/InstabugBaseToolbarContainer">
+
+    <ImageButton
+        android:id="@+id/instabug_btn_toolbar_left"
+        style="@style/InstabugTopDialogButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/instabug_ic_close"
+        android:tint="?attr/instabug_theme_tinting_color" />
+
+
+    <TextView
+        android:id="@+id/instabug_fragment_title"
+        style="@style/InstabugToolbarTitle"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/instabug_btn_toolbar_left"
+        android:layout_toLeftOf="@+id/instabug_btn_toolbar_right"
+        android:layout_toRightOf="@+id/instabug_btn_toolbar_left"
+        android:layout_toStartOf="@+id/instabug_btn_toolbar_right"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+
+    <ImageButton
+        android:id="@+id/instabug_btn_toolbar_right"
+        style="@style/InstabugTopDialogButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:tint="?attr/instabug_theme_tinting_color"
+        android:rotation="@integer/instabug_icon_lang_rotation"
+        tools:src="@drawable/instabug_ic_next" />
+
+</RelativeLayout>
+

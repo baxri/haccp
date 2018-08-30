@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/instabug_survey_dialog_container"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/instabug_ic_survey_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right|top"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:id="@+id/instabug_dialog_survey_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?survey_container_bg"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/survey_step_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:progressDrawable="@drawable/survey_step_progressbar"/>
+
+        <com.instabug.library.ui.custom.InstabugViewPager
+            android:id="@+id/instabug_survey_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/instabug_btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/survey_button_height"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/instabug_dialog_container_padding"
+            android:layout_marginRight="@dimen/instabug_dialog_container_padding"
+            android:layout_marginTop="@dimen/survey_button_margin_top"
+            android:background="@drawable/survey_large_action_button"
+            android:gravity="center"
+            android:text="@string/instabug_str_action_submit"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/survey_button_text_size"/>
+
+        <include
+            layout="@layout/instabug_lyt_pbi"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="-8dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

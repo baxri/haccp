@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             style="@style/InstabugBaseContainer"
+             android:padding="0dp">
+
+    <ListView
+        android:id="@+id/instabug_lst_chats"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="?attr/instabug_divider_color"
+        android:dividerHeight="1dp"
+        android:drawSelectorOnTop="true"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp">
+
+        <ImageButton
+            android:id="@+id/instabug_btn_new_chat"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:background="@drawable/instabug_bg_white_oval"
+            android:padding="16dp"
+            android:scaleType="center"
+            android:src="@drawable/instabug_ic_plus"/>
+    </FrameLayout>
+
+</FrameLayout>

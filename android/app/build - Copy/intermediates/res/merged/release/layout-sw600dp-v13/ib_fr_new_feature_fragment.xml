@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout_new_feature"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/instabug_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/input_layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/instabug_container_padding"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/instabug_container_padding"
+        android:paddingRight="@dimen/instabug_container_padding"
+        android:paddingTop="@dimen/ib_fr_space_4">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_title"
+                style="@style/IbFrAddCommentEditText"
+                android:hint="@string/feature_requests_new_title"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/title_underline"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/ib_fr_add_comment_edit_text_underline_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_layout_description_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_container"
+        android:layout_marginTop="@dimen/ib_fr_space_16"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/instabug_container_padding"
+        android:paddingRight="@dimen/instabug_container_padding">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_description"
+                style="@style/IbFrAddCommentEditText"
+                android:hint="@string/feature_requests_new_description"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:id="@+id/description_underline"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/ib_fr_add_comment_edit_text_underline_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/txtBottomHintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtBottomHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/ib_fr_str_add_comment_disclaimer"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/feature_requests_new_bottom_hint"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/feature_request_name_email_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtBottomHintLayout"
+        android:padding="@dimen/ib_fr_details_title_padding_left_right">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/name_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_name"
+                    style="@style/IbFrAddCommentEditText"
+                    android:hint="@string/feature_requests_new_name"
+                    android:lines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:id="@+id/name_underline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="4dp"
+                android:background="?attr/ib_fr_add_comment_edit_text_underline_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/email_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null">
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/input_email"
+                    style="@style/IbFrAddCommentEditText"
+                    android:hint="@string/feature_requests_new_email" />
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:id="@+id/email_underline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="4dp"
+                android:background="?attr/ib_fr_add_comment_edit_text_underline_color" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/instabug_survey_dialog_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+    <!-- shadow used in partial view -->
+    <include layout="@layout/layout_shadow" />
+
+    <LinearLayout
+        android:layout_below="@+id/survey_shadow"
+        android:layout_width="match_parent"
+        android:background="?attr/survey_container_bg"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:fillViewport="true"
+        android:orientation="vertical">
+        <!-- -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="?attr/survey_container_bg"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <include layout="@layout/survey_question_textview" />
+
+            <!-- close button used in parial view -->
+            <include layout="@layout/item_close_survey_button" />
+            <!-- -->
+
+            <EditText
+                android:id="@+id/instabug_edit_text_answer"
+                style="@style/InstabugSurveyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/instabug_text_view_question"
+                android:layout_marginBottom="@dimen/survey_bottom_pdi_margin" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

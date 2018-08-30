@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/ib_fr_card_padding_left_right"
+    android:paddingRight="@dimen/ib_fr_card_padding_left_right"
+    android:paddingTop="10dp">
+
+    <com.instabug.featuresrequest.ui.custom.IbFrRippleView
+        android:id="@+id/ib_btn_fr_vote"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/ib_fr_bg_vote_"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:ib_fr_rv_centered="true"
+        app:ib_fr_rv_type="rectangle"
+        app:ib_fr_rv_zoom="true">
+
+        <ImageView
+            android:id="@+id/instabug_txt_feature_request_vote_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ib_fr_ic_vote_arrow" />
+
+        <TextView
+            android:id="@+id/instabug_txt_feature_request_vote_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:fontFamily="SF UI Display"
+            android:textColor="?instabug_fr_text_color"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            tools:text="345" />
+
+        <TextView
+            android:id="@+id/instabug_txt_feature_request_vote_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:fontFamily="SF UI Display"
+            android:text="@string/ib_feature_rq_str_votes"
+            android:textColor="?instabug_fr_text_color"
+            android:textSize="10sp" />
+    </com.instabug.featuresrequest.ui.custom.IbFrRippleView>
+
+    <TextView
+        android:id="@+id/instabug_txt_feature_request_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/ib_btn_fr_vote"
+        android:layout_toRightOf="@+id/ib_btn_fr_vote"
+        android:fontFamily="Roboto"
+        android:lines="2"
+        android:minHeight="50dp"
+        android:textColor="?instabug_fr_text_color"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/instabug_txt_feature_request_status"
+        style="@style/IbFrFeatureStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ib_btn_fr_vote"
+        tools:text="opened" />
+
+    <ImageView
+        android:id="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignBottom="@+id/instabug_txt_feature_request_status"
+        android:layout_alignTop="@+id/instabug_txt_feature_request_status"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/instabug_txt_feature_request_status"
+        android:layout_toRightOf="@+id/instabug_txt_feature_request_status"
+        android:src="@drawable/ib_fr_shape_comment" />
+
+    <TextView
+        android:id="@+id/instabug_txt_feature_request_comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_alignTop="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_toRightOf="@+id/instabug_txt_feature_request_comment_icon"
+        android:fontFamily="Roboto"
+        android:textColor="@color/ib_fr_color_ptr_loading_txt"
+        tools:text="30" />
+
+    <TextView
+        android:id="@+id/instabug_txt_feature_request_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/instabug_txt_feature_request_comment_icon"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/instabug_txt_feature_request_comment_count"
+        android:layout_toRightOf="@+id/instabug_txt_feature_request_comment_count"
+        android:fontFamily="Roboto"
+        android:gravity="end"
+        android:textColor="@color/ib_fr_color_ptr_loading_txt"
+        android:textSize="12sp"
+        tools:text="Just now" />
+
+    <include layout="@layout/ib_fr_view_separator" />
+</RelativeLayout>

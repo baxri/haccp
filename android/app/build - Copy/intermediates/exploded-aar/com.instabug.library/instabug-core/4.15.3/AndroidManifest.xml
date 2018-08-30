@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.instabug.library" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="27" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application>
+        <service
+            android:name="com.instabug.library.network.worker.uploader.InstabugSessionUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.library.internal.video.VideoProcessingService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.instabug.library.analytics.network.InstabugAnalyticsUploaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.instabug.library.internal.video.RequestPermissionActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.instabug.library.invocation.invocationdialog.InstabugDialogActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/InstabugTranslucentSdkTheme" />
+        <activity
+            android:name="com.instabug.library.ui.onboarding.OnboardingActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/InstabugTranslucentSdkTheme" />
+
+        <service android:name="com.instabug.library.internal.video.AutoScreenRecordingService" />
+    </application>
+
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="instabug_survey_container_padding">8dp</dimen>
+    <dimen name="instabug_survey_welcome_dialog_padding_left_right">140dp</dimen>
+    <dimen name="instabug_survey_welcome_dialog_padding_top_bottom">18dp</dimen>
+    <dimen name="survey_button_height">38dp</dimen>
+    <dimen name="survey_button_margin_top">6dp</dimen>
+    <dimen name="survey_button_text_size">16sp</dimen>
+    <dimen name="survey_nps_likely_top_margin">4dp</dimen>
+    <dimen name="survey_nps_selected_rect_size">30dp</dimen>
+    <dimen name="survey_nps_top_margin">0dp</dimen>
+    <dimen name="survey_rate_us_subTitle_text_size">16sp</dimen>
+    <dimen name="survey_welcome_subtitle_text_margin_top">16sp</dimen>
+    <dimen name="survey_welcome_title_text_size">20sp</dimen>
+</resources>

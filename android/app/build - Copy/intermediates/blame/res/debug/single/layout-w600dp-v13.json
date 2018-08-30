@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-w600dp-v13\\ib_core_lyt_dialog_fragment.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\layout-w600dp-v13\\ib_core_lyt_dialog_fragment.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-w600dp-v13\\instabug_lyt_pbi.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-core\\4.15.3\\res\\layout-w600dp-v13\\instabug_lyt_pbi.xml"
+    }
+]

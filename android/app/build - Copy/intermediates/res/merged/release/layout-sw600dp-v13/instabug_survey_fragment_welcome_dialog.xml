@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instabug_dialog_survey_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:orientation="vertical">
+    <!-- shadow used in partial view -->
+    <include
+        layout="@layout/layout_shadow"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/survey_container_bg"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/item_close_survey_button"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/ib_welcome_survey_title"
+            style="@style/InstabugSurveyDialogQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/instabug_dialog_container_padding"
+            android:layout_marginRight="@dimen/instabug_dialog_container_padding"
+            android:layout_marginTop="24dp"
+            android:text="@string/instabug_survey_welcome_feedback"
+            android:textSize="@dimen/survey_welcome_title_text_size"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/ib_welcome_survey_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ib_welcome_survey_title"
+            android:layout_marginLeft="@dimen/instabug_dialog_container_padding"
+            android:layout_marginRight="@dimen/instabug_dialog_container_padding"
+            android:layout_marginTop="@dimen/survey_welcome_subtitle_text_margin_top"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="start"
+            android:lineSpacingExtra="6dp"
+            android:text="@string/instabug_survey_welcome_feedback_msg"
+            android:textSize="@dimen/survey_welcome_subtitle_text_size"
+            android:textStyle="normal"
+            tools:targetApi="jelly_bean" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/ib_welcome_survey_take_survey"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_above="@id/instabug_pbi_container"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="@dimen/instabug_dialog_container_padding"
+                android:layout_marginRight="@dimen/instabug_dialog_container_padding"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/survey_large_action_button"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/instabug_survey_welcome_button"
+                android:textAllCaps="true"
+                android:textSize="17sp" />
+
+            <include
+                layout="@layout/instabug_lyt_pbi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="-16dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

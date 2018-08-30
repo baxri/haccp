@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ib_core_onboarding_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/instabug_dialog_bg_color"
+    android:paddingBottom="16dp"
+    android:paddingLeft="@dimen/ib_core_onboarding_margin_sides"
+    android:paddingRight="@dimen/ib_core_onboarding_margin_sides"
+    android:paddingTop="16dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <com.instabug.library.ui.custom.InstabugViewPager
+            android:id="@+id/ib_core_onboarding_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/instabug_bg_card" />
+
+        <com.instabug.library.ui.custom.pagerindicator.DotIndicator
+            android:id="@+id/ib_core_onboarding_viewpager_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ib_core_onboarding_viewpager"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            app:selectedDotDiameter="6dp"
+            app:unselectedDotDiameter="6dp" />
+
+        <TextView
+            android:id="@+id/ib_core_onboarding_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/ib_core_onboarding_viewpager_indicator"
+            android:layout_alignBottom="@+id/ib_core_onboarding_viewpager"
+            android:paddingBottom="18dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/ib_str_beta_done"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <include
+            layout="@layout/instabug_lyt_pbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ib_core_onboarding_viewpager"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp" />
+    </RelativeLayout>
+</RelativeLayout>

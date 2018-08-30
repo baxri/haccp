@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/instabug_survey_dialog_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+    <!-- shadow used in partial view -->
+    <include layout="@layout/layout_shadow" />
+    <!-- -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/survey_shadow"
+        android:background="?attr/survey_container_bg"
+        android:orientation="vertical">
+
+        <include layout="@layout/survey_question_textview" />
+        <!-- close button used in parial view -->
+        <include layout="@layout/item_close_survey_button" />
+        <!-- -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/instabug_text_view_question"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/instabug_dialog_container_padding"
+                android:layout_marginRight="@dimen/instabug_dialog_container_padding"
+                android:layout_weight="1">
+
+                <GridView
+                    android:id="@+id/instabug_survey_mcq_grid_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/survey_mcq_list_top_margin"
+                    android:horizontalSpacing="@dimen/instabug_container_padding"
+                    android:numColumns="1"
+                    android:verticalSpacing="@dimen/instabug_container_padding" />
+
+                <View
+                    android:id="@+id/survey_mcq_fade"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/survey_mcq_fade_light"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

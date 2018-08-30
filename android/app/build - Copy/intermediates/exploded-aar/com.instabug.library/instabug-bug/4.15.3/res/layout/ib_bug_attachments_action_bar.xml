@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instabug_attachment_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="80dp"
+    app:behavior_skipCollapsed="false"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    tools:targetApi="honeycomb">
+
+    <LinearLayout
+        android:id="@+id/ib_bottomsheet_arrow_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="bottom|center_horizontal"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/arrow_handler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            android:paddingTop="4dp"
+            app:srcCompat="@drawable/ib_bug_ic_arrow_down" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/instabug_divider" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/attachment_background_color">
+
+        <LinearLayout
+            android:id="@+id/instabug_attach_video"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/instabug_attach_video_icon"
+                android:layout_width="@dimen/attachemnt_icon_size"
+                android:layout_height="@dimen/attachemnt_icon_size"
+                android:gravity="center"
+                app:srcCompat="@drawable/ib_bug_ic_attach_video" />
+
+            <TextView
+                android:id="@+id/instabug_attach_video_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/instabug_str_record_video"
+                android:textColor="?attr/attachment_item_text_color"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/instabug_add_attachment"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:padding="16dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/instabug_add_attachment_icon"
+                style="@style/AttachmentIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                app:srcCompat="@drawable/ib_bug_ic_attachment" />
+
+            <TextView
+                android:id="@+id/instabug_add_attachment_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toEndOf="@+id/instabug_add_attachment_icon"
+                android:layout_toRightOf="@+id/instabug_add_attachment_icon"
+                android:text="@string/instabug_str_add_attachment"
+                android:textColor="?attr/attachment_item_text_color"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/instabug_add_attachment_label"
+                android:layout_toRightOf="@+id/instabug_add_attachment_label"
+                android:gravity="end">
+
+                <ImageView
+                    android:id="@+id/ib_bug_attachment_collapsed_video_icon"
+                    style="@style/AttachmentIcon"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:gravity="center"
+                    app:srcCompat="@drawable/ib_bug_ic_attach_video_2" />
+
+                <ImageView
+                    android:id="@+id/ib_bug_attachment_collapsed_screenshot_icon"
+                    style="@style/AttachmentIcon"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@drawable/ib_bug_ic_attach_screenshot_2" />
+
+                <ImageView
+                    android:id="@+id/ib_bug_attachment_collapsed_photo_library_icon"
+                    style="@style/AttachmentIcon"
+                    app:srcCompat="@drawable/ib_bug_ic_attach_img_2" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/ib_bug_videorecording_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/instabug_divider" />
+
+    <LinearLayout
+        android:id="@+id/instabug_attach_screenshot"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/attachment_background_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/instabug_attach_screenshot_icon"
+            style="@style/AttachmentIcon"
+            android:gravity="center"
+            app:srcCompat="@drawable/ib_bug_ic_attach_screenshot" />
+
+        <TextView
+            android:id="@+id/instabug_attach_screenshot_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/instabug_str_take_screenshot"
+            android:textColor="?attr/attachment_item_text_color"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/ib_bug_screenshot_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/instabug_divider" />
+
+    <LinearLayout
+        android:id="@+id/instabug_attach_gallery_image"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/attachment_background_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/instabug_attach_gallery_image_icon"
+            style="@style/AttachmentIcon"
+            android:gravity="center"
+            app:srcCompat="@drawable/ib_bug_ic_attach_img" />
+
+        <TextView
+            android:id="@+id/instabug_attach_gallery_image_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/instabug_str_add_photo"
+            android:textColor="?attr/attachment_item_text_color"
+            android:textSize="17sp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>

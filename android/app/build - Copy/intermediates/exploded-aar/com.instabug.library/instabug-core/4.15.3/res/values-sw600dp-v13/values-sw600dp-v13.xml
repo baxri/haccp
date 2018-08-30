@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isTablet">true</bool>
+    <dimen name="ib_core_onboarding_margin_sides">200dp</dimen>
+    <dimen name="ib_core_prompt_dialog_padding">120dp</dimen>
+    <dimen name="instabug_actionbar_height">56dp</dimen>
+</resources>

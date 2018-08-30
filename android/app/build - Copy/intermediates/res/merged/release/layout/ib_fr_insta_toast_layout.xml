@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.instabug.featuresrequest.ui.custom.SnackbarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Design.Snackbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginTop="0dp"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    />

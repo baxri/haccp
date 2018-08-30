@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="color|reference" name="instabug_survey_mcq_radio_icon_color"/>
+    <attr format="color|reference" name="instabug_survey_mcq_text_color"/>
+    <attr format="color|reference" name="instabug_survey_mcq_text_color_selected"/>
+    <attr format="color|reference" name="instabug_survey_mcq_unselected_bg"/>
+    <attr format="color|reference" name="instabug_survey_question_color"/>
+    <attr format="reference" name="survey_container_bg"/>
+    <attr format="reference" name="survey_edittext_background"/>
+    <attr format="color|reference" name="survey_nps_background_color"/>
+    <attr format="color|reference" name="survey_nps_circles_color"/>
+    <attr format="color|reference" name="survey_nps_circles_container_background"/>
+    <attr format="color|reference" name="survey_nps_circles_container_border_background"/>
+    <attr format="color|reference" name="survey_nps_numbers_color"/>
+    <attr format="color|reference" name="survey_welcome_subtitle_color"/>
+    <color name="instabug_color_survey_separator">#0D000000</color>
+    <color name="instabug_color_text_grey_light">#FFA5A5A5</color>
+    <color name="instabug_survey_back_icon_color">#C6C6C6</color>
+    <color name="instabug_survey_pbi_color">#525E6C</color>
+    <color name="instabug_survey_txt_color_grey">#B1B1B1</color>
+    <color name="instabug_text_color_light_grey">#898989</color>
+    <color name="nps_background_dark">#363636</color>
+    <color name="nps_background_light">#FFFFFF</color>
+    <color name="nps_circles_dark">#3E3E3E</color>
+    <color name="nps_circles_light">#D8D8D8</color>
+    <color name="nps_circles_rect_background_dark">#4D4D4D</color>
+    <color name="nps_circles_rect_background_light">#F9F9F9</color>
+    <color name="nps_circles_rect_border_dark">#4D4D4D</color>
+    <color name="nps_circles_rect_border_light">#ECECEC</color>
+    <color name="nps_numbers_dark">#AEAEAE</color>
+    <color name="nps_numbers_light">#99000000</color>
+    <color name="survey_btn_disabled_color_dark">#5F5F5F</color>
+    <color name="survey_btn_disabled_color_light">#D9D9D9</color>
+    <color name="survey_btn_txt_color_dark">#888888</color>
+    <color name="survey_edittext_background">#F8FAFB</color>
+    <color name="survey_edittext_background_dark">#4D4D4D</color>
+    <color name="survey_mcq_unselected_dark">#AEAEAE</color>
+    <color name="survey_mcq_unselected_light">#D8D8D8</color>
+    <color name="survey_nps_txt_bg_color_dark">#565656</color>
+    <color name="survey_nps_txt_color_dark">#C7C7C7</color>
+    <color name="survey_nps_txt_color_light">#B5B5B5</color>
+    <color name="survey_rate_selected">#F8E71C</color>
+    <color name="survey_rate_unselected_dark">#515151</color>
+    <color name="survey_rate_unselected_light">#E6E6E6</color>
+    <color name="survey_txt_color_dark">#EFEFEF</color>
+    <color name="survey_txt_color_light">#B3000000</color>
+    <color name="surveys_nps_box_color_white">#F3F3F3</color>
+    <color name="welcome_screen_subtitle_dark">#EFEFEF</color>
+    <color name="welcome_screen_subtitle_light">#B3747474</color>
+    <declare-styleable name="NpsView"><attr format="integer" name="nps_count"/><attr format="dimension" name="nps_num_text_size"/><attr format="dimension" name="nps_selected_num_text_size"/><attr format="dimension" name="nps_selected_view_edge_size"/><attr format="dimension" name="nps_selected_rect_size"/><attr format="dimension" name="nps_rect_corners_radius"/></declare-styleable>
+    <dimen name="ib_survey_thanks_dialog">218dp</dimen>
+    <dimen name="ib_survey_thanks_subtitle">15sp</dimen>
+    <dimen name="ib_survey_thanks_title">25sp</dimen>
+    <dimen name="instabug_survey_container_padding">16dp</dimen>
+    <dimen name="instabug_survey_dialog_padding_left_right">16dp</dimen>
+    <dimen name="instabug_survey_dialog_padding_top_bottom">20dp</dimen>
+    <dimen name="instabug_survey_pager_top_space">4dp</dimen>
+    <dimen name="instabug_survey_welcome_dialog_padding_left_right">40dp</dimen>
+    <dimen name="question_answer_text_height">120dp</dimen>
+    <dimen name="survey_bottom_pdi_margin">30dp</dimen>
+    <dimen name="survey_button_height">48dp</dimen>
+    <dimen name="survey_button_margin_top">10dp</dimen>
+    <dimen name="survey_button_text_size">16sp</dimen>
+    <dimen name="survey_edittext_top_margin">16dp</dimen>
+    <dimen name="survey_margin_left_right">24dp</dimen>
+    <dimen name="survey_mcq_list_top_margin">16dp</dimen>
+    <dimen name="survey_nps_height">100dp</dimen>
+    <dimen name="survey_nps_likely_labels_size">13sp</dimen>
+    <dimen name="survey_nps_likely_top_margin">8dp</dimen>
+    <dimen name="survey_nps_selected_rect_size">36dp</dimen>
+    <dimen name="survey_nps_selection_text_size">26sp</dimen>
+    <dimen name="survey_nps_text_size">15sp</dimen>
+    <dimen name="survey_nps_top_margin">-16dp</dimen>
+    <dimen name="survey_question_text_size">13sp</dimen>
+    <dimen name="survey_question_title">17sp</dimen>
+    <dimen name="survey_question_top_margin">16dp</dimen>
+    <dimen name="survey_rate_us_image_height">70dp</dimen>
+    <dimen name="survey_rate_us_subTitle_text_size">16sp</dimen>
+    <dimen name="survey_rate_us_title_text_size">25sp</dimen>
+    <dimen name="survey_rating_bar_margin_top">24dp</dimen>
+    <dimen name="survey_star_margin_top">24dp</dimen>
+    <dimen name="survey_text_end_margin">40dp</dimen>
+    <dimen name="survey_welcome_subtitle_text_margin_top">16dp</dimen>
+    <dimen name="survey_welcome_subtitle_text_size">14sp</dimen>
+    <dimen name="survey_welcome_title_text_size">22sp</dimen>
+    <style name="InstabugSurveyDark" parent="InstabugSdkTheme.Dark">
+        <item name="survey_container_bg">@drawable/survey_container_bg_dark</item>
+        <item name="survey_edittext_background">@drawable/survey_edittext_dark</item>
+        <item name="instabug_survey_mcq_unselected_bg">#4D4D4D</item>
+        <item name="instabug_survey_mcq_text_color">#AEAEAE</item>
+        <item name="instabug_survey_mcq_text_color_selected">#FFFFFF</item>
+        <item name="instabug_survey_question_color">@color/survey_txt_color_dark</item>
+        <item name="instabug_survey_mcq_radio_icon_color">@color/survey_mcq_unselected_dark</item>
+        <item name="survey_nps_circles_container_background">@color/nps_circles_rect_background_dark</item>
+        <item name="survey_nps_circles_container_border_background">@color/nps_circles_rect_border_dark</item>
+        <item name="survey_nps_circles_color">@color/nps_circles_dark</item>
+        <item name="survey_nps_numbers_color">@color/nps_numbers_dark</item>
+        <item name="survey_nps_background_color">@color/nps_background_dark</item>
+        <item name="survey_welcome_subtitle_color">@color/welcome_screen_subtitle_dark</item>
+
+    </style>
+    <style name="InstabugSurveyDialogQuestion" parent="InstabugBaseText">
+        <item name="android:textSize">@dimen/survey_question_title</item>
+        <item name="android:textColor">?attr/instabug_survey_question_color</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">8dp</item>
+        <item name="android:layout_marginRight">@dimen/survey_text_end_margin</item>
+        <item name="android:layout_marginLeft">@dimen/instabug_dialog_container_padding</item>
+        <item name="android:layout_marginTop">@dimen/survey_question_top_margin</item>
+        <item name="android:background">?attr/instabug_survey_dialog_header_transition</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:maxLines">4</item>
+    </style>
+    <style name="InstabugSurveyEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/instabug_dialog_container_padding</item>
+        <item name="android:layout_marginRight">@dimen/instabug_dialog_container_padding</item>
+        <item name="android:layout_marginTop">@dimen/survey_edittext_top_margin</item>
+        <item name="android:background">?attr/survey_edittext_background</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:hint">@string/instabug_str_hint_enter_your_answer</item>
+        <item name="android:inputType">textAutoCorrect|textMultiLine</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingLeft">@dimen/instabug_container_padding</item>
+        <item name="android:paddingRight">@dimen/instabug_container_padding</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">?attr/instabug_survey_edittext_color</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="InstabugSurveyLight" parent="InstabugSdkTheme.Light">
+        <item name="survey_container_bg">@drawable/survey_container_bg_light</item>
+        <item name="survey_edittext_background">@drawable/survey_edittext_light</item>
+        <item name="instabug_survey_mcq_unselected_bg">#F7F7F7</item>
+        <item name="instabug_survey_mcq_text_color">#484848</item>
+        <item name="instabug_survey_mcq_text_color_selected">#484848</item>
+        <item name="instabug_survey_question_color">@color/survey_txt_color_light</item>
+        <item name="instabug_survey_mcq_radio_icon_color">@color/survey_mcq_unselected_light</item>
+        <item name="survey_nps_circles_container_background">@color/nps_circles_rect_background_light</item>
+        <item name="survey_nps_circles_container_border_background">@color/nps_circles_rect_border_light</item>
+        <item name="survey_nps_circles_color">@color/nps_circles_light</item>
+        <item name="survey_nps_numbers_color">@color/nps_numbers_light</item>
+        <item name="survey_nps_background_color">@color/nps_background_light</item>
+        <item name="survey_welcome_subtitle_color">@color/welcome_screen_subtitle_light</item>
+    </style>
+</resources>

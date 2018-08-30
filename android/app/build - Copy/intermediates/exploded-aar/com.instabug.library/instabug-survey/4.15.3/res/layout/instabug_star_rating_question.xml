@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/instabug_survey_dialog_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+    <!-- shadow used in partial view -->
+    <include layout="@layout/layout_shadow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/survey_shadow"
+        android:background="?attr/survey_container_bg"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <!-- -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="?attr/survey_container_bg"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <include layout="@layout/survey_question_textview" />
+
+            <!-- close button used in parial view -->
+            <include layout="@layout/item_close_survey_button" />
+
+            <com.instabug.survey.ui.custom.RatingView
+                android:id="@+id/ib_ratingbar"
+                android:layout_marginLeft="@dimen/instabug_survey_dialog_padding_top_bottom"
+                android:layout_marginRight="@dimen/instabug_survey_dialog_padding_top_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_below="@+id/instabug_text_view_question"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/survey_question_top_margin"
+                android:layout_marginBottom="@dimen/survey_question_top_margin"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

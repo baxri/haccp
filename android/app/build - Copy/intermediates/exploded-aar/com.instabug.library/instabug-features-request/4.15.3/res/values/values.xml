@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="color" name="ib_fr_add_comment_edit_text_underline_color"/>
+    <attr format="color" name="ib_fr_details_add_feature_tv_color"/>
+    <attr format="color" name="ib_fr_details_comments_status_separator_color"/>
+    <attr format="color" name="ib_fr_details_comments_tv_color"/>
+    <attr format="color" name="ib_fr_details_date"/>
+    <attr format="color" name="ib_fr_details_owner"/>
+    <attr format="color" name="ib_fr_details_subtitle"/>
+    <attr format="color" name="ib_fr_details_title"/>
+    <attr format="color" name="ib_fr_no_comments_icon_color"/>
+    <attr format="color" name="ib_fr_no_comments_txt_color"/>
+    <attr format="color" name="ib_fr_seprator_color"/>
+    <attr format="color" name="ib_fr_str_add_comment_disclaimer"/>
+    <attr format="color" name="ib_fr_thanks_title_color"/>
+    <color name="ib_fr_add_comment_edit_text_underline_color_default_dark">#4c4c4c</color>
+    <color name="ib_fr_add_comment_edit_text_underline_color_default_light">#cccccc</color>
+    <color name="ib_fr_add_comment_error">#F41337</color>
+    <color name="ib_fr_colorAccent">#295dfd</color>
+    <color name="ib_fr_colorPrimary">#3F51B5</color>
+    <color name="ib_fr_colorPrimaryDark">#3F51B5</color>
+    <color name="ib_fr_color_completed">#57D99B</color>
+    <color name="ib_fr_color_dimmed_state">#c8ffffff</color>
+    <color name="ib_fr_color_highlight">#F2FF00</color>
+    <color name="ib_fr_color_in_progress">#FF7E00</color>
+    <color name="ib_fr_color_maybe_later">#A7A7A7</color>
+    <color name="ib_fr_color_opened">#98BDFF</color>
+    <color name="ib_fr_color_ordinary_state">#ffffff</color>
+    <color name="ib_fr_color_planned">#C27DFF</color>
+    <color name="ib_fr_color_ptr_loading_txt">#808080</color>
+    <color name="ib_fr_details_add_feature_tv_color_dark">#6c6c6d</color>
+    <color name="ib_fr_details_add_feature_tv_color_light">#909090</color>
+    <color name="ib_fr_details_comments_status_change_light">#B6B4B4</color>
+    <color name="ib_fr_details_comments_status_separator_color_dark">#4E4E4E</color>
+    <color name="ib_fr_details_comments_status_separator_color_light">#e6e6e6</color>
+    <color name="ib_fr_details_comments_tv_color_dark">#808080</color>
+    <color name="ib_fr_details_comments_tv_color_light">#898989</color>
+    <color name="ib_fr_details_date_dark">#808080</color>
+    <color name="ib_fr_details_date_light">#BFBFBF</color>
+    <color name="ib_fr_details_owner_dark">#808080</color>
+    <color name="ib_fr_details_owner_light">#808080</color>
+    <color name="ib_fr_details_subtitle_color_dark">#7F7F7F</color>
+    <color name="ib_fr_details_subtitle_color_light">#808080</color>
+    <color name="ib_fr_details_title_color_dark">#CCCCCC</color>
+    <color name="ib_fr_details_title_color_light">#333333</color>
+    <color name="ib_fr_new_feature_toast_bg">#4D4D4D</color>
+    <color name="ib_fr_no_comments_icon_color_dark">#424242</color>
+    <color name="ib_fr_no_comments_icon_color_light">#e6e6e6</color>
+    <color name="ib_fr_no_comments_txt_color_dark">#4d4d4d</color>
+    <color name="ib_fr_no_comments_txt_color_light">#BFBFBF</color>
+    <color name="ib_fr_pbi_color">#525E6C</color>
+    <color name="ib_fr_ripple_color">#ffffff</color>
+    <color name="ib_fr_seprator_color_dark">#404040</color>
+    <color name="ib_fr_seprator_color_light">#e6e6e6</color>
+    <color name="ib_fr_str_add_comment_disclaimer_dark">#666666</color>
+    <color name="ib_fr_str_add_comment_disclaimer_light">#EEEEEE</color>
+    <color name="ib_fr_str_add_comment_disclaimer_txt_color">#A9A9A9</color>
+    <color name="ib_fr_thanks_title_color_dark">#8f8f8f</color>
+    <color name="ib_fr_thanks_title_color_light">#6b6b6b</color>
+    <color name="ib_fr_toolbar_dark_color">#212121</color>
+    <color name="ib_fr_toolbar_vote_btn_stroke_color">#1b000000</color>
+    <color name="ib_fr_vote_text_dark">#c1c1c1</color>
+    <color name="ib_fr_vote_text_light_color">#808080</color>
+    <color name="ib_fr_white">#FFFFFF</color>
+    <declare-styleable name="IbFrRippleView"><attr format="integer" name="ib_fr_rv_alpha"/><attr format="integer" name="ib_fr_rv_framerate"/><attr format="integer" name="ib_fr_rv_rippleDuration"/><attr format="integer" name="ib_fr_rv_zoomDuration"/><attr format="color" name="ib_fr_rv_color"/><attr format="boolean" name="ib_fr_rv_centered"/><attr format="enum" name="ib_fr_rv_type">
+            <enum name="simpleRipple" value="0"/>
+            <enum name="doubleRipple" value="1"/>
+            <enum name="rectangle" value="2"/>
+        </attr><attr format="dimension" name="ib_fr_rv_ripplePadding"/><attr format="boolean" name="ib_fr_rv_zoom"/><attr format="float" name="ib_fr_rv_zoomScale"/></declare-styleable>
+    <dimen name="ib_fr_add_comment_height">40dp</dimen>
+    <dimen name="ib_fr_card_padding_left_right">16dp</dimen>
+    <dimen name="ib_fr_comment_text_size">15sp</dimen>
+    <dimen name="ib_fr_details_title_padding_left_right">@dimen/ib_fr_space_16</dimen>
+    <dimen name="ib_fr_email_disclaimer_height">24dp</dimen>
+    <dimen name="ib_fr_email_disclaimer_top_margin">0dp</dimen>
+    <dimen name="ib_fr_space_12">12dp</dimen>
+    <dimen name="ib_fr_space_16">16dp</dimen>
+    <dimen name="ib_fr_space_2">2dp</dimen>
+    <dimen name="ib_fr_space_20">20dp</dimen>
+    <dimen name="ib_fr_space_24">24dp</dimen>
+    <dimen name="ib_fr_space_36">36dp</dimen>
+    <dimen name="ib_fr_space_4">4dp</dimen>
+    <dimen name="ib_fr_space_8">8dp</dimen>
+    <dimen name="ib_fr_toast_multi_line_padding">8dp</dimen>
+    <dimen name="ib_fr_toast_single_line_padding">6dp</dimen>
+    <dimen name="ib_fr_toast_text_size">14sp</dimen>
+    <dimen name="ib_fr_user_avatar">32dp</dimen>
+    <style name="IbFrActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#FF0000</item>
+    </style>
+    <style name="IbFrAddCommentEditText">
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textSize">@dimen/ib_fr_comment_text_size</item>
+    </style>
+    <style name="IbFrAppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
+    <style name="IbFrAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/ib_fr_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/ib_fr_colorPrimaryDark</item>
+        <item name="colorAccent">@color/ib_fr_colorAccent</item>
+        <item name="textAllCaps">false</item>
+    </style>
+    <style name="IbFrDark" parent="InstabugSdkTheme.Dark">
+        <item name="ib_fr_details_title">@color/ib_fr_details_title_color_dark</item>
+        <item name="ib_fr_details_subtitle">@color/ib_fr_details_subtitle_color_dark</item>
+        <item name="ib_fr_details_date">@color/ib_fr_details_date_dark</item>
+        <item name="ib_fr_details_owner">@color/ib_fr_details_owner_dark</item>
+        <item name="ib_fr_details_add_feature_tv_color">@color/ib_fr_details_add_feature_tv_color_dark</item>
+        <item name="ib_fr_seprator_color">@color/ib_fr_seprator_color_dark</item>
+        <item name="ib_fr_no_comments_icon_color">@color/ib_fr_no_comments_icon_color_dark</item>
+        <item name="ib_fr_no_comments_txt_color">@color/ib_fr_no_comments_txt_color_dark</item>
+        <item name="ib_fr_details_comments_tv_color">@color/ib_fr_details_comments_tv_color_dark</item>
+        <item name="ib_fr_details_comments_status_separator_color">@color/ib_fr_details_comments_status_separator_color_dark</item>
+        <item name="ib_fr_add_comment_edit_text_underline_color">@color/ib_fr_add_comment_edit_text_underline_color_default_dark</item>
+        <item name="ib_fr_str_add_comment_disclaimer">@color/ib_fr_str_add_comment_disclaimer_dark</item>
+        <item name="ib_fr_thanks_title_color">@color/ib_fr_thanks_title_color_dark</item>
+    </style>
+    <style name="IbFrFeatureStatus">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_toEndOf">@id/ib_btn_fr_vote</item>
+        <item name="android:layout_toRightOf">@+id/ib_btn_fr_vote</item>
+        <item name="android:background">@drawable/ib_fr_bg_status</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="IbFrLight" parent="InstabugSdkTheme.Light">
+        <item name="ib_fr_details_title">@color/ib_fr_details_title_color_light</item>
+        <item name="ib_fr_details_subtitle">@color/ib_fr_details_subtitle_color_light</item>
+        <item name="ib_fr_details_date">@color/ib_fr_details_date_light</item>
+        <item name="ib_fr_details_owner">@color/ib_fr_details_owner_light</item>
+        <item name="ib_fr_details_add_feature_tv_color">@color/ib_fr_details_add_feature_tv_color_light</item>
+        <item name="ib_fr_seprator_color">@color/ib_fr_seprator_color_light</item>
+        <item name="ib_fr_no_comments_icon_color">@color/ib_fr_no_comments_icon_color_light</item>
+        <item name="ib_fr_no_comments_txt_color">@color/ib_fr_no_comments_txt_color_light</item>
+        <item name="ib_fr_details_comments_tv_color">@color/ib_fr_details_comments_tv_color_light</item>
+        <item name="ib_fr_details_comments_status_separator_color">@color/ib_fr_details_comments_status_separator_color_light</item>
+        <item name="ib_fr_add_comment_edit_text_underline_color">@color/ib_fr_add_comment_edit_text_underline_color_default_light</item>
+        <item name="ib_fr_str_add_comment_disclaimer">@color/ib_fr_str_add_comment_disclaimer_light</item>
+        <item name="ib_fr_thanks_title_color">@color/ib_fr_thanks_title_color_light</item>
+    </style>
+    <style name="IbFrPopupMenuOverlapAnchorDark" parent="@style/Theme.AppCompat">
+        <item name="android:overlapAnchor">true</item>
+        <item name="android:dropDownVerticalOffset">16dp</item>
+        <item name="android:dropDownHorizontalOffset">-16dp</item>
+        <item name="colorAccent">#5e5e5e</item>
+    </style>
+    <style name="IbFrPopupMenuOverlapAnchorLight" parent="@style/Theme.AppCompat.Light">
+        <item name="android:overlapAnchor">true</item>
+        <item name="android:dropDownVerticalOffset">16dp</item>
+        <item name="android:dropDownHorizontalOffset">-16dp</item>
+        <item name="colorAccent">#5e5e5e</item>
+    </style>
+    <style name="IbFrToolbarContainer" parent="InstabugBaseToolbarContainer">
+        <item name="android:layout_height">52dp</item>
+    </style>
+    <style name="IbFrToolbarVoteButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">-8dp</item>
+    </style>
+</resources>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\menu\\instabug_bug_reporting.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-bug\\4.15.3\\res\\menu\\instabug_bug_reporting.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\menu\\ib_fr_sorting_actions_pop_up.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-features-request\\4.15.3\\res\\menu\\ib_fr_sorting_actions_pop_up.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\release\\menu\\instabug_bug_annoataion.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-bug\\4.15.3\\res\\menu\\instabug_bug_annoataion.xml"
+    }
+]

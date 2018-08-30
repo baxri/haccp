@@ -34,6 +34,7 @@ import { AdminBackupIndexScreen } from './src/screens/admin/backup/index';
 import { AdminCleanItemScreen } from './src/screens/admin/clean/item';
 import { AdminCleanIndexScreen } from './src/screens/admin/clean/index';
 import { AdminPasswordIndexScreen } from './src/screens/admin/password/index';
+import { AdminRestoreIndexScreen } from './src/screens/admin/restore/index';
 // End Admin Screens
 
 // Front Screens
@@ -370,6 +371,21 @@ const AdminPasswordStack = StackNavigator(
   }
 );
 
+const AdminRestoreStack = StackNavigator(
+  {
+    AdminRestoreIndex: AdminRestoreIndexScreen,
+  },
+  {
+    initialRouteName: 'AdminRestoreIndex',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: headerBackground,
+      },
+      headerTintColor: headerTextColor,
+    }
+  }
+);
+
 const AdminCleanStack = StackNavigator(
   {
     AdminCleanItem: AdminCleanItemScreen,
@@ -394,6 +410,7 @@ const DrawerStackAdmin = DrawerNavigator({
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
   AdminPassword: AdminPasswordStack,
+  AdminRestore: AdminRestoreStack,
   AdminClean: AdminCleanStack,
   AdminLogout: LogOutScreen,
 },

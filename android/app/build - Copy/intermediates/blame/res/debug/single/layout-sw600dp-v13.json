@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\instabug_lyt_notification.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-chat\\4.15.3\\res\\layout-sw600dp-v13\\instabug_lyt_notification.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\27.1.0\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\instabug_dialog_nps_survey.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-sw600dp-v13\\instabug_dialog_nps_survey.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\instabug_survey_fragment_welcome_dialog.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-survey\\4.15.3\\res\\layout-sw600dp-v13\\instabug_survey_fragment_welcome_dialog.xml"
+    },
+    {
+        "merged": "D:\\react\\haccp\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\ib_fr_new_feature_fragment.xml",
+        "source": "D:\\react\\haccp\\android\\app\\build\\intermediates\\exploded-aar\\com.instabug.library\\instabug-features-request\\4.15.3\\res\\layout-sw600dp-v13\\ib_fr_new_feature_fragment.xml"
+    }
+]

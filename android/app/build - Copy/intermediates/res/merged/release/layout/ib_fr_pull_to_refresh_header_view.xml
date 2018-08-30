@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="55dp">
+
+        <LinearLayout
+            android:id="@+id/ptr_classic_header_rotate_view_header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/ib_ptr_header_progressbar"
+                style="?android:attr/progressBarStyleSmallInverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/ptr_header_refreshing_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ib_feature_rq_str_load_more_loading_txt"
+                android:textColor="@color/ib_fr_color_ptr_loading_txt"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/ptr_classic_header_rotate_view_header_text"
+            android:layout_alignTop="@+id/ptr_classic_header_rotate_view_header_text"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/ptr_classic_header_rotate_view_header_text">
+
+            <ImageView
+                android:id="@+id/ptr_classic_header_rotate_view"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ib_fr_ic_arrow_upward"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

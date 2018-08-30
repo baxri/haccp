@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/instabug_survey_dialog_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+        <!-- shadow used in partial view -->
+        <include
+            layout="@layout/layout_shadow"/>
+        <!-- -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/survey_container_bg"
+            android:orientation="vertical">
+
+            <include layout="@layout/survey_question_textview"/>
+
+            <!-- close button used in parial view -->
+            <include layout="@layout/item_close_survey_button"/>
+            <!-- -->
+            <com.instabug.survey.ui.custom.NpsView
+                android:id="@+id/instabug_survey_nps_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/survey_nps_height"
+                android:layout_below="@+id/instabug_text_view_question"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="@dimen/survey_nps_top_margin"
+                app:nps_num_text_size="@dimen/survey_nps_text_size"
+                app:nps_rect_corners_radius="2dp"
+                app:nps_selected_num_text_size="@dimen/survey_nps_selection_text_size"
+                app:nps_selected_rect_size="@dimen/survey_nps_selected_rect_size"
+                app:nps_selected_view_edge_size="11dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/instabug_survey_nps_layout"
+                android:layout_below="@+id/instabug_survey_nps_layout"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="@dimen/survey_nps_likely_top_margin"
+                android:gravity="left"
+                android:text="@string/surveys_nps_less_likely"
+                android:textColor="@color/instabug_color_text_grey_light"
+                android:textSize="@dimen/survey_nps_likely_labels_size"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/instabug_survey_nps_layout"
+                android:layout_below="@+id/instabug_survey_nps_layout"
+                android:layout_marginRight="11dp"
+                android:layout_marginTop="@dimen/survey_nps_likely_top_margin"
+                android:gravity="right"
+                android:text="@string/surveys_nps_very_likely"
+                android:textColor="@color/instabug_color_text_grey_light"
+                android:textSize="@dimen/survey_nps_likely_labels_size"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <!-- Instabug poweredby layout footer -->
+    <include
+        layout="@layout/instabug_lyt_pbi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
