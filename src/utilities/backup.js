@@ -41,24 +41,28 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         let path = await zip(sourcePath, targetPath);
 
+
+        resolve(path);
+        return;
+
         // resolve(path);
         // return;
 
-        formFiles.push({ name: 'zip', filename: zipName, data: RNFetchBlob.wrap(path) });
+        // formFiles.push({ name: 'zip', filename: zipName, data: RNFetchBlob.wrap(path) });
 
-        console.log(formFiles);
+        // console.log(formFiles);
 
-        let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload-zip', {
-            'haccp-device': ID,
-            'admin-password': adminPassword,
-            'name': name,
-            'Content-Type': 'multipart/form-data',
-        }, formFiles);
+        // let resp = await RNFetchBlob.fetch('POST', 'http://haccp.milady.io/api/upload-zip', {
+        //     'haccp-device': ID,
+        //     'admin-password': adminPassword,
+        //     'name': name,
+        //     'Content-Type': 'multipart/form-data',
+        // }, formFiles);
 
-        let parsedResponse = resp.text();
+        // let parsedResponse = resp.text();
 
-        resolve(resp.text());
-        return;
+        // resolve(resp.text());
+        // return;
 
         // formFiles.push({ name: 'realm', filename: PATH_REALM_FILE, data: RNFetchBlob.wrap(DB) });
 

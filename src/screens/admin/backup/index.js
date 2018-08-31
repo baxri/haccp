@@ -454,8 +454,9 @@ export class AdminBackupIndexScreen extends React.Component {
                                     <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
-                            <View style={{ height: 100, }}></View>
-                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
+
+                            {/* <View style={{ height: 100, }}></View> */}
+                            {/* <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
                             <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
@@ -466,8 +467,9 @@ export class AdminBackupIndexScreen extends React.Component {
                                     value={this.state.backup_id} onChangeText={(value) => { this.setState({ backup_id: value }) }} />
                                 {this.state.backup_id.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                                 {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
-                            </View>
-                            <Button danger style={styles.button} onPress={() => { this._restore() }}>
+                            </View> */}
+
+                            <Button danger style={styles.button} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
                                 <Left >
                                     <Text style={[{ color: 'white', }, styles.text]}>{Strings.RESTORE}</Text>
                                 </Left>
@@ -475,7 +477,6 @@ export class AdminBackupIndexScreen extends React.Component {
                                     <Icon name='cloud-download' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
-
 
                             {/* <View style={{ height: 50, }}></View>
                             <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
