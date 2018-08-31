@@ -23,7 +23,7 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH_BACKUP } from '../../../utilities/index';
+import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE } from '../../../utilities/index';
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
@@ -90,9 +90,38 @@ export class AdminBackupRestoreScreen extends React.Component {
     }
 
     _restore(zip) {
-        
-        alert(zip.path);
+        let zipPath = zip.path;
+        let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
+        RNFS.readDir(PATH).then(async files => {
+            //Delete all images
+            if (files.length > 0) {
+                files.map(file => {
+                    RNFetchBlob.fs.unlink(PATH + '/' + file).then(() => { })
+                });
+            }
+
+            //Delete db file
+            RNFetchBlob.fs.unlink(DB);
+
+            const sourcePath = zipPath;
+            const targetPath = PATH;
+
+            //Unzip backup
+            await unzip(sourcePath, targetPath);
+
+            // Move beckup db file to destination
+            await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
+
+            //Remove realm file from unzipped folder
+            RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
+
+            //Restart application
+            RestartAndroid.restart();
+
+        }).catch(error => {
+            alert(error);
+        });
     }
 
     render() {
@@ -116,7 +145,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'gray'}}>Click right icon to restore this backup</Text>
+                                        <Text style={{ marginBottom: 10, color: 'gray' }}>Click right icon to restore this backup</Text>
                                     </View>
                                 </Left>
                                 <Right>
