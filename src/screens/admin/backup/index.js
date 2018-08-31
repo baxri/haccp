@@ -13,7 +13,7 @@ import {
     Linking
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import {
@@ -34,7 +34,7 @@ import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
+import { PATH_BACKUP, LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
 import { upload } from '../../../utilities/backup';
 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
@@ -58,6 +58,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.BACKUP} />,
+            headerRight: <Space />,
         };
     };
 
@@ -111,109 +112,6 @@ export class AdminBackupIndexScreen extends React.Component {
         }).catch(error => {
             alert(error);
         });
-    }
-
-    _restore = async () => {
-        let backup_id = this.state.backup_id;
-
-        if (backup_id.length == 0) {
-            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
-        }
-
-        let download = 'http://haccp.milady.io/admin/download/' + backup_id;
-        this._showLoader();
-
-        bugsnag.leaveBreadcrumb('Init images folder...');
-        await initImages();
-
-        try {
-
-            bugsnag.leaveBreadcrumb('Start _restore function try block.');
-
-            var filename = Math.floor(Date.now() / 1000) + '.zip';
-            bugsnag.leaveBreadcrumb('Generate random .zip filename with Math filename: ' + filename);
-
-            var filepath = PATH_ZIP + "/" + filename;
-
-            bugsnag.leaveBreadcrumb('Starting RNFetchBlob download method...');
-            let res = await RNFetchBlob.config({
-                fileCache: true,
-                path: filepath
-            }).fetch('GET', download, {});
-            bugsnag.leaveBreadcrumb('Received download response...');
-
-            let status = res.info().status;
-            bugsnag.leaveBreadcrumb('Download response http status = ' + status);
-
-            if (status == 200) {
-                let IMAGES = PATH;
-                let DB = PATH_REALM + "/" + PATH_REALM_FILE;
-
-                let filename = res.path();
-                bugsnag.leaveBreadcrumb('Retrive file path from download response ' + filename);
-
-                bugsnag.leaveBreadcrumb('Start Listing all local images with: RNFetchBlobOld.fs.ls');
-
-                // get a list of files and directories in the main bundle
-                RNFS.readDir(PATH) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
-                    .then(async (files) => {
-                        bugsnag.leaveBreadcrumb(files.length + ' images Loaded from local store');
-                        if (files.length > 0) {
-                            bugsnag.leaveBreadcrumb('Start deleting all images...');
-                            files.map(file => {
-                                RNFetchBlobOld.fs.unlink(IMAGES + '/' + file).then(() => { })
-                            });
-                            bugsnag.leaveBreadcrumb('Finish deleting all images...');
-                        }
-
-                        bugsnag.leaveBreadcrumb('Delete realm file...');
-                        RNFetchBlob.fs.unlink(DB);
-
-                        if (!RNFetchBlob.fs.exists(DB)) {
-                            throw new Error(Strings.CANNOT_DElETE_DATABASE_FILE);
-                        }
-
-                        const sourcePath = res.path();
-                        const targetPath = IMAGES;
-
-                        bugsnag.leaveBreadcrumb('Downloaded path: ' + sourcePath);
-                        bugsnag.leaveBreadcrumb('Target path: ' + targetPath);
-
-                        bugsnag.leaveBreadcrumb('Start unzipping downloaded bundle...');
-                        await unzip(sourcePath, targetPath);
-                        bugsnag.leaveBreadcrumb('Unziping finished...');
-
-                        bugsnag.leaveBreadcrumb('Move downloaded realm file to destination...');
-                        let copy = await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
-
-                        if (!(await RNFetchBlob.fs.exists(DB))) {
-                            throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
-                        }
-
-                        bugsnag.leaveBreadcrumb('Remove realm file from downloaded bundle it is already copied :)');
-                        RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
-
-                        this._hideLoader();
-                        RestartAndroid.restart();
-
-                    })
-                    .catch((error) => {
-                        this._hideLoader();
-                        bugsnag.notify(new Error("NEW CATCH " + error.message));
-                        // alert(error);
-                        alert(error.message);
-                    });
-
-            } else {
-                throw new Error(Strings.PROBLEM_DOWNLOADING_BACKUP);
-            }
-
-        } catch (error) {
-            this._hideLoader();
-            bugsnag.notify(new Error(error));
-            alert(error);
-        }
-
     }
 
     _askDeleteOldData = async () => {
@@ -409,7 +307,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
     render() {
         return (
-            <Container style={{ flex: 1, paddingTop: 50, }} onLayout={this._onLayout.bind(this)}>
+            <Container style={{ flex: 1, paddingTop: 10, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
 
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
@@ -427,11 +325,19 @@ export class AdminBackupIndexScreen extends React.Component {
                         </Button>
  */}
 
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Application details:</H3>
+                        <Text style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</Text>
+                        <Text style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</Text>
 
-                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</H3>
-                        <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Application images:</H3>
+                        <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH}</Text>
 
-                        <H3 style={{ marginBottom: 30, textAlign: 'center' }}>{PATH}</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Backups will be located:</H3>
+                        <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
+
+                        <Button full transparent style={{padding: 10, marginBottom: 20,}} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
+                                <Text style={[styles.text]}>SEE ALL BACKUPS</Text>
+                        </Button>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
 
@@ -469,14 +375,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                 {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
                             </View> */}
 
-                            <Button danger style={styles.button} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
-                                <Left >
-                                    <Text style={[{ color: 'white', }, styles.text]}>{Strings.RESTORE}</Text>
-                                </Left>
-                                <Right>
-                                    <Icon name='cloud-download' style={{ color: 'white', }} />
-                                </Right>
-                            </Button>
+
 
                             {/* <View style={{ height: 50, }}></View>
                             <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>

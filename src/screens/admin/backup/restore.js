@@ -12,9 +12,10 @@ import {
     ListView,
     RefreshControl,
     Text,
+    Alert,
 } from 'react-native';
 import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import { RealmFile } from '../../../database/realm';
@@ -40,6 +41,8 @@ export class AdminBackupRestoreScreen extends React.Component {
                 <Icon name='lock' style={{ color: tintColor, }} />
             ),
             headerTitle: <LogoTitle HeaderText="RESTORE" />,
+            headerRight: <Space />,
+
         };
     };
 
@@ -68,10 +71,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _loadItems = () => {
         RNFS.readDir(PATH_BACKUP).then(files => {
-            console.log(files);
-
-
-            this.setState({ listViewData: files, refreshing: false });
+            this.setState({ listViewData: files.reverse(), refreshing: false });
         }).catch(error => {
             //alert(error);
         });
@@ -89,7 +89,22 @@ export class AdminBackupRestoreScreen extends React.Component {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
+    _restoreAsk(zip) {
+        Alert.alert(
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._restore(zip) },
+            ],
+            { cancelable: false }
+        )
+    }
+
     _restore(zip) {
+
+        this._showLoader();
+
         let zipPath = zip.path;
         let DB = PATH_REALM + "/" + PATH_REALM_FILE;
 
@@ -120,6 +135,7 @@ export class AdminBackupRestoreScreen extends React.Component {
             RestartAndroid.restart();
 
         }).catch(error => {
+            this._hideLoader();
             alert(error);
         });
     }
@@ -153,7 +169,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                                         {/* <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button> */}
-                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._restore(data)}>
+                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._restoreAsk(data)}>
                                             <Icon active name="build" />
                                         </Button>
                                     </View>

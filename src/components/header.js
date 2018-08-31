@@ -24,6 +24,16 @@ export class Menu extends React.Component {
     }
 }
 
+export class Space extends React.Component {
+    render() {
+        return (
+            <View>
+                
+            </View>
+        );
+    }
+}
+
 export class Equipments extends React.Component {
     render() {
         return (
