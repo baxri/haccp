@@ -22,6 +22,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 import { launchCamera } from 'react-native-image-picker';
 
 
@@ -148,15 +149,7 @@ export class FrontCleanIndexScreen extends React.Component {
     }
 
     _pickImage = (schedule) => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        launchCamera(options, (response) => {
+        launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePicture(response.data).then(filename => {
                     // this.setState({

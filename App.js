@@ -413,7 +413,7 @@ const DrawerStackAdmin = DrawerNavigator({
   AdminUsers: AdminUsersStack,
   AdminBackup: AdminBackupStack,
   AdminPassword: AdminPasswordStack,
-  AdminRestore: AdminRestoreStack,
+  // AdminRestore: AdminRestoreStack,
   AdminClean: AdminCleanStack,
   AdminLogout: LogOutScreen,
 },

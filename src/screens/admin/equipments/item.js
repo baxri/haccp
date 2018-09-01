@@ -27,8 +27,9 @@ import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, FilePicturePathTemp, writePictureTemp, writePicture, toDate } from '../../../utilities/index';
-import { styles } from '../../../utilities/styles';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import { styles } from '../../../utilities/styles';
 
 export class AdminEquipmentsItemScreen extends React.Component {
 
@@ -80,15 +81,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
     }
 
     _pickImage = () => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
+        ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePictureTemp(response.data).then(filename => {
                     this.setState({

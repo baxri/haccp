@@ -26,8 +26,8 @@ import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
 import { FilePicturePath, writePicture, toDate, toYM, renderRadios, renderFieldDanger, renderOption, renderFieldSuccess, } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 import { CustomPicker } from 'react-native-custom-picker';
-// import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 export class ControleIndexScreen extends React.Component {
 
@@ -134,15 +134,7 @@ export class ControleIndexScreen extends React.Component {
     }
 
     _pickImage = () => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
+        ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePicture(response.data).then(filename => {
                     this.setState({ source: filename });

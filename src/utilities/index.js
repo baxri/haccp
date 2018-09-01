@@ -121,7 +121,7 @@ export const FilePicturePathTemp = () => {
 };
 
 export const writePicture = async (result) => {
-    var filename = Math.floor(Date.now() / 1000) + '.png';
+    var filename = Math.floor(Date.now() / 1000) + '.jpg';
     var filepath = PATH + "/" + filename;
 
     try {
@@ -133,7 +133,7 @@ export const writePicture = async (result) => {
 };
 
 export const writePictureTemp = async (result) => {
-    var filename = Math.floor(Date.now() / 1000) + '.png';
+    var filename = Math.floor(Date.now() / 1000) + '.jpg';
     var filepath = PATH_TEMP + "/" + filename;
 
     try {

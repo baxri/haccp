@@ -20,6 +20,7 @@ import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles } from '../../../utilities/styles';
 import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 
 var ImagePicker = require('react-native-image-picker');
 
@@ -147,15 +148,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
     }
 
     _pickImage = () => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
+        ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePicture(response.data).then(filename => {
                     this.setState({ equipment_image: filename });

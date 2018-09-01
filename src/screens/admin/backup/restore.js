@@ -36,11 +36,11 @@ export class AdminBackupRestoreScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: 'RESTORE',
+            drawerLabel: Strings.BACKUPS,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='lock' style={{ color: tintColor, }} />
             ),
-            headerTitle: <LogoTitle HeaderText="RESTORE" />,
+            headerTitle: <LogoTitle HeaderText={Strings.BACKUPS} />,
             headerRight: <Space />,
 
         };
@@ -161,7 +161,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'gray' }}>Click right icon to restore this backup</Text>
+                                        <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
                                     </View>
                                 </Left>
                                 <Right>

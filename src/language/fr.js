@@ -207,6 +207,15 @@ const strings = {
     DOWNLOAD_LATEST_APK: 'Télécharger la dernière version',
     BEFORE_UPDATE_PLEASE_MAKE_A_BACKUP: 'Veuillez faire une sauvegarde avant de mettre à jour',
     DOWNLOAD: 'Télécharger',
+
+    APPLICATION_DETAILS: 'APPLICATION_DETAILS',
+    APPLICATION_IMAGES: 'APPLICATION_IMAGES',
+    BACKUPS_FOLDER: 'BACKUPS_FOLDER',
+    BACKUPS: 'BACKUPS',
+    SEE_ALL_BACKUPS: 'SEE_ALL_BACKUPS',
+    CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP: 'CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP',
+
+
 };
 
 export default strings;

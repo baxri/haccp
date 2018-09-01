@@ -28,6 +28,7 @@ import Strings from '../../../language/fr';
 import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
 import { reverseFormat } from '../../../utilities/index';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 import { FilePicturePath, writePicture, toDate, toYM } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
 
@@ -123,15 +124,7 @@ export class NonConformeIndexScreen extends React.Component {
     }
 
     _pickImage = () => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
+        ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePicture(response.data).then(filename => {
                     this.setState({ source: filename });

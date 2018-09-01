@@ -325,18 +325,18 @@ export class AdminBackupIndexScreen extends React.Component {
                         </Button>
  */}
 
-                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Application details:</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.APPLICATION_DETAILS}:</H3>
                         <Text style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.UNIQUE_ID}: {DeviceInfo.getUniqueID()}</Text>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{Strings.APP_ID}: {DeviceInfo.getInstanceID()}</Text>
 
-                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Application images:</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.APPLICATION_IMAGES}:</H3>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH}</Text>
 
-                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>Backups will be located:</H3>
+                        <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.BACKUPS_FOLDER}:</H3>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
 
                         <Button full transparent style={{padding: 10, marginBottom: 20,}} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
-                                <Text style={[styles.text]}>SEE ALL BACKUPS</Text>
+                                <Text style={[styles.text]}>{Strings.SEE_ALL_BACKUPS}</Text>
                         </Button>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}

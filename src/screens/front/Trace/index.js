@@ -17,6 +17,7 @@ import { addPicture, addArchive, ArchivesList } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
+import { imagePickerOptions } from '../../../utilities/image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, writePicture, toDate, toYM } from '../../../utilities/index';
 
@@ -83,15 +84,7 @@ export class TraceIndexScreen extends React.Component {
     }
 
     _pickImage = () => {
-
-        var options = {
-            quality: 1,
-            storageOptions: {
-                cameraRoll: false,
-            }
-        };
-
-        ImagePicker.launchCamera(options, (response) => {
+        ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
                 writePicture(response.data).then(filename => {
                     this.setState({ source: filename });
