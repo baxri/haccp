@@ -80,14 +80,24 @@ export class AdminEquipmentsItemScreen extends React.Component {
         this.setState({ loading: 0 });
     }
 
+    // _pickImage = () => {
+    //     ImagePicker.launchCamera(imagePickerOptions, (response) => {
+    //         if (response.data) {
+    //             writePictureTemp(response.data).then(filename => {
+    //                 this.setState({
+    //                     source: filename,
+    //                     sourcePath: FilePicturePathTemp() + filename,
+    //                 });
+    //             });
+    //         }
+    //     });
+    // };
+
     _pickImage = () => {
         ImagePicker.launchCamera(imagePickerOptions, (response) => {
             if (response.data) {
-                writePictureTemp(response.data).then(filename => {
-                    this.setState({
-                        source: filename,
-                        sourcePath: FilePicturePathTemp() + filename,
-                    });
+                writePicture(response.data).then(filename => {
+                    this.setState({ source: filename });
                 });
             }
         });
@@ -102,40 +112,33 @@ export class AdminEquipmentsItemScreen extends React.Component {
 
     _saveItem() {
 
+        this._showLoader();
         setTimeout(() => {
+            if (!this.state.id) {
+                addEquipment({
+                    name: this.state.name,
+                    source: this.state.source,
+                }).then(res => {
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+                }).catch(error => {
+                    alert(error);
+                });
+            } else {
+                editEquipment({
+                    id: this.state.id,
+                    name: this.state.name,
+                    source: this.state.source,
 
-            let sourcePath = this.state.sourcePath.replace('file://', '');
-            let destinationPath = (FilePicturePath() + this.state.source).replace('file://', '');
-
-            RNFetchBlob.fs.mv(sourcePath, destinationPath).then(data => {
-                if (!this.state.id) {
-                    addEquipment({
-                        name: this.state.name,
-                        source: this.state.source,
-                    }).then(res => {
-                        this.props.navigation.navigate('AdminEquipmentsIndex');
-                        Keyboard.dismiss();
-                        this._hideLoader();
-                    }).catch(error => {
-                        alert(error);
-                    });
-                } else {
-                    editEquipment({
-                        id: this.state.id,
-                        name: this.state.name,
-                        source: this.state.source,
-
-                    }).then(res => {
-                        this.props.navigation.navigate('AdminEquipmentsIndex');
-                        Keyboard.dismiss();
-                        this._hideLoader();
-                    }).catch(error => {
-                        alert(error);
-                    });
-                }
-            }).catch(error => {
-                alert(error);
-            });
+                }).then(res => {
+                    this.props.navigation.navigate('AdminEquipmentsIndex');
+                    Keyboard.dismiss();
+                    this._hideLoader();
+                }).catch(error => {
+                    alert(error);
+                });
+            }
 
         }, 500);
     }
@@ -148,15 +151,15 @@ export class AdminEquipmentsItemScreen extends React.Component {
                     <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
 
                         <View style={{ width: 300, height: 300, marginBottom: 50, }}>
-                            {!this.state.sourcePath && <Button style={{ flex: 1 }} full light onPress={this._pickImage} >
+                            {!this.state.source && <Button style={{ flex: 1 }} full light onPress={this._pickImage} >
                                 <Icon name='camera' fontSize={50} size={50} style={{ color: 'gray', fontSize: 80, }} />
                             </Button>}
-                            {this.state.sourcePath && <View style={{ flex: 1, }}>
+                            {this.state.source && <View style={{ flex: 1, }}>
                                 <View style={{ flex: 0.75, zIndex: 0 }}>
                                     <Image
                                         resizeMode={'cover'}
                                         style={{ flex: 1 }}
-                                        source={{ uri: this.state.sourcePath }}
+                                        source={{ uri: FilePicturePath() + this.state.source }}
                                     />
                                 </View>
                                 <Button style={[styles.button, { zIndex: 1, height: 70, width: 300, position: 'absolute', bottom: 0, }]} onPress={this._pickImage}>
