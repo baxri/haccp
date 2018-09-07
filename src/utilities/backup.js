@@ -24,7 +24,6 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         console.log(copyFrom);
         console.log(copyTo);
 
-        // Copy realm file to main images folder
         await RNFetchBlob.fs.cp(copyFrom, copyTo);
 
         if (!(await RNFetchBlob.fs.exists(copyTo))) {
