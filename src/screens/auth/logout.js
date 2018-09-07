@@ -27,8 +27,6 @@ export class LogOutScreen extends React.Component {
     _bootstrapAsync = async () => {
         await AsyncStorage.setItem('userSession', "");
         await AsyncStorage.setItem('userSessionType', "");
-
-        //Navigate to sign in
         this.props.navigation.navigate('EntryPoint');
     };
 
