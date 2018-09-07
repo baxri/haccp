@@ -16,7 +16,6 @@ import Strings from '../../../language/fr';
 import { reverseFormat, FilePicturePath, toDate } from '../../../utilities/index';
 
 export class ArchiveDetailsScreen extends React.Component {
-
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};
 
