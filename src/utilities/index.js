@@ -83,7 +83,6 @@ export const initImages = async () => {
 
     } catch (error) {
         alert(error);
-        // bugsnag.notify(new Error(error));
     }
 };
 
