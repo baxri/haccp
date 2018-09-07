@@ -17,9 +17,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let files = await RNFetchBlobOld.fs.ls(PATH);
         let formFiles = [];
 
-        // var zipName = 'last-backup.zip';
         let zipName = name + '.zip';
-
         let copyFrom = DB;
         let copyTo = PATH + '/' + PATH_REALM_FILE;
 
