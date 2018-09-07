@@ -25,8 +25,6 @@ export class LogOutScreen extends React.Component {
 
 
     _bootstrapAsync = async () => {
-
-        //Clear Session
         await AsyncStorage.setItem('userSession', "");
         await AsyncStorage.setItem('userSessionType', "");
 
