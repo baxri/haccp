@@ -19,9 +19,6 @@ export class HelloAppScreen extends React.Component {
         };
 
         this._bootstrapAsync();
-
-        // Need func parameter (this is a requred parameter for this screen)
-        // this.props.navigation.state.params.func();
     }
 
     _bootstrapAsync = async () => {
