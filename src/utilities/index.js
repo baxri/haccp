@@ -93,9 +93,6 @@ export const initFolders = async () => {
     try {
         let a = await RNFS.mkdir(PATH_REALM + "/");
         let b = await RNFS.mkdir(PATH_REALM_TEMP + "/");
-        // let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
-        // let c = await RNFetchBlob.fs.mkdir(PATH_REALM_TEMP + '/');
-
     } catch (error) {
         alert(error)
     }
