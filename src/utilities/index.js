@@ -102,7 +102,6 @@ export const initFolders = async () => {
     }
 };
 
-
 export const realmFilePath = () => {
     return PATH_REALM + '/' + PATH_REALM_FILE;
 };
