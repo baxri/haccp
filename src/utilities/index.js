@@ -83,7 +83,6 @@ export const initImages = async () => {
 
     } catch (error) {
         alert(error);
-        // bugsnag.notify(new Error(error));
     }
 };
 
@@ -94,14 +93,10 @@ export const initFolders = async () => {
     try {
         let a = await RNFS.mkdir(PATH_REALM + "/");
         let b = await RNFS.mkdir(PATH_REALM_TEMP + "/");
-        // let b = await RNFetchBlob.fs.mkdir(PATH_REALM + '/');
-        // let c = await RNFetchBlob.fs.mkdir(PATH_REALM_TEMP + '/');
-
     } catch (error) {
         alert(error)
     }
 };
-
 
 export const realmFilePath = () => {
     return PATH_REALM + '/' + PATH_REALM_FILE;
