@@ -14,7 +14,8 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
     try {
 
-        console.log(Upload);
+        alert(Upload);
+
         resolve("OK");
         return;
 

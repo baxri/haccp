@@ -24,7 +24,6 @@ var ImagePicker = require('react-native-image-picker');
 import RNFS from 'react-native-fs';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import Upload from 'react-native-background-upload'
 import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, FilePicturePathTemp, writePictureTemp, writePicture, toDate } from '../../../utilities/index';
 import { imagePickerOptions } from '../../../utilities/image-picker';

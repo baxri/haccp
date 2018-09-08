@@ -150,6 +150,8 @@ android {
     }
 }
 
+//configurations.all { resolutionStrategy.force 'com.squareup.okhttp3:okhttp:3.4.1' } // required by react-native-background-upload until React Native supports okhttp >= okhttp 3.5
+
 dependencies {
     compile project(':instabug-reactnative')
     compile fileTree(dir: "libs", include: ["*.jar"])
