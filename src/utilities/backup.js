@@ -3,6 +3,7 @@ import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
+import Upload from 'react-native-background-upload'
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -12,6 +13,10 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
     console.log(name);
 
     try {
+
+        console.log(Upload);
+        resolve("OK");
+        return;
 
         let ID = DeviceInfo.getUniqueID();
         let files = await RNFetchBlobOld.fs.ls(PATH);
