@@ -3,7 +3,7 @@ import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
-import Upload from 'react-native-background-upload'
+import BackgroundUpload from 'react-native-background-upload'
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -13,11 +13,6 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
     console.log(name);
 
     try {
-
-        alert(Upload);
-
-        resolve("OK");
-        return;
 
         let ID = DeviceInfo.getUniqueID();
         let files = await RNFetchBlobOld.fs.ls(PATH);
@@ -47,6 +42,45 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         let path = await zip(sourcePath, targetPath);
 
+        const options = {
+            url: 'http://haccp.milady.io/api/upload-zip',
+            path: path,
+            method: 'POST',
+            field: 'zip',
+            type: 'multipart',
+            headers: {
+                'content-type': 'application/octet-stream', // Customize content-type
+                'haccp-device': ID,
+                'admin-password': adminPassword,
+                'name': name,
+            },
+            // Below are options only supported on Android
+            notification: {
+                enabled: true
+            }
+        }
+
+        console.log(options);
+
+        // BackgroundUpload.startUpload(options).then((uploadId) => {
+        //     console.log('Upload started')
+        //     BackgroundUpload.addListener('progress', uploadId, (data) => {
+        //         console.log(`Progress: ${data.progress}%`)
+        //     })
+        //     BackgroundUpload.addListener('error', uploadId, (data) => {
+        //         console.log(`Error: ${data.error}%`)
+        //     })
+        //     BackgroundUpload.addListener('cancelled', uploadId, (data) => {
+        //         console.log(`Cancelled!`)
+        //     })
+        //     BackgroundUpload.addListener('completed', uploadId, (data) => {
+        //         // data includes responseCode: number and responseBody: Object
+        //         console.log('Completed!')
+        //         console.log(data)
+        //     })
+        // }).catch((err) => {
+        //     console.log('Upload error!', err)
+        // })
 
         resolve(path);
         return;
