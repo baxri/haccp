@@ -59,25 +59,29 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         console.log(options);
 
-        // BackgroundUpload.startUpload(options).then((uploadId) => {
-        //     console.log('Upload started')
-        //     BackgroundUpload.addListener('progress', uploadId, (data) => {
-        //         console.log(`Progress: ${data.progress}%`)
-        //     })
-        //     BackgroundUpload.addListener('error', uploadId, (data) => {
-        //         console.log(`Error: ${data.error}%`)
-        //     })
-        //     BackgroundUpload.addListener('cancelled', uploadId, (data) => {
-        //         console.log(`Cancelled!`)
-        //     })
-        //     BackgroundUpload.addListener('completed', uploadId, (data) => {
-        //         // data includes responseCode: number and responseBody: Object
-        //         console.log('Completed!')
-        //         console.log(data)
-        //     })
-        // }).catch((err) => {
-        //     console.log('Upload error!', err)
-        // })
+        BackgroundUpload.startUpload(options).then((uploadId) => {
+            console.log('Upload started')
+            BackgroundUpload.addListener('progress', uploadId, (data) => {
+                console.log(`Progress: ${data.progress}%`)
+            })
+            BackgroundUpload.addListener('error', uploadId, (data) => {
+                console.log(`Error: ${data.error}%`)
+                alert(`Error: ${data.error}%`);
+            })
+            BackgroundUpload.addListener('cancelled', uploadId, (data) => {
+                console.log(`Cancelled!`)
+                alert("Canceled!");
+            })
+            BackgroundUpload.addListener('completed', uploadId, (data) => {
+                // data includes responseCode: number and responseBody: Object
+                console.log('Completed!')
+                console.log(data)
+                alert("Upload Completed");
+            })
+        }).catch((err) => {
+            alert('Upload error!', err);
+            console.log('Upload error!', err)
+        })
 
         resolve(path);
         return;
