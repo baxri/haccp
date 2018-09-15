@@ -406,10 +406,6 @@ export class AdminBackupIndexScreen extends React.Component {
                                 </Right>
                             </Button>
                         </View>}
-
-
-
-
                     </View>
                 </Content >
             </Container>
