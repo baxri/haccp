@@ -140,6 +140,33 @@ export class AdminBackupRestoreScreen extends React.Component {
         });
     }
 
+
+    _deleteRowAsk(data, secId, rowId, rowMap) {
+        Alert.alert(
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._deleteRow(data, secId, rowId, rowMap) },
+            ],
+            { cancelable: false }
+        )
+    }
+
+    _deleteRow(data, secId, rowId, rowMap) {
+
+        this._showLoader();
+
+        //Delete zip file
+        RNFetchBlob.fs.unlink(data.path).then(() => {
+            rowMap[`${secId}${rowId}`].props.closeRow();
+            this._loadItems();
+            this._hideLoader();
+        }).catch(error => {
+            this._hideLoader();
+        });
+    }
+
     render() {
         return (
             <Container>
@@ -166,9 +193,9 @@ export class AdminBackupRestoreScreen extends React.Component {
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 140, }}>
-                                        {/* <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._deleteRowAsk(data.id, secId, rowId, rowMap)}>
+                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
-                                        </Button> */}
+                                        </Button>
                                         <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._restoreAsk(data)}>
                                             <Icon active name="build" />
                                         </Button>
