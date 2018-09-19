@@ -35,7 +35,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let path = await zip(sourcePath, targetPath);
 
         // Not to wait for this response
-        uploadOnly(path, name, adminPassword);
+        startUpload(path, name, adminPassword);
 
     } catch (error) {
         reject(error);
@@ -44,58 +44,50 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
 
 
-export const uploadOnly = async (PATH, name, adminPassword = '') => new Promise(async (resolve, reject) => {
+export const startUpload = (PATH, name, adminPassword = '') => {
+    let ID = DeviceInfo.getUniqueID();
+    let path = PATH;
 
-    try {
-
-        let ID = DeviceInfo.getUniqueID();
-        let path = PATH;
-
-        const options = {
-            url: 'http://haccp.milady.io/api/upload-zip',
-            path: path,
-            method: 'POST',
-            field: 'zip',
-            type: 'multipart',
-            headers: {
-                'content-type': 'application/octet-stream',
-                'haccp-device': ID,
-                'admin-password': adminPassword,
-                'name': name,
-            },
-            // Below are options only supported on Android
-            notification: {
-                enabled: true
-            }
+    const options = {
+        url: 'http://haccp.milady.io/api/upload-zip',
+        path: path,
+        method: 'POST',
+        field: 'zip',
+        type: 'multipart',
+        headers: {
+            'content-type': 'application/octet-stream',
+            'haccp-device': ID,
+            'admin-password': adminPassword,
+            'name': name,
+        },
+        notification: {
+            enabled: true
         }
-
-        console.log(options);
-
-        BackgroundUpload.startUpload(options).then((uploadId) => {
-            console.log('Upload started')
-            BackgroundUpload.addListener('progress', uploadId, (data) => {
-                console.log(`Progress: ${data.progress}%`)
-            })
-            BackgroundUpload.addListener('error', uploadId, (data) => {
-                console.log(data)
-                alert(`Error: ${data.error}%`);
-            })
-            BackgroundUpload.addListener('cancelled', uploadId, (data) => {
-                console.log(`Cancelled!`)
-                alert("Canceled!");
-            })
-            BackgroundUpload.addListener('completed', uploadId, (data) => {
-                // data includes responseCode: number and responseBody: Object
-                console.log('Completed!')
-                console.log(data)
-                alert("Upload Completed");
-            })
-        }).catch((err) => {
-            alert('Upload error!', err);
-            console.log('Upload error!', err)
-        })
-    } catch (error) {
-        reject(error);
     }
-});
+
+    console.log(options);
+
+    BackgroundUpload.startUpload(options).then((uploadId) => {
+        console.log('Upload started')
+        BackgroundUpload.addListener('progress', uploadId, (data) => {
+            console.log(`Progress: ${data.progress}%`)
+        })
+        BackgroundUpload.addListener('error', uploadId, (data) => {
+            console.log(data)
+            alert(`Error: ${data.error}%`);
+        })
+        BackgroundUpload.addListener('cancelled', uploadId, (data) => {
+            console.log(`Cancelled!`)
+            alert("Canceled!");
+        })
+        BackgroundUpload.addListener('completed', uploadId, (data) => {
+            console.log('Completed!')
+            console.log(data)
+            alert("Upload Completed");
+        })
+    }).catch((err) => {
+        alert('Upload error!', err);
+        console.log('Upload error!', err)
+    })
+}
 

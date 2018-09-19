@@ -24,7 +24,7 @@ import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE } from '../../../utiliti
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
-import { uploadOnly } from '../../../utilities/backup';
+import { startUpload } from '../../../utilities/backup';
 
 
 export class AdminBackupRestoreScreen extends React.Component {
@@ -169,7 +169,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         this._showLoader();
 
         try {
-            await uploadOnly(data.path, data.name, '123');
+            startUpload(data.path, data.name, '123');
             this._hideLoader();
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
