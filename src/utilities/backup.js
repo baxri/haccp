@@ -37,6 +37,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         // Not to wait for this response
         startUpload(path, name, adminPassword);
 
+        resolve("OK");
     } catch (error) {
         reject(error);
     }
