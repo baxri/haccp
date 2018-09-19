@@ -65,29 +65,16 @@ export const startUpload = (PATH, name, adminPassword = '') => {
         }
     }
 
-    console.log(options);
-
     BackgroundUpload.startUpload(options).then((uploadId) => {
-        console.log('Upload started')
         BackgroundUpload.addListener('progress', uploadId, (data) => {
-            console.log(`Progress: ${data.progress}%`)
         })
         BackgroundUpload.addListener('error', uploadId, (data) => {
-            console.log(data)
-            alert(`Error: ${data.error}%`);
         })
         BackgroundUpload.addListener('cancelled', uploadId, (data) => {
-            console.log(`Cancelled!`)
-            alert("Canceled!");
         })
         BackgroundUpload.addListener('completed', uploadId, (data) => {
-            console.log('Completed!')
-            console.log(data)
-            alert("Upload Completed");
         })
     }).catch((err) => {
-        alert('Upload error!', err);
-        console.log('Upload error!', err)
     })
 }
 
