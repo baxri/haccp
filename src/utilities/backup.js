@@ -41,7 +41,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
             field: 'zip',
             type: 'multipart',
             headers: {
-                'content-type': 'application/octet-stream', /
+                'content-type': 'application/octet-stream', 
                 'haccp-device': ID,
                 'admin-password': adminPassword,
                 'name': name,
