@@ -164,6 +164,18 @@ export class AdminBackupRestoreScreen extends React.Component {
         });
     }
 
+    _uploadOnlyAsk(data) {
+        Alert.alert(
+            Strings.DELETE,
+            Strings.ARE_YOU_SURE,
+            [
+                { text: Strings.CANCEL, style: 'cancel' },
+                { text: Strings.OK, onPress: () => this._uploadOnly(data) },
+            ],
+            { cancelable: false }
+        )
+    }
+
     _uploadOnly = async (data) => {
 
         this._showLoader();
@@ -202,19 +214,19 @@ export class AdminBackupRestoreScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                        {/* <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text> */}
+                                        <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
                                     </View>
                                 </Left>
                                 <Right>
                                     <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 210, }}>
-                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
+                                        <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>
-                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
+                                        <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
                                             <Icon active name="build" />
                                         </Button>
-                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnly(data)}>
-                                            <Icon active name="download" />
+                                        <Button style={{ flex: 3.4, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnlyAsk(data)}>
+                                            <Icon active name="cloud-upload" />
                                         </Button>
                                     </View>
                                 </Right>
