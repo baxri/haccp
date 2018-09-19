@@ -22,8 +22,6 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let copyFrom = DB;
         let copyTo = PATH + '/' + PATH_REALM_FILE;
 
-        console.log(copyFrom);
-        console.log(copyTo);
 
         await RNFetchBlob.fs.cp(copyFrom, copyTo);
 
