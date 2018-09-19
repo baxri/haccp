@@ -18,17 +18,14 @@ import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List
 import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { RealmFile } from '../../../database/realm';
-import Upload from 'react-native-background-upload'
-import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
-import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE } from '../../../utilities/index';
-import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { uploadOnly } from '../../../utilities/backup';
+
 
 export class AdminBackupRestoreScreen extends React.Component {
 
@@ -167,6 +164,23 @@ export class AdminBackupRestoreScreen extends React.Component {
         });
     }
 
+    _uploadOnly = async (data) => {
+
+        this._showLoader();
+
+        try {
+            await uploadOnly(data.path, data.name, '123');
+            this._hideLoader();
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+        } catch (error) {
+            alert(error);
+            this._hideLoader();
+        } finally {
+            this._hideLoader();
+        }
+
+    }
+
     render() {
         return (
             <Container>
@@ -188,16 +202,19 @@ export class AdminBackupRestoreScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
+                                        {/* <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text> */}
                                     </View>
                                 </Left>
                                 <Right>
-                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 140, }}>
-                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 210, }}>
+                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                             <Icon active name="trash" />
                                         </Button>
-                                        <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._restoreAsk(data)}>
+                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
                                             <Icon active name="build" />
+                                        </Button>
+                                        <Button style={{ flex: 0.3, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnly(data)}>
+                                            <Icon active name="download" />
                                         </Button>
                                     </View>
                                 </Right>
