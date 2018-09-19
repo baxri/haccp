@@ -32,7 +32,6 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let targetPath = PATH_BACKUP + '/' + zipName;
         let sourcePath = PATH;
 
-
         let path = await zip(sourcePath, targetPath);
 
         const options = {
