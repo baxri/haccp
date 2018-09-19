@@ -34,39 +34,9 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
         let path = await zip(sourcePath, targetPath);
 
-        const options = {
-            url: 'http://haccp.milady.io/api/upload-zip',
-            path: path,
-            method: 'POST',
-            field: 'zip',
-            type: 'multipart',
-            headers: {
-                'content-type': 'application/octet-stream',
-                'haccp-device': ID,
-                'admin-password': adminPassword,
-                'name': name,
-            },
-            // Below are options only supported on Android
-            notification: {
-                enabled: true
-            }
-        }
+        // Not to wait for this response
+        uploadOnly(path, name, adminPassword);
 
-        BackgroundUpload.startUpload(options).then((uploadId) => {
-            BackgroundUpload.addListener('progress', uploadId, (data) => {
-            })
-            BackgroundUpload.addListener('error', uploadId, (data) => {
-                alert(`Error: ${data.error}%`);
-            })
-            BackgroundUpload.addListener('cancelled', uploadId, (data) => {
-                alert("Canceled!");
-            })
-            BackgroundUpload.addListener('completed', uploadId, (data) => {
-                alert("Upload Completed");
-            })
-        }).catch((err) => {
-            alert('Upload error!', err);
-        })
     } catch (error) {
         reject(error);
     }
