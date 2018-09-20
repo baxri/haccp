@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <View
+        android:id="@+id/instabug_attachments_bottom_sheet_dim_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/instabug_dialog_bg_color"
+        android:clickable="true"/>
+
+
+    <LinearLayout
+        android:id="@+id/instabug_attachments_actions_bottom_sheet"
+        style="@style/InstabugBottomSheetContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/instabug_attach_screenshot"
+            style="@style/InstabugBottomSheetItemContainer">
+
+            <ImageView
+                style="@style/InstabugBottomSheetItemImage"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/instabug_ic_capture_screenshot"
+                android:tint="?attr/instabug_theme_tinting_color"/>
+
+            <TextView
+                android:id="@+id/instabug_attach_screenshot_text"
+                style="@style/InstabugBottomSheetItemText"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/instabug_str_take_screenshot"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/instabug_attach_video"
+            style="@style/InstabugBottomSheetItemContainer">
+
+            <ImageView
+                style="@style/InstabugBottomSheetItemImage"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/instabug_ic_record_video"
+                android:tint="?attr/instabug_theme_tinting_color"/>
+
+            <TextView
+                android:id="@+id/instabug_attach_video_text"
+                style="@style/InstabugBottomSheetItemText"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/instabug_str_record_video"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/instabug_attach_gallery_image"
+            style="@style/InstabugBottomSheetItemContainer">
+
+            <ImageView
+                style="@style/InstabugBottomSheetItemImage"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/instabug_ic_attach_gallery_image"
+                android:tint="?attr/instabug_theme_tinting_color"/>
+
+            <TextView
+                android:id="@+id/instabug_attach_gallery_image_text"
+                style="@style/InstabugBottomSheetItemText"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/instabug_str_add_photo"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

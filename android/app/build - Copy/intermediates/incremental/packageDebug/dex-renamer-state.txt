@@ -1,7 +1,0 @@
-#Tue Aug 07 13:14:30 GET 2018
-base.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
-base.1=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
-file.0=D\:\\react\\haccp\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes2.dex

@@ -35,7 +35,7 @@ var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH_BACKUP, LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
-import { upload } from '../../../utilities/backup';
+import { upload, startDownload } from '../../../utilities/backup';
 
 import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
@@ -305,6 +305,17 @@ export class AdminBackupIndexScreen extends React.Component {
         Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
     };
 
+    _downloadBackupAsk() {
+
+        let backup_id = this.state.backup_id;
+
+        if (backup_id.length == 0) {
+            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
+        }
+
+        startDownload(backup_id);
+    }
+
     render() {
         return (
             <Container style={{ flex: 1, paddingTop: 10, }} onLayout={this._onLayout.bind(this)}>
@@ -335,8 +346,8 @@ export class AdminBackupIndexScreen extends React.Component {
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.BACKUPS_FOLDER}:</H3>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
 
-                        <Button full transparent style={{padding: 10, marginBottom: 20,}} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
-                                <Text style={[styles.text]}>{Strings.SEE_ALL_BACKUPS}</Text>
+                        <Button full transparent style={{ padding: 10, marginBottom: 20, }} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
+                            <Text style={[styles.text]}>{Strings.SEE_ALL_BACKUPS}</Text>
                         </Button>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
@@ -361,8 +372,8 @@ export class AdminBackupIndexScreen extends React.Component {
                                 </Right>
                             </Button>
 
-                            {/* <View style={{ height: 100, }}></View> */}
-                            {/* <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
+                            <View style={{ height: 50, }}></View>
+                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
                             <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
                             <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
@@ -373,8 +384,18 @@ export class AdminBackupIndexScreen extends React.Component {
                                     value={this.state.backup_id} onChangeText={(value) => { this.setState({ backup_id: value }) }} />
                                 {this.state.backup_id.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                                 {this.state.backup_id.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
-                            </View> */}
+                            </View>
 
+                            <Button primary style={[styles.button, { marginBottom: 30 }]} onPress={() => { this._downloadBackupAsk() }}>
+                                <Left >
+                                    <Text style={[{ color: 'white', }, styles.text]}>
+                                        {Strings.DOWNLOAD}
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Icon name='sync' style={{ color: 'white', }} />
+                                </Right>
+                            </Button>
 
 
                             {/* <View style={{ height: 50, }}></View>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:background="?attr/instabug_background_color"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/instabug_img_thanks"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ib_fr_ic_thanks" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ib_fr_space_20"
+            android:gravity="center"
+            android:text="@string/feature_request_str_thanks"
+            android:textColor="?attr/ib_fr_thanks_title_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/feature_request_add_feature_thanks_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="@dimen/ib_fr_space_8"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/feature_request_str_thanks_msg"
+            android:textColor="#8c8c8c"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</LinearLayout>

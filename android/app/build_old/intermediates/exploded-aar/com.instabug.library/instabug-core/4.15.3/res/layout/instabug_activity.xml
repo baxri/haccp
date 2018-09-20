@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/instabug_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/instabug_pbi_footer"
+        android:background="@android:color/transparent" />
+    <!--todo move this footer to fragment or making it as view stub-->
+    <LinearLayout
+        android:id="@+id/instabug_pbi_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/instabug_primary_color"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_view_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/instabug_str_powered_by_instabug"
+            android:textColor="?attr/instabug_foreground_color"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</RelativeLayout>

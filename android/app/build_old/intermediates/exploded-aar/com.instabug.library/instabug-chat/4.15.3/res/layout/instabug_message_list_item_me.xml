@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/instabug_txt_message_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/chat_bubble_sent"
+        android:ellipsize="end"
+        android:textColor="?attr/instabug_sent_message_text_color"
+        android:textSize="@dimen/instabug_normal_text_size"
+        android:visibility="visible"
+        android:autoLink="web"
+        android:textColorLink="@color/instabug_url_color_blue"
+        tools:text="I have some problem that is annoying me." />
+
+    <TextView
+        android:id="@+id/instabug_txt_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:textColor="#999999"
+        android:textSize="@dimen/instabug_date_text_size"
+        tools:text="09:41 AM" />
+
+</LinearLayout>

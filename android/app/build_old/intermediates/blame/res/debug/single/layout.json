@@ -1,0 +1,630 @@
+[
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_add_comment_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_add_comment_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_toolbar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_fragment_toolbar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_extra_fields.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_extra_fields.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_annotation_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_annotation_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_fragment_annotation.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_fragment_annotation.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_conversation_list_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_conversation_list_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_toolbar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_toolbar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_core_lyt_onboarding_activity.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/ib_core_lyt_onboarding_activity.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_activity.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_activity.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_main_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_main_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_insta_toast_include.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_insta_toast_include.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_item_edittext.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_item_edittext.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_extra_field.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_extra_field.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_menu.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_alert_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_alert_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_core_lyt_onboarding_pager_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/ib_core_lyt_onboarding_pager_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_layout_comment_count.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_layout_comment_count.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_pull_to_refresh_footer_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_pull_to_refresh_footer_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow_custom.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_dialog_mcq_survey.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_dialog_mcq_survey.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_completed_features_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_completed_features_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_lyt_activity_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/ib_lyt_activity_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_voice.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_voice.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_video_me.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_video_me.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_feature_request_details_header.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_feature_request_details_header.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/survey_rate_us_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/survey_rate_us_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_layout_tab_icon.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_voice_me.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_voice_me.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_view_separator.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_view_separator.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_me.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_me.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_img.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_img.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/redbox_item_frame.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_item_frame.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_menu_item_action_area.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_sort_bar_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_sort_bar_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_survey_activity.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_survey_activity.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_survey_fragment_welcome_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_survey_fragment_welcome_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_record_audio.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_record_audio.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_insta_toast_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_insta_toast_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_dialog_survey.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_dialog_survey.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_vertical_separator.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_vertical_separator.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_video.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_video.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_layout_no_comments.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_layout_no_comments.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_dialog_nps_survey.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_dialog_nps_survey.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/redbox_item_title.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_item_title.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_attachment_image.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_attachment_image.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_feature_request_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_feature_request_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/dev_loading_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/dev_loading_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_feedback.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_feedback.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_details_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_details_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_layout_tab_text.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_action.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/fps_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/fps_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_layout_snackbar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_dialog_toolbar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_dialog_toolbar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/nps_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/nps_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_lines_media.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_attachments_action_bar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_attachments_action_bar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_extra_field.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_extra_field.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_action_vote_button.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_action_vote_button.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_new_feature_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_new_feature_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_item_admin_comment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_item_admin_comment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_thanks.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_thanks.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_toolbar_activity.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_toolbar_activity.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_item_comment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_item_comment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_dialog_text_survey.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_dialog_text_survey.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_item_status_change.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_item_status_change.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_image_attachment_viewer.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_fragment_image_attachment_viewer.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/survey_question_textview.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/survey_question_textview.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_annotation.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_fragment_annotation.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_bottom_sheet_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_list_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_list_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_survey_fragment_thanks_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_survey_fragment_thanks_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_search_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_search_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_thanks_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_thanks_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/item_close_survey_button.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/item_close_survey_button.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_chats.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_fragment_chats.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/layout_shadow.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/layout_shadow.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_survey_mcq_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_survey_mcq_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_progress_dialog_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_progress_dialog_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_header.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_item_header.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_pbi.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_pbi.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_chat.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_fragment_chat.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_pull_to_refresh_header_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_pull_to_refresh_header_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/list_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/haccp/react-native-image-picker/unspecified/res/layout/list_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_item_disclaimer.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_item_disclaimer.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_activity_bug_reporting.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_activity_bug_reporting.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_message_list_item_img_me.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_message_list_item_img_me.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_core_lyt_dialog_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/ib_core_lyt_dialog_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_media_custom.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_list_error_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_list_error_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_annotation.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_annotation.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_star_rating_question.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout/instabug_star_rating_question.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_video_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_video_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_request_list.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_request_list.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_fragment_attachments_bottom_sheet.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_fragment_attachments_bottom_sheet.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_bug_lyt_attachment_video.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout/ib_bug_lyt_attachment_video.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_action_icon_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_action_icon_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_disclaimer.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_disclaimer.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_action_text_view.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_action_text_view.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_toolbar_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_toolbar_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_disclaimer_details.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/instabug_lyt_disclaimer_details.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_tooltip.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_tooltip.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/instabug_lyt_notification.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-chat/4.15.3/res/layout/instabug_lyt_notification.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.4.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_features_list_empty_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_features_list_empty_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_subheader.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_fr_powered_by_instabug_layout.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout/ib_fr_powered_by_instabug_layout.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/ib_dialog_list_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout/ib_dialog_list_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_custom.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/27.1.0/res/layout/notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_item.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_navigation_item_separator.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout/design_bottom_navigation_item.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.android.support/design/27.1.0/res/layout/design_bottom_navigation_item.xml"
+    }
+]

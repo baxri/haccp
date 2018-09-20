@@ -4,6 +4,7 @@ import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import BackgroundUpload from 'react-native-background-upload'
+import BackgroundDowoloader from 'react-native-background-downloader';
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -77,5 +78,31 @@ export const startUpload = (PATH, name, adminPassword = '') => {
         })
     }).catch((err) => {
     })
+}
+
+
+export const startDownload = async (backupID) => {
+
+    Linking.openURL('http://haccp.milady.io/admin/download/' + backupID);
+    return;
+
+    let path = `${PATH_ZIP}/${backupID}.zip`;
+    let lostTasks = await BackgroundDowoloader.checkForExistingDownloads();
+
+    let task = BackgroundDowoloader.download({
+        id: backupID,
+        url: 'http://haccp.milady.io/admin/download/' + backupID,
+        destination: path
+    }).begin((expectedBytes) => {
+        console.log(`Going to download ${expectedBytes} bytes!`);
+    }).progress((percent) => {
+        console.log(`Downloaded: ${percent * 100}%`);
+    }).done(() => {
+        console.log('Download is done!');
+    }).error((error) => {
+        console.log('Download canceled due to error: ', error);
+    });
+
+    console.log(lostTasks);
 }
 

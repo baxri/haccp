@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+             style="@style/InstabugTopDialogButton"
+             android:layout_centerVertical="true"
+             android:layout_margin="0dp"
+             android:foreground="?android:selectableItemBackground"
+             android:rotation="@integer/instabug_icon_lang_rotation"/>

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/release/layout-w600dp-v13/instabug_lyt_pbi.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout-w600dp-v13/instabug_lyt_pbi.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/release/layout-w600dp-v13/ib_core_lyt_dialog_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-core/4.15.3/res/layout-w600dp-v13/ib_core_lyt_dialog_fragment.xml"
+    }
+]

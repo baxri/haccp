@@ -26,6 +26,7 @@ import com.rnrestartandroid.RNRestartAndroidPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
+import com.eko.RNBackgroundDownloaderPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -50,7 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNRestartAndroidPackage(),
           BugsnagReactNative.getPackage(),
           new BackgroundJobPackage(),
-          new RNBackgroundFetchPackage()
+          new RNBackgroundFetchPackage(),
+          new RNBackgroundDownloaderPackage()
       );
     }
 

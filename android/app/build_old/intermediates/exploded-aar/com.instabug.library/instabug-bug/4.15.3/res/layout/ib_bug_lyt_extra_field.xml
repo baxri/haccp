@@ -1,0 +1,8 @@
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/instabug_extra_field"
+          style="@style/InstabugEditTextStyle"
+          android:layout_height="wrap_content"
+          android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
+          android:minLines="2"
+          tools:text="Hello\nOther\nWorld"/>

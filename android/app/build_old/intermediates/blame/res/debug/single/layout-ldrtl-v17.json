@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/ib_fr_add_comment_fragment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout-ldrtl-v17/ib_fr_add_comment_fragment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/instabug_survey_fragment_welcome_dialog.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout-ldrtl-v17/instabug_survey_fragment_welcome_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/ib_bug_lyt_attachment_video.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout-ldrtl-v17/ib_bug_lyt_attachment_video.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/ib_fr_feature_request_details_header.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout-ldrtl-v17/ib_fr_feature_request_details_header.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/ib_fr_item_comment.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-features-request/4.15.3/res/layout-ldrtl-v17/ib_fr_item_comment.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/instabug_dialog_survey.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout-ldrtl-v17/instabug_dialog_survey.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/item_close_survey_button.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-survey/4.15.3/res/layout-ldrtl-v17/item_close_survey_button.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/res/merged/debug/layout-ldrtl-v17/ib_bug_lyt_attachment_image.xml",
+        "source": "/Users/mac/Documents/react/haccp/android/app/build/intermediates/exploded-aar/com.instabug.library/instabug-bug/4.15.3/res/layout-ldrtl-v17/ib_bug_lyt_attachment_image.xml"
+    }
+]

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/instabug_video_attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:id="@+id/instabug_img_video_attachment"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/chat_bubble_sent"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/instabug_ic_video" />
+
+        <FrameLayout
+            android:layout_width="94dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp">
+
+            <ProgressBar
+                android:id="@+id/instabug_video_attachment_progress_bar"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="14dp" />
+
+            <ImageView
+                android:id="@+id/instabug_btn_play_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:src="@drawable/instabug_ic_play"
+                android:tint="?attr/instabug_foreground_color"
+                android:visibility="gone" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/instabug_txt_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:textColor="#999999"
+        android:textSize="@dimen/instabug_date_text_size"
+        tools:text="09:41 AM" />
+
+</LinearLayout>
