@@ -201,12 +201,10 @@ export class AdminBackupRestoreScreen extends React.Component {
                     refreshing={this.state.refreshing}
                     onRefresh={() => { this._onRefresh() }} />
                 }>
-
                     {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                         <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
                         <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO BACKUPS YET</Text>
                     </View>}
-
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={(data, secId, rowId, rowMap) =>
