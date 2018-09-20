@@ -81,7 +81,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _loadItems2 = () => {
         RNFS.readDir(PATH_DOWNLOAD).then(files => {
-            this.setState({ listViewData2: files.filter( file => file.name.includes(".zip") ).reverse(), refreshing: false });
+            this.setState({ listViewData2: files.filter(file => file.name.includes(".zip")).reverse(), refreshing: false });
         }).catch(error => {
             //alert(error);
         });
@@ -212,9 +212,11 @@ export class AdminBackupRestoreScreen extends React.Component {
             <Container >
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
 
-                <Tabs style={{ backgroundColor: 'white', borderWidth: 1, flex: 1, }} >
-                    <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
-                        <Icon name="cloud-upload" /><Text>BACKUPS</Text></TabHeading>}>
+                <Tabs style={{ backgroundColor: 'white', flex: 1, }} >
+                    <Tab style={{ height: 100, }} heading={<TabHeading style={{ backgroundColor: 'lightgray', }}>
+                        <Icon name="folder" style={{ color: 'white', marginRight: 10, }} />
+                        <Text style={{ color: 'white', }}>LOCAL</Text>
+                    </TabHeading>}>
                         {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                             <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
                             <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO BACKUPS YET</Text>
@@ -260,7 +262,9 @@ export class AdminBackupRestoreScreen extends React.Component {
                         />
                     </Tab>
                     <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
-                        <Icon name="download" /><Text>DOWNLOADS</Text></TabHeading>}>
+                        <Icon name="download" style={{color: 'white', marginRight: 10, }}/>
+                        <Text style={{color: 'white',}}>DOWNLOADS</Text>
+                    </TabHeading>}>
                         {!this.state.listViewData2.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                             <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
                             <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO DOWNLOADS YET</Text>
