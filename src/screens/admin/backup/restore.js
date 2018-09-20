@@ -14,13 +14,13 @@ import {
     Text,
     Alert,
 } from 'react-native';
-import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
+import { Container, Header, Tab, Tabs, TabHeading, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
 import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
-import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE } from '../../../utilities/index';
+import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE, PATH_DOWNLOAD } from '../../../utilities/index';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
@@ -47,6 +47,8 @@ export class AdminBackupRestoreScreen extends React.Component {
         super(props);
 
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this.ds2 = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
         this.state = {
             active: true,
             loading: 0,
@@ -54,21 +56,32 @@ export class AdminBackupRestoreScreen extends React.Component {
             refreshig: false,
             basic: true,
             listViewData: [],
+            listViewData2: [],
             dimesions: { width, height } = Dimensions.get('window'),
         };
     }
 
     componentDidMount = () => {
         this._loadItems();
+        this._loadItems2();
     }
 
     _onRefresh() {
         this._loadItems();
+        this._loadItems2();
     }
 
     _loadItems = () => {
         RNFS.readDir(PATH_BACKUP).then(files => {
             this.setState({ listViewData: files.reverse(), refreshing: false });
+        }).catch(error => {
+            //alert(error);
+        });
+    }
+
+    _loadItems2 = () => {
+        RNFS.readDir(PATH_DOWNLOAD).then(files => {
+            this.setState({ listViewData2: files.filter( file => file.name.includes(".zip") ).reverse(), refreshing: false });
         }).catch(error => {
             //alert(error);
         });
@@ -158,6 +171,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         RNFetchBlob.fs.unlink(data.path).then(() => {
             rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
+            this._loadItems2();
             this._hideLoader();
         }).catch(error => {
             this._hideLoader();
@@ -195,59 +209,106 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     render() {
         return (
-            <Container>
+            <Container >
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-                <Content refreshControl={<RefreshControl
-                    refreshing={this.state.refreshing}
-                    onRefresh={() => { this._onRefresh() }} />
-                }>
-                    {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
-                        <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                        <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO BACKUPS YET</Text>
-                    </View>}
-                    <List
-                        dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-                        renderRow={(data, secId, rowId, rowMap) =>
-                            <ListItem style={{ height: 100, paddingLeft: 15, }}>
-                                <Left>
-                                    <View style={{ textAlign: 'left', }}>
-                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
-                                    </View>
-                                </Left>
-                                <Right>
-                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 210, }}>
-                                        <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
-                                            <Icon active name="trash" />
-                                        </Button>
-                                        <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
-                                            <Icon active name="build" />
-                                        </Button>
-                                        <Button style={{ flex: 3.4, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnlyAsk(data)}>
-                                            <Icon active name="cloud-upload" />
-                                        </Button>
-                                    </View>
-                                </Right>
-                            </ListItem>}
-                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
-                            <Button full
-                                onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
-                                <Icon active name="build" />
-                            </Button>}
-                        renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-                            <View style={{ flex: 1, }}>
-                                <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
-                                    <Icon active name="trash" />
-                                </Button>
-                            </View>
-                        }
-                        // leftOpenValue={75}
-                        // rightOpenValue={-75}
 
-                        leftOpenValue={0}
-                        rightOpenValue={0}
-                    />
-                </Content>
+                <Tabs style={{ backgroundColor: 'white', borderWidth: 1, flex: 1, }} >
+                    <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
+                        <Icon name="cloud-upload" /><Text>BACKUPS</Text></TabHeading>}>
+                        {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                            <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
+                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO BACKUPS YET</Text>
+                        </View>}
+                        <List
+                            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+                            renderRow={(data, secId, rowId, rowMap) =>
+                                <ListItem style={{ height: 100, paddingLeft: 15, }}>
+                                    <Left>
+                                        <View style={{ textAlign: 'left', }}>
+                                            <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
+                                            <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
+                                        </View>
+                                    </Left>
+                                    <Right>
+                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 210, }}>
+                                            <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
+                                                <Icon active name="trash" />
+                                            </Button>
+                                            <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
+                                                <Icon active name="build" />
+                                            </Button>
+                                            <Button style={{ flex: 3.4, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnlyAsk(data)}>
+                                                <Icon active name="cloud-upload" />
+                                            </Button>
+                                        </View>
+                                    </Right>
+                                </ListItem>}
+                            renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                                <Button full
+                                    onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
+                                    <Icon active name="build" />
+                                </Button>}
+                            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+                                <View style={{ flex: 1, }}>
+                                    <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                        <Icon active name="trash" />
+                                    </Button>
+                                </View>
+                            }
+                            leftOpenValue={0}
+                            rightOpenValue={0}
+                        />
+                    </Tab>
+                    <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
+                        <Icon name="download" /><Text>DOWNLOADS</Text></TabHeading>}>
+                        {!this.state.listViewData2.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
+                            <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
+                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO DOWNLOADS YET</Text>
+                        </View>}
+
+                        <List
+                            dataSource={this.ds.cloneWithRows(this.state.listViewData2)}
+                            renderRow={(data, secId, rowId, rowMap) =>
+                                <ListItem style={{ height: 100, paddingLeft: 15, }}>
+                                    <Left>
+                                        <View style={{ textAlign: 'left', }}>
+                                            <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
+                                            <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
+                                        </View>
+                                    </Left>
+                                    <Right>
+                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 140, }}>
+                                            <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
+                                                <Icon active name="trash" />
+                                            </Button>
+                                            <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
+                                                <Icon active name="build" />
+                                            </Button>
+                                        </View>
+                                    </Right>
+                                </ListItem>}
+                            renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                                <Button full
+                                    onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
+                                    <Icon active name="build" />
+                                </Button>}
+                            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+                                <View style={{ flex: 1, }}>
+                                    <Button disabled full onPress={_ => this._deleteRow(data.id, secId, rowId, rowMap)}>
+                                        <Icon active name="trash" />
+                                    </Button>
+                                </View>
+                            }
+                            leftOpenValue={0}
+                            rightOpenValue={0}
+                        />
+
+                    </Tab>
+                </Tabs>
+
+
+
+                {/* </Content> */}
             </Container>
         );
     }

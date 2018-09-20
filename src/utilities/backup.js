@@ -5,6 +5,9 @@ import DeviceInfo from 'react-native-device-info';
 import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import BackgroundUpload from 'react-native-background-upload'
 import BackgroundDowoloader from 'react-native-background-downloader';
+import {
+    Linking
+} from 'react-native';
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -81,28 +84,27 @@ export const startUpload = (PATH, name, adminPassword = '') => {
 }
 
 
-export const startDownload = async (backupID) => {
-
+export const startDownload = (backupID) => {
     Linking.openURL('http://haccp.milady.io/admin/download/' + backupID);
-    return;
+    // return;
 
-    let path = `${PATH_ZIP}/${backupID}.zip`;
-    let lostTasks = await BackgroundDowoloader.checkForExistingDownloads();
+    // let path = `${PATH_ZIP}/${backupID}.zip`;
+    // let lostTasks = await BackgroundDowoloader.checkForExistingDownloads();
 
-    let task = BackgroundDowoloader.download({
-        id: backupID,
-        url: 'http://haccp.milady.io/admin/download/' + backupID,
-        destination: path
-    }).begin((expectedBytes) => {
-        console.log(`Going to download ${expectedBytes} bytes!`);
-    }).progress((percent) => {
-        console.log(`Downloaded: ${percent * 100}%`);
-    }).done(() => {
-        console.log('Download is done!');
-    }).error((error) => {
-        console.log('Download canceled due to error: ', error);
-    });
+    // let task = BackgroundDowoloader.download({
+    //     id: backupID,
+    //     url: 'http://haccp.milady.io/admin/download/' + backupID,
+    //     destination: path
+    // }).begin((expectedBytes) => {
+    //     console.log(`Going to download ${expectedBytes} bytes!`);
+    // }).progress((percent) => {
+    //     console.log(`Downloaded: ${percent * 100}%`);
+    // }).done(() => {
+    //     console.log('Download is done!');
+    // }).error((error) => {
+    //     console.log('Download canceled due to error: ', error);
+    // });
 
-    console.log(lostTasks);
+    // console.log(lostTasks);
 }
 

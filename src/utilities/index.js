@@ -34,6 +34,7 @@ export const PATH_TEMP = RNFetchBlob.fs.dirs.PictureDir + '/' + APP_PICTURE_FOLD
 export const PATH_REALM = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_REALM_FOLDER;
 export const PATH_REALM_TEMP = RNFetchBlob.fs.dirs.DocumentDir + '/' + APP_TEMP_REALM_FOLDER;
 
+export const PATH_DOWNLOAD = RNFetchBlob.fs.dirs.DownloadDir;
 export const PATH_ZIP = RNFetchBlob.fs.dirs.DownloadDir + '/RESTORES';
 export const PATH_BACKUP = RNFetchBlob.fs.dirs.DownloadDir + '/BACKUPS';
 

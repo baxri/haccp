@@ -10,7 +10,8 @@ import {
     TextInput,
     Dimensions,
     Alert,
-    Linking
+    Linking,
+    Keyboard
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
 import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
@@ -313,6 +314,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
+        Keyboard.dismiss();
         startDownload(backup_id);
     }
 
@@ -347,7 +349,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
 
                         <Button full transparent style={{ padding: 10, marginBottom: 20, }} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
-                            <Text style={[styles.text]}>{Strings.SEE_ALL_BACKUPS}</Text>
+                            <Text style={[styles.text]}>{Strings.BACKUPS_AND_DOWNLOADS}</Text>
                         </Button>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
