@@ -74,10 +74,24 @@ export class AdminBackupIndexScreen extends React.Component {
             date: new Date().toISOString().substring(0, 10),
             dimesions: { width, height } = Dimensions.get('window'),
             past_year: null,
+            zipProgress: 0,
         };
 
         this._bootstrapAsync();
     }
+
+    componentDidMount() {
+        this.zipProgress = subscribe(({ progress, filePath }) => {
+            console.log(progress);
+            console.log(filePath);
+          this.setState({ zipProgress: progress })
+        })
+      }
+      
+      componentWillUnmount() {
+        // Important: Unsubscribe from the progress events
+        this.zipProgress.remove()
+      }
 
     _showLoader() {
         this.setState({ loading: 1 });

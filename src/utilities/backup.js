@@ -36,19 +36,12 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let targetPath = PATH_BACKUP + '/' + zipName;
         let sourcePath = PATH;
 
-        console.log("start");
-
-        subscribe(data => {
-            console.log(data);
-        })
-        
 
         zip(sourcePath, targetPath).then(path => {
 
         }).cath(error => {
 
         });
-
 
 
         // Not to wait for this response
