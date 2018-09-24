@@ -135,6 +135,7 @@ export class AdminBackupRestoreScreen extends React.Component {
             //Unzip backup
             await unzip(sourcePath, targetPath);
 
+
             // Move beckup db file to destination
             await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
 
@@ -262,8 +263,8 @@ export class AdminBackupRestoreScreen extends React.Component {
                         />
                     </Tab>
                     <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
-                        <Icon name="download" style={{color: 'white', marginRight: 10, }}/>
-                        <Text style={{color: 'white',}}>DOWNLOADS</Text>
+                        <Icon name="download" style={{ color: 'white', marginRight: 10, }} />
+                        <Text style={{ color: 'white', }}>DOWNLOADS</Text>
                     </TabHeading>}>
                         {!this.state.listViewData2.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                             <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
