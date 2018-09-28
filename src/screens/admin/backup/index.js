@@ -44,7 +44,6 @@ import { RestartAndroid } from 'react-native-restart-android'
 import { styles } from '../../../utilities/styles';
 import { Client } from 'bugsnag-react-native';
 var RNFS = require('react-native-fs');
-
 const bugsnag = new Client();
 
 export class AdminBackupIndexScreen extends React.Component {
@@ -82,6 +81,7 @@ export class AdminBackupIndexScreen extends React.Component {
 
     componentDidMount() {
         this.zipProgress = subscribe((objectProgress) => {
+            console.log(objectProgress);
             this.setState({ zipProgress: objectProgress.progress })
         })
     }
@@ -133,7 +133,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
-        // this._showLoader();
+        this._showLoader();
 
         try {
 
@@ -155,17 +155,9 @@ export class AdminBackupIndexScreen extends React.Component {
             let targetPath = PATH_BACKUP + '/' + zipName;
             let sourcePath = PATH;
 
-            setTimeout(() => {
-                console.log("start zipping");
+            console.log("start zipping");
 
-                zip(sourcePath, targetPath).then(res => {
-                    console.log('zipped');
-                }).catch(error => {
-                    console.log('zip' + error);
-                });
-            }, 500);
-
-            return;
+            let zipped = await zip(sourcePath, targetPath);
 
             this.props.navigation.navigate("AdminHome");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
@@ -340,8 +332,6 @@ export class AdminBackupIndexScreen extends React.Component {
             this._hideLoader();
         }
     }
-
-
 
     _update = () => {
         Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
