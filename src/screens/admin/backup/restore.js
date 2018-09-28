@@ -133,18 +133,26 @@ export class AdminBackupRestoreScreen extends React.Component {
             const targetPath = PATH;
 
             //Unzip backup
-            await unzip(sourcePath, targetPath);
+            let unzipped = await unzip(sourcePath, targetPath);
 
+            let newDbFile = unzipped + '/' + PATH_REALM_FILE;
+
+            console.log(newDbFile);
+
+            let exists = await RNFetchBlob.fs.exists(newDbFile);
+
+            if (!exists) {
+                throw new Error('DB_FILE_NOT_FOUND');
+            }
 
             // Move beckup db file to destination
-            await RNFetchBlob.fs.cp(targetPath + '/' + PATH_REALM_FILE, DB);
+            await RNFetchBlob.fs.cp(unzipped + '/' + PATH_REALM_FILE, DB);
 
             //Remove realm file from unzipped folder
-            RNFetchBlob.fs.unlink(targetPath + '/' + PATH_REALM_FILE);
+            RNFetchBlob.fs.unlink(unzipped + '/' + PATH_REALM_FILE);
 
             //Restart application
             RestartAndroid.restart();
-
         }).catch(error => {
             this._hideLoader();
             alert(error);

@@ -80,18 +80,20 @@ export class AdminBackupIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    componentDidMount() {
+    componentWillMount() {
+
+        console.log("Subscribe method is called! :D :D :D");
+
         this.zipProgress = subscribe(({ progress, filePath }) => {
-            console.log(progress);
-            console.log(filePath);
-          this.setState({ zipProgress: progress })
+            console.log("PROGRESS -- " + progress);
+            console.log("FILEPATH -- " + filePath);
+            this.setState({ zipProgress: progress })
         })
-      }
-      
-      componentWillUnmount() {
-        // Important: Unsubscribe from the progress events
+    }
+
+    componentWillUnmount() {
         this.zipProgress.remove()
-      }
+    }
 
     _showLoader() {
         this.setState({ loading: 1 });
@@ -128,6 +130,56 @@ export class AdminBackupIndexScreen extends React.Component {
             alert(error);
         });
     }
+
+    _sync = async () => {
+        await initImages();
+
+        if (this.state.name.length == 0) {
+            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
+        }
+
+        // this._showLoader();
+
+        try {
+
+            let DB = RealmFile();
+            let name = this.state.name;
+
+            // await upload(PATH, RealmFile(), this.state.name, adminPassword);
+
+            let zipName = name + '.zip';
+            let copyFrom = DB;
+            let copyTo = PATH + '/' + PATH_REALM_FILE;
+
+            await RNFetchBlob.fs.cp(copyFrom, copyTo);
+
+            if (!(await RNFetchBlob.fs.exists(copyTo))) {
+                throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
+            }
+
+            let targetPath = PATH_BACKUP + '/' + zipName;
+            let sourcePath = PATH;
+
+            setTimeout(() => {
+                console.log("start zipping");
+
+                zip(sourcePath, targetPath).then(res => {
+                    console.log('zipped');
+                }).catch(error => {
+                    console.log('zip' + error);
+                });
+            }, 500);
+
+            return;
+
+            this.props.navigation.navigate("AdminHome");
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+        } catch (error) {
+            alert(error);
+        } finally {
+            this._hideLoader();
+        }
+    };
 
     _askDeleteOldData = async () => {
         try {
@@ -294,27 +346,7 @@ export class AdminBackupIndexScreen extends React.Component {
         }
     }
 
-    _sync = async () => {
 
-        let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
-        await initImages();
-
-        if (this.state.name.length == 0) {
-            ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
-        }
-
-        this._showLoader();
-
-        try {
-            await upload(PATH, RealmFile(), this.state.name, adminPassword);
-            this.props.navigation.navigate("AdminHome");
-            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
-        } catch (error) {
-            alert(error);
-        } finally {
-            this._hideLoader();
-        }
-    };
 
     _update = () => {
         Linking.openURL('http://haccp.milady.io/app-center/app-release.apk');
