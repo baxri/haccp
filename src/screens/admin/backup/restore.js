@@ -58,10 +58,21 @@ export class AdminBackupRestoreScreen extends React.Component {
             listViewData: [],
             listViewData2: [],
             dimesions: { width, height } = Dimensions.get('window'),
+            zipProgress: 0,
+
         };
     }
 
+    componentWillUnmount() {
+        this.zipProgress.remove()
+    }
+
     componentDidMount = () => {
+
+        this.zipProgress = subscribe((objectProgress) => {
+            this.setState({ zipProgress: objectProgress.progress })
+        })
+
         this._loadItems();
         this._loadItems2();
     }

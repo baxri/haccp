@@ -80,14 +80,9 @@ export class AdminBackupIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    componentWillMount() {
-
-        console.log("Subscribe method is called! :D :D :D");
-
-        this.zipProgress = subscribe(({ progress, filePath }) => {
-            console.log("PROGRESS -- " + progress);
-            console.log("FILEPATH -- " + filePath);
-            this.setState({ zipProgress: progress })
+    componentDidMount() {
+        this.zipProgress = subscribe((objectProgress) => {
+            this.setState({ zipProgress: objectProgress.progress })
         })
     }
 
@@ -360,6 +355,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_ID, ToastAndroid.LONG); return;
         }
 
+        this.setState({ backup_id: '' });
         Keyboard.dismiss();
         startDownload(backup_id);
     }
