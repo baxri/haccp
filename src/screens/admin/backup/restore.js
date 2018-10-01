@@ -221,8 +221,10 @@ export class AdminBackupRestoreScreen extends React.Component {
 
         this._showLoader();
 
+        let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
+
         try {
-            startUpload(data.path, data.name, '123');
+            startUpload(data.path, data.name, adminPassword);
             this._hideLoader();
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
