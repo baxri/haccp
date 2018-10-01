@@ -133,12 +133,13 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
 
-        this._showLoader();
+        // this._showLoader();
 
         try {
 
             let DB = RealmFile();
             let name = this.state.name;
+
 
             // await upload(PATH, RealmFile(), this.state.name, adminPassword);
 
@@ -155,9 +156,13 @@ export class AdminBackupIndexScreen extends React.Component {
             let targetPath = PATH_BACKUP + '/' + zipName;
             let sourcePath = PATH;
 
-            console.log("start zipping");
+            console.log("Start Zipping");
+            console.log(targetPath);
+            console.log(sourcePath);
 
             let zipped = await zip(sourcePath, targetPath);
+
+            console.log("Finish zipping");
 
             this.props.navigation.navigate("AdminHome");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);

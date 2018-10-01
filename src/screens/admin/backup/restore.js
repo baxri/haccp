@@ -25,8 +25,6 @@ import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 import { startUpload } from '../../../utilities/backup';
-import * as Progress from 'react-native-progress';
-
 
 export class AdminBackupRestoreScreen extends React.Component {
 
