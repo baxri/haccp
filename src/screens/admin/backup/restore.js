@@ -15,7 +15,7 @@ import {
     Alert,
 } from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
+import { NoBackButton, LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 var RNFS = require('react-native-fs');
@@ -25,6 +25,7 @@ import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 import { startUpload } from '../../../utilities/backup';
+import * as Progress from 'react-native-progress';
 
 
 export class AdminBackupRestoreScreen extends React.Component {
@@ -52,6 +53,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         this.state = {
             active: true,
             loading: 0,
+            loadingZip: 0,
 
             refreshig: false,
             basic: true,
@@ -59,7 +61,6 @@ export class AdminBackupRestoreScreen extends React.Component {
             listViewData2: [],
             dimesions: { width, height } = Dimensions.get('window'),
             zipProgress: 0,
-
         };
     }
 
@@ -86,7 +87,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         RNFS.readDir(PATH_BACKUP).then(files => {
             this.setState({ listViewData: files.reverse(), refreshing: false });
         }).catch(error => {
-            //alert(error);
+            // alert(error);
         });
     }
 
@@ -94,7 +95,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         RNFS.readDir(PATH_DOWNLOAD).then(files => {
             this.setState({ listViewData2: files.filter(file => file.name.includes(".zip")).reverse(), refreshing: false });
         }).catch(error => {
-            //alert(error);
+            // alert(error);
         });
     }
 
@@ -104,6 +105,14 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _hideLoader() {
         this.setState({ loading: 0 });
+    }
+
+    _showLoaderZip() {
+        this.setState({ loadingZip: 1 });
+    }
+
+    _hideLoaderZip() {
+        this.setState({ loadingZip: 0 });
     }
 
     _onLayout(e) {
@@ -124,7 +133,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _restore(zip) {
 
-        this._showLoader();
+        this._showLoaderZip();
 
         let zipPath = zip.path;
         let DB = PATH_REALM + "/" + PATH_REALM_FILE;
@@ -165,7 +174,7 @@ export class AdminBackupRestoreScreen extends React.Component {
             //Restart application
             RestartAndroid.restart();
         }).catch(error => {
-            this._hideLoader();
+            this._hideLoaderZip();
             alert(error);
         });
     }
@@ -231,6 +240,29 @@ export class AdminBackupRestoreScreen extends React.Component {
         return (
             <Container >
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+
+                {/* {this.state.loadingZip == 1 && <View style={{
+                    flex: 1,
+                    position: "absolute",
+                    zIndex: 100,
+                    backgroundColor: "white",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    // borderColor: 'red',
+                    // borderWidth: 1,
+                    // opacity: 0.9,
+                }}>
+
+                    <Progress.Bar progress={this.state.zipProgress} width={300} color="red" />
+                    <H1 style={{ fontSize: 30, color: 'gray', marginTop: 30, }}>{parseInt(this.state.zipProgress * 100)}%</H1>
+                </View>
+                } */}
+
+                <ProgressBar visible={this.state.loadingZip} value={parseInt(this.state.zipProgress)} />
 
                 <Tabs style={{ backgroundColor: 'white', flex: 1, }} >
                     <Tab style={{ height: 100, }} heading={<TabHeading style={{ backgroundColor: 'lightgray', }}>
