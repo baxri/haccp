@@ -94,8 +94,8 @@ export class ProgressBar extends React.Component {
                 // opacity: 0.9,
             }}>
 
-                <Progress.Bar progress={this.props.value / 100} width={300} color="red" />
-                <H1 style={{ fontSize: 30, color: 'gray', marginTop: 30, }}>{this.props.value}%</H1>
+                <Progress.Bar progress={this.props.progressValue / 100} width={300} color="red" />
+                <H1 style={{ fontSize: 30, color: 'gray', marginTop: 30, }}>{this.props.progressValue}%</H1>
             </View>
         );
     }

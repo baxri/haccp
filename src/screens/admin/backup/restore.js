@@ -240,29 +240,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         return (
             <Container >
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
-
-                {/* {this.state.loadingZip == 1 && <View style={{
-                    flex: 1,
-                    position: "absolute",
-                    zIndex: 100,
-                    backgroundColor: "white",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    // borderColor: 'red',
-                    // borderWidth: 1,
-                    // opacity: 0.9,
-                }}>
-
-                    <Progress.Bar progress={this.state.zipProgress} width={300} color="red" />
-                    <H1 style={{ fontSize: 30, color: 'gray', marginTop: 30, }}>{parseInt(this.state.zipProgress * 100)}%</H1>
-                </View>
-                } */}
-
-                <ProgressBar visible={this.state.loadingZip} value={parseInt(this.state.zipProgress)} />
+                <ProgressBar visible={this.state.loadingZip} progressValue={parseInt(this.state.zipProgress * 100)} />
 
                 <Tabs style={{ backgroundColor: 'white', flex: 1, }} >
                     <Tab style={{ height: 100, }} heading={<TabHeading style={{ backgroundColor: 'lightgray', }}>
