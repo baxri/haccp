@@ -167,6 +167,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
             alert(error);
+            console.log(error);
         } finally {
             this._hideLoader();
         }
