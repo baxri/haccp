@@ -10,6 +10,7 @@ import {
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
 import { styles, inputAndButtonFontSize } from '../../src/utilities/styles';
 import * as Progress from 'react-native-progress';
+import Image from 'react-native-scalable-image';
 
 
 export class Menu extends React.Component {

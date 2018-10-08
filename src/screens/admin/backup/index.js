@@ -14,7 +14,7 @@ import {
     Keyboard
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
-import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
+import { NoBackButton, LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import {
@@ -81,7 +81,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
     componentDidMount() {
         this.zipProgress = subscribe((objectProgress) => {
-            console.log(objectProgress);
             this.setState({ zipProgress: objectProgress.progress })
         })
     }
@@ -96,6 +95,14 @@ export class AdminBackupIndexScreen extends React.Component {
 
     _hideLoader() {
         this.setState({ loading: 0 });
+    }
+
+    _showLoaderZip() {
+        this.setState({ loadingZip: 1 });
+    }
+
+    _hideLoaderZip() {
+        this.setState({ loadingZip: 0 });
     }
 
     _onLayout(e) {
@@ -127,13 +134,15 @@ export class AdminBackupIndexScreen extends React.Component {
     }
 
     _sync = async () => {
+
         await initImages();
 
         if (this.state.name.length == 0) {
             ToastAndroid.show(Strings.PLEASE_ENTER_BACKUP_NAME, ToastAndroid.LONG); return;
         }
+        Keyboard.dismiss();
 
-        this._showLoader();
+        this._showLoaderZip();
 
         try {
 
@@ -163,13 +172,14 @@ export class AdminBackupIndexScreen extends React.Component {
 
             console.log("Finish zipping");
 
-            this.props.navigation.navigate("AdminHome");
+            // this.props.navigation.navigate("AdminHome");
+            this.props.navigation.navigate("AdminBackupRestore");
             ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
             alert(error);
             console.log(error);
         } finally {
-            this._hideLoader();
+            this._hideLoaderZip();
         }
     };
 
@@ -359,6 +369,8 @@ export class AdminBackupIndexScreen extends React.Component {
         return (
             <Container style={{ flex: 1, paddingTop: 10, }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
+                <ProgressBar visible={this.state.loadingZip} progressValue={parseInt(this.state.zipProgress * 100)} />
+
 
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
