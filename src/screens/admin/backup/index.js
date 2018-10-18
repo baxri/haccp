@@ -279,7 +279,6 @@ export class AdminBackupIndexScreen extends React.Component {
             let archiveBefore = await ArchivesBeforeDate(date);
 
 
-            console.log('--------------------------------');
 
             console.log(controlesBefore.length);
             console.log(picturesBefore.length);
