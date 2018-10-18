@@ -270,7 +270,6 @@ export class AdminBackupIndexScreen extends React.Component {
 
             console.log(date);
 
-            // Retrive data after this date from temp db file
             let controles = await ControlesAfterDate(date, TEMP_DB_PATH);
             let pictures = await PicturesAfterDate(date, TEMP_DB_PATH);
             let archive = await ArchivesAfterDate(date, TEMP_DB_PATH);
