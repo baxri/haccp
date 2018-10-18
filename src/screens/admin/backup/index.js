@@ -266,7 +266,6 @@ export class AdminBackupIndexScreen extends React.Component {
                 throw new Error("problem in copping file");
             }
 
-            //select archivage date
             let date = toDate(this.state.past_year);
 
             console.log(date);
