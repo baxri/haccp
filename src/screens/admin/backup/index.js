@@ -267,7 +267,6 @@ export class AdminBackupIndexScreen extends React.Component {
             }
 
             //select archivage date
-            // let date = new Date().toISOString().substring(0, 10);
             let date = toDate(this.state.past_year);
 
             console.log(date);
