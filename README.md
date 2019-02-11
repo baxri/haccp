@@ -1,3 +1,5 @@
+"react-native-zip-archive": "github:mockingbot/react-native-zip-archive#fix-zip-progress",
+
 # INSTRUCTION TO BUILT APK
 
 Download and install github project on your local computer run this command:
