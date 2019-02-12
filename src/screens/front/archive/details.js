@@ -140,7 +140,7 @@ export class ArchiveDetailsScreen extends React.Component {
                             </Body>
                         </CardItem>}
 
-                        {this.state.item.type == 0 && <CardItem bordered>
+                        {(this.state.item.type == 0 || this.state.item.type == 3) && <CardItem bordered>
                             <Body>
                                 <Text>{Strings.AUTRES}: {this.state.item.autres}</Text>
                             </Body>

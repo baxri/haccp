@@ -25,7 +25,6 @@ import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 import { imagePickerOptions } from '../../../utilities/image-picker';
 import { launchCamera } from 'react-native-image-picker';
 
-
 export class FrontCleanIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
@@ -137,85 +136,20 @@ export class FrontCleanIndexScreen extends React.Component {
     }
 
     _askCleanDone(schedule) {
-        Alert.alert(
-            Strings.DELETE,
-            Strings.ARE_YOU_SURE,
-            [
-                { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._pickImage(schedule) },
-            ],
-            { cancelable: false }
-        )
-    }
 
-    _pickImage = (schedule) => {
-        launchCamera(imagePickerOptions, (response) => {
-            if (response.data) {
-                writePicture(response.data).then(filename => {
-                    // this.setState({
-                    //     source: filename,
-                    // });
-                    this._cleanDone(schedule, filename);
-                });
-            }
-        });
-    };
+        // This is new stuff to navigate on new page 
+        this.props.navigation.navigate('FrontCleanDone', schedule)
 
-    _cleanDone(schedule, source = "") {
-
-        console.log(source);
-
-        this._showLoader();
-
-        setTimeout(() => {
-
-            addControle(this.state.userId, {
-                equipment: schedule.equipment,
-
-                source: source,
-                signature: '',
-
-                produit: '',
-                fourniser: '',
-                dubl: '',
-
-                aspect: 0,
-                du_produit: '',
-
-                intact: 0,
-                conforme: 0,
-                autres: '',
-                actions: '',
-                confirmed: 1,
-
-                temperatures: [],
-                type: 3,
-
-                quantity: 0,
-                valorisation: '',
-                causes: '',
-                devenir: '',
-                traitment: '',
-
-                date: this.state.date,
-                created_at: this.state.created_at,
-            }).then(res => {
-
-                cleanDone(schedule.equipment, schedule.department, schedule, this.state.userId).then(item => {
-                }).catch(error => {
-                    alert(error);
-                });
-
-                addArchive(this.state.date, this.state.YM, true, this.state.userId);
-                // this.props.navigation.navigate('Home');
-                this._loadItems();
-                this._hideLoader();
-                ToastAndroid.show(Strings.SCHEDULE_SUCCESSFULL_SAVED, ToastAndroid.LONG);
-            }).catch(error => {
-                alert(error);
-            });
-
-        }, 500);
+        // This is an old stuff
+        // Alert.alert(
+        //     Strings.DELETE,
+        //     Strings.ARE_YOU_SURE,
+        //     [
+        //         { text: Strings.CANCEL, style: 'cancel' },
+        //         { text: Strings.OK, onPress: () => this._pickImage(schedule) },
+        //     ],
+        //     { cancelable: false }
+        // )
     }
 
     _onRefresh() {
@@ -248,12 +182,15 @@ export class FrontCleanIndexScreen extends React.Component {
 
                                 </Left>
                                 <Right>
-                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 150, }}>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 230, }}>
                                         {!this._done(data) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full success onPress={_ => this._askCleanDone(data)}>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.CLEAN}</Text>
                                         </Button>}
 
-                                        {this._done(data) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full disabled>
+                                        {this._done(data) && <Button style={{ flex: 1, height: 65, borderLeftWidth: 0, }} full
+                                            onPress={() => this.props.navigation.navigate('ArchiveList', {
+                                                selectedStartDate: this.state.date
+                                            })}>
                                             <Text style={[{ color: 'white' }, styles.text]}>{Strings.DONE}</Text>
                                         </Button>}
                                     </View>

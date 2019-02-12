@@ -46,6 +46,8 @@ import { ControleIndexScreen } from './src/screens/front/controle/index';
 import { NonConformeIndexScreen } from './src/screens/front/nonconforme/index';
 import { FroidIndexScreen } from './src/screens/front/froid/index';
 import { FrontCleanIndexScreen } from './src/screens/front/clean/index';
+import { FrontCleanDoneScreen } from './src/screens/front/clean/done';
+import { FrontCleanShowScreen } from './src/screens/front/clean/show';
 
 import { ArchiveIndexScreen } from './src/screens/front/archive/index';
 import { ArchiveListScreen } from './src/screens/front/archive/list';
@@ -212,6 +214,8 @@ const NonconlistfStack = StackNavigator(
 const FrontCleanStack = StackNavigator(
   {
     FrontCleanIndex: FrontCleanIndexScreen,
+    FrontCleanDone: FrontCleanDoneScreen,
+    FrontCleanShow: FrontCleanShowScreen,
   },
   {
     initialRouteName: 'FrontCleanIndex',

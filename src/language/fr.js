@@ -94,12 +94,14 @@ const strings = {
     SCHEDULE_SUCCESSFULL_SAVED: 'Planning enregistré',
 
     // SCHEDULES FRONT
-    CLEAN: 'Propre',
-    DONE: 'Terminé',
+    CLEAN: 'Effectuer cette tâche',
+    DONE: 'Vérifier cette tâche',
     WEEKLY: 'Hebdomadaire',
     MONTHLY: 'Mensuel',
     DAILY: 'DAILY',
-    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui - (%s/%s)',
+    COMMENT: 'Enter some note',
+    // YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui - (%s/%s)',
+    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Il vous reste %s tâches à effectuer (%s/%s)',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
