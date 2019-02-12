@@ -49,7 +49,8 @@ export class AdminCleanItemScreen extends React.Component {
             departments: [],
             types: [
                 { name: Strings.MONTHLY, value: 1 },
-                { name: Strings.WEEKLY, value: 2 }
+                { name: Strings.WEEKLY, value: 2 },
+                { name: Strings.DAILY, value: 3 }
             ],
             weekly: [
                 { name: Strings.MON, value: 1 },
@@ -98,8 +99,6 @@ export class AdminCleanItemScreen extends React.Component {
         };
 
         this._bootstrapAsync();
-
-
     }
 
     _showLoader() {
@@ -174,7 +173,6 @@ export class AdminCleanItemScreen extends React.Component {
     }
 
     _clickSave = () => {
-
         Alert.alert(
             Strings.RECEPTION_CHECK,
             Strings.ARE_YOU_SURE,
@@ -184,8 +182,6 @@ export class AdminCleanItemScreen extends React.Component {
             ],
             { cancelable: false }
         )
-
-        // this._save();
     }
 
     _save = async () => {
@@ -204,26 +200,36 @@ export class AdminCleanItemScreen extends React.Component {
             let monthlyObject = {};
             let weeklyObject = {};
             let weekDays = ['none', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
+            
+            // Fill monthly object with empty values
             this.state.monthly.map(object => {
                 monthlyObject['day_' + object.value] = 0;
             })
 
+            // Fill weekly object with 
             weekDays.map(value => {
                 weeklyObject[value] = 0;
             })
 
+
             if (this.state.type.value == 1) {
+                // Monthly
                 this.state.days.map(day => {
                     monthlyObject['day_' + day] = 1;
                 })
-
+            } else if (this.state.type.value == 3) {
+                // Dailly   
+                for (let i = 1; i <= 31; i++) {
+                    monthlyObject['day_' + i] = 1;
+                }
             } else {
+                // Weekly 
                 this.state.days.map(day => {
                     weeklyObject[weekDays[day]] = 1;
                 })
             }
 
+            // Combine all the fields
             realmObject = { ...form, ...monthlyObject, ...weeklyObject };
 
             if (this.state.id.length > 0) {
@@ -330,11 +336,12 @@ export class AdminCleanItemScreen extends React.Component {
 
 
 
-
+                        
                     </View>
                 </Content >
 
-                {this.state.department !== null && this.state.equipment !== null && this.state.type !== null && this.state.days.length > 0 && <Footer styles={{ height: 100 }}>
+                
+                {this.state.department !== null && this.state.equipment !== null && this.state.type !== null && ( this.state.days.length > 0 || this.state.type.value == 3 ) && <Footer styles={{ height: 100 }}>
                     <FooterTab styles={{ height: 100 }}><Button full success onPress={_ => this._clickSave()} >
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={[{ color: 'white', paddingTop: 5, }, styles.text]}>{Strings.SAVE}</Text>
