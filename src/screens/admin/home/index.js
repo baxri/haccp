@@ -7,6 +7,7 @@ import {
     View,
 } from 'react-native';
 import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import { Icon as ReacrNativeIcon } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
@@ -14,8 +15,9 @@ import { Departments, Users, Equipments, Fourniseurs } from '../../../database/r
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
 
-export class AdminHomeIndexScreen extends React.Component {
+//"native-base": "^2.4.3",
 
+export class AdminHomeIndexScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const params = navigation.state.params || {};
 
@@ -111,7 +113,7 @@ export class AdminHomeIndexScreen extends React.Component {
                         <Col style={{ borderWidth: 1, borderColor: '#F5F5F5' }}>
                             <Button full light style={{ flex: 1 }} onPress={() => this.props.navigation.navigate('AdminClean')}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Icon name='snow' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
+                                    <Icon name='brush' fontSize={50} size={50} style={{ color: '#494949', fontSize: 100, }} />
                                     <Text style={{ color: '#494949', fontSize: inputAndButtonFontSize, marginTop: 20, }} >{Strings.CLEANING_SCHEDULE}</Text>
                                 </View>
                             </Button>
