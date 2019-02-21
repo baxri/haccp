@@ -96,13 +96,13 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     // buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.haccp"
-        minSdkVersion 26
-        targetSdkVersion 26
+        minSdkVersion 27
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
