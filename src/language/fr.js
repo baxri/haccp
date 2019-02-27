@@ -98,7 +98,7 @@ const strings = {
     DONE: 'Vérifier cette tâche',
     WEEKLY: 'Hebdomadaire',
     MONTHLY: 'Mensuel',
-    DAILY: 'DAILY',
+    DAILY: 'Du quotidien',
     COMMENT: 'Enter some note',
     // YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui - (%s/%s)',
     YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Il vous reste %s tâches à effectuer (%s/%s)',

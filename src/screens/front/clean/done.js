@@ -107,7 +107,7 @@ export class FrontCleanDoneScreen extends React.Component {
         }
 
         Alert.alert(
-            Strings.RECEPTION_CHECK,
+            Strings.CLEANING_SCHEDULE,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },

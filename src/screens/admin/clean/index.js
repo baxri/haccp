@@ -30,7 +30,7 @@ export class AdminCleanIndexScreen extends React.Component {
         return {
             drawerLabel: Strings.CLEANING_SCHEDULE,
             drawerIcon: ({ tintColor }) => (
-                <Icon name='snow' style={{ color: tintColor, }} />
+                <Icon name='brush' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.CLEANING_SCHEDULE} />,

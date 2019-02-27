@@ -174,7 +174,7 @@ export class AdminCleanItemScreen extends React.Component {
 
     _clickSave = () => {
         Alert.alert(
-            Strings.RECEPTION_CHECK,
+            Strings.CLEANING_SCHEDULE,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
