@@ -177,7 +177,11 @@ export class FrontCleanIndexScreen extends React.Component {
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
                                         <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.equipment.name} </Text>
-                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.type == 1 ? Strings.MONTHLY : Strings.WEEKLY} </Text>
+                                        <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>
+                                            {data.type == 1 && Strings.MONTHLY}
+                                            {data.type == 2 && Strings.WEEKLY}
+                                            {data.type == 3 && Strings.DAILY}
+                                        </Text>
                                     </View>
 
                                 </Left>

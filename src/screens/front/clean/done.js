@@ -217,7 +217,7 @@ export class FrontCleanDoneScreen extends React.Component {
                     <Text style={[styles.text]}>{Strings.DEPARTMENT}: {this.state.schedule.department.name}</Text>
                     <Text style={[styles.text, { marginBottom: 30, }]}>{Strings.EQUIPMENTS}: {this.state.schedule.equipment.name}</Text>
                     <Textarea style={[styles.textarea, {}]} rowSpan={5} bordered placeholder={Strings.COMMENT} onChangeText={(value) => { this.setState({ note: value }) }} />
-                    <Text style={[{ color: 'gray', marginBottom: 85, }]}>Some additional comments goes here</Text>
+                    {/* <Text style={[{ color: 'gray', marginBottom: 85, }]}>Some additional comments goes here</Text> */}
                 </Content>
 
                 <Footer styles={{ height: 100 }}>
