@@ -1,12 +1,30 @@
 "react-native-zip-archive": "github:mockingbot/react-native-zip-archive#fix-zip-progress",
 
-# INSTRUCTION TO BUILT APK
+# INSTALLATION
 
 Download and install github project on your local computer run this command:
 
+## SSH
 ```bash
 git clone git@github.com:jrenouard/haccp.git
 ```
+
+## HTTPS
+```bash
+git clone https://github.com/jrenouard/haccp.git
+```
+
+<hr>
+
+```bash
+cd haccp
+```
+
+```bash
+npm install
+```
+
+# INSTRUCTION TO BUILT APK
 
 make sure that you configured you local enviroment to run this project, if not you can use this guide
 
@@ -31,10 +49,12 @@ And run this command
 ./gradlew assembleRelease
 ```
 
+MYAPP_RELEASE_KEY_PASSWORD=123456
+
 You can find new apk generated apk in this directory
 
 ```bash
 android/app/build/outputs/apk/app-release.apk
 ```
 
-
+ENJOY :tada:
