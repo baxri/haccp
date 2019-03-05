@@ -1,6 +1,6 @@
 import { realmFilePath, toDate } from '../../src/utilities/index';
 import Realm from 'realm';
-import AsyncStorage from 'react-native';
+import { AsyncStorage } from 'react-native';
 // const Realm = require('realm');
 
 const ArchiveSchema = {

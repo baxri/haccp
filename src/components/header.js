@@ -1,5 +1,5 @@
 import React from 'react';
-import View from 'react-native';
+import { View } from 'react-native';
 import { Button, Text, H1, Icon } from 'native-base';
 import { inputAndButtonFontSize } from '../../src/utilities/styles';
 import * as Progress from 'react-native-progress';

@@ -1,5 +1,5 @@
 import React from 'react';
-import ListView from 'react-native';
+import { ListView } from 'react-native';
 import { Container, Footer, Content, Button, Text, Icon, List, ListItem, CheckBox, Left, Right, FooterTab } from 'native-base';
 import { LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr'
