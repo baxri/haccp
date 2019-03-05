@@ -163,7 +163,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                                 </View>
                                 <Button style={[styles.button, { zIndex: 1, height: 70, width: 300, position: 'absolute', bottom: 0, }]} onPress={this._pickImage}>
                                     <Left >
-                                        <Text style={[{ color: 'white', }, styles.text]}>{Strings.EDIT}</Text>
+                                        <Text style={[{ color: 'white', }, styles.text]}>{Strings.EDIT_IMAGE}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='attach' style={{ color: 'white', }} />

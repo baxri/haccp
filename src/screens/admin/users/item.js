@@ -127,7 +127,7 @@ export class AdminUsersItemScreen extends React.Component {
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
-                                placeholder={Strings.EQUIPMENT_NAME}
+                                placeholder={Strings.FIRST_NAME}
                                 value={this.state.name} onChangeText={(value) => { this.setState({ name: value }) }} />
                             {this.state.name.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                             {this.state.name.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}
@@ -137,7 +137,7 @@ export class AdminUsersItemScreen extends React.Component {
                             <TextInput
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
-                                placeholder={Strings.EQUIPMENT_NAME}
+                                placeholder={Strings.LAST_NAME}
                                 value={this.state.lastname} onChangeText={(value) => { this.setState({ lastname: value }) }} />
                             {this.state.lastname.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                             {this.state.lastname.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}

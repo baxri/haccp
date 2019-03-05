@@ -144,6 +144,11 @@ export const styles = StyleSheet.create({
         fontSize: inputAndButtonFontSize,
     },
 
+    textButton: {
+        fontSize: inputAndButtonFontSize,
+        textDecorationLine: 'underline',
+    },
+
     label: {
         fontSize: inputAndButtonFontSize,
         marginBottom: 10,

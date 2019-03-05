@@ -92,7 +92,7 @@ export class SetupAdminScreen extends React.Component {
                                 secureTextEntry={true}
                                 style={styles.inputInline}
                                 underlineColorAndroid="transparent"
-                                placeholder={Strings.ENTER_PASSWORD}
+                                placeholder={Strings.CONFIRM_PASSWORD}
                                 value={this.state.passwordConfirm} onChangeText={(value) => { this.setState({ passwordConfirm: value }) }} />
                             {this.state.passwordConfirm.length > 0 && <Icon name='checkmark' style={styles.inputInlineIconSuccess} />}
                             {this.state.passwordConfirm.length <= 0 && <Icon name='checkmark' style={styles.inputInlineIconDisabled} />}

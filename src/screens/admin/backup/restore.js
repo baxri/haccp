@@ -119,7 +119,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _restoreAsk(zip) {
         Alert.alert(
-            Strings.DELETE,
+            Strings.RESTORE_BACKUP,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
@@ -180,7 +180,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _deleteRowAsk(data, secId, rowId, rowMap) {
         Alert.alert(
-            Strings.DELETE,
+            Strings.DELETE_BACKUP,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
@@ -207,7 +207,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _uploadOnlyAsk(data) {
         Alert.alert(
-            Strings.DELETE,
+            Strings.UPLOAD_BACKUP,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
@@ -244,12 +244,12 @@ export class AdminBackupRestoreScreen extends React.Component {
 
                 <Tabs style={{ backgroundColor: 'white', flex: 1, }} >
                     <Tab style={{ height: 100, }} heading={<TabHeading style={{ backgroundColor: 'lightgray', }}>
-                        <Icon name="folder" style={{ color: 'white', marginRight: 10, }} />
-                        <Text style={{ color: 'white', }}>LOCAL</Text>
+                        <Icon name="archive" style={{ color: 'white', marginRight: 10, }} />
+                        <Text style={{ color: 'white', }}>{Strings.ON_DEVICE}</Text>
                     </TabHeading>}>
                         {!this.state.listViewData.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                             <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO BACKUPS YET</Text>
+                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >{Strings.THERE_IS_NO_BACKUPS_YET}</Text>
                         </View>}
                         <List
                             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
@@ -258,19 +258,21 @@ export class AdminBackupRestoreScreen extends React.Component {
                                     <Left>
                                         <View style={{ textAlign: 'left', }}>
                                             <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                            <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
                                         </View>
                                     </Left>
                                     <Right>
-                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 210, }}>
+                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 420, }}>
                                             <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                                 <Icon active name="trash" />
+                                                <Text style={{color: 'white', fontSize: 12}}>{Strings.DELETE}</Text>
                                             </Button>
                                             <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
                                                 <Icon active name="build" />
+                                                <Text style={{color: 'white', fontSize: 12}}>{Strings.RESTORE}</Text>
                                             </Button>
                                             <Button style={{ flex: 3.4, height: 65, borderLeftWidth: 0, }} full danger onPress={_ => this._uploadOnlyAsk(data)}>
                                                 <Icon active name="cloud-upload" />
+                                                <Text style={{color: 'white', fontSize: 12}}>{Strings.UPLOAD}</Text>
                                             </Button>
                                         </View>
                                     </Right>
@@ -292,12 +294,12 @@ export class AdminBackupRestoreScreen extends React.Component {
                         />
                     </Tab>
                     <Tab heading={<TabHeading style={{ backgroundColor: 'lightgray' }}>
-                        <Icon name="download" style={{ color: 'white', marginRight: 10, }} />
-                        <Text style={{ color: 'white', }}>DOWNLOADS</Text>
+                        <Icon name="cloud-download" style={{ color: 'white', marginRight: 10, }} />
+                        <Text style={{ color: 'white', }}>{Strings.DOWNLOADED}</Text>
                     </TabHeading>}>
                         {!this.state.listViewData2.length && <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 100, }}>
                             <Icon name='snow' fontSize={50} size={50} style={{ color: 'lightgray', fontSize: 100, }} />
-                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >THERE IS NO DOWNLOADS YET</Text>
+                            <Text style={{ color: 'lightgray', fontSize: 25, marginTop: 20, }} >{Strings.THERE_IS_NO_DOWNLOADS_YET}</Text>
                         </View>}
 
                         <List
@@ -307,16 +309,17 @@ export class AdminBackupRestoreScreen extends React.Component {
                                     <Left>
                                         <View style={{ textAlign: 'left', }}>
                                             <Text style={{ marginBottom: 10, color: 'black', fontSize: inputAndButtonFontSize, }}>{data.name} </Text>
-                                            <Text style={{ marginBottom: 10, color: 'gray' }}>{Strings.CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP}</Text>
                                         </View>
                                     </Left>
                                     <Right>
                                         <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 140, }}>
                                             <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                                 <Icon active name="trash" />
+                                                <Text style={{color: 'white', fontSize: 12}}>{Strings.DELETE}</Text>
                                             </Button>
                                             <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
                                                 <Icon active name="build" />
+                                                <Text style={{color: 'white', fontSize: 12}}>{Strings.RESTORE}</Text>
                                             </Button>
                                         </View>
                                     </Right>

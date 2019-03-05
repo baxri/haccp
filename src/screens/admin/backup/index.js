@@ -390,8 +390,8 @@ export class AdminBackupIndexScreen extends React.Component {
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.BACKUPS_FOLDER}:</H3>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
 
-                        <Button full transparent style={{ padding: 10, marginBottom: 20, }} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
-                            <Text style={[styles.text]}>{Strings.BACKUPS_AND_DOWNLOADS}</Text>
+                        <Button full transparent style={{ padding: 10, marginBottom: 20, borderBottom: '1px solid'}} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
+                            <Text style={[styles.textButton]}>{Strings.BACKUPS_AND_DOWNLOADS}</Text>
                         </Button>
 
                         {!this.state.connected && <H3 style={{ marginTop: 100, textAlign: 'center', color: 'red' }}>{Strings.NO_CONNECTION}</H3>}
@@ -409,16 +409,16 @@ export class AdminBackupIndexScreen extends React.Component {
                             </View>
                             <Button primary style={styles.button} onPress={() => { this._sync() }}>
                                 <Left >
-                                    <Text style={[{ color: 'white', }, styles.text]}>{Strings.UPLOAD}</Text>
+                                    <Text style={[{ color: 'white', }, styles.text]}>{Strings.SAVE_LOCAL}</Text>
                                 </Left>
                                 <Right>
-                                    <Icon name='sync' style={{ color: 'white', }} />
+                                    <Icon name='archive' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
 
                             <View style={{ height: 50, }}></View>
-                            <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2>
-                            <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3>
+                            {/* <H2 style={{ textAlign: 'center', color: 'red', marginBottom: 25, }}>{Strings.DANGER_ZONE}</H2> */}
+                            {/* <H3 style={{ textAlign: 'center', color: 'red', marginBottom: 25 }}>{Strings.RESTORE_WARNING}</H3> */}
                             <View style={this.state.backup_id.length > 0 ? styles.inputSuccess : styles.inputDanger}>
                                 <TextInput
                                     keyboardType="numeric"
@@ -433,11 +433,11 @@ export class AdminBackupIndexScreen extends React.Component {
                             <Button primary style={[styles.button, { marginBottom: 30 }]} onPress={() => { this._downloadBackupAsk() }}>
                                 <Left >
                                     <Text style={[{ color: 'white', }, styles.text]}>
-                                        {Strings.DOWNLOAD}
+                                        {Strings.DOWNLOAD_BACKUP_FROM_CLOUD}
                                     </Text>
                                 </Left>
                                 <Right>
-                                    <Icon name='sync' style={{ color: 'white', }} />
+                                    <Icon name='cloud-download' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
 
@@ -467,7 +467,7 @@ export class AdminBackupIndexScreen extends React.Component {
                                     </Text>
                                 </Left>
                                 <Right>
-                                    <Icon name='cloud-download' style={{ color: 'white', }} />
+                                    <Icon name='sync' style={{ color: 'white', }} />
                                 </Right>
                             </Button>
                         </View>}

@@ -9,6 +9,7 @@ const strings = {
     CANCEL: 'Annuler',
     OK: 'Ok',
     SAVE: 'Sauvegarder',
+    SAVE_LOCAL: 'Sauvegarder sur l\'appareil',
     CONFIRM: 'Confirmer',
     CONFIRMED: 'Confirmé',
     NOT_CONFIRM: 'Annuler',
@@ -21,12 +22,12 @@ const strings = {
     DATE: 'Date',
     DATETIME: 'Date et heure',
     PLEASE_WRITE_YOUR_SIGNATURE: 'Veuillez ajouter une signature',
-    UNIQUE_ID: 'Identifiant',
-    APP_ID: 'Identifiant Application',
+    UNIQUE_ID: 'ID du dispositif',
+    APP_ID: 'ID de l\'application',
     TEMPERATURE: 'Température',
 
     // SETUP ADMINISTRATOR
-    SETUP_ADMINISTRATOR: 'Configuration Administrateur',
+    SETUP_ADMINISTRATOR: 'Créer votre mot de passe administrateur',
     PASSWORD_REQUIRED: 'Mot de passe requis',
     PASSWORD_NOT_MUTCHED: 'Les mots de passe ne correspondent pas',
     ADMINISTRATOR_SUCCESSFULLY_CREATED: 'Administrateur créé avec succès',
@@ -41,8 +42,8 @@ const strings = {
     BACK_TO_SIGNIN: 'Retour (Connexion)',
 
     // LOGIN FONT
-    THERE_IS_NO_DEPARTMENTS: 'Il n\'y a pas de rayons',
-    THERE_IS_NO_USERS: 'Il n\'y a pas d\'utilisateurs',
+    THERE_IS_NO_DEPARTMENTS: 'Aucun rayon définit',
+    THERE_IS_NO_USERS: 'Aucun utilisateur définit',
     SIGN_IN_AS_ADMIN: 'Connexion administrateur',
 
     // ADMIN DASHBOARD
@@ -55,7 +56,7 @@ const strings = {
 
     // FOURNISSEUR
     THERE_IS_NO_FOURNISSEUR_YET: 'Aucun fournisseur',
-    SAVE_FOURNISSEUR: 'Sauvegarder fournisseur',
+    SAVE_FOURNISSEUR: 'Sauvegarder le fournisseur',
     FOURNISSEUR_NAME: 'Nom du fournisseur',
     SELECT_FOURNISSEUR: 'Sélectionner un fournisseur',
 
@@ -67,7 +68,7 @@ const strings = {
     // DEPARTMENTS
     DEPARTMENT: 'Rayons',
     DEPARTMENT_NAME: 'Nom du rayon',
-    SAVE_DEPARTMENT: 'Sauvegarder rayon',
+    SAVE_DEPARTMENT: 'Sauvegarder le rayon',
     CHOOSE_EQUIPMENTS: 'Choisir les équipements',
     THERE_IS_NO_DEPARTMENTS_YET: 'Aucun rayon',
     ADD_MORE_EQUIPMENTS: 'Ajouter un équipement',
@@ -79,19 +80,27 @@ const strings = {
     SELECT_DEPARTMENT: 'Sélectionner un rayon',
     FIRST_NAME: 'Prénom',
     LAST_NAME: 'Nom',
-    SAVE_USER: 'Sauvegarder',
+    SAVE_USER: 'Sauvegarder l\'utilisateur',
     CHOOSE_EQUIPMENTS: 'Choisir des équipements',
+
+    // CLEAN
+    SELECT_EQUIPMENTS: 'Sélectionner un équipement',
+    SELECT_TYPE: 'Sélectionner la récurrence',
+    CLEANING_SCHEDULE_SAVE: 'Sauvegarder le planning de nettoyage',
 
     // BACKUP
     BACKUP: 'Sauvegarder',
-    DATA_SUCCESSFULLY_UPLOADED: 'Données sauvegardées',
+    DELETE_BACKUP: 'Supprimer la sauvegarde',
+    RESTORE_BACKUP: 'Restaurer la sauvegarde',
+    UPLOAD_BACKUP: 'Envoyer la sauvegarde',
+    DATA_SUCCESSFULLY_UPLOADED: 'Données sauvegardées avec succès',
     DATA_UPLOADED_CANCELED: 'Sauvegarde annulée',
-    DATA_UPLOADED_ERROR: 'Erreur lors de la sauvegarde',
+    DATA_UPLOADED_ERROR: 'Une erreur est survenue lors de la sauvegarde',
     UPLOAD: 'Envoyer',
 
     // SCHEDULES ADMIN
-    THERE_IS_NO_SCHEDULES_YET: 'Il n\'y a aucun nettoyage plannifié',
-    SCHEDULE_SUCCESSFULL_SAVED: 'Planning enregistré',
+    THERE_IS_NO_SCHEDULES_YET: 'Aucun nettoyage plannifié',
+    SCHEDULE_SUCCESSFULL_SAVED: 'Planning de nettoyage enregistré',
 
     // SCHEDULES FRONT
     CLEAN: 'Effectuer cette tâche',
@@ -188,11 +197,13 @@ const strings = {
     NOVEMBER: 'Novembre',
     DECEMBER: 'Décembre',
 
+    BACKUPS: 'Sauvegardes',
     BACKUP_NAME: 'Nom de la sauvegarde',
     BACKUP_ID: 'Identifiant de la sauvegarde',
-    PLEASE_ENTER_BACKUP_NAME: 'Veuillez entrer un nom',
-    PLEASE_ENTER_BACKUP_ID: 'Veuillez entrer un identifiant',
+    PLEASE_ENTER_BACKUP_NAME: 'Veuillez entrer un nom pour la sauvegarde',
+    PLEASE_ENTER_BACKUP_ID: 'Veuillez entrer un identifiant de sauvegarde',
     RESTORE: 'Restaurer',
+    DOWNLOAD_BACKUP_FROM_CLOUD: 'Télécharger une sauvegarde en ligne',
     RESTORE_WARNING: 'Attention ! Cette action effacera toutes les données locales et redémarrera l\'application.',
     DELETE_OLD_DATA_WARNING: 'Attention ! Cette action effacera les anciennes données',
     DELETE_OLD_DATA: 'Supprimer les anciennes données',
@@ -203,22 +214,25 @@ const strings = {
     DANGER_ZONE: 'Zone dangereuse',
     SELECT_USER: 'Sélectionner un utilisateur',
     EDIT: 'Éditer',
+    EDIT_IMAGE: 'Modifier l\'image',
     TIME: 'Heure',
 
-    DEVICE_ID: 'ID dispositif',
+    ON_DEVICE: 'Sur l\'appareil',
+    DEVICE_ID: 'ID du dispositif',
     UPDATE: 'Mise à jour',
-    DOWNLOAD_LATEST_APK: 'Télécharger la dernière version',
+    DOWNLOAD_LATEST_APK: 'Télécharger la dernière version de l\'application',
     BEFORE_UPDATE_PLEASE_MAKE_A_BACKUP: 'Veuillez faire une sauvegarde avant de mettre à jour',
     DOWNLOAD: 'Télécharger',
 
-    APPLICATION_DETAILS: 'APPLICATION_DETAILS',
-    APPLICATION_IMAGES: 'APPLICATION_IMAGES',
-    BACKUPS_FOLDER: 'BACKUPS_FOLDER',
-    BACKUPS: 'BACKUPS',
-    SEE_ALL_BACKUPS: 'SEE_ALL_BACKUPS',
-    CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP: 'CLICK_ICON_RIGHT_TO_RESTORE_THIS_BACKUP',
+    APPLICATION_DETAILS: 'Détails de l\'application',
+    APPLICATION_IMAGES: 'Dossier des images',
+    BACKUPS_FOLDER: 'Dossier des sauvegardes',
+    DOWNLOADED: 'Téléchargée(s)',
+    THERE_IS_NO_DOWNLOADS_YET: 'Aucune sauvegarde téléchargée',
+    THERE_IS_NO_BACKUPS_YET: 'Aucune sauvergarde locale',
+    SEE_ALL_BACKUPS: 'Voir toutes les sauvegardes',
 
-    BACKUPS_AND_DOWNLOADS: 'BACKUPS_AND_DOWNLOADS',
+    BACKUPS_AND_DOWNLOADS: 'Sauvegardes et restaurations',
 };
 
 export default strings;

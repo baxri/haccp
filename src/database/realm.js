@@ -641,6 +641,23 @@ export const Departments = async (item) => new Promise((resolve, reject) => {
 
 });
 
+export const DepartmentsWithEquipments = async (item) => new Promise((resolve, reject) => {
+
+    Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
+        .then(realm => {
+            const items = realm.objects('Department').filtered('equipments.@size > 0').sorted('name', true);
+            resolve(items);
+        })
+        .catch(error => {
+            setTimeout(() => {
+                alert(error);
+                reject(error);
+            }, 1000);
+        });
+
+
+});
+
 export const DeleteDepartment = (id) => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })

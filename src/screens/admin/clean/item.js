@@ -17,7 +17,7 @@ import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content
 import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { Departments, addCleanSchedule, editCleanSchedule, CleanSchedules } from '../../../database/realm';
+import { DepartmentsWithEquipments, addCleanSchedule, editCleanSchedule, CleanSchedules } from '../../../database/realm';
 import { styles } from '../../../utilities/styles';
 import { CustomPicker } from 'react-native-custom-picker';
 import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
@@ -114,8 +114,8 @@ export class AdminCleanItemScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
-        this.setState({ departments: await Departments() });
-
+        this.setState({ departments: await DepartmentsWithEquipments() });
+        
         if (this.props.navigation.state.params.type > 0) {
             this.setState({ type: this.state.types[this.props.navigation.state.params.type - 1] });
         }
@@ -174,7 +174,7 @@ export class AdminCleanItemScreen extends React.Component {
 
     _clickSave = () => {
         Alert.alert(
-            Strings.CLEANING_SCHEDULE,
+            Strings.CLEANING_SCHEDULE_SAVE,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
@@ -267,7 +267,7 @@ export class AdminCleanItemScreen extends React.Component {
                 <Content style={{ width: this.state.dimesions.width, paddingLeft: 30, paddingRight: 30, }}>
                     <View style={styles.container}>
 
-                        {this.state.departments.length == 0 && <H3 style={{ marginTop: 30, textAlign: 'center' }}>THERE_IS_NO_DEPARTMENTS</H3>}
+                        {this.state.departments.length == 0 && <H3 style={{ marginTop: 30, textAlign: 'center' }}>{Strings.THERE_IS_NO_DEPARTMENTS}</H3>}
 
                         {this.state.departments.length > 0 && <View>
                             <CustomPicker
@@ -282,12 +282,10 @@ export class AdminCleanItemScreen extends React.Component {
                                 onValueChange={(value) => this._changeDepartment(value)}
                             />
 
-                            {this.state.department === null && <H3 style={{ marginTop: 30, textAlign: 'center' }}>NO_DEPARTMENTS_CHOOSEN</H3>}
-
                             {this.state.department !== null && <CustomPicker
                                 optionTemplate={renderOption}
                                 fieldTemplate={this.state.equipment !== null ? renderFieldSuccess : renderFieldDanger}
-                                placeholder="SELECT_EQUIPMENTS"
+                                placeholder={Strings.SELECT_EQUIPMENTS}
                                 getLabel={item => item.name}
                                 options={this.state.department.equipments}
                                 value={this.state.equipment}
@@ -299,7 +297,7 @@ export class AdminCleanItemScreen extends React.Component {
                             {this.state.equipment !== null && <CustomPicker
                                 optionTemplate={renderOption}
                                 fieldTemplate={this.state.type !== null ? renderFieldSuccess : renderFieldDanger}
-                                placeholder="SELECT_TYPE"
+                                placeholder={Strings.SELECT_TYPE}
                                 getLabel={item => item.name}
                                 options={this.state.types}
                                 value={this.state.type}
