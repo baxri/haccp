@@ -1,35 +1,28 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ToastAndroid,
-    NetInfo,
-    TextInput,
     Dimensions,
     ListView,
-    RefreshControl,
     Text,
     Alert,
 } from 'react-native';
-import { Container, Header, Tab, Tabs, TabHeading, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
+import { Container, Tab, Tabs, TabHeading, Button, Icon, List, ListItem, Left, Right, } from 'native-base';
+import { LogoTitle, Space, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import { PATH_BACKUP, PATH, PATH_REALM, PATH_REALM_FILE, PATH_DOWNLOAD } from '../../../utilities/index';
-import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
+import { unzip, subscribe } from 'react-native-zip-archive'
 import { RestartAndroid } from 'react-native-restart-android'
-import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { inputAndButtonFontSize } from '../../../utilities/styles';
 import { startUpload } from '../../../utilities/backup';
 
 export class AdminBackupRestoreScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.BACKUPS,
@@ -84,7 +77,7 @@ export class AdminBackupRestoreScreen extends React.Component {
     _loadItems = () => {
         RNFS.readDir(PATH_BACKUP).then(files => {
             this.setState({ listViewData: files.reverse(), refreshing: false });
-        }).catch(error => {
+        }).catch(() => {
             // alert(error);
         });
     }
@@ -92,7 +85,7 @@ export class AdminBackupRestoreScreen extends React.Component {
     _loadItems2 = () => {
         RNFS.readDir(PATH_DOWNLOAD).then(files => {
             this.setState({ listViewData2: files.filter(file => file.name.includes(".zip")).reverse(), refreshing: false });
-        }).catch(error => {
+        }).catch(() => {
             // alert(error);
         });
     }
@@ -113,7 +106,7 @@ export class AdminBackupRestoreScreen extends React.Component {
         this.setState({ loadingZip: 0 });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -200,7 +193,7 @@ export class AdminBackupRestoreScreen extends React.Component {
             this._loadItems();
             this._loadItems2();
             this._hideLoader();
-        }).catch(error => {
+        }).catch(() => {
             this._hideLoader();
         });
     }
@@ -277,7 +270,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                                         </View>
                                     </Right>
                                 </ListItem>}
-                            renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                            renderLeftHiddenRow={(data) =>
                                 <Button full
                                     onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
                                     <Icon active name="build" />
@@ -324,7 +317,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                                         </View>
                                     </Right>
                                 </ListItem>}
-                            renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                            renderLeftHiddenRow={(data) =>
                                 <Button full
                                     onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
                                     <Icon active name="build" />

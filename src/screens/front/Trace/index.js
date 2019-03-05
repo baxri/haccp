@@ -1,24 +1,19 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
     ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Container, Content, Button, Text, H3, Icon, FooterTab, Footer } from 'native-base';
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, addArchive, ArchivesList } from '../../../database/realm';
+import { LogoTitle, Menu } from '../../../components/header';
+import { addPicture, addArchive } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
 import { imagePickerOptions } from '../../../utilities/image-picker';
-import RNFetchBlob from 'react-native-fetch-blob';
 import { FilePicturePath, writePicture, toDate, toYM } from '../../../utilities/index';
 
 var ImagePicker = require('react-native-image-picker');
@@ -26,7 +21,6 @@ var ImagePicker = require('react-native-image-picker');
 export class TraceIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.TRACEABILITY,
@@ -112,7 +106,7 @@ export class TraceIndexScreen extends React.Component {
                 source: this.state.source,
                 date: this.state.date,
                 created_at: this.state.created_at,
-            }).then(res => {
+            }).then(() => {
 
                 addArchive(this.state.date, this.state.YM, true, this.state.userId);
 
@@ -127,7 +121,6 @@ export class TraceIndexScreen extends React.Component {
     }
 
     render() {
-        let { image } = this.state;
         return (
             <Container style={{ alignItems: 'center', paddingTop: 110, }}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />

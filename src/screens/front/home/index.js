@@ -1,15 +1,11 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import { Container, Button, Text, Icon } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu } from '../../../components/header';
 import { Departments, Users } from '../../../database/realm';
 import Strings from '../../../language/fr';
 import { CleanSchedulesFront as CleanSchedules, allDoneCleans } from '../../../database/realm';
@@ -18,7 +14,6 @@ import { sprintf } from 'sprintf-js';
 export class HomeIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.DASHBOARD,

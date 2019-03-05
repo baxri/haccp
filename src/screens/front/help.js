@@ -1,13 +1,11 @@
 import React from 'react';
 import {
-    View,
     Dimensions,
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer } from 'native-base';
+import { Container, Content, Icon } from 'native-base';
 import Image from 'react-native-scalable-image';
 
-import { NoBackButton, LogoTitle, Menu } from '../../components/header';
-import Strings from '../../language/fr';
+import { LogoTitle } from '../../components/header';
 
 export class HelpScreen extends React.Component {
 
@@ -37,7 +35,7 @@ export class HelpScreen extends React.Component {
         });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 

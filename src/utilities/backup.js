@@ -1,13 +1,9 @@
 import RNFetchBlob from 'rn-fetch-blob';
-import RNFetchBlobOld from 'react-native-fetch-blob';
 import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
-import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
+import zip from 'react-native-zip-archive'
 import BackgroundUpload from 'react-native-background-upload'
-import BackgroundDowoloader from 'react-native-background-downloader';
-import {
-    Linking
-} from 'react-native';
+import Linking from 'react-native';
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -18,9 +14,6 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
     try {
 
-        let ID = DeviceInfo.getUniqueID();
-        let files = await RNFetchBlobOld.fs.ls(PATH);
-        let formFiles = [];
 
         let zipName = name + '.zip';
         let copyFrom = DB;
@@ -37,9 +30,9 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let sourcePath = PATH;
 
 
-        zip(sourcePath, targetPath).then(path => {
+        zip(sourcePath, targetPath).then(() => {
 
-        }).cath(error => {
+        }).cath(() => {
 
         });
 
@@ -77,15 +70,15 @@ export const startUpload = (PATH, name, adminPassword = '') => {
     }
 
     BackgroundUpload.startUpload(options).then((uploadId) => {
-        BackgroundUpload.addListener('progress', uploadId, (data) => {
+        BackgroundUpload.addListener('progress', uploadId, () => {
         })
-        BackgroundUpload.addListener('error', uploadId, (data) => {
+        BackgroundUpload.addListener('error', uploadId, () => {
         })
-        BackgroundUpload.addListener('cancelled', uploadId, (data) => {
+        BackgroundUpload.addListener('cancelled', uploadId, () => {
         })
-        BackgroundUpload.addListener('completed', uploadId, (data) => {
+        BackgroundUpload.addListener('completed', uploadId, () => {
         })
-    }).catch((err) => {
+    }).catch(() => {
     })
 }
 

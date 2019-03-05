@@ -1,23 +1,16 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
-    ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer, H1, H3, CardItem, Card, Body, Left, Right, Title } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Content, Button, Text, Icon, H3, CardItem, Card, Body } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import Strings from '../../../language/fr';
 import { reverseFormat, FilePicturePath, toDate } from '../../../utilities/index';
 
 export class ArchiveDetailsScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK} />,
@@ -39,7 +32,7 @@ export class ArchiveDetailsScreen extends React.Component {
 
     };
 
-    _parseEquipments(equipments) {
+    _parseEquipments() {
 
     }
 

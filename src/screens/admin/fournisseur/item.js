@@ -1,27 +1,21 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Keyboard,
     Dimensions,
     TextInput,
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Content, Button, Text, Left, Right, Icon } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import { addFourniseur, editFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
-import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles } from '../../../utilities/styles';
 
 export class AdminFournisseurItemScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.FOURNISSEUR,
@@ -48,7 +42,7 @@ export class AdminFournisseurItemScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -75,7 +69,7 @@ export class AdminFournisseurItemScreen extends React.Component {
             if (!this.state.id) {
                 addFourniseur({
                     name: this.state.name,
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminFournisseurIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
@@ -87,7 +81,7 @@ export class AdminFournisseurItemScreen extends React.Component {
                 editFourniseur({
                     id: this.state.id,
                     name: this.state.name,
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminFournisseurIndex');
                     Keyboard.dismiss();
                     this._hideLoader();

@@ -1,34 +1,25 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ListView,
-    FlatList,
     RefreshControl,
-    ToastAndroid,
     Text,
     Alert,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu, Equipments } from '../../../components/header';
-import { CleanSchedulesFront as CleanSchedules, addControle, addArchive, cleanDone, allDoneCleans } from '../../../database/realm';
-import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
+import { Container, Content, Button, Icon, List, ListItem, Left, Right, } from 'native-base';
+import { LogoTitle, Menu } from '../../../components/header';
+import { CleanSchedulesFront as CleanSchedules, allDoneCleans } from '../../../database/realm';
+import { toDate, toYM } from '../../../utilities/index';
 
 import Spinner from 'react-native-loading-spinner-overlay';
-import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
-import { imagePickerOptions } from '../../../utilities/image-picker';
-import { launchCamera } from 'react-native-image-picker';
 
 export class FrontCleanIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.CLEANING_SCHEDULE,
@@ -172,7 +163,7 @@ export class FrontCleanIndexScreen extends React.Component {
 
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-                        renderRow={(data, secId, rowId, rowMap) =>
+                        renderRow={(data) =>
                             <ListItem style={{ height: 100, paddingLeft: 15, }}>
                                 <Left>
                                     <View style={{ textAlign: 'left', }}>
@@ -200,7 +191,7 @@ export class FrontCleanIndexScreen extends React.Component {
                                     </View>
                                 </Right>
                             </ListItem>}
-                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                        renderLeftHiddenRow={(data) =>
                             <Button full
                                 onPress={() => this.props.navigation.navigate('AdminCleanItem', data)}>
                                 <Icon active name="build" />

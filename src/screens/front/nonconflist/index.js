@@ -1,20 +1,13 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
-    Image,
-    ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, H3, Icon, FooterTab, Footer, List, ListItem, Left, Right, Body, Thumbnail } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Container, Text, H3, Icon, Footer, List, ListItem, Left, Right, Body } from 'native-base';
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Controles, ControlesRange } from '../../../database/realm';
-import CalendarPicker from 'react-native-calendar-picker';
+import { LogoTitle, Menu } from '../../../components/header';
+import { ControlesRange } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
@@ -24,7 +17,6 @@ import { styles, AppColorSecond } from '../../../utilities/styles';
 export class NonconflistIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.NONCONFORMELIST,
@@ -86,7 +78,6 @@ export class NonconflistIndexScreen extends React.Component {
 
     render() {
         const { selectedStartDate } = this.state;
-        const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
         return (
             <Container>

@@ -3,11 +3,10 @@ import {
     ActivityIndicator,
     AsyncStorage,
     StatusBar,
-    StyleSheet,
     View,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
+import { Icon } from 'native-base';
 import Strings from '../../language/fr';
 
 export class LogOutScreen extends React.Component {

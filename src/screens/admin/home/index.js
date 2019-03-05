@@ -1,25 +1,19 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon } from 'native-base';
-import { Icon as ReacrNativeIcon } from 'react-native-elements';
+import { Container, Button, Text, Icon } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu, Space } from '../../../components/header';
+import { LogoTitle, Menu, Space } from '../../../components/header';
 import { Departments, Users, Equipments, Fourniseurs } from '../../../database/realm';
 import Strings from '../../../language/fr'
-import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { inputAndButtonFontSize } from '../../../utilities/styles';
 
 //"native-base": "^2.4.3",
 
 export class AdminHomeIndexScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.DASHBOARD,

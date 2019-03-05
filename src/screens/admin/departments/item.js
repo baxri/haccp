@@ -1,25 +1,20 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Keyboard,
     Dimensions,
     TextInput,
     Image,
-
 } from 'react-native';
-import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { List, ListItem, CheckBox, FooterTab, Footer, Container, Content, Button, Text, H2, Left, Right, Icon } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import { addDepartment, editDepartment, Equipments, addEquipment, Fourniseurs, addFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
 import { styles } from '../../../utilities/styles';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 import { imagePickerOptions } from '../../../utilities/image-picker';
 
 var ImagePicker = require('react-native-image-picker');
@@ -27,7 +22,6 @@ var ImagePicker = require('react-native-image-picker');
 export class AdminDepartmentsItemScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.DEPARTMENT,
@@ -71,7 +65,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -224,7 +218,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                     name: this.state.name,
                     equipments: equipments,
                     fourniseurs: fourniseurs,
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminDepartmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
@@ -238,7 +232,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
                     name: this.state.name,
                     equipments: equipments,
                     fourniseurs: fourniseurs,
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminDepartmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();

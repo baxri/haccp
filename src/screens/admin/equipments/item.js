@@ -1,39 +1,26 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
-    ToastAndroid,
-    Alert,
     Dimensions,
     TextInput,
     Keyboard,
-
 } from 'react-native';
-import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Container, Content, Button, Text, Icon, Right, Left } from 'native-base';
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle } from '../../../components/header';
 import { addEquipment, editEquipment } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
-import RNFS from 'react-native-fs';
-import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import RNFetchBlob from 'react-native-fetch-blob';
-import { FilePicturePath, FilePicturePathTemp, writePictureTemp, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, writePicture } from '../../../utilities/index';
 import { imagePickerOptions } from '../../../utilities/image-picker';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { styles } from '../../../utilities/styles';
 
 export class AdminEquipmentsItemScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.EQUIPMENTS,
@@ -67,7 +54,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
         }
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -117,7 +104,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                 addEquipment({
                     name: this.state.name,
                     source: this.state.source,
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
@@ -130,7 +117,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
                     name: this.state.name,
                     source: this.state.source,
 
-                }).then(res => {
+                }).then(() => {
                     this.props.navigation.navigate('AdminEquipmentsIndex');
                     Keyboard.dismiss();
                     this._hideLoader();

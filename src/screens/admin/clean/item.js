@@ -1,31 +1,23 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ToastAndroid,
-    NetInfo,
-    TextInput,
     Dimensions,
     Alert,
-    Keyboard,
-
+    Keyboard
 } from 'react-native';
-import { List, ListItem, CheckBox, FooterTab, Footer, Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { List, ListItem, CheckBox, FooterTab, Footer, Container, Content, Button, Text, H3, Left, Right, Icon } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
-import { DepartmentsWithEquipments, addCleanSchedule, editCleanSchedule, CleanSchedules } from '../../../database/realm';
+import { DepartmentsWithEquipments, addCleanSchedule, editCleanSchedule } from '../../../database/realm';
 import { styles } from '../../../utilities/styles';
 import { CustomPicker } from 'react-native-custom-picker';
-import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
+import { renderOption, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
 
 export class AdminCleanItemScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.CLEANING_SCHEDULE,
@@ -109,7 +101,7 @@ export class AdminCleanItemScreen extends React.Component {
         this.setState({ loading: 0 });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -233,7 +225,7 @@ export class AdminCleanItemScreen extends React.Component {
             realmObject = { ...form, ...monthlyObject, ...weeklyObject };
 
             if (this.state.id.length > 0) {
-                editCleanSchedule({ ...{ id: this.state.id }, ...realmObject }).then(res => {
+                editCleanSchedule({ ...{ id: this.state.id }, ...realmObject }).then(() => {
                     this.props.navigation.navigate('AdminCleanIndex');
                     Keyboard.dismiss();
                     this._hideLoader();
@@ -244,7 +236,7 @@ export class AdminCleanItemScreen extends React.Component {
                     alert(error);
                 });
             } else {
-                addCleanSchedule(realmObject).then(res => {
+                addCleanSchedule(realmObject).then(() => {
                     this.props.navigation.navigate('AdminCleanIndex');
                     Keyboard.dismiss();
                     this._hideLoader();

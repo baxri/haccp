@@ -1,19 +1,6 @@
-import { realmFilePath, realmFilePathTemp, toDate } from '../../src/utilities/index';
+import { realmFilePath, toDate } from '../../src/utilities/index';
 import Realm from 'realm';
-import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
-    View,
-    ListView,
-    FlatList,
-    RefreshControl,
-    ToastAndroid,
-    Text,
-    Alert,
-
-} from 'react-native';
+import AsyncStorage from 'react-native';
 // const Realm = require('realm');
 
 const ArchiveSchema = {
@@ -255,7 +242,6 @@ const _guid = () => {
 const schemaVersion = 72;
 const schemas = [CleanDoneSchema, CleanScheduleSchema, ArchiveSchema, UserSchema, DepartmentSchema, PictureSchema, ControleSchema, EquipmentSchema, FourniseurSchema, TemperatureSchema, ProductSchema];
 const realmPath = realmFilePath();
-const realmPathTemp = realmFilePathTemp();
 
 export const RealmFile = () => {
     return realmPath;
@@ -292,7 +278,7 @@ export const cleanDone = (equipment = null, department = null, schedule = null, 
 
 export const checkCleanDone = async (equipment) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
-        .then(realm => {
+        .then(() => {
             let date = toDate(new Date());
             const items = equipment.cleansdone.filtered('date = $0', date);
             resolve(items);
@@ -371,7 +357,7 @@ export const CleanSchedules = async () => new Promise((resolve, reject) => {
         });
 });
 
-export const CleanSchedulesFront = async (userId) => new Promise((resolve, reject) => {
+export const CleanSchedulesFront = async () => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(async realm => {
 
@@ -488,7 +474,7 @@ export const editFourniseur = (item) => new Promise((resolve, reject) => {
         });
 });
 
-export const Fourniseurs = async (item) => new Promise((resolve, reject) => {
+export const Fourniseurs = async () => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -624,7 +610,7 @@ export const editDepartment = (item) => new Promise((resolve, reject) => {
         });
 });
 
-export const Departments = async (item) => new Promise((resolve, reject) => {
+export const Departments = async () => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -641,7 +627,7 @@ export const Departments = async (item) => new Promise((resolve, reject) => {
 
 });
 
-export const DepartmentsWithEquipments = async (item) => new Promise((resolve, reject) => {
+export const DepartmentsWithEquipments = async () => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -724,7 +710,7 @@ export const editUser = (departmentId, item) => new Promise((resolve, reject) =>
 });
 
 
-export const Users = (item) => new Promise((resolve, reject) => {
+export const Users = () => new Promise((resolve, reject) => {
 
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {

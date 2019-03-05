@@ -1,27 +1,11 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
-    Keyboard,
-    Dimensions,
-    TextInput,
-    Picker,
-    TouchableOpacity,
     PermissionsAndroid,
-
 } from 'react-native';
-import { Container, Header, Content, Button, Text, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import Strings from '../language/fr'
+import { Button, Text, Icon } from 'native-base';
 import { styles, inputAndButtonFontSize } from '../utilities/styles';
-import { CustomPicker } from 'react-native-custom-picker';
-import { Client } from 'bugsnag-react-native';
-var RNFS = require('react-native-fs');
-
-const bugsnag = new Client();
 
 export const FILE_VERSION = '8';
 export const APP_PICTURE_FOLDER = 'HACCPIMAGES-' + FILE_VERSION;
@@ -80,8 +64,6 @@ export const initImages = async () => {
         console.log(granted_read);
         console.log(granted_write);
 
-        let a = await RNFS.mkdir(PATH + "/");
-        let temp = await RNFS.mkdir(PATH_TEMP + "/");
 
     } catch (error) {
         alert(error);
@@ -93,8 +75,6 @@ export const initFolders = async () => {
     initImages();
 
     try {
-        let a = await RNFS.mkdir(PATH_REALM + "/");
-        let b = await RNFS.mkdir(PATH_REALM_TEMP + "/");
     } catch (error) {
         alert(error)
     }
@@ -117,36 +97,30 @@ export const FilePicturePathTemp = () => {
     return 'file://' + PATH_TEMP + '/';
 };
 
-export const writePicture = async (result) => {
+export const writePicture = async () => {
     var filename = Math.floor(Date.now() / 1000) + '.jpg';
-    var filepath = PATH + "/" + filename;
 
     try {
-        let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
         return filename;
     } catch (error) {
         alert(error);
     }
 };
 
-export const writePictureTemp = async (result) => {
+export const writePictureTemp = async () => {
     var filename = Math.floor(Date.now() / 1000) + '.jpg';
-    var filepath = PATH_TEMP + "/" + filename;
 
     try {
-        let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
         return filename;
     } catch (error) {
         alert(error);
     }
 };
 
-export const writeZip = async (result) => {
+export const writeZip = async () => {
     var filename = Math.floor(Date.now() / 1000) + '.zip';
-    var filepath = PATH_ZIP + "/" + filename;
 
     try {
-        let writed = await RNFetchBlob.fs.writeFile(filepath, result, 'base64');
         return filename;
     } catch (error) {
         alert(error);
@@ -182,7 +156,7 @@ export const renderOption = (settings) => {
 }
 
 export const renderField = (settings) => {
-    const { selectedItem, defaultText, getLabel, clear } = settings
+    const { selectedItem, defaultText, getLabel } = settings
     return (
         <View style={styles.DropdownContainer}>
             <View>
@@ -210,7 +184,7 @@ export const renderField = (settings) => {
 }
 
 export const renderFieldDanger = (settings) => {
-    const { selectedItem, defaultText, getLabel, clear } = settings
+    const { selectedItem, defaultText, getLabel } = settings
     return (
         <View style={styles.DropdownContainerDanger}>
             <View>
@@ -238,7 +212,7 @@ export const renderFieldDanger = (settings) => {
 }
 
 export const renderFieldSuccess = (settings) => {
-    const { selectedItem, defaultText, getLabel, clear } = settings
+    const { selectedItem, defaultText, getLabel } = settings
     return (
         <View style={styles.DropdownContainerSuccess}>
             <View>

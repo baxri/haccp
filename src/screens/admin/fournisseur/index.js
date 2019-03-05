@@ -1,31 +1,24 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ListView,
-    FlatList,
     RefreshControl,
-    ToastAndroid,
     Text,
     Alert,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Picker, H1, H2, H3, Icon, Fab, List, ListItem, Left, Right, H4, H5, } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Content, Button, Icon, Fab, List, ListItem, Left, Right, } from 'native-base';
+import { LogoTitle, Menu } from '../../../components/header';
 import { Fourniseurs, DeleteFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
-import PopupDialog from 'react-native-popup-dialog';
 import Strings from '../../../language/fr'
-import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
+import { inputAndButtonFontSize } from '../../../utilities/styles';
 
 export class AdminFournisseurIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.FOURNISSEUR,
@@ -115,7 +108,7 @@ export class AdminFournisseurIndexScreen extends React.Component {
 
         rowMap[`${secId}${rowId}`].props.closeRow();
 
-        DeleteFourniseur(id).then(item => {
+        DeleteFourniseur(id).then(() => {
             rowMap[`${secId}${rowId}`].props.closeRow();
             this._loadItems();
         }).catch(error => {
@@ -165,7 +158,7 @@ export class AdminFournisseurIndexScreen extends React.Component {
                                     </View>
                                 </Right>
                             </ListItem>}
-                        renderLeftHiddenRow={(data, secId, rowId, rowMap) =>
+                        renderLeftHiddenRow={(data) =>
                             <Button full
                                 onPress={() => this.props.navigation.navigate('AdminFournisseurItem', data)}>
                                 <Icon active name="build" />

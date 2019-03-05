@@ -1,23 +1,12 @@
 import React from 'react';
-import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
-    View,
-    ListView,
-    FlatList,
-    RefreshControl,
-
-} from 'react-native';
-import { Container, Footer, Header, Content, Button, Text, Picker, H1, Icon, Fab, List, ListItem, CheckBox, Left, Right, FooterTab } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import ListView from 'react-native';
+import { Container, Footer, Content, Button, Text, Icon, List, ListItem, CheckBox, Left, Right, FooterTab } from 'native-base';
+import { LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr'
 
 export class AdminDepartmentsEquipmentsModal extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             headerTitle: <LogoTitle HeaderText={Strings.CHOOSE_EQUIPMENTS} />,
@@ -164,7 +153,7 @@ export class AdminDepartmentsEquipmentsModal extends React.Component {
                 <Content>
                     <List
                         dataSource={this.ds.cloneWithRows(this.state.formatedData)}
-                        renderRow={(data, secId, rowId, rowMap) =>
+                        renderRow={(data, secId, rowId) =>
                             <ListItem style={{ height: 70, padding: 15, }} onPress={() => { this._toggleCheckbox(rowId) }}>
                                 <Left>
                                     <Text>{data.name}</Text>

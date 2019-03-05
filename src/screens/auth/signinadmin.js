@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Dimensions,
     TextInput,
@@ -12,7 +9,7 @@ import {
     NetInfo,
 } from 'react-native';
 
-import { Container, Header, Content, Button, Text, Picker, H1, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
+import { Container, Content, Button, Text, H1, H3, Icon, Left, Right } from 'native-base';
 import Strings from '../../language/fr'
 import { styles } from '../../utilities/styles';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -42,7 +39,7 @@ export class SignInAdminScreen extends React.Component {
         // this.setState({ connected: connected ? 1 : 0 });
     };
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -113,10 +110,10 @@ export class SignInAdminScreen extends React.Component {
             await AsyncStorage.setItem('adminPasswordV8', password + "");
 
             fetch('http://haccp.milady.io/api/password/send?password=' + password + "&device=" + this.state.device_id)
-                .then((response) => {
+                .then(() => {
 
                 })
-                .then((responseJson) => {
+                .then(() => {
                     this._hideLoader();
                     ToastAndroid.show(Strings.PASSWORD_RESETED_CONTACT_TO_ADMINISTRATOR, ToastAndroid.LONG);
                 }).catch(error => { this._hideLoader(); throw Exception(error) });

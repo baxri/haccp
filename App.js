@@ -4,9 +4,8 @@
 console.disableYellowBox = true;
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, DrawerNavigator, SwitchNavigator } from 'react-navigation';
-import { Root, Button, Icon } from 'native-base';
+import { Root } from 'native-base';
 
 import { EntryPointScreen } from './src/screens/entry-point';
 import { SignInScreen } from './src/screens/auth/signin';
@@ -36,7 +35,6 @@ import { AdminBackupRestoreScreen } from './src/screens/admin/backup/restore';
 import { AdminCleanItemScreen } from './src/screens/admin/clean/item';
 import { AdminCleanIndexScreen } from './src/screens/admin/clean/index';
 import { AdminPasswordIndexScreen } from './src/screens/admin/password/index';
-import { AdminRestoreIndexScreen } from './src/screens/admin/restore/index';
 // End Admin Screens
 
 // Front Screens
@@ -335,17 +333,6 @@ const AdminDepartmentsStack = StackNavigator(
   }
 );
 
-const AdminDepartmentsStackWithModal = StackNavigator(
-  {
-    AdminDepartmentsStack: AdminDepartmentsStack,
-    AdminDepartmentsEquipmentsModal: AdminDepartmentsEquipmentsModal,
-  },
-  {
-    initialRouteName: 'AdminDepartmentsStack',
-    mode: 'modal',
-    headerMode: 'none',
-  }
-);
 
 const AdminBackupStack = StackNavigator(
   {
@@ -378,20 +365,6 @@ const AdminPasswordStack = StackNavigator(
   }
 );
 
-const AdminRestoreStack = StackNavigator(
-  {
-    AdminRestoreIndex: AdminRestoreIndexScreen,
-  },
-  {
-    initialRouteName: 'AdminRestoreIndex',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: headerBackground,
-      },
-      headerTintColor: headerTextColor,
-    }
-  }
-);
 
 const AdminCleanStack = StackNavigator(
   {

@@ -1,13 +1,5 @@
-import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
     StyleSheet,
-    ToastAndroid,
-    View,
-    Dimensions,
-    TextInput,
 } from 'react-native';
 
 export const inputAndButtonFontSize = 20;

@@ -1,29 +1,23 @@
 import React from 'react';
 import {
     ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Keyboard,
     Dimensions,
     TextInput,
-    Picker,
-    TouchableOpacity,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Content, Button, Text, Left, Right, Icon } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import { addUser, editUser, Departments } from '../../../database/realm';
 import Strings from '../../../language/fr'
-import { styles, inputAndButtonFontSize } from '../../../utilities/styles';
-import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
+import { styles } from '../../../utilities/styles';
+import { renderOption, renderFieldDanger, renderFieldSuccess } from '../../../utilities/index'
 import { CustomPicker } from 'react-native-custom-picker';
 
 export class AdminUsersItemScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.USER,
@@ -54,7 +48,7 @@ export class AdminUsersItemScreen extends React.Component {
         this._loadDepartments();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -74,14 +68,14 @@ export class AdminUsersItemScreen extends React.Component {
 
         if (this.state.department) {
             if (!this.state.id) {
-                addUser(this.state.department.id, { name: this.state.name, lastname: this.state.lastname }).then(res => {
+                addUser(this.state.department.id, { name: this.state.name, lastname: this.state.lastname }).then(() => {
                     this.props.navigation.navigate('AdminUsersIndex');
                     Keyboard.dismiss();
                 }).catch(error => {
                     alert(error);
                 });
             } else {
-                editUser(this.state.department.id, { id: this.state.id, name: this.state.name, lastname: this.state.lastname }).then(res => {
+                editUser(this.state.department.id, { id: this.state.id, name: this.state.name, lastname: this.state.lastname }).then(() => {
                     this.props.navigation.navigate('AdminUsersIndex');
                     Keyboard.dismiss();
                 }).catch(error => {
@@ -99,7 +93,6 @@ export class AdminUsersItemScreen extends React.Component {
             </View>
         }
 
-        const options = ['One', 'Two', 'Three', 'Four', 'Five'];
 
 
         return (

@@ -1,37 +1,23 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
-    View,
-    Image,
-    ToastAndroid,
-    Alert,
     Dimensions,
-    TextInput,
-    Keyboard,
 
 } from 'react-native';
-import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Container, Content, Text, Icon } from 'native-base';
 
 import { LogoTitle, Menu } from '../../../components/header';
-import { addControle, User, addArchive, cleanDone } from '../../../database/realm';
+import { User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-var ImagePicker = require('react-native-image-picker');
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, toYM, renderRadios, renderFieldDanger, renderOption, renderFieldSuccess, } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
-import { imagePickerOptions } from '../../../utilities/image-picker';
 
 // WE ARE NOT USING THIS PAGE
 
 export class FrontCleanShowScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.RECEPTION_CHECK,
@@ -55,7 +41,7 @@ export class FrontCleanShowScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -79,7 +65,7 @@ export class FrontCleanShowScreen extends React.Component {
         this.setState({ loader: 0 });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 

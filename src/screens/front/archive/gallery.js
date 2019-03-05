@@ -1,27 +1,17 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
-    Image,
-    ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { Pictures } from '../../../database/realm';
+import { LogoTitle } from '../../../components/header';
 import Gallery from 'react-native-image-gallery';
-import { reverseFormat, FilePicturePath } from '../../../utilities/index';
+import { FilePicturePath } from '../../../utilities/index';
 import Strings from '../../../language/fr';
 
 export class ArchiveGalleryScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             headerTitle: <LogoTitle HeaderText={Strings.GALLERY} />,

@@ -1,11 +1,8 @@
-import React, {
-    Component
-} from 'react';
+import React from 'react';
 
-import ReactNative, {
-    View, Modal, Platform, Alert
-} from 'react-native';
-import { Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import {
+    View, Modal, Platform} from 'react-native';
+import { Text } from 'native-base';
 import Strings from '../../../language/fr';
 import SignatureCapture from 'react-native-signature-capture';
 

@@ -1,15 +1,12 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     ToastAndroid,
     View,
     Dimensions,
     TextInput,
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, Form, Item, Label, Input, Toast, Root, Left, Right, Icon } from 'native-base';
+import { Container, Content, Button, Text, H1, Left, Right, Icon } from 'native-base';
 import Strings from '../../language/fr';
 import { styles } from '../../utilities/styles';
 
@@ -29,7 +26,7 @@ export class SetupAdminScreen extends React.Component {
         title: Strings.SETUP_ADMINISTRATOR,
     };
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 

@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
     ToastAndroid,
@@ -13,7 +10,7 @@ import {
     Keyboard,
 
 } from 'react-native';
-import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Fab, Textarea, Container, Content, Button, Text, Icon, FooterTab, Footer } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import { LogoTitle, Menu } from '../../../components/header';
@@ -32,7 +29,6 @@ import { CustomPicker } from 'react-native-custom-picker';
 export class ControleIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.RECEPTION_CHECK,
@@ -89,7 +85,7 @@ export class ControleIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -212,14 +208,14 @@ export class ControleIndexScreen extends React.Component {
                 Strings.ARE_YOU_SURE,
                 [
                     { text: Strings.CANCEL, style: 'cancel' },
-                    { text: Strings.OK, onPress: () => this._store(1) },
+                    { text: Strings.OK, onPress: () => this._store() },
                 ],
                 { cancelable: false }
             )
         }
     }
 
-    _store(confirmed) {
+    _store() {
         this._showLoader();
 
         setTimeout(() => {
@@ -257,7 +253,7 @@ export class ControleIndexScreen extends React.Component {
 
                 date: this.state.date,
                 created_at: this.state.created_at,
-            }).then(res => {
+            }).then(() => {
 
                 addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false), this.state.userId);
 
@@ -272,19 +268,14 @@ export class ControleIndexScreen extends React.Component {
         }, 2000);
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     render() {
-        let { image } = this.state;
 
 
 
-        var yesno_props = [
-            { label: Strings.NO, value: 0 },
-            { label: Strings.YES, value: 1 }
-        ];
 
         return (
             <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
@@ -422,7 +413,7 @@ export class ControleIndexScreen extends React.Component {
                                         <Icon name='close' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
-                                <Button full success onPress={_ => this._store(0)} style={{ marginLeft: 20, }} >
+                                <Button full success onPress={_ => this._store()} style={{ marginLeft: 20, }} >
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                         <Icon name='checkmark' style={{ color: 'white', }} />

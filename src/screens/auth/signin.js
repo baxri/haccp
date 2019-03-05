@@ -1,25 +1,20 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
-    Alert,
     ToastAndroid,
     Dimensions,
-    TextInput,
 } from 'react-native';
 
 // import { Text } from 'react-native-elements';
-import { Container, Header, Content, Button, Text, Picker, H1, Icon, Left, Right } from 'native-base';
+import { Container, Content, Button, Text, H1, Icon, Left, Right } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../language/fr'
 import { Departments } from '../../database/realm';
 
-import { renderOption, renderField, renderFieldDanger, renderFieldSuccess } from '../../utilities/index'
+import { renderOption, renderFieldSuccess } from '../../utilities/index'
 import { CustomPicker } from 'react-native-custom-picker';
-import { styles, inputAndButtonFontSize } from '../../utilities/styles';
+import { styles } from '../../utilities/styles';
 
 
 export class SignInScreen extends React.Component {
@@ -37,7 +32,7 @@ export class SignInScreen extends React.Component {
         };
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 

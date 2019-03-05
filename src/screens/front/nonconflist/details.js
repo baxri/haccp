@@ -1,25 +1,18 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
-    ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer, H1, H3, Card, Body, Left, Right, Title, CardItem } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { Container, Content, Button, Text, Card, Body, CardItem } from 'native-base';
+import { LogoTitle } from '../../../components/header';
 import Strings from '../../../language/fr';
 import { reverseFormat } from '../../../utilities/index';
-import { FilePicturePath, writePicture, toDate } from '../../../utilities/index';
+import { FilePicturePath, toDate } from '../../../utilities/index';
 
 export class NonConformeDetailsScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK} />,
@@ -41,7 +34,7 @@ export class NonConformeDetailsScreen extends React.Component {
 
     };
 
-    _parseEquipments(equipments) {
+    _parseEquipments() {
 
         // let ret = [];
 

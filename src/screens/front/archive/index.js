@@ -1,28 +1,20 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
-    View,
-    Image,
-    ToastAndroid,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H2, Icon, FooterTab, Footer } from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Container, Content, Icon } from 'native-base';
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import { addPicture, Pictures, Controles, ControlesGrouped, ArchivesList, User } from '../../../database/realm';
+import { LogoTitle, Menu } from '../../../components/header';
+import { ArchivesList, User } from '../../../database/realm';
 import CalendarPicker from 'react-native-calendar-picker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr';
-import { reverseFormat, toDate, toYM } from '../../../utilities/index';
+import { toDate, toYM } from '../../../utilities/index';
 
 export class ArchiveIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.ARCHIVE,
@@ -168,7 +160,6 @@ export class ArchiveIndexScreen extends React.Component {
 
     render() {
         const { selectedStartDate } = this.state;
-        const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
         return (
             <Container style={{ paddingTop: 20, }}>

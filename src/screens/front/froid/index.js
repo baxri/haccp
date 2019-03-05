@@ -1,39 +1,31 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
     ToastAndroid,
     Alert,
     Dimensions,
     TextInput,
-    Keyboard,
 
 } from 'react-native';
-import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Fab, Textarea, Container, Content, Button, Text, Icon, FooterTab, Footer } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu } from '../../../components/header';
 import { addControle, User, addArchive } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-var ImagePicker = require('react-native-image-picker');
-import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import { FilePicturePath, writePicture, toDate, toYM, renderFieldDanger, renderOption, renderFieldSuccess, guid } from '../../../utilities/index';
-import { CustomPicker } from 'react-native-custom-picker';
+import { FilePicturePath, writePicture, toDate, toYM, guid } from '../../../utilities/index';
 import { styles } from '../../../utilities/styles';
 
 
 export class FroidIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.CONTROLE_FROID,
@@ -83,7 +75,7 @@ export class FroidIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -253,13 +245,11 @@ export class FroidIndexScreen extends React.Component {
             ToastAndroid.show(Strings.PLEASE_ADD_A_SIGNATURE, ToastAndroid.LONG); return;
         }
 
-        let equipmentError = false;
         let alertMessage = Strings.ARE_YOU_SURE;
 
         this.state.equipments.map(equipment => {
             equipment.values.map(value => {
                 if (value == '') {
-                    equipmentError = true;
                     alertMessage = Strings.EQUIPMENTS_REQUIRED;
                 }
             });
@@ -270,13 +260,13 @@ export class FroidIndexScreen extends React.Component {
             alertMessage,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._store(confirmed) },
+                { text: Strings.OK, onPress: () => this._store() },
             ],
             { cancelable: false }
         )
     }
 
-    _store(confirmed) {
+    _store() {
 
         this._showLoader();
 
@@ -315,7 +305,7 @@ export class FroidIndexScreen extends React.Component {
                 created_at: this.state.created_at,
 
                 clickedAdd: false,
-            }).then(res => {
+            }).then(() => {
 
                 addArchive(this.state.date, this.state.YM, (this.state.confirmed ? true : false), this.state.userId);
 
@@ -329,12 +319,11 @@ export class FroidIndexScreen extends React.Component {
         }, 2000);
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     render() {
-        let { image } = this.state;
 
         return (
             <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
@@ -465,7 +454,7 @@ export class FroidIndexScreen extends React.Component {
                                         <Icon name='close' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
-                                <Button full success onPress={_ => this._store(0)} style={{ marginLeft: 20, }} >
+                                <Button full success onPress={_ => this._store()} style={{ marginLeft: 20, }} >
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                         <Icon name='checkmark' style={{ color: 'white', }} />

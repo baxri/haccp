@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     Image,
     ToastAndroid,
@@ -13,19 +10,17 @@ import {
 
 
 } from 'react-native';
-import { Fab, Textarea, Container, Header, Content, Button, Text, Picker, H3, Icon, FooterTab, Footer, Form, Item, Label, Input, Radio, ListItem, Right, Left } from 'native-base';
+import { Fab, Textarea, Container, Content, Button, Text, Icon, FooterTab, Footer } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu } from '../../../components/header';
 import { addControle, addArchive, User } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 var ImagePicker = require('react-native-image-picker');
-import RNFS from 'react-native-fs';
 import SignatureView from './signature';
 import Modal from "react-native-modal";
 import Strings from '../../../language/fr';
-import Upload from 'react-native-background-upload'
 import DatePicker from 'react-native-datepicker'
 import { reverseFormat } from '../../../utilities/index';
 import { imagePickerOptions } from '../../../utilities/image-picker';
@@ -36,7 +31,6 @@ import { styles } from '../../../utilities/styles';
 export class NonConformeIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.NONCONFORME,
@@ -83,7 +77,7 @@ export class NonConformeIndexScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -191,13 +185,13 @@ export class NonConformeIndexScreen extends React.Component {
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
-                { text: Strings.OK, onPress: () => this._store(1) },
+                { text: Strings.OK, onPress: () => this._store() },
             ],
             { cancelable: false }
         )
     }
 
-    _store(confirmed) {
+    _store() {
         this._showLoader();
 
         setTimeout(() => {
@@ -234,7 +228,7 @@ export class NonConformeIndexScreen extends React.Component {
 
                 date: this.state.date,
                 created_at: this.state.created_at,
-            }).then(res => {
+            }).then(() => {
 
                 addArchive(this.state.date, this.state.YM, true, this.state.userId);
 
@@ -248,12 +242,11 @@ export class NonConformeIndexScreen extends React.Component {
         }, 2000);
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
     render() {
-        let { image } = this.state;
         return (
             <Container style={{ flex: 1 }} onLayout={this._onLayout.bind(this)}>
                 <Spinner visible={this.state.loading} textContent={Strings.LOADING} textStyle={{ color: '#FFF' }} />
@@ -376,7 +369,7 @@ export class NonConformeIndexScreen extends React.Component {
                                         <Icon name='close' style={{ color: 'white', }} />
                                     </View>
                                 </Button>
-                                <Button full success onPress={_ => this._store(0)} style={{ marginLeft: 20, }} >
+                                <Button full success onPress={_ => this._store()} style={{ marginLeft: 20, }} >
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                         <Icon name='checkmark' style={{ color: 'white', }} />

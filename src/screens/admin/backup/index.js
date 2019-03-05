@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ToastAndroid,
     NetInfo,
@@ -13,8 +10,8 @@ import {
     Linking,
     Keyboard
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
-import { NoBackButton, LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
+import { Container, Content, Button, Text, H2, H3, Icon, Left, Right } from 'native-base';
+import { LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import {
@@ -30,26 +27,20 @@ import {
     Delete,
     DeleteFromTemp
 } from '../../../database/realm';
-import Upload from 'react-native-background-upload'
 import DeviceInfo from 'react-native-device-info';
 var RNFS = require('react-native-fs');
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH_BACKUP, LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM, PATH_REALM_FILE, PATH_REALM_FILE_TEMP, PATH_ZIP, realmFilePath, realmFilePathTemp, writeZip, initImages, toDate, reverseFormat } from '../../../utilities/index';
+import { PATH_BACKUP, LOOSE_IMAGES, PATH, PATH_TEMP, PATH_REALM_FILE, realmFilePath, realmFilePathTemp, initImages, toDate, reverseFormat } from '../../../utilities/index';
 import { upload, startDownload } from '../../../utilities/backup';
 
-import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
-import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
-import { RestartAndroid } from 'react-native-restart-android'
+import { subscribe } from 'react-native-zip-archive'
 import { styles } from '../../../utilities/styles';
-import { Client } from 'bugsnag-react-native';
 var RNFS = require('react-native-fs');
-const bugsnag = new Client();
 
 export class AdminBackupIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: Strings.BACKUP,
@@ -105,7 +96,7 @@ export class AdminBackupIndexScreen extends React.Component {
         this.setState({ loadingZip: 0 });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
@@ -168,7 +159,6 @@ export class AdminBackupIndexScreen extends React.Component {
             console.log(targetPath);
             console.log(sourcePath);
 
-            let zipped = await zip(sourcePath, targetPath);
 
             console.log("Finish zipping");
 

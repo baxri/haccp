@@ -1,36 +1,20 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     AsyncStorage,
-    StatusBar,
-    StyleSheet,
     View,
     ToastAndroid,
-    NetInfo,
     TextInput,
     Dimensions,
 
 } from 'react-native';
-import { Container, Header, Content, Button, Text, Picker, H1, H2, H3, Form, Item, Label, Input, Toast, Root, Icon, Left, Right } from 'native-base';
-import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
-import Spinner from 'react-native-loading-spinner-overlay';
+import { Container, Content, Button, Text, H1, Icon, Left, Right } from 'native-base';
+import { LogoTitle, Menu } from '../../../components/header';
 import Strings from '../../../language/fr'
-import { RealmFile } from '../../../database/realm';
-import Upload from 'react-native-background-upload'
-import DeviceInfo from 'react-native-device-info';
-var RNFS = require('react-native-fs');
-import RNFetchBlob from 'rn-fetch-blob';
-import RNFetchBlobOld from 'react-native-fetch-blob';
-import { PATH, PATH_REALM, PATH_REALM_FILE, PATH_ZIP, realmFilePath, writeZip } from '../../../utilities/index';
-import { MainBundlePath, DocumentDirectoryPath } from 'react-native-fs'
-import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive'
-import { RestartAndroid } from 'react-native-restart-android'
 import { styles } from '../../../utilities/styles';
 
 export class AdminRestoreIndexScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const params = navigation.state.params || {};
 
         return {
             drawerLabel: 'RESTORE',
@@ -87,7 +71,7 @@ export class AdminRestoreIndexScreen extends React.Component {
         this.setState({ loading: 0 });
     }
 
-    _onLayout(e) {
+    _onLayout() {
         this.setState({ dimesions: { width, height } = Dimensions.get('window') })
     }
 
