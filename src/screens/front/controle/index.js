@@ -413,7 +413,7 @@ export class ControleIndexScreen extends React.Component {
 
                     <Modal isVisible={this.state.isModalVisible}>
                         <View style={{ flex: 1, backgroundColor: 'white', padding: 20, }}>
-                            <Text style={{ marginBottom: 20, }}>Action corectives</Text>
+                            <Text style={{ marginBottom: 20, }}>{Strings.ACTION_CORECTIVES}</Text>
                             <Textarea style={{ marginBottom: 50, }} rowSpan={5} bordered placeholder={Strings.ACTION_CORECTIVES} onChangeText={(value) => { this.setState({ actions: value }) }} />
                             <View style={{ flexDirection: 'row' }}>
                                 <Button danger onPress={this._toggleModal} >

@@ -25,6 +25,7 @@ const strings = {
     UNIQUE_ID: 'ID du dispositif',
     APP_ID: 'ID de l\'application',
     TEMPERATURE: 'Température',
+    GALLERY: 'Galerie',
 
     // SETUP ADMINISTRATOR
     SETUP_ADMINISTRATOR: 'Créer votre mot de passe administrateur',
@@ -103,14 +104,16 @@ const strings = {
     SCHEDULE_SUCCESSFULL_SAVED: 'Planning de nettoyage enregistré',
 
     // SCHEDULES FRONT
+    CURRENT_TASK: 'Tâche en cours',
+    CONFIRM_CURRENT_TASK: 'Tâche effectuée',
     CLEAN: 'Effectuer cette tâche',
-    DONE: 'Vérifier cette tâche',
+    DONE: 'Valider',
     WEEKLY: 'Hebdomadaire',
     MONTHLY: 'Mensuel',
     DAILY: 'Quotidien',
     COMMENT: 'Note',
     // YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Vous n\'avez aucune tâche à effectuer aujourd\'hui - (%s/%s)',
-    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Il vous reste %s tâches à effectuer (%s/%s)',
+    YOU_HAVEN_TASKS_TO_DONE_TODAY: 'Il vous reste %s tâche%s à effectuer (%s/%s)',
 
     // CHANGE PASSWORD
     CHANGE_PASSWORD: 'Modifier le mot de passe',
@@ -131,11 +134,11 @@ const strings = {
     NONCONFORMELIST: 'Liste des produits non conf.',
 
     //TRACEABILITY
-    PLEASE_TAKE_A_PICTURE: 'Ajouter une photo',
+    PLEASE_TAKE_A_PICTURE: 'Veuillez ajouter une photo',
     PICTURE_SUCCESSFULL_SAVED: 'Photo sauvegardée',
 
     //RECEPTION_CHECK
-    PLEASE_ADD_A_SIGNATURE: 'Ajouter une signature',
+    PLEASE_ADD_A_SIGNATURE: 'Veuillez ajouter une signature',
     RECEPTION_CHECK_SUCCESSFULL_SAVED: 'Contrôle à réception sauvegardé',
     PRODUCT: 'Produit',
     FOURNISER: 'Fournisseur',
@@ -156,7 +159,7 @@ const strings = {
     AUTRES_CORECTIVES: 'Actions correctives',
     EQUIPMENTS_REQUIRED: 'Certains équipements n\'ont pas été controlés, valider ?',
     ADD_MORE_TEMPERATURES: 'Ajouter un contrôle de température',
-    ADD_MORE_PRODUCTS: 'ADD_PRODUCT',
+    ADD_MORE_PRODUCTS: 'Ajouter d\'autres produits',
 
     //ARCHIVE
     THERE_IS_NO_RECEP_CONTROLS: 'Aucun contrôle à réception',

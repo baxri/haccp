@@ -32,12 +32,12 @@ export class FrontCleanDoneScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            drawerLabel: Strings.RECEPTION_CHECK,
+            drawerLabel: Strings.CURRENT_TASK,
             drawerIcon: ({ tintColor }) => (
                 <Icon name='eye' style={{ color: tintColor, }} />
             ),
             headerLeft: <Menu navigation={navigation} />,
-            headerTitle: <LogoTitle HeaderText={Strings.RECEPTION_CHECK} />,
+            headerTitle: <LogoTitle HeaderText={Strings.CURRENT_TASK} />,
         };
     };
 
@@ -107,7 +107,7 @@ export class FrontCleanDoneScreen extends React.Component {
         }
 
         Alert.alert(
-            Strings.CLEANING_SCHEDULE,
+            Strings.CONFIRM_CURRENT_TASK,
             Strings.ARE_YOU_SURE,
             [
                 { text: Strings.CANCEL, style: 'cancel' },
@@ -203,7 +203,7 @@ export class FrontCleanDoneScreen extends React.Component {
                                 </View>
                                 <Button style={[styles.button, { zIndex: 1, height: 70, width: 300, position: 'absolute', bottom: 0, }]} onPress={this._pickImage}>
                                     <Left >
-                                        <Text style={[{ color: 'white', }, styles.text]}>{Strings.EDIT}</Text>
+                                        <Text style={[{ color: 'white', }, styles.text]}>{Strings.EDIT_IMAGE}</Text>
                                     </Left>
                                     <Right>
                                         <Icon name='attach' style={{ color: 'white', }} />

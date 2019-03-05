@@ -75,7 +75,10 @@ export class HomeIndexScreen extends React.Component {
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Icon name='alert' fontSize={50} size={50} style={{ color: 'red', fontSize: 50, marginBottom: 20, }} />
                                     <Text style={{ color: 'red', fontSize: 20, textAlign: 'center' }} >
-                                        {sprintf(Strings.YOU_HAVEN_TASKS_TO_DONE_TODAY, this.state.tasks.length, this.state.done.length, this.state.tasks.length)}
+                                        {sprintf(Strings.YOU_HAVEN_TASKS_TO_DONE_TODAY, this.state.tasks.length,
+                                        (this.state.tasks.length > 1 ? 's' : ''),
+                                        this.state.done.length,
+                                        this.state.tasks.length)}
                                     </Text>
                                 </View>
                             </Button>

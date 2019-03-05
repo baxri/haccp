@@ -154,7 +154,7 @@ export class TraceIndexScreen extends React.Component {
                                 <Icon name='close' />
                             </View>
                         </Button>
-                        <Button full danger onPress={_ => this._confirm()} >
+                        <Button full success onPress={_ => this._confirm()} >
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={{ color: 'white', paddingTop: 5, }}>{Strings.CONFIRM}</Text>
                                 <Icon name='checkmark' style={{ color: 'white', }} />

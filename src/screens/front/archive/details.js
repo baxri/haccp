@@ -246,7 +246,7 @@ export class ArchiveDetailsScreen extends React.Component {
 
                         {true && <CardItem bordered>
                             <Body>
-                                <Text>{Strings.DATETIME}: {reverseFormat(toDate(this.state.item.created_at))}</Text>
+                                <Text>{Strings.DATETIME}: {reverseFormat(toDate(this.state.item.created_at))} {this.state.item.created_at.toLocaleTimeString()}</Text>
                             </Body>
                         </CardItem>}
                     </Card>

@@ -16,6 +16,7 @@ import { NoBackButton, LogoTitle, Menu } from '../../../components/header';
 import { Pictures } from '../../../database/realm';
 import Gallery from 'react-native-image-gallery';
 import { reverseFormat, FilePicturePath } from '../../../utilities/index';
+import Strings from '../../../language/fr';
 
 export class ArchiveGalleryScreen extends React.Component {
 
@@ -23,7 +24,7 @@ export class ArchiveGalleryScreen extends React.Component {
         const params = navigation.state.params || {};
 
         return {
-            headerTitle: <LogoTitle HeaderText={"Gallery"} />,
+            headerTitle: <LogoTitle HeaderText={Strings.GALLERY} />,
         };
     };
 
