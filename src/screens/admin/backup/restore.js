@@ -212,7 +212,7 @@ export class AdminBackupRestoreScreen extends React.Component {
 
     _uploadOnly = async (data) => {
 
-        this._showLoader();
+        // this._showLoader();
 
         let adminPassword = await AsyncStorage.getItem('adminPasswordV8');
 

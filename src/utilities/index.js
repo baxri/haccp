@@ -64,14 +64,21 @@ export const initImages = async () => {
         console.log(granted_read);
         console.log(granted_write);
 
-
     } catch (error) {
         alert(error);
     }
 };
 
+export const initRealmForlder = async () => {
+    RNFetchBlob.fs.mkdir(PATH_REALM)
+        .then(() => { })
+        .catch((err) => { })
+}
+
 export const initFolders = async () => {
 
+
+    initRealmForlder();
     initImages();
 
     try {

@@ -133,7 +133,7 @@ export class AdminBackupIndexScreen extends React.Component {
         }
         Keyboard.dismiss();
 
-        this._showLoaderZip();
+        // this._showLoaderZip();
 
         try {
 
@@ -146,7 +146,11 @@ export class AdminBackupIndexScreen extends React.Component {
             let copyFrom = DB;
             let copyTo = PATH + '/' + PATH_REALM_FILE;
 
-            await RNFetchBlob.fs.cp(copyFrom, copyTo);
+            if (!(await RNFetchBlob.fs.exists(copyFrom))) {
+                throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
+            }
+
+            await RNFetchBlobOld.fs.cp(copyFrom, copyTo);
 
             if (!(await RNFetchBlob.fs.exists(copyTo))) {
                 throw new Error(Strings.CANNOT_COPY_DATABASE_FILE);
@@ -158,7 +162,6 @@ export class AdminBackupIndexScreen extends React.Component {
             console.log("Start Zipping");
             console.log(targetPath);
             console.log(sourcePath);
-
 
             console.log("Finish zipping");
 
@@ -380,7 +383,7 @@ export class AdminBackupIndexScreen extends React.Component {
                         <H3 style={{ marginBottom: 10, textAlign: 'center' }}>{Strings.BACKUPS_FOLDER}:</H3>
                         <Text style={{ marginBottom: 30, textAlign: 'center' }}>{PATH_BACKUP}</Text>
 
-                        <Button full transparent style={{ padding: 10, marginBottom: 20, borderBottom: '1px solid'}} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
+                        <Button full transparent style={{ padding: 10, marginBottom: 20, borderBottom: '1px solid' }} onPress={() => { this.props.navigation.navigate("AdminBackupRestore"); }}>
                             <Text style={[styles.textButton]}>{Strings.BACKUPS_AND_DOWNLOADS}</Text>
                         </Button>
 

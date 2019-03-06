@@ -17,7 +17,7 @@
     "react-native-background-downloader": "^1.0.1",
     "react-native-background-fetch": "^2.4.3",
     "react-native-background-job": "^2.1.1",
-    "react-native-background-upload": "^4.4.0",
+    "react-native-background-upload": "^5.0.1",
     "react-native-calendar-picker": "^5.18.0",
     "react-native-checkbox-list": "0.0.6",
     "react-native-custom-picker": "^0.1.0",
@@ -43,7 +43,7 @@
     "react-native-vector-icons": "^4.6.0",
     "react-native-zip-archive": "3.0.1",
     "react-navigation": "^1.5.11",
-    "realm": "^2.4.0",
+    "realm": "^2.24.0",
     "rn-fetch-blob": "^0.10.11",
     "sprintf-js": "^1.1.1"
   },

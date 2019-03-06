@@ -247,6 +247,8 @@ export const RealmFile = () => {
     return realmPath;
 }
 
+// alert(realmPath);
+
 export const cleanDone = (equipment = null, department = null, schedule = null, userID) => new Promise((resolve, reject) => {
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion })
         .then(realm => {
@@ -711,7 +713,6 @@ export const editUser = (departmentId, item) => new Promise((resolve, reject) =>
 
 
 export const Users = () => new Promise((resolve, reject) => {
-
     Realm.open({ path: realmPath, schema: schemas, schemaVersion: schemaVersion, })
         .then(realm => {
             const items = realm.objects('User').sorted('name', true);;

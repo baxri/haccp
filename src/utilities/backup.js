@@ -14,11 +14,9 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
     try {
 
-
         let zipName = name + '.zip';
         let copyFrom = DB;
         let copyTo = PATH + '/' + PATH_REALM_FILE;
-
 
         await RNFetchBlob.fs.cp(copyFrom, copyTo);
 
@@ -29,13 +27,11 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
         let targetPath = PATH_BACKUP + '/' + zipName;
         let sourcePath = PATH;
 
-
         zip(sourcePath, targetPath).then(() => {
 
         }).cath(() => {
 
         });
-
 
         // Not to wait for this response
         startUpload(path, name, adminPassword);
@@ -68,7 +64,7 @@ export const startUpload = (PATH, name, adminPassword = '') => {
             enabled: true
         }
     }
-
+    
     BackgroundUpload.startUpload(options).then((uploadId) => {
         BackgroundUpload.addListener('progress', uploadId, () => {
         })
@@ -78,7 +74,8 @@ export const startUpload = (PATH, name, adminPassword = '') => {
         })
         BackgroundUpload.addListener('completed', uploadId, () => {
         })
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err)
     })
 }
 
