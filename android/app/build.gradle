@@ -96,19 +96,19 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     // buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.haccp"
-        minSdkVersion 27
-        targetSdkVersion 27
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        multiDexEnabled  false
+        multiDexEnabled true
     }
 
     // compileOptions {
@@ -159,6 +159,7 @@ android {
 //configurations.all { resolutionStrategy.force 'com.squareup.okhttp3:okhttp:3.4.1' } // required by react-native-background-upload until React Native supports okhttp >= okhttp 3.5
 
 dependencies {
+    implementation "com.android.support:multidex:1.0.3"
     implementation project(':instabug-reactnative')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:23.0.1"
