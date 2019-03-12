@@ -11,7 +11,7 @@ import {
     Keyboard
 } from 'react-native';
 import { Container, Content, Button, Text, H2, H3, Icon, Left, Right } from 'native-base';
-import { LogoTitle, Menu, Space, ProgressBar } from '../../../components/header';
+import { LogoTitle, Menu, UploadIcon, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import {
@@ -49,7 +49,7 @@ export class AdminBackupIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.BACKUP} />,
-            headerRight: <Space />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

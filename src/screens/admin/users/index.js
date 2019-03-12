@@ -9,7 +9,7 @@ import {
 
 } from 'react-native';
 import { Container, Content, Button, Icon, Fab, List, ListItem, Left, Right, } from 'native-base';
-import { LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu, UploadIcon } from '../../../components/header';
 import { Users, DeleteUser } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -26,7 +26,7 @@ export class AdminUsersIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.USERS} />,
-            // headerRight: <Menu navigation={navigation} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
 
     };

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Container, Content, Button, Text, Icon, Right, Left } from 'native-base';
 
-import { LogoTitle } from '../../../components/header';
+import { LogoTitle, UploadIcon } from '../../../components/header';
 import { addEquipment, editEquipment } from '../../../database/realm';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -29,6 +29,7 @@ export class AdminEquipmentsItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.EQUIPMENTS} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

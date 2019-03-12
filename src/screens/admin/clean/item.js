@@ -7,7 +7,7 @@ import {
     Keyboard
 } from 'react-native';
 import { List, ListItem, CheckBox, FooterTab, Footer, Container, Content, Button, Text, H3, Left, Right, Icon } from 'native-base';
-import { LogoTitle } from '../../../components/header';
+import { LogoTitle, UploadIcon } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 import { DepartmentsWithEquipments, addCleanSchedule, editCleanSchedule } from '../../../database/realm';
@@ -25,6 +25,7 @@ export class AdminCleanItemScreen extends React.Component {
                 <Icon name='snow' style={{ color: tintColor, }} />
             ),
             headerTitle: <LogoTitle HeaderText={Strings.CLEANING_SCHEDULE} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

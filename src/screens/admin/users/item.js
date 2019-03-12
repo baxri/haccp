@@ -8,7 +8,7 @@ import {
 
 } from 'react-native';
 import { Container, Content, Button, Text, Left, Right, Icon } from 'native-base';
-import { LogoTitle } from '../../../components/header';
+import { LogoTitle, UploadIcon } from '../../../components/header';
 import { addUser, editUser, Departments } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import { styles } from '../../../utilities/styles';
@@ -26,6 +26,7 @@ export class AdminUsersItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.USER} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

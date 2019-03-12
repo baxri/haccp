@@ -3,7 +3,9 @@ import { PATH_REALM_FILE, PATH_ZIP, PATH_BACKUP } from './index';
 import DeviceInfo from 'react-native-device-info';
 import zip from 'react-native-zip-archive'
 import BackgroundUpload from 'react-native-background-upload'
-import Linking from 'react-native';
+import {Linking, ToastAndroid} from 'react-native';
+import Strings from '../language/fr'
+import { UploadIcon } from '../components/header';
 
 export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(async (resolve, reject) => {
     console.log(PATH);
@@ -45,6 +47,7 @@ export const upload = async (PATH, DB, name, adminPassword = '') => new Promise(
 
 
 export const startUpload = (PATH, name, adminPassword = '') => {
+    let upIcon = new UploadIcon();
     let ID = DeviceInfo.getUniqueID();
     let path = PATH;
 
@@ -61,22 +64,50 @@ export const startUpload = (PATH, name, adminPassword = '') => {
             'name': name,
         },
         notification: {
-            enabled: true
+            enabled: false
         }
     }
     
     BackgroundUpload.startUpload(options).then((uploadId) => {
-        BackgroundUpload.addListener('progress', uploadId, () => {
-        })
-        BackgroundUpload.addListener('error', uploadId, () => {
-        })
-        BackgroundUpload.addListener('cancelled', uploadId, () => {
-        })
-        BackgroundUpload.addListener('completed', uploadId, () => {
-        })
+        ToastAndroid.show(Strings.DATA_UPLOADED_START, ToastAndroid.LONG);
+        console.log('Upload started')
+        
+        // TODO: How to change state from backup.js
+        upIcon.setState({active: 1, progress: 0});
+
+        BackgroundUpload.addListener('progress', uploadId, (data) => {
+            console.log(`Progress: ${data.progress}%`)
+
+            upIcon.setState({active: 1, progress: parseInt(data.progress)});
+        });
+
+        BackgroundUpload.addListener('error', uploadId, (data) => {
+            ToastAndroid.show(Strings.DATA_UPLOADED_ERROR, ToastAndroid.LONG);
+            console.log(`Error: ${data.error}%`)
+
+            upIcon.setState({active: 0, progress: 0});
+        });
+
+        BackgroundUpload.addListener('cancelled', uploadId, (data) => {
+            ToastAndroid.show(Strings.DATA_UPLOADED_CANCELED, ToastAndroid.LONG);
+            console.log(`Cancelled!`)
+
+            upIcon.setState({active: 0, progress: 0});
+        });
+
+        BackgroundUpload.addListener('completed', uploadId, (data) => {
+            // data includes responseCode: number and responseBody: Object
+            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
+            console.log('Completed!')
+
+            upIcon.setState({active: 0, progress: 0});
+        });
+
     }).catch((err) => {
-        console.log(err)
-    })
+        console.log('Upload error!', err)
+
+        upIcon.setState({active: 0, progress: 0});
+    });
 }
 
 

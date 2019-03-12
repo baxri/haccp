@@ -8,7 +8,7 @@ import {
 
 } from 'react-native';
 import { Container, Content, Button, Text, H1, Icon, Left, Right } from 'native-base';
-import { LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu, UploadIcon } from '../../../components/header';
 import Strings from '../../../language/fr'
 import { styles } from '../../../utilities/styles';
 
@@ -23,6 +23,7 @@ export class AdminRestoreIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText="RESTORE" />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

@@ -5,7 +5,7 @@ import {
 import { Container, Button, Text, Icon } from 'native-base';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import { LogoTitle, Menu, Space } from '../../../components/header';
+import { LogoTitle, Menu, UploadIcon } from '../../../components/header';
 import { Departments, Users, Equipments, Fourniseurs } from '../../../database/realm';
 import Strings from '../../../language/fr'
 import { inputAndButtonFontSize } from '../../../utilities/styles';
@@ -22,7 +22,7 @@ export class AdminHomeIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.DASHBOARD} />,
-            headerRight: <Space />,
+            headerRight: <UploadIcon navigation={navigation} />,
 
         };
     };

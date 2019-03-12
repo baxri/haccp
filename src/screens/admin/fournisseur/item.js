@@ -6,7 +6,7 @@ import {
     TextInput,
 } from 'react-native';
 import { Container, Content, Button, Text, Left, Right, Icon } from 'native-base';
-import { LogoTitle } from '../../../components/header';
+import { LogoTitle, UploadIcon } from '../../../components/header';
 import { addFourniseur, editFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -24,6 +24,7 @@ export class AdminFournisseurItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.FOURNISSEUR} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

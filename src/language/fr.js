@@ -97,6 +97,7 @@ const strings = {
     DATA_SUCCESSFULLY_UPLOADED: 'Données sauvegardées avec succès',
     DATA_UPLOADED_CANCELED: 'Sauvegarde annulée',
     DATA_UPLOADED_ERROR: 'Une erreur est survenue lors de la sauvegarde',
+    DATA_UPLOADED_START: 'Sauvegarde en cours d\'envoi',
     UPLOAD: 'Envoyer',
 
     // SCHEDULES ADMIN

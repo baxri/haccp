@@ -2,14 +2,13 @@ import React from 'react';
 import {
     AsyncStorage,
     View,
-    ToastAndroid,
     Dimensions,
     ListView,
     Text,
     Alert,
 } from 'react-native';
 import { Container, Tab, Tabs, TabHeading, Button, Icon, List, ListItem, Left, Right, } from 'native-base';
-import { LogoTitle, Space, ProgressBar } from '../../../components/header';
+import { LogoTitle, UploadIcon, ProgressBar } from '../../../components/header';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Strings from '../../../language/fr'
 var RNFS = require('react-native-fs');
@@ -30,7 +29,7 @@ export class AdminBackupRestoreScreen extends React.Component {
                 <Icon name='lock' style={{ color: tintColor, }} />
             ),
             headerTitle: <LogoTitle HeaderText={Strings.BACKUPS} />,
-            headerRight: <Space />,
+            headerRight: <UploadIcon navigation={navigation} />,
 
         };
     };
@@ -219,7 +218,6 @@ export class AdminBackupRestoreScreen extends React.Component {
         try {
             startUpload(data.path, data.name, adminPassword);
             this._hideLoader();
-            ToastAndroid.show(Strings.DATA_SUCCESSFULLY_UPLOADED, ToastAndroid.LONG);
         } catch (error) {
             alert(error);
             this._hideLoader();
@@ -305,12 +303,12 @@ export class AdminBackupRestoreScreen extends React.Component {
                                         </View>
                                     </Left>
                                     <Right>
-                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 140, }}>
-                                            <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
+                                        <View style={{ flexDirection: 'row', flex: 1, margin: 0, width: 280, }}>
+                                            <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._deleteRowAsk(data, secId, rowId, rowMap)}>
                                                 <Icon active name="trash" />
                                                 <Text style={{color: 'white', fontSize: 12}}>{Strings.DELETE}</Text>
                                             </Button>
-                                            <Button style={{ flex: 0.5, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
+                                            <Button style={{ flex: 3.3, height: 65, borderLeftWidth: 0, marginRight: 5, }} full danger onPress={_ => this._restoreAsk(data)}>
                                                 <Icon active name="build" />
                                                 <Text style={{color: 'white', fontSize: 12}}>{Strings.RESTORE}</Text>
                                             </Button>

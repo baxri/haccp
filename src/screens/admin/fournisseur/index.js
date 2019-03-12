@@ -9,7 +9,7 @@ import {
 
 } from 'react-native';
 import { Container, Content, Button, Icon, Fab, List, ListItem, Left, Right, } from 'native-base';
-import { LogoTitle, Menu } from '../../../components/header';
+import { LogoTitle, Menu, UploadIcon } from '../../../components/header';
 import { Fourniseurs, DeleteFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -27,6 +27,7 @@ export class AdminFournisseurIndexScreen extends React.Component {
             ),
             headerLeft: <Menu navigation={navigation} />,
             headerTitle: <LogoTitle HeaderText={Strings.FOURNISSEUR} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 

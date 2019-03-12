@@ -7,7 +7,7 @@ import {
     Image,
 } from 'react-native';
 import { List, ListItem, CheckBox, FooterTab, Footer, Container, Content, Button, Text, H2, Left, Right, Icon } from 'native-base';
-import { LogoTitle } from '../../../components/header';
+import { LogoTitle, UploadIcon } from '../../../components/header';
 import { addDepartment, editDepartment, Equipments, addEquipment, Fourniseurs, addFourniseur } from '../../../database/realm';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -30,6 +30,7 @@ export class AdminDepartmentsItemScreen extends React.Component {
             ),
 
             headerTitle: <LogoTitle HeaderText={Strings.DEPARTMENT} />,
+            headerRight: <UploadIcon navigation={navigation} />,
         };
     };
 
